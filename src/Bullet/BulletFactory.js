@@ -3,6 +3,7 @@ import { mappings } from './mappings';
 
 export class BulletFactory {
   constructor() {
+    this.equippedWeapon = null;
     this.automatic = true;
     this.frames = 0;
     this.bullets = [];
@@ -10,16 +11,16 @@ export class BulletFactory {
   }
 
   update (context, player, walls, mouse, weaponIndex = 0) {
-    const weapon = mappings[weaponIndex];
+    this.equippedWeapon = mappings[weaponIndex];
 
-    if (weapon && this.automatic && !player.dead) {
+    if (this.equippedWeapon && this.automatic && !player.dead) {
       if (mouse.pressed) {       
-        for (let i = weapon.min; i <= weapon.max; i++) {
+        for (let i = this.equippedWeapon.min; i <= this.equippedWeapon.max; i++) {
           const bullet = new Bullet(context, player, i);
           this.bullets.push(bullet);
         }
 
-        this.automatic = weapon.automatic;
+        this.automatic = this.equippedWeapon.automatic;
       }
     } else {
       this.frames++;

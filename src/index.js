@@ -100,7 +100,6 @@ const tickCallback = () => {
 requestAnimationFrame(tickCallback);
 
 document.addEventListener('keydown', (event) => {
-  console.log({ event })
   switch (event.key) {
     case 'w': keyboard.up = true; break;
     case 's': keyboard.down = true; break;

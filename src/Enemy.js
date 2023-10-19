@@ -37,13 +37,13 @@ export class Enemy
     this.pushAlongVelocity.y = vectorY * 10;
   }
 
-  pushByBullet (bullet) {
+  pushByBullet (bullet, dps) {
     if (this.canBePushedByBullet) {
       this.pushBulletVelocity.x = bullet.vectorX * 15;
       this.pushBulletVelocity.y = bullet.vectorY * 15;
       this.canBePushedByBullet = false;
   
-      this.health -= 25;
+      this.health -= dps;
       this.health = this.health < 0 ? 0 : this.health;
   
       if (this.health == 0) {
@@ -53,7 +53,7 @@ export class Enemy
     }
   }
 
-  update (context, player, enemies, walls, bulletManager, camera, keyboard, mouse) {
+  update (context, player, enemies, walls, bulletFactory, camera, keyboard, mouse) {
     if (this.sleep || this.dead) {
       return;
     }
@@ -131,12 +131,13 @@ export class Enemy
       height: config.radius * 2
     };
 
-    for (let i = 0; i < bulletManager.bullets.length; i++) {
-      const bullet = bulletManager.bullets[i];
+    for (let i = 0; i < bulletFactory.bullets.length; i++) {
+      const bullet = bulletFactory.bullets[i];
 
       if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        this.pushByBullet(bullet);
+        console.log({ dps: bulletFactory.equippedWeapon.dps });
+        this.pushByBullet(bullet, bulletFactory.equippedWeapon.dps);
       }
     }
 

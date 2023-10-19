@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Physics/EntityHelper';
+import { EntityHelper } from '../Entity/EntityHelper';
 import { config } from '../config';
 
 export class Camera

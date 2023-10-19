@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Physics/EntityHelper';
+import { EntityHelper } from '../Entity/EntityHelper';
 import { config } from '../config';
 
 export class Bullet
@@ -8,7 +8,7 @@ export class Bullet
     this.vectorY = Math.sin(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
     this.x = player.x + this.vectorX * config.radius * 1.5;
     this.y = player.y + this.vectorY * config.radius * 1.5;
-    
+
     this.radius = 5;
     this.bounds = {
       x: this.x - this.radius,

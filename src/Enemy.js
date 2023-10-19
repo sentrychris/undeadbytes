@@ -1,5 +1,5 @@
-import { EntityCollision } from './Physics/EntityCollision';
-import { EntityHelper } from './Physics/EntityHelper';
+import { EntityCollision } from './Entity/EntityCollision';
+import { EntityHelper } from './Entity/EntityHelper';
 import { config } from './config';
 
 export class Enemy

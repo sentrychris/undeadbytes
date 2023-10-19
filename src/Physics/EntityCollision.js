@@ -1,10 +1,5 @@
 export class _EntityCollision
 {
-  constructor(radius = 60, size = 150) {
-    this.radius = radius;
-    this.size = size;
-  }
-
   arcToWall({ arcX, arcY, radius, wallX, wallY, size }) {
     const distX = Math.abs(arcX - wallX - size / 2);
     const distY = Math.abs(arcY - wallY - size / 2);
@@ -43,14 +38,14 @@ export class _EntityCollision
       if (this.arcToWall({
         arcX: x,
         arcY: y,
-        radius: this.radius,
+        radius: 60,
         wallX: wall.x,
         wallY: wall.y,
-        size: this.size
+        size: 150
       })) {
   
-        const wallCenterX = wall.x + this.size / 2;
-        const wallCenterY = wall.y + this.size / 2;
+        const wallCenterX = wall.x + 150 / 2;
+        const wallCenterY = wall.y + 150 / 2;
   
         let vectorX = x - wallCenterX;
         let vectorY = y - wallCenterY;
@@ -71,4 +66,4 @@ export class _EntityCollision
   }
 }
 
-export const EntityCollision = new _EntityCollision(60, 150);
+export const EntityCollision = new _EntityCollision();

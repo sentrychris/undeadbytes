@@ -1,5 +1,11 @@
 export class _EntityDrawer
 {
+  /**
+   * Draw player
+   * 
+   * @param {*} context 
+   * @param {*} position 
+   */
   player (context, position) {
     // left foot
     context.beginPath();
@@ -56,6 +62,11 @@ export class _EntityDrawer
     context.rotate(180 * Math.PI / 180);
   }
 
+  /**
+   * Draw dead player
+   * 
+   * @param {*} context 
+   */
   deadPlayer (context) {
     // left foot
     context.beginPath();
@@ -112,6 +123,12 @@ export class _EntityDrawer
     context.rotate(170 * Math.PI / 180);
   }
 
+  /**
+   * Draw enemy
+   * 
+   * @param {*} context 
+   * @param {*} position 
+   */
   enemy (context, position) {
     // left foot
     context.beginPath();
@@ -158,6 +175,11 @@ export class _EntityDrawer
     context.rotate(180 * Math.PI / 180);
   }
 
+  /**
+   * Draw dead enemy
+   * 
+   * @param {*} context 
+   */
   deadEnemy (context) {
     // left foot
     context.beginPath();
@@ -204,7 +226,15 @@ export class _EntityDrawer
     context.rotate(170 * Math.PI / 180);
   }
 
-  healthBar(context, health, centerX, centerY) {
+  /**
+   * Draw health
+   * 
+   * @param {*} context 
+   * @param {*} health 
+   * @param {*} centerX 
+   * @param {*} centerY 
+   */
+  health(context, health, centerX, centerY) {
     context.beginPath();
     context.rect(centerX - 50, centerY + 60, 100, 5);
     context.strokeStyle = 'black';

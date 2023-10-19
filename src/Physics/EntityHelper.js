@@ -2,6 +2,13 @@ import { EntityDrawer } from './EntityDrawer';
 
 export class _EntityHelper
 {
+  /**
+   * Determine intersection between entities
+   * 
+   * @param {*} r1 
+   * @param {*} r2 
+   * @returns 
+   */
   intersection (r1, r2) {
     return ! (r1.x + r1.width < r2.x
       || r1.y + r1.height < r2.y
@@ -10,6 +17,14 @@ export class _EntityHelper
     );
   }
 
+  /**
+   * Begin rotating entity to given angle at position
+   * 
+   * @param {*} context 
+   * @param {*} x 
+   * @param {*} y 
+   * @param {*} angle 
+   */
   beginRotationOffset(context, x, y, angle) {
     context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
     context.translate(context.canvas.width / 2, context.canvas.height / 2);
@@ -17,6 +32,14 @@ export class _EntityHelper
     context.rotate(angle);
   }
 
+  /**
+   * Stop rotating entity to given angle at position
+   * 
+   * @param {*} context 
+   * @param {*} x 
+   * @param {*} y 
+   * @param {*} angle 
+   */
   endRotationOffset(context, x, y, angle) {
     context.rotate(-angle);
 
@@ -24,6 +47,12 @@ export class _EntityHelper
     context.translate(+(-x + context.canvas.width / 2), +(-y + context.canvas.height / 2));
   }
 
+  /**
+   * Render the entity
+   * 
+   * @param {*} context 
+   * @param {*} entity 
+   */
   render (context, entity) {
     this.beginRotationOffset(context, entity.x, entity.y, entity.angle);
 
@@ -38,7 +67,7 @@ export class _EntityHelper
     }
     
     this.endRotationOffset(context, entity.x, entity.y, entity.angle);
-    EntityDrawer.healthBar(context, entity.health, entity.x, entity.y);
+    EntityDrawer.health(context, entity.health, entity.x, entity.y);
   }
 }
 

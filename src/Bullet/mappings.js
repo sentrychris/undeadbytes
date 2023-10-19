@@ -13,28 +13,28 @@ export const mappings = [
     name: 'Pistol',
     min: 0,
     max: 0,
-    dps: 100,
+    dps: 30,
     automatic: false
   },
   {
     name: 'Shotgun',
     min: -3,
     max: 3,
-    dps: 25,
+    dps: 35,
     automatic: false
   },
   {
     name: 'Machine Gun',
     min: 0,
     max: 0,
-    dps: 15,
+    dps: 20,
     automatic: true
   },
   {
     name: 'Flamethrower',
     min: -5,
     max: 5,
-    dps: 5,
+    dps: 10,
     automatic: true
   }
 ];

@@ -16,10 +16,21 @@
 
     .help {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 10px;
+      left: 10px;
       font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: white;
+      background: rgba(34, 34, 34, 0.75);
+      border: 1px solid rgb(34, 34, 34);
+      border-radius: 5px;
       padding: 15px;
+    }
+    .help p {
+      margin-top: 0;
+      margin-bottom: 1px;
+    }
+    #equipped-weapon {
+      color: #27a2f5;
     }
 
     .gameover {
@@ -52,8 +63,11 @@
 <body>
   <canvas id="main"></canvas>
   <div class="help">
-    WSAD - movement<br>
-    mouse - direction/shooting
+    <p>WSAD - movement</p>
+    <p>mouse - direction/shooting</p>
+    <hr />
+    <p>Equipped Weapon: <strong id="equipped-weapon"></strong></p>
+    <p>Enemies Remaining: <strong id="enemies-remaining"></strong></p>
   </div>
   <div class="gameover">
     <h1>Game Over</h1>

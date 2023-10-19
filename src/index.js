@@ -74,6 +74,12 @@ const onUpdate = () => {
       );
     }
   }
+
+  document.querySelector('strong#enemies-remaining').innerHTML = enemies.length;
+
+  if (enemies.length === 0) {
+    // Open the door to the next level, maybe display a toast notification or something
+  }
 };
 
 const onRender = () => {

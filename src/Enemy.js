@@ -37,7 +37,7 @@ export class Enemy
     this.pushAlongVelocity.y = vectorY * 10;
   }
 
-  pushByBullet (bullet, dps) {
+  pushByBullet (bullet, dps, enemies) {
     if (this.canBePushedByBullet) {
       this.pushBulletVelocity.x = bullet.vectorX * 15;
       this.pushBulletVelocity.y = bullet.vectorY * 15;
@@ -48,6 +48,10 @@ export class Enemy
   
       if (this.health == 0) {
         this.dead = true;
+
+        // Last remaining enemy has been killed
+        // update is not called on the next tick
+        if (enemies.length === 1) enemies.length = 0;
       }
     }
   }
@@ -95,7 +99,7 @@ export class Enemy
 
     // enemy collision
     if (Math.random() <= 0.1) {
-      for (let i = 0; i < enemies.length; i++) {
+      for (let i = 0; i < enemies.length; i++) {       
         const enemy = enemies[i];
   
         if (enemy != this) {
@@ -111,6 +115,17 @@ export class Enemy
 
             enemy.pushAlong(vectorX, vectorY);
           } 
+        }
+        
+        if (enemy.dead) {
+          // TODO condition not hit on last remaining enemy
+          enemies.splice(i, 1);
+
+          // // TODO fix this bullshit hack
+          // if (enemies.length === 1) {
+          //   console.log(enemies.length);
+          //   enemies.length = 0;
+          // }
         }
       }
     }
@@ -135,7 +150,7 @@ export class Enemy
 
       if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        this.pushByBullet(bullet, bulletFactory.equippedWeapon.dps);
+        this.pushByBullet(bullet, bulletFactory.equippedWeapon.dps, enemies);
       }
     }
 

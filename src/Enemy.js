@@ -1,19 +1,21 @@
 import { EntityCollision } from './Physics/EntityCollision';
 import { EntityHelper } from './Physics/EntityHelper';
+import { config } from './config';
 
 export class Enemy
 {
   constructor (spawn) {
     this.type = 'enemy';
     this.bounding = 'arc';
-    this.x = spawn.x * 150;
-    this.y = spawn.y * 150;
-    this.radius = 60;
+    this.x = spawn.x * config.size;
+    this.y = spawn.y * config.size;
     this.angle = 0;
     this.position = 0;
     this.incrementer = 0;
     this.speed = 3;
+    
     this.sleep = true;
+    
     this.pushAlongVelocity = {
       x: 0,
       y: 0
@@ -23,10 +25,11 @@ export class Enemy
       y: 0
     };
     this.canBePushedByBullet = true;
-    this.health = 100;
-    this.dead = false;
     this.lastVectorX = 0;
     this.lastVectorY = 0;
+    
+    this.health = 100;
+    this.dead = false;
   }
 
   pushAlong (vectorX, vectorY) {
@@ -122,10 +125,10 @@ export class Enemy
 
     // bullet collision
     const bounds = {
-      x: this.x - this.radius,
-      y: this.y - this.radius,
-      width: this.radius * 2,
-      height: this.radius * 2
+      x: this.x - config.radius,
+      y: this.y - config.radius,
+      width: config.radius * 2,
+      height: config.radius * 2
     };
 
     for (let i = 0; i < bulletManager.bullets.length; i++) {

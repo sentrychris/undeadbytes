@@ -1,15 +1,15 @@
 
 import { EntityCollision } from './Physics/EntityCollision';
-import { EntityDrawer } from './Physics/EntityDrawer';
 import { EntityHelper } from './Physics/EntityHelper';
+import { config } from './config';
 
 export class Player
 {
   constructor (spawn, gameover) {
     this.type = 'player';
     this.bounding = 'arc';
-    this.x = spawn.x * 150;
-    this.y = spawn.y * 150;
+    this.x = spawn.x * config.size;
+    this.y = spawn.y * config.size;
     this.angle = 0;
     this.position = 0;
     this.incrementer = 0;

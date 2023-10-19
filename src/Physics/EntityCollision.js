@@ -1,3 +1,5 @@
+import { config } from '../config';
+
 export class _EntityCollision
 {
   /**
@@ -55,10 +57,10 @@ export class _EntityCollision
         radius: 60,
         wallX: wall.x,
         wallY: wall.y,
-        size: 150
+        size: config.size
       })) {
-        const wallCenterX = wall.x + 150 / 2;
-        const wallCenterY = wall.y + 150 / 2;
+        const wallCenterX = wall.x + config.size / 2;
+        const wallCenterY = wall.y + config.size / 2;
   
         let vectorX = x - wallCenterX;
         let vectorY = y - wallCenterY;

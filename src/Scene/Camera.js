@@ -1,12 +1,11 @@
 import { EntityHelper } from '../Physics/EntityHelper';
+import { config } from '../config';
 
 export class Camera
 {
-  constructor(context, frames = 0, radius = 60, size = 150) {
+  constructor(context, frames = 0) {
     this.x = 0;
     this.y = 0;
-    this.radius = radius;
-    this.size = size;
     this.offsetX = 0;
     this.offsetY = 0;
 
@@ -31,15 +30,15 @@ export class Camera
         const bounds = {};
 
         if (entity.bounding === 'arc') {
-          bounds.x = entity.x - this.radius;
-          bounds.y = entity.y - this.radius;
-          bounds.width = this.radius * 2;
-          bounds.height = this.radius * 2;
+          bounds.x = entity.x - config.radius;
+          bounds.y = entity.y - config.radius;
+          bounds.width = config.radius * 2;
+          bounds.height = config.radius * 2;
         } else if (entity.bounding === 'box') {
           bounds.x = entity.x;
           bounds.y = entity.y;
-          bounds.width = this.size;
-          bounds.height = this.size;
+          bounds.width = config.size;
+          bounds.height = config.size;
         }
         entity.sleep = ! EntityHelper.intersection(bounds, screen);
       }

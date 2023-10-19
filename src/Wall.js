@@ -1,16 +1,18 @@
+import { config } from './config';
+
 export class Wall
 {
   constructor (x, y) {
     this.bounding = 'box';
-    this.x = x * 150;
-    this.y = y * 150;
+    this.x = x * config.size;
+    this.y = y * config.size;
     this.sleep = true;
 
     this.bounds = {
       x: this.x,
       y: this.y,
-      width: 150,
-      height: 150
+      width: config.size,
+      height: config.size
     };
   }
 
@@ -20,7 +22,7 @@ export class Wall
     }
 
     context.beginPath();
-    context.rect(this.x, this.y, 150, 150);
+    context.rect(this.x, this.y, config.size, config.size);
     context.fillStyle = '#8fce00';
     context.fill();
   };

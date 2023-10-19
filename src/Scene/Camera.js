@@ -1,3 +1,5 @@
+import { EntityHelper } from '../Entity/Physics/EntityHelper';
+
 export class Camera {
   constructor(context, frames = 0, radius = 60, size = 150) {
     this.x = 0;
@@ -9,14 +11,6 @@ export class Camera {
 
     this.context = context
     this.frames = frames;
-  }
-
-  rectangleIntersection (r1, r2) {
-    return ! (r1.x + r1.width < r2.x
-        || r1.y + r1.height < r2.y
-        || r1.x > r2.x + r2.width
-        || r1.y > r2.y + r2.height
-      );
   }
 
   update (player, entities) {
@@ -46,7 +40,7 @@ export class Camera {
           bounds.width = this.size;
           bounds.height = this.size;
         }
-        entity.sleep = !this.rectangleIntersection(bounds, screen);
+        entity.sleep = ! EntityHelper.intersection(bounds, screen);
       }
     }
   }

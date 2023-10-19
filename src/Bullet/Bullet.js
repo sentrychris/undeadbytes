@@ -1,3 +1,5 @@
+import { EntityHelper } from '../Entity/Physics/EntityHelper';
+
 export class Bullet
 {
   constructor(context, player, i) {
@@ -18,14 +20,6 @@ export class Bullet
     this.markToDelete = false;
   }
 
-  rectangleIntersection (r1, r2) {
-    return ! (r1.x + r1.width < r2.x
-      || r1.y + r1.height < r2.y
-      || r1.x > r2.x + r2.width
-      || r1.y > r2.y + r2.height
-    );
-  }
-
   update (walls) {
     this.x += this.vectorX * 25;
     this.y += this.vectorY * 25;
@@ -41,7 +35,7 @@ export class Bullet
 
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
-      if (this.rectangleIntersection(wall.bounds, this.bounds)) {
+      if (EntityHelper.intersection(wall.bounds, this.bounds)) {
         this.markToDelete = true;
       }
     }

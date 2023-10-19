@@ -50,10 +50,6 @@ export class Enemy
     }
   }
 
-  rectangleIntersection (r1, r2) {
-    return !(r1.x + r1.width < r2.x || r1.y + r1.height < r2.y || r1.x > r2.x + r2.width || r1.y > r2.y + r2.height);
-  }
-
   update (context, player, enemies, walls, bulletManager, camera, keyboard, mouse) {
     if (this.sleep || this.dead) {
       return;
@@ -135,7 +131,7 @@ export class Enemy
     for (let i = 0; i < bulletManager.bullets.length; i++) {
       const bullet = bulletManager.bullets[i];
 
-      if (this.rectangleIntersection(bounds, bullet.bounds)) {
+      if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
         this.pushByBullet(bullet);
       }

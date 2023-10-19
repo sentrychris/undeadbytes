@@ -1,8 +1,4 @@
-import { LevelOne } from './Levels/LevelOne';
-import { LevelTwo } from './Levels/LevelTwo';
-import { LevelThree } from './Levels/LevelThree';
-
-const levels = [LevelOne, LevelTwo, LevelThree];
+import { LevelManager } from './Levels/LevelManager';
 
 export class Map
 {
@@ -13,10 +9,11 @@ export class Map
     };
     this.enemyPositions = [];
     this.wallPositions = [];
+    this.nextLevelPositions = [];
   }
 
   generate (levelIndex = 0) {
-    const level = levels[levelIndex];
+    const level = LevelManager.levels[levelIndex];
     for (let y = 0; y < level.length; y++) {
       const row = level[y];
 
@@ -25,6 +22,7 @@ export class Map
         const realX = x / 2;
 
         switch (char) {
+          case 'N': this.nextLevelPositions.push({ x: realX, y: y }); break;
           case 'W': this.wallPositions.push({ x: realX, y: y }); break;
           case 'E': this.enemyPositions.push({ x: realX, y: y }); break;
           case 'P': this.playerPosition = { x: realX, y: y }; break;

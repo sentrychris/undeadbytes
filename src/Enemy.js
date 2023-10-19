@@ -47,7 +47,6 @@ export class Enemy
       this.health = this.health < 0 ? 0 : this.health;
   
       if (this.health == 0) {
-        // debug
         this.dead = true;
       }
     }
@@ -136,7 +135,6 @@ export class Enemy
 
       if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        console.log({ dps: bulletFactory.equippedWeapon.dps });
         this.pushByBullet(bullet, bulletFactory.equippedWeapon.dps);
       }
     }

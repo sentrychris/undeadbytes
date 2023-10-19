@@ -12,6 +12,7 @@ export class BulletFactory {
 
   update (context, player, walls, mouse, weaponIndex = 0) {
     this.equippedWeapon = mappings[weaponIndex];
+    document.querySelector('strong#equipped-weapon').innerHTML = this.equippedWeapon.name;
 
     if (this.equippedWeapon && this.automatic && !player.dead) {
       if (mouse.pressed) {       

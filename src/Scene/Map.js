@@ -1,4 +1,8 @@
+import { LevelOne } from './Levels/LevelOne';
 import { LevelTwo } from './Levels/LevelTwo';
+import { LevelThree } from './Levels/LevelThree';
+
+const levels = [LevelOne, LevelTwo, LevelThree];
 
 export class Map
 {
@@ -11,9 +15,10 @@ export class Map
     this.wallPositions = [];
   }
 
-  generate () {
-    for (let y = 0; y < LevelTwo.length; y++) {
-      const row = LevelTwo[y];
+  generate (levelIndex = 0) {
+    const level = levels[levelIndex];
+    for (let y = 0; y < level.length; y++) {
+      const row = level[y];
 
       for (let x = 0; x < row.length; x += 2) {
         const char = row[x];

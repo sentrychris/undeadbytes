@@ -1,6 +1,3 @@
-// W = wall
-// E = Enemy spawn
-
 export const LevelOne = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W       W                             W',

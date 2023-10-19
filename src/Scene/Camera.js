@@ -1,6 +1,7 @@
-import { EntityHelper } from '../Entity/Physics/EntityHelper';
+import { EntityHelper } from '../Physics/EntityHelper';
 
-export class Camera {
+export class Camera
+{
   constructor(context, frames = 0, radius = 60, size = 150) {
     this.x = 0;
     this.y = 0;

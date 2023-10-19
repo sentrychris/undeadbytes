@@ -1,8 +1,8 @@
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
-import { Player } from './Entity/Player';
-import { Enemy } from './Entity/Enemy';
-import { Wall } from './Entity/Wall';
+import { Player } from './Player';
+import { Enemy } from './Enemy';
+import { Wall } from './Wall';
 import { BulletFactory } from './Bullet/BulletFactory';
 
 const canvas = document.querySelector('canvas#main');

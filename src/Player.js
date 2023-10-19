@@ -13,29 +13,32 @@ export class Player
     this.position = 0;
     this.incrementer = 0;
     this.speed = 5;
+    
     this.sleep = true;
-    this.canTakeDamage = true;
-    this.damageVelocity = {
+    
+    this.invincible = false;
+    this.health = 100;
+    
+    this.damage = {
       x: 0,
       y: 0
     };
-    this.health = 100;
     this.dead = false;
     this.gameover = gameover;
   }
 
   takeDamage (enemy) {
-    if (this.canTakeDamage) {
+    if (! this.invincible) {
       const vectorX = this.x - enemy.x;
       const vectorY = this.y - enemy.y;
       const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
       if (length > 0) {
-        this.damageVelocity.x = vectorX / length * 20;
-        this.damageVelocity.y = vectorY / length * 20;
-        this.canTakeDamage = false;
+        this.damage.x = vectorX / length * 20;
+        this.damage.y = vectorY / length * 20;
+        this.invincible = true;
         
-        this.health -= 25;
+        this.health -= 25; // TODO difficulty setting and power-ups
         this.health = this.health < 0 ? 0 : this.health;
 
         if (this.health == 0) {
@@ -46,7 +49,6 @@ export class Player
           }, 1000);
         }
       }
-
     }
   }
 
@@ -68,21 +70,21 @@ export class Player
     }
 
     // keyboard
-    if (Math.abs(this.damageVelocity.x) != 0 < Math.abs(this.damageVelocity.y) != 0) {
-      this.damageVelocity.x *= 0.9;
-      this.damageVelocity.y *= 0.9;
+    if (Math.abs(this.damage.x) != 0 < Math.abs(this.damage.y) != 0) {
+      this.damage.x *= 0.9;
+      this.damage.y *= 0.9;
 
-      this.x += this.damageVelocity.x;
-      this.y += this.damageVelocity.y;
+      this.x += this.damage.x;
+      this.y += this.damage.y;
 
-      if (Math.abs(this.damageVelocity.x) < 0.5 && Math.abs(this.damageVelocity.y) < 0.5) {
-        this.damageVelocity = {
+      if (Math.abs(this.damage.x) < 0.5 && Math.abs(this.damage.y) < 0.5) {
+        this.damage = {
           x: 0,
           y: 0
         };
-        this.canTakeDamage = true;
-      }
 
+        this.invincible = false;
+      }
     } else {
       if (keyboard.up) this.y -= currentSpeed;
       if (keyboard.down) this.y += currentSpeed;

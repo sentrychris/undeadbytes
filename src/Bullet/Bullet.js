@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Entity/Physics/EntityHelper';
+import { EntityHelper } from '../Physics/EntityHelper';
 
 export class Bullet
 {

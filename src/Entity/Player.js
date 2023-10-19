@@ -15,7 +15,10 @@ export class Player
     this.speed = 5;
     this.sleep = true;
     this.canTakeDamage = true;
-    this.damageVelocity = { x: 0, y: 0 };
+    this.damageVelocity = {
+      x: 0,
+      y: 0
+    };
     this.health = 100;
     this.dead = false;
     this.gameover = gameover;
@@ -73,7 +76,10 @@ export class Player
       this.y += this.damageVelocity.y;
 
       if (Math.abs(this.damageVelocity.x) < 0.5 && Math.abs(this.damageVelocity.y) < 0.5) {
-        this.damageVelocity = { x: 0, y: 0 };
+        this.damageVelocity = {
+          x: 0,
+          y: 0
+        };
         this.canTakeDamage = true;
       }
 

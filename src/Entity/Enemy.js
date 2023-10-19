@@ -14,8 +14,14 @@ export class Enemy
     this.incrementer = 0;
     this.speed = 3;
     this.sleep = true;
-    this.pushAlongVelocity = {x: 0, y: 0};
-    this.pushBulletVelocity = {x: 0, y: 0};
+    this.pushAlongVelocity = {
+      x: 0,
+      y: 0
+    };
+    this.pushBulletVelocity = {
+      x: 0,
+      y: 0
+    };
     this.canBePushedByBullet = true;
     this.health = 100;
     this.dead = false;
@@ -91,7 +97,7 @@ export class Enemy
 
     // enemy collision
     if (Math.random() <= 0.1) {
-      for (var i = 0; i < enemies.length; i++) {
+      for (let i = 0; i < enemies.length; i++) {
         const enemy = enemies[i];
   
         if (enemy != this) {

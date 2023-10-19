@@ -32,7 +32,10 @@ export class _EntityCollision
   }
 
   arcToWalls (x, y, walls) {
-    const result = { x: 0, y: 0 };
+    const result = {
+      x: 0,
+      y: 0
+    };
 
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];

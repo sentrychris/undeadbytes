@@ -39,9 +39,8 @@ export class Bullet
       this.markToDelete = true;
     }
 
-    for (var i = 0; i < walls.length; i++) {
-      var wall = walls[i];
-
+    for (let i = 0; i < walls.length; i++) {
+      const wall = walls[i];
       if (this.rectangleIntersection(wall.bounds, this.bounds)) {
         this.markToDelete = true;
       }

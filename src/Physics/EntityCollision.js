@@ -42,7 +42,7 @@ export class _EntityCollision
    * @param {*} walls 
    * @returns 
    */
-  calculateVector(x, y, walls) {
+  vector(x, y, walls) {
     const result = {
       x: 0,
       y: 0

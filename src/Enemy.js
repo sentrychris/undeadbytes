@@ -27,7 +27,7 @@ export class Enemy
     this.canBePushedByBullet = true;
     this.lastVectorX = 0;
     this.lastVectorY = 0;
-    
+
     this.health = 100;
     this.dead = false;
   }
@@ -81,7 +81,7 @@ export class Enemy
         this.y += vectorY * this.speed;
 
         // collision
-        const collisionVector = EntityCollision.calculateVector(this.x, this.y, walls);
+        const collisionVector = EntityCollision.vector(this.x, this.y, walls);
         this.x += collisionVector.x * this.speed;
         this.y += collisionVector.y * this.speed;
 

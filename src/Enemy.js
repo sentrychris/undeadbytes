@@ -156,16 +156,6 @@ export class Enemy
       return;
     }
 
-    EntityHelper.beginRotationOffset(context, this.x, this.y, this.angle);
-
-    if (! this.dead) {
-      EntityDrawer.enemy(context, this.position);
-    } else {
-      EntityDrawer.deadEnemy(context);
-    }
-    
-    EntityHelper.endRotationOffset(context, this.x, this.y, this.angle);
-
-    EntityDrawer.healthBar(context, this.health, this.x, this.y);
+    EntityHelper.render(context, 'enemy', this);
   };
 };

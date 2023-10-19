@@ -1,3 +1,5 @@
+import { EntityDrawer } from './EntityDrawer';
+
 export class _EntityHelper
 {
   intersection (r1, r2) {
@@ -20,6 +22,27 @@ export class _EntityHelper
 
     context.translate(-context.canvas.width / 2, -context.canvas.height / 2);
     context.translate(+(-x + context.canvas.width / 2), +(-y + context.canvas.height / 2));
+  }
+
+  render (context, type, entity) {
+    this.beginRotationOffset(context, entity.x, entity.y, entity.angle);
+
+    if (! entity.dead) {
+      if (type === 'enemy') {
+        EntityDrawer.enemy(context, entity.position);
+      } else {
+        EntityDrawer.player(context, entity.position);
+      }
+    } else {
+      if (type === 'enemy') {
+        EntityDrawer.deadEnemy(context);
+      } else {
+        EntityDrawer.deadPlayer(context);
+      }
+    }
+    
+    this.endRotationOffset(context, entity.x, entity.y, entity.angle);
+    EntityDrawer.healthBar(context, entity.health, entity.x, entity.y);
   }
 }
 

@@ -36,6 +36,7 @@ const player = new Player(
 );
 entities.push(player);
 
+let weapon = 0;
 
 for (let i = 0; i < map.getEnemyPositions().length; i++) {
   const enemy = new Enemy(map.getEnemyPositions()[i]);
@@ -58,7 +59,7 @@ const onResize = (width, height) => {
 
 const onUpdate = () => {
   camera.update(player, entities);
-  bulletFactory.update(context, player, walls, mouse);
+  bulletFactory.update(context, player, walls, mouse, weapon);
   for (let i = 0; i < entities.length; i++) {
     if (typeof entities[i] !== undefined && typeof entities[i].update === 'function') {
       entities[i].update(
@@ -105,6 +106,10 @@ document.addEventListener('keydown', (event) => {
     case 's': keyboard.down = true; break;
     case 'a': keyboard.left = true; break;
     case 'd': keyboard.right = true; break;
+    case '1': weapon = 0; break;
+    case '2': weapon = 1; break;
+    case '3': weapon = 2; break;
+    case '4': weapon = 3; break;
   }
 });
 

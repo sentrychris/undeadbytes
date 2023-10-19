@@ -1,10 +1,10 @@
 import { EntityCollision } from './Physics/EntityCollision';
-import { EntityDrawer } from './Physics/EntityDrawer';
 import { EntityHelper } from './Physics/EntityHelper';
 
 export class Enemy
 {
   constructor (spawn) {
+    this.type = 'enemy';
     this.bounding = 'arc';
     this.x = spawn.x * 150;
     this.y = spawn.y * 150;
@@ -156,6 +156,6 @@ export class Enemy
       return;
     }
 
-    EntityHelper.render(context, 'enemy', this);
+    EntityHelper.render(context, this);
   };
 };

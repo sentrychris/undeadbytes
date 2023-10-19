@@ -6,6 +6,7 @@ import { EntityHelper } from './Physics/EntityHelper';
 export class Player
 {
   constructor (spawn, gameover) {
+    this.type = 'player';
     this.bounding = 'arc';
     this.x = spawn.x * 150;
     this.y = spawn.y * 150;
@@ -123,6 +124,6 @@ export class Player
       return;
     }
 
-    EntityHelper.render(context, 'player', this);
+    EntityHelper.render(context, this);
   };
 };

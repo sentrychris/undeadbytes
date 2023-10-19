@@ -35,12 +35,12 @@ export class Camera {
         const entity = entities[i];
         const bounds = {};
 
-        if (entity.boundingType === 'arc') {
+        if (entity.bounding === 'arc') {
           bounds.x = entity.x - this.radius;
           bounds.y = entity.y - this.radius;
           bounds.width = this.radius * 2;
           bounds.height = this.radius * 2;
-        } else if (entity.boundingType === 'box') {
+        } else if (entity.bounding === 'box') {
           bounds.x = entity.x;
           bounds.y = entity.y;
           bounds.width = this.size;

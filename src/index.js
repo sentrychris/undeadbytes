@@ -1,12 +1,14 @@
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
-import { Player } from './Player/Player';
-import { Enemy } from './Enemy/Enemy';
+import { Player } from './Entity/Player';
+import { Enemy } from './Entity/Enemy';
 import { Wall } from './Entity/Wall';
 import { BulletFactory } from './Bullet/BulletFactory';
 
 const canvas = document.querySelector('canvas#main');
 const context = canvas.getContext('2d');
+const camera = new Camera(context);
+
 const keyboard = {
   up: false,
   down: false,
@@ -20,39 +22,33 @@ const mouse = {
   pressed: false
 };
 
-const entities = [];
-const walls = [];
-const enemies = [];
-
 const map = new Map();
 map.generate();
 
-const playerPosition = map.getPlayerPosition();
+const entities = [];
+const walls = [];
+const enemies = [];
+const bulletFactory = new BulletFactory();
+
 const player = new Player(
-  playerPosition.x,
-  playerPosition.y,
+  map.getPlayerPosition(),
   document.querySelector('div.gameover')
 );
+entities.push(player);
+
 
 for (let i = 0; i < map.getEnemyPositions().length; i++) {
-  const enemyPosition = map.getEnemyPositions()[i];
-  const enemy = new Enemy(enemyPosition.x, enemyPosition.y);
-
+  const enemy = new Enemy(map.getEnemyPositions()[i]);
   entities.push(enemy);
   enemies.push(enemy);
 }
 
-entities.push(player);
-
 for (let i = 0; i < map.getWallPositions().length; i++) {
   const wallPosition = map.getWallPositions()[i];
   const wall = new Wall(wallPosition.x, wallPosition.y);
-
   entities.push(wall);
   walls.push(wall);
 }
-
-const camera = new Camera(context);
 
 const onResize = (width, height) => {
   context.canvas.width = width;
@@ -60,13 +56,22 @@ const onResize = (width, height) => {
   camera.resize();
 };
 
-const bulletFactory = new BulletFactory();
-
 const onUpdate = () => {
   camera.update(player, entities);
   bulletFactory.update(context, player, walls, mouse);
   for (let i = 0; i < entities.length; i++) {
-    entities[i].update(context, player, enemies, walls, bulletFactory, camera, keyboard, mouse);
+    if (typeof entities[i] !== undefined && typeof entities[i].update === 'function') {
+      entities[i].update(
+        context,
+        player,
+        enemies,
+        walls,
+        bulletFactory,
+        camera,
+        keyboard,
+        mouse
+      );
+    }
   }
 };
 
@@ -74,11 +79,9 @@ const onRender = () => {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
   camera.preRender(player);
   bulletFactory.render();
-
   for (let i = 0; i < entities.length; i++) {
     entities[i].render(context);
   }
-
   camera.postRender();
 }
 
@@ -87,7 +90,6 @@ const resizeCallback = () => {
 };
 window.addEventListener('resize', resizeCallback);
 resizeCallback();
-
 
 const tickCallback = () => {
   onUpdate();

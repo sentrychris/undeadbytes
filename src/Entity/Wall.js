@@ -1,7 +1,7 @@
 export class Wall
 {
   constructor (x, y) {
-    this.boundingType = 'box';
+    this.bounding = 'box';
     this.x = x * 150;
     this.y = y * 150;
     this.sleep = true;
@@ -14,8 +14,6 @@ export class Wall
     };
   }
 
-  update (player, enemies) {};
-
   render (context) {
     if (this.sleep) {
       return;
@@ -23,7 +21,7 @@ export class Wall
 
     context.beginPath();
     context.rect(this.x, this.y, 150, 150);
-    context.fillStyle = '#774F38';
+    context.fillStyle = '#8fce00';
     context.fill();
   };
 };

@@ -1,17 +1,17 @@
-import { EntityCollision } from '../Entity/EntityCollision';
-import { EntityDrawer } from '../Entity/EntityDrawer';
-import { EntityHelper } from '../Entity/EntityHelper';
+import { EntityCollision } from './Physics/EntityCollision';
+import { EntityDrawer } from './Physics/EntityDrawer';
+import { EntityHelper } from './Physics/EntityHelper';
 
 export class Enemy
 {
-  constructor (x, y) {
-    this.boundingType = 'arc';
-    this.x = x * 150;
-    this.y = y * 150;
+  constructor (spawn) {
+    this.bounding = 'arc';
+    this.x = spawn.x * 150;
+    this.y = spawn.y * 150;
     this.radius = 60;
     this.angle = 0;
-    this.footPosition = 0;
-    this.footIncrementer = 0;
+    this.position = 0;
+    this.incrementer = 0;
     this.speed = 3;
     this.sleep = true;
     this.pushAlongVelocity = {x: 0, y: 0};
@@ -19,7 +19,6 @@ export class Enemy
     this.canBePushedByBullet = true;
     this.health = 100;
     this.dead = false;
-
     this.lastVectorX = 0;
     this.lastVectorY = 0;
   }
@@ -81,8 +80,8 @@ export class Enemy
         this.x += collisionVector.x * this.speed;
         this.y += collisionVector.y * this.speed;
 
-        this.footIncrementer += this.speed;
-        this.footPosition = Math.sin(this.footIncrementer * Math.PI / 180);
+        this.incrementer += this.speed;
+        this.position = Math.sin(this.incrementer * Math.PI / 180);
 
         if (length < 100) {
           player.takeDamage(this);
@@ -158,9 +157,9 @@ export class Enemy
     EntityHelper.beginRotationOffset(context, this.x, this.y, this.angle);
 
     if (! this.dead) {
-      EntityDrawer.enemy(context, this.footPosition);
+      EntityDrawer.enemy(context, this.position);
     } else {
-      EntityDrawer.deadEnemy();
+      EntityDrawer.deadEnemy(context);
     }
     
     EntityHelper.endRotationOffset(context, this.x, this.y, this.angle);

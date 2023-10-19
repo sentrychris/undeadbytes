@@ -1,26 +1,4 @@
-export const map = [
-  'W W W W W W W W W W W W W W W W W W W W',
-  'W       W                             W',
-  'W   E   W           E           E     W',
-  'W   E   W                             W',
-  'W       W           E     W W W W W W W',
-  'W     W W                             W',
-  'W                   E                 W',
-  'W         E E                   E     W',
-  'W                                     W',
-  'W W W W W W W W W W W W W W           W',
-  'W                         W           W',
-  'W     E     E             W     E     W',
-  'W                   E     W           W',
-  'W W W W W W W             W           W',
-  'W                         W     E     W',
-  'W               W W W W W W           W',
-  'W   P                     W           W',
-  'W                   E                 W',
-  'W         W W W                   E   W',
-  'W           W       E                 W',
-  'W W W W W W W W W W W W W W W W W W W W'
-];
+import { LevelTwo } from './Levels/LevelTwo';
 
 export class Map
 {
@@ -34,8 +12,8 @@ export class Map
   }
 
   generate () {
-    for (let y = 0; y < map.length; y++) {
-      const row = map[y];
+    for (let y = 0; y < LevelTwo.length; y++) {
+      const row = LevelTwo[y];
 
       for (let x = 0; x < row.length; x += 2) {
         const char = row[x];

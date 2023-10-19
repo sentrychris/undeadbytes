@@ -1,17 +1,17 @@
 
-import { EntityCollision } from '../Entity/EntityCollision';
-import { EntityDrawer } from '../Entity/EntityDrawer';
-import { EntityHelper } from '../Entity/EntityHelper';
+import { EntityCollision } from './Physics/EntityCollision';
+import { EntityDrawer } from './Physics/EntityDrawer';
+import { EntityHelper } from './Physics/EntityHelper';
 
 export class Player
 {
-  constructor (x, y, gameover) {
-    this.boundingType = 'arc';
-    this.x = x * 150;
-    this.y = y * 150;
+  constructor (spawn, gameover) {
+    this.bounding = 'arc';
+    this.x = spawn.x * 150;
+    this.y = spawn.y * 150;
     this.angle = 0;
-    this.footPosition = 0;
-    this.footIncrementer = 0;
+    this.position = 0;
+    this.incrementer = 0;
     this.speed = 5;
     this.sleep = true;
     this.canTakeDamage = true;
@@ -104,10 +104,10 @@ export class Player
 
     // foot
     if (keyboard.up || keyboard.down || keyboard.left || keyboard.right) {
-      this.footIncrementer += this.speed;
+      this.incrementer += this.speed;
     }
 
-    this.footPosition = Math.sin(this.footIncrementer * Math.PI / 180);
+    this.position = Math.sin(this.incrementer * Math.PI / 180);
   };
 
   render (context) {
@@ -118,9 +118,9 @@ export class Player
     EntityHelper.beginRotationOffset(context, this.x, this.y, this.angle);
 
     if (! this.dead) {
-      EntityDrawer.player(context, this.footPosition);
+      EntityDrawer.player(context, this.position);
     } else {
-      EntityDrawer.deadPlayer();
+      EntityDrawer.deadPlayer(context);
     }
     
     EntityHelper.endRotationOffset(context, this.x, this.y, this.angle);

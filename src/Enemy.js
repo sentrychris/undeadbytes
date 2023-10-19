@@ -78,7 +78,7 @@ export class Enemy
         this.y += vectorY * this.speed;
 
         // collision
-        const collisionVector = EntityCollision.arcToWalls(this.x, this.y, walls);
+        const collisionVector = EntityCollision.calculateVector(this.x, this.y, walls);
         this.x += collisionVector.x * this.speed;
         this.y += collisionVector.y * this.speed;
 

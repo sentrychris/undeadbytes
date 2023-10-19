@@ -1,6 +1,12 @@
 export class _EntityCollision
 {
-  arcToWall({ arcX, arcY, radius, wallX, wallY, size }) {
+  /**
+   * Caclulate collision beween entity (arc) and wall (box)
+   * 
+   * @param {*} param0 
+   * @returns 
+   */
+  arcWallVector({ arcX, arcY, radius, wallX, wallY, size }) {
     const distX = Math.abs(arcX - wallX - size / 2);
     const distY = Math.abs(arcY - wallY - size / 2);
   
@@ -26,7 +32,15 @@ export class _EntityCollision
     return (dX * dX + dY * dY <= (radius * radius));
   }
 
-  arcToWalls (x, y, walls) {
+  /**
+   * Calculate collision vectors
+   * 
+   * @param {*} x 
+   * @param {*} y 
+   * @param {*} walls 
+   * @returns 
+   */
+  calculateVector(x, y, walls) {
     const result = {
       x: 0,
       y: 0
@@ -35,7 +49,7 @@ export class _EntityCollision
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
   
-      if (this.arcToWall({
+      if (this.arcWallVector({
         arcX: x,
         arcY: y,
         radius: 60,
@@ -43,7 +57,6 @@ export class _EntityCollision
         wallY: wall.y,
         size: 150
       })) {
-  
         const wallCenterX = wall.x + 150 / 2;
         const wallCenterY = wall.y + 150 / 2;
   

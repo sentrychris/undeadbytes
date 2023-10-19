@@ -94,7 +94,7 @@ export class Player
     }
 
     // collision
-    const collisionVector = EntityCollision.arcToWalls(this.x, this.y, walls);
+    const collisionVector = EntityCollision.calculateVector(this.x, this.y, walls);
     this.x += collisionVector.x * currentSpeed;
     this.y += collisionVector.y * currentSpeed;
 

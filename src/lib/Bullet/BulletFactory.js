@@ -1,4 +1,5 @@
 import { Bullet } from './Bullet';
+import { AudioHandler } from './AudioHandler';
 import { mappings } from './mappings';
 
 export class BulletFactory {
@@ -29,15 +30,9 @@ export class BulletFactory {
 
         document.querySelector('#gun-reload').style.display = 'none';
 
-        const audioFire = document.querySelector(`#${this.equippedWeapon.audioFire}`);
-        if (audioFire) {
-          if (audioFire.duration > 0 && !audioFire.paused) {
-            audioFire.pause();
-            audioFire.currentTime = 0
-          }
-          audioFire.playbackRate=1.5
-          audioFire.play();
-        }
+        AudioHandler.play({
+          equippedWeapon: this.equippedWeapon
+        }, 'fire', 1.5);
 
         const { spread } = this.equippedWeapon;
         for (let i = spread.min; i <= spread.max; i++) {
@@ -47,12 +42,13 @@ export class BulletFactory {
 
         this.automatic = this.equippedWeapon.automatic;
 
-        setTimeout(() => {
-          const audioReload = document.querySelector(`#${this.equippedWeapon.audioReload}`);
-          if (audioReload) {
-            audioReload.play();
-          }
-        }, 900);
+        if ( ! this.automatic) {
+          setTimeout(() => {
+            AudioHandler.play({
+              equippedWeapon: this.equippedWeapon
+            }, 'reload');
+          }, 900);
+        }
       }
     } else {
       this.frames++;

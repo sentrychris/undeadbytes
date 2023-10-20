@@ -20,8 +20,8 @@ export const mappings = [
     capacity: 20,
     magazines: 2,
     automatic: false,
-    audioFire: 'audio-shotgun-blast',
-    audioReload: 'audio-shotgun-reload'
+    audioFire: './fx/audio/pistol/pistol-fire.mp3',
+    audioReload: './fx/audio/pistol/pistol-reload.mp3'
   },
   {
     name: 'Shotgun',
@@ -34,8 +34,8 @@ export const mappings = [
     capacity: 20,
     magazines: 2,
     automatic: false,
-    audioFire: 'audio-shotgun-blast',
-    audioReload: 'audio-shotgun-reload'
+    audioFire: './fx/audio/shotgun/shotgun-fire.mp3',
+    audioReload: './fx/audio/shotgun/shotgun-reload.mp3'
   },
   {
     name: 'Machine Gun',
@@ -48,8 +48,8 @@ export const mappings = [
     capacity: 150,
     magazines: 2,
     automatic: true,
-    audioFire: 'audio-shotgun-blast',
-    audioReload: 'audio-shotgun-reload'
+    audioFire: './fx/audio/machine-gun/machine-gun-fire.mp3',
+    audioReload: './fx/audio/machine-gun/machine-gun-reload.mp3'
   },
   {
     name: 'Flamethrower',
@@ -62,7 +62,7 @@ export const mappings = [
     capacity: 300,
     magazines: 2,
     automatic: true,
-    audioFire: 'audio-shotgun-blast',
-    audioReload: 'audio-shotgun-reload'
+    audioFire: './fx/audio/flamethrower/flamethrower-fire.mp3',
+    audioReload: './fx/audio/flamethrower/flamethrower-reload.mp3'
   }
 ];

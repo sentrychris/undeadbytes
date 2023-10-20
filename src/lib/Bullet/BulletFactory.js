@@ -14,9 +14,9 @@ export class BulletFactory {
 
   update (context, player, walls, mouse, weaponIndex = 0) {
     this.equippedWeapon = mappings[weaponIndex];
-    document.querySelector('strong#equipped-weapon').innerHTML = this.equippedWeapon.name;
-    document.querySelector('span#ammo-remaining').innerHTML = this.equippedWeapon.clip;
-    document.querySelector('span#ammo-capacity').innerHTML = this.equippedWeapon.capacity;
+    document.querySelector('#equipped-weapon').innerHTML = this.equippedWeapon.name;
+    document.querySelector('#ammo-remaining').innerHTML = this.equippedWeapon.clip;
+    document.querySelector('#ammo-capacity').innerHTML = this.equippedWeapon.capacity;
 
     if (this.equippedWeapon && this.automatic && !player.dead) {
       if (mouse.pressed) {

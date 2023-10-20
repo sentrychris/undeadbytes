@@ -1,4 +1,4 @@
-export const LevelTwo = [
+export const level2 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W       W                       W     W',
   'W   E   W           E           E     W',

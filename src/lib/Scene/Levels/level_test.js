@@ -1,4 +1,4 @@
-export const TestLevel = [
+export const leveltest = [
   'W W W W W W W W W W W W W W W ',
   'W                           W',
   'W                           W',

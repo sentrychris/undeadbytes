@@ -4,74 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Squareshoot</title>
-  <style>
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #000000;
-      margin: 0;
-      padding: 0;
-    }
-
-    .help {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      color: white;
-      background: rgba(34, 34, 34, 0.75);
-      border: 1px solid rgb(34, 34, 34);
-      border-radius: 5px;
-      padding: 15px;
-    }
-    .help p {
-      margin-top: 0;
-      margin-bottom: 1px;
-    }
-    #equipped-weapon {
-      color: #27a2f5;
-    }
-
-    .gameover {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      background: rgba(197, 13, 13, 0.8);
-      display: none;
-    }
-
-    .gameover h1 {
-      text-align: center;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      font-size: 70px;
-      color: white;
-      text-transform: uppercase;
-    }
-
-    .gameover button {
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-      font-size: 30px;
-      text-transform: uppercase;
-      display: block;
-      margin: auto;
-    }
-  </style>
 </head>
 <body>
   <canvas id="main"></canvas>
+  
   <div class="help">
     <p>WSAD - movement</p>
     <p>mouse - direction/shooting</p>
     <hr />
     <p>Equipped Weapon: <strong id="equipped-weapon"></strong></p>
     <p>Enemies Remaining: <strong id="enemies-remaining"></strong></p>
+    <hr />
+    <p>Ammo: <strong id="gun-ammo"><span id="ammo-remaining"></span> / <span id="ammo-capacity"></span></strong></p>
+    <p><strong id="gun-reload" class="reload"><span>RELOAD</span></strong></p>
   </div>
-  <div class="gameover">
-    <h1>Game Over</h1>
+  
+  <div class="game-ended-wrapper">
+    <div class="game-ended">
+      <h1>Game Over</h1>
+    </div>
   </div>
+
   <script src="./main.js"></script>
 </body>
 </html>

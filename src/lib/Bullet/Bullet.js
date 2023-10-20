@@ -1,5 +1,5 @@
 import { EntityHelper } from '../Entity/EntityHelper';
-import { config } from '../config';
+import { config } from '../../config';
 
 export class Bullet
 {

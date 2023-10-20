@@ -1,6 +1,6 @@
 import { EntityCollision } from './Entity/EntityCollision';
 import { EntityHelper } from './Entity/EntityHelper';
-import { config } from './config';
+import { config } from '../config';
 
 export class Enemy
 {

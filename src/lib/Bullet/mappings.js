@@ -11,30 +11,50 @@
 export const mappings = [
   {
     name: 'Pistol',
-    min: 0,
-    max: 0,
+    spread: {
+      min: 0,
+      max: 0,
+    },
     dps: 30,
+    clip: 2,
+    capacity: 2,
+    magazines: 2,
     automatic: false
   },
   {
     name: 'Shotgun',
-    min: -3,
-    max: 3,
-    dps: 35,
+    spread: {
+      min: -3,
+      max: 3,
+    },
+    dps: 50,
+    clip: 20,
+    capacity: 20,
+    magazines: 2,
     automatic: false
   },
   {
     name: 'Machine Gun',
-    min: 0,
-    max: 0,
-    dps: 20,
+    spread: {
+      min: 0,
+      max: 0,
+    },
+    dps: 15,
+    clip: 150,
+    capacity: 150,
+    magazines: 2,
     automatic: true
   },
   {
     name: 'Flamethrower',
-    min: -5,
-    max: 5,
+    spread: {
+      min: -5,
+      max: 5,
+    },
     dps: 10,
+    clip: 300,
+    capacity: 300,
+    magazines: 2,
     automatic: true
   }
 ];

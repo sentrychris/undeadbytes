@@ -1,11 +1,11 @@
 
 import { EntityCollision } from './Entity/EntityCollision';
 import { EntityHelper } from './Entity/EntityHelper';
-import { config } from './config';
+import { config } from '../config';
 
 export class Player
 {
-  constructor (spawn, gameover) {
+  constructor (spawn, gameEndedDisplay) {
     this.type = 'player';
     this.bounding = 'arc';
     this.x = spawn.x * config.size;
@@ -25,7 +25,7 @@ export class Player
       y: 0
     };
     this.dead = false;
-    this.gameover = gameover;
+    this.gameEndedDisplay = gameEndedDisplay;
   }
 
   takeDamage (enemy) {
@@ -46,7 +46,7 @@ export class Player
           this.dead = true;
 
           setTimeout(() => {
-            this.gameover.style.display = 'block';
+            this.gameEndedDisplay.style.display = 'block';
           }, 1000);
         }
       }

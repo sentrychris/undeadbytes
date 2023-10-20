@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squareshoot</title>
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .help {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: white;
+      background: rgba(34, 34, 34, 0.75);
+      border: 1px solid rgb(34, 34, 34);
+      border-radius: 5px;
+      padding: 15px;
+    }
+    .help p {
+      margin-top: 0;
+      margin-bottom: 1px;
+    }
+    #equipped-weapon {
+      color: #27a2f5;
+    }
+    #gun-reload {
+      display: none;
+      color: red;
+    }
+
+    .game-ended-wrapper {
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+    }
+    .game-ended {
+      background: rgba(197, 13, 13, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      width: 100%;
+    }
+    .game-ended h1 {
+      margin-bottom: 0;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 6rem;
+      color: white;
+      text-transform: uppercase;
+    }
+    .reload {
+      border: none;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      text-shadow: 1px 5px 4px rgba(0, 0, 0, .3), 0 0 2px rgba(255, 255, 255, 1), 0 0 10px rgba(255, 255, 255, 1), 0 0 20px rgba(255, 255, 255, 1), 0 0 30px rgba(255, 255, 255, 1), 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de;
+    }
+    .reload span {
+      animation: blink .3s infinite alternate;
+    }
+    .reload span.delay {
+      animation-duration: 6s;
+      animation-delay: 2s;
+      animation-direction: alternate cubic-bezier(0.5, 0.2, 0.3, 1.0)
+    }
+    @keyframes blink {
+      0% {}
+      50% {}
+      60% {
+        text-shadow: 0 0 2px rgba(211, 139, 139, 0.1), 0 0 10px rgba(235, 171, 171, 0.4);
+        text-stroke: 2px rgba(228, 153, 153, 0.05);
+      }
+      70% {
+        text-shadow: 0 0 2px rgb(192, 124, 124), 0 0 10px
+          rgb(211, 116, 116), 0 0 20px
+          rgb(221, 145, 145), 0 0 30px
+          rgb(190, 118, 118), 0 0 40px
+          #da5656, 0 0 70px #da5656, 0 0 80px #da5656, 0 0 100px #da5656;
+      }
+      80% {
+        text-shadow: 0 0 2px rgba(255, 255, 255, .1), 0 0 10px rgba(255, 255, 255, .4);
+        text-stroke: 2px rgba(255, 255, 255, 0.05);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="main"></canvas>
+  
+  <div class="help">
+    <p>WSAD - movement</p>
+    <p>mouse - direction/shooting</p>
+    <hr />
+    <p>Equipped Weapon: <strong id="equipped-weapon"></strong></p>
+    <p>Enemies Remaining: <strong id="enemies-remaining"></strong></p>
+    <hr />
+    <p>Ammo: <strong id="gun-ammo"><span id="ammo-remaining"></span> / <span id="ammo-capacity"></span></strong></p>
+    <p><strong id="gun-reload" class="reload"><span>RELOAD</span></strong></p>
+  </div>
+  
+  <div class="game-ended-wrapper">
+    <div class="game-ended">
+      <h1>Game Over</h1>
+    </div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>

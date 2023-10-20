@@ -4,6 +4,7 @@ import { mappings } from './mappings';
 export class BulletFactory {
   constructor() {
     this.equippedWeapon = null;
+    this.reload = false;
     this.automatic = true;
     this.frames = 0;
     this.bullets = [];
@@ -13,10 +14,23 @@ export class BulletFactory {
   update (context, player, walls, mouse, weaponIndex = 0) {
     this.equippedWeapon = mappings[weaponIndex];
     document.querySelector('strong#equipped-weapon').innerHTML = this.equippedWeapon.name;
+    document.querySelector('span#ammo-remaining').innerHTML = this.equippedWeapon.clip;
+    document.querySelector('span#ammo-capacity').innerHTML = this.equippedWeapon.capacity;
 
     if (this.equippedWeapon && this.automatic && !player.dead) {
-      if (mouse.pressed) {       
-        for (let i = this.equippedWeapon.min; i <= this.equippedWeapon.max; i++) {
+      if (mouse.pressed) {
+        --this.equippedWeapon.clip;
+        if (this.equippedWeapon.clip < 0) {
+          this.equippedWeapon.clip = 0;
+          this.reload = true;
+          document.querySelector('#gun-reload').style.display = 'inline';
+          return;
+        }
+
+        document.querySelector('#gun-reload').style.display = 'none';
+
+        const { spread } = this.equippedWeapon;
+        for (let i = spread.min; i <= spread.max; i++) {
           const bullet = new Bullet(context, player, i);
           this.bullets.push(bullet);
         }

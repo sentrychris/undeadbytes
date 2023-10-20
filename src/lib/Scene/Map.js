@@ -12,7 +12,7 @@ export class Map
     this.nextLevelPositions = [];
   }
 
-  generate (levelIndex = 0) {
+  generate (levelIndex = 1) {
     const level = LevelManager.levels[levelIndex];
     for (let y = 0; y < level.length; y++) {
       const row = level[y];

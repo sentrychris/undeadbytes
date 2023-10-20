@@ -1,13 +1,17 @@
-import { Map } from './Scene/Map';
-import { Camera } from './Scene/Camera';
-import { Player } from './Player';
-import { Enemy } from './Enemy';
-import { Wall } from './Wall';
-import { BulletFactory } from './Bullet/BulletFactory';
+import { Map } from './lib/Scene/Map';
+import { Camera } from './lib/Scene/Camera';
+import { Player } from './lib/Player';
+import { Enemy } from './lib/Enemy';
+import { Wall } from './lib/Wall';
+import { BulletFactory } from './lib/Bullet/BulletFactory';
+
+import './css/main.css';
 
 const canvas = document.querySelector('canvas#main');
 const context = canvas.getContext('2d');
 const camera = new Camera(context);
+
+const gameEndedDisplay = document.querySelector('.game-ended-wrapper');
 
 const keyboard = {
   up: false,
@@ -32,7 +36,7 @@ const bulletFactory = new BulletFactory();
 
 const player = new Player(
   map.getPlayerPosition(),
-  document.querySelector('div.gameover')
+  gameEndedDisplay
 );
 entities.push(player);
 
@@ -78,7 +82,9 @@ const onUpdate = () => {
   document.querySelector('strong#enemies-remaining').innerHTML = enemies.length;
 
   if (enemies.length === 0) {
-    // Open the door to the next level, maybe display a toast notification or something
+    setTimeout(() => {
+      gameEndedDisplay.style.display = 'flex';
+    }, 1000);
   }
 };
 

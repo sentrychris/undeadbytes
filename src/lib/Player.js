@@ -5,7 +5,7 @@ import { config } from '../config';
 
 export class Player
 {
-  constructor (spawn, gameEndedDisplay) {
+  constructor (spawn, gameEndedDisplay, levelManager) {
     this.type = 'player';
     this.bounding = 'arc';
     this.x = spawn.x * config.size;
@@ -26,6 +26,7 @@ export class Player
     };
     this.dead = false;
     this.gameEndedDisplay = gameEndedDisplay;
+    this.levelManager = levelManager;
   }
 
   takeDamage (enemy) {

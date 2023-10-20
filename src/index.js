@@ -4,6 +4,8 @@ import { Player } from './lib/Player';
 import { Enemy } from './lib/Enemy';
 import { Wall } from './lib/Wall';
 import { BulletFactory } from './lib/Bullet/BulletFactory';
+import { LevelManager } from './lib/Scene/Levels/LevelManager';
+import { randomNumber } from './util';
 
 import './css/main.css';
 
@@ -27,7 +29,7 @@ const mouse = {
 };
 
 const map = new Map();
-map.generate();
+map.generate(randomNumber(0, (LevelManager.levels.length - 1)));
 
 const entities = [];
 const walls = [];
@@ -36,7 +38,8 @@ const bulletFactory = new BulletFactory();
 
 const player = new Player(
   map.getPlayerPosition(),
-  gameEndedDisplay
+  gameEndedDisplay,
+  LevelManager
 );
 entities.push(player);
 

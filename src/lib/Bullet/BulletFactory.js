@@ -29,6 +29,16 @@ export class BulletFactory {
 
         document.querySelector('#gun-reload').style.display = 'none';
 
+        const audioFire = document.querySelector(`#${this.equippedWeapon.audioFire}`);
+        if (audioFire) {
+          if (audioFire.duration > 0 && !audioFire.paused) {
+            audioFire.pause();
+            audioFire.currentTime = 0
+          }
+          audioFire.playbackRate=1.5
+          audioFire.play();
+        }
+
         const { spread } = this.equippedWeapon;
         for (let i = spread.min; i <= spread.max; i++) {
           const bullet = new Bullet(context, player, i);
@@ -36,6 +46,13 @@ export class BulletFactory {
         }
 
         this.automatic = this.equippedWeapon.automatic;
+
+        setTimeout(() => {
+          const audioReload = document.querySelector(`#${this.equippedWeapon.audioReload}`);
+          if (audioReload) {
+            audioReload.play();
+          }
+        }, 900);
       }
     } else {
       this.frames++;

@@ -16,10 +16,12 @@ export const mappings = [
       max: 0,
     },
     dps: 30,
-    clip: 2,
-    capacity: 2,
+    clip: 20,
+    capacity: 20,
     magazines: 2,
-    automatic: false
+    automatic: false,
+    audioFire: 'audio-shotgun-blast',
+    audioReload: 'audio-shotgun-reload'
   },
   {
     name: 'Shotgun',
@@ -31,7 +33,9 @@ export const mappings = [
     clip: 20,
     capacity: 20,
     magazines: 2,
-    automatic: false
+    automatic: false,
+    audioFire: 'audio-shotgun-blast',
+    audioReload: 'audio-shotgun-reload'
   },
   {
     name: 'Machine Gun',
@@ -43,7 +47,9 @@ export const mappings = [
     clip: 150,
     capacity: 150,
     magazines: 2,
-    automatic: true
+    automatic: true,
+    audioFire: 'audio-shotgun-blast',
+    audioReload: 'audio-shotgun-reload'
   },
   {
     name: 'Flamethrower',
@@ -55,6 +61,8 @@ export const mappings = [
     clip: 300,
     capacity: 300,
     magazines: 2,
-    automatic: true
+    automatic: true,
+    audioFire: 'audio-shotgun-blast',
+    audioReload: 'audio-shotgun-reload'
   }
 ];

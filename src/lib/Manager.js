@@ -9,8 +9,9 @@ import { config } from '../config';
 export class Manager
 {
   constructor(context) {
-    this.gameID = null;
-
+    this.frame = null;
+    this.stopped = false;
+    
     this.context = context;
     this.camera = new Camera(this.context);
     this.keyboard = config.device.keyboard;
@@ -21,14 +22,13 @@ export class Manager
 
     this.newGameParams();
   
-    this.stopped = false;
     this.gameover = false;
     this.levelPassed = false;
   }
 
   loop() {
     if (! this.stopped) {
-      this.gameID = null;
+      this.frame = null;
 
       this.onUpdate();
       this.onRender();
@@ -48,13 +48,13 @@ export class Manager
   };
 
   run() {
-    if (! this.gameID && ! this.stopped) {
-      this.gameID = requestAnimationFrame(this.loop.bind(this));
+    if (! this.frame && ! this.stopped) {
+      this.frame = requestAnimationFrame(this.loop.bind(this));
     }
   }
 
   restart (stopped, nextLevel = false) {
-    if (stopped && ! this.gameID) {
+    if (stopped && ! this.frame) {
       const gameover = document.querySelector('.game-ended-wrapper');
       gameover.style.display = 'flex';
 
@@ -73,14 +73,14 @@ export class Manager
 
   async stop() {
     this.stopped = true;
-    this.gameID = null;
+    this.frame = null;
     cancelAnimationFrame(this.loop.bind(this));
 
     return this.stopped;
   }
 
   setup({ level = 1 }, reset = false) {
-    this.gameID = null;
+    this.frame = null;
     this.stopped = false;
     this.gameover = false;
     this.levelPassed = false;

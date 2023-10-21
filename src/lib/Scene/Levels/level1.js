@@ -1,3 +1,4 @@
+// 10 enemies
 export const level1 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W       W                             W',

@@ -9,11 +9,62 @@ import { config } from '../config';
 export class Manager
 {
   constructor(context) {
+    this.gameID = null;
+
     this.context = context;
     this.camera = new Camera(this.context);
     this.keyboard = config.device.keyboard;
     this.mouse = config.device.mouse;
 
+    this.map = new Map();
+    this.currentLevel = 1;
+
+    this.newGameParams();
+  
+    this.gameover = false;
+    this.levelPassed = false;
+  }
+
+  loop() {
+    this.onUpdate();
+    this.onRender();
+  
+    if (this.gameover) {
+      const gameover = document.querySelector('.game-ended-wrapper');
+      if (this.levelPassed) {
+        gameover.style.display = 'flex';
+        // Proceed to the next level
+      } else {
+        gameover.style.display = 'flex';
+      }
+    }
+  
+    this.run();
+  };
+
+  run() {
+    this.gameID = requestAnimationFrame(this.loop.bind(this));
+  }
+
+  stop() {
+    if (this.gameID) {
+      window.cancelAnimationFrame(this.gameID);
+      this.gameID = null;
+    }
+  }
+
+  setup({ level = 1 }, reset = false) {
+    if (reset) {
+      this.newGameParams();
+    }
+
+    this.generateMap(level)
+      .createPlayer()
+      .createEnemies()
+      .createWalls();
+  }
+
+  newGameParams() {
     this.player = null;
     this.entities = [];
     this.walls = [];
@@ -21,22 +72,6 @@ export class Manager
 
     this.selectedWeaponIndex = 0;
     this.bulletFactory = new BulletFactory();
-    
-    this.map = new Map();
-
-    this.gameover = false;
-    this.levelPassed = false;
-  }
-
-  run(tick) {
-    requestAnimationFrame(tick);
-  }
-
-  setup({ level = 1 }) {
-    this.generateMap(level)
-      .createPlayer()
-      .createEnemies()
-      .createWalls();
   }
 
   onUpdate() {

@@ -15,23 +15,5 @@ onResize();
 // Add game control listeners
 manager.createKeyboardMouseControls();
 
-// Handle the game loop
-const tick = () => {
-  manager.onUpdate();
-  manager.onRender();
-
-  if (manager.gameover) {
-    if (manager.levelPassed) {
-      // document.querySelector('.game-ended-wrapper').style.display = 'flex';
-      // Proceed to the next level
-    } else {
-      document.querySelector('.game-ended-wrapper').style.display = 'flex';
-      // Clear all entities and rebuild level
-    }
-  }
-
-  requestAnimationFrame(tick);
-};
-
 // Run the game loop
-manager.run(tick);
+manager.loop();

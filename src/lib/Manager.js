@@ -1,9 +1,9 @@
-import { BulletFactory } from './lib/Bullet/BulletFactory';
-import { Enemy } from './lib/Enemy';
-import { Player } from './lib/Player';
-import { LevelManager } from './lib/Scene/Levels/LevelManager';
-import { Map } from './lib/Scene/Map';
-import { Wall } from './lib/Wall';
+import { BulletFactory } from './Bullet/BulletFactory';
+import { Enemy } from './Enemy';
+import { Player } from './Player';
+import { LevelManager } from './Scene/Levels/LevelManager';
+import { Map } from './Scene/Map';
+import { Wall } from './Wall';
 
 export class Manager
 {
@@ -23,8 +23,8 @@ export class Manager
     requestAnimationFrame(tick);
   }
 
-  setup() {
-    this.generateMap(0)
+  setup({ level = 1 }) {
+    this.generateMap(level)
       .createPlayer()
       .createEnemies()
       .createWalls();

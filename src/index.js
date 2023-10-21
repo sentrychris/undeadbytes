@@ -1,32 +1,38 @@
 import { Camera } from './lib/Scene/Camera';
+import { Manager } from './lib/Manager';
 import { config } from './config';
-import { Manager } from './Manager';
-
 import './css/main.css';
 
+// Create the canvas, set the context for rendering
+// and setup the camera tracking implementation
 const canvas = document.querySelector('canvas#main');
 const context = canvas.getContext('2d');
 const camera = new Camera(context);
 
+// Initialise devices
 const keyboard = config.device.keyboard;
 const mouse = config.device.mouse;
 
+// Create a new game manager and setup a new game
 const manager = new Manager();
-manager.setup();
+manager.setup({
+  level: 0
+});
 
-const onUpdate = () => manager.onUpdate(context, camera, keyboard, mouse);
-const onRender = () => manager.onRender(context, camera);
+// Add resize event listeners
 const onResize = () => manager.onResize(context, camera, window.innerWidth, window.innerHeight);
-
 window.addEventListener('resize', onResize);
-onResize();
+manager.onResize(context, camera, window.innerWidth, window.innerHeight);
 
+// Register listeners for the game controls
 manager.createKeyboardMouseControls(keyboard, mouse);
 
+// Handle the game loop
 const tick = () => {
-  onUpdate();
-  onRender();
+  manager.onUpdate(context, camera, keyboard, mouse);
+  manager.onRender(context, camera);
   requestAnimationFrame(tick);
 };
 
+// Run the game loop
 manager.run(tick);

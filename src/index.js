@@ -22,7 +22,7 @@ manager.setup({
 // Add resize event listeners
 const onResize = () => manager.onResize(context, camera, window.innerWidth, window.innerHeight);
 window.addEventListener('resize', onResize);
-manager.onResize(context, camera, window.innerWidth, window.innerHeight);
+onResize();
 
 // Register listeners for the game controls
 manager.createKeyboardMouseControls(keyboard, mouse);

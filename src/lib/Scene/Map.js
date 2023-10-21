@@ -1,13 +1,13 @@
-import { LevelManager } from './Levels/LevelManager';
+import { mappings } from '../Levels/mappings';
 
 export class Map
 {
   constructor () {
     this.newMapConfiguration();
-  }
+  }sss
 
   generate (levelIndex = 1) {
-    const level = LevelManager.levels[levelIndex];
+    const level = mappings[levelIndex];
     for (let y = 0; y < level.length; y++) {
       const row = level[y];
 

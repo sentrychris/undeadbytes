@@ -1,4 +1,4 @@
-import { Ballistics } from './Bullet/Ballistics';
+import { Ballistics } from './Ballistics/Ballistics';
 import { Player } from './Player';
 import { Enemy } from './Enemy';
 import { Wall } from './Wall';

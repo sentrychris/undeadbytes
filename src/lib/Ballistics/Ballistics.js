@@ -1,5 +1,5 @@
-import { Bullet } from './Bullet';
 import { AudioHandler } from './AudioHandler';
+import { Bullet } from './Bullet';
 import { mappings } from './mappings';
 
 export class Ballistics

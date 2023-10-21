@@ -40,6 +40,10 @@ module.exports = {
         ],
         'func-call-spacing': [
             'error',
+            'never'
+        ],
+        'space-before-function-paren': [
+            'error',
             'always'
         ]
     },

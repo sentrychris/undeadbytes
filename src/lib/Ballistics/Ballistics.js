@@ -4,24 +4,24 @@ import { mappings } from './mappings';
 
 export class Ballistics
 {
-  constructor() {
+  constructor () {
     this.weapon = null;
     this.automatic = true;
     this.frames = 0;
     this.bullets = [];
     this.indexesToDelete = [];
     this.reload = false;
-    this.reloadDisplay = document.querySelector ('#gun-reload');
+    this.reloadDisplay = document.querySelector('#gun-reload');
   }
 
   update (game) {
     this.weapon = mappings[game.selectedWeaponIndex];
-    this.setEquippedWeaponDisplayInformation ();
+    this.setEquippedWeaponDisplayInformation();
 
     if (this.weapon && this.automatic && ! game.player.dead) {
       this.reloadDisplay.style.display = 'none';
       if (game.mouse.pressed) {
-        this.handleFire (game.context, game.player);
+        this.handleFire(game.context, game.player);
       }
     } else {
       this.frames++;
@@ -31,45 +31,45 @@ export class Ballistics
       }
     }
 
-    this.cleanupBullets (game.walls);
+    this.cleanupBullets(game.walls);
   }
 
   render () {
     for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].render (this.weapon.bulletColor);
+      this.bullets[i].render(this.weapon.bulletColor);
     }
   }
 
-  handleFire(context, player) {
+  handleFire (context, player) {
     --this.weapon.clip;
-    if (this.shouldReloadWeaponAmmoClip ()) {
+    if (this.shouldReloadWeaponAmmoClip()) {
       return;
     }
 
-    AudioHandler.play ({
+    AudioHandler.play({
       equippedWeapon: this.weapon
     }, 'fire', 1.5);
 
-    this.registerBullets (context, player);
+    this.registerBullets(context, player);
     this.automatic = this.weapon.automatic;
 
     if ( ! this.automatic) {
-      setTimeout (() => {
-        AudioHandler.play ({
+      setTimeout(() => {
+        AudioHandler.play({
           equippedWeapon: this.weapon
         }, 'reload');
       }, 900);
     }
   }
 
-  setEquippedWeaponDisplayInformation() {
+  setEquippedWeaponDisplayInformation () {
     const { name, clip, capacity } = this.weapon;
-    document.querySelector ('#equipped-weapon').innerHTML = name;
-    document.querySelector ('#ammo-remaining').innerHTML = clip;
-    document.querySelector ('#ammo-capacity').innerHTML = capacity;
+    document.querySelector('#equipped-weapon').innerHTML = name;
+    document.querySelector('#ammo-remaining').innerHTML = clip;
+    document.querySelector('#ammo-capacity').innerHTML = capacity;
   }
 
-  shouldReloadWeaponAmmoClip() {
+  shouldReloadWeaponAmmoClip () {
     if (this.weapon.clip < 0) {
       this.weapon.clip = 0;
       this.reload = true;
@@ -80,25 +80,25 @@ export class Ballistics
     return false;
   }
 
-  registerBullets(context, player) {
+  registerBullets (context, player) {
     const { spread } = this.weapon;
     for (let i = spread.min; i <= spread.max; i++) {
-      const bullet = new Bullet (context, player, i);
-      this.bullets.push (bullet);
+      const bullet = new Bullet(context, player, i);
+      this.bullets.push(bullet);
     }
   }
 
-  cleanupBullets(walls) {
+  cleanupBullets (walls) {
     this.indexesToDelete = [];
     for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].update (walls);
+      this.bullets[i].update(walls);
       if (this.bullets[i].markToDelete) {
-        this.indexesToDelete.push (i);
+        this.indexesToDelete.push(i);
       }
     }
 
     for (let i = 0; i < this.indexesToDelete.length; i++) {
-      this.bullets.splice (this.indexesToDelete[i], 1);
+      this.bullets.splice(this.indexesToDelete[i], 1);
     }
   }
 }

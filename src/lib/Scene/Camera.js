@@ -3,7 +3,7 @@ import { config } from '../../config';
 
 export class Camera
 {
-  constructor(context, frames = 0) {
+  constructor (context, frames = 0) {
     this.x = 0;
     this.y = 0;
     this.offsetX = 0;
@@ -40,12 +40,12 @@ export class Camera
           bounds.width = config.size;
           bounds.height = config.size;
         }
-        entity.sleep = ! EntityHelper.intersection (bounds, screen);
+        entity.sleep = ! EntityHelper.intersection(bounds, screen);
       }
     }
   }
 
-  resize() {}
+  resize () {}
 
   preRender (player) {
     const targetX = -player.x + this.context.canvas.width / 2;
@@ -60,11 +60,11 @@ export class Camera
     this.x += vectorX / 10;
     this.y += vectorY / 10;
 
-    this.context.save ();
-    this.context.translate (this.x, this.y);
+    this.context.save();
+    this.context.translate(this.x, this.y);
   }
 
   postRender () {
-    this.context.restore ();
+    this.context.restore();
   }
 }

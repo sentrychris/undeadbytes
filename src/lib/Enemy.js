@@ -76,33 +76,33 @@ export class Enemy
       this.lastVectorY = vectorY;
     }
 
-    let length = Math.sqrt (vectorX * vectorX + vectorY * vectorY);
+    let length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
     if (length > 0) {
       vectorX /= length;
       vectorY /= length;
 
       if (length < 800) {
-        this.angle = Math.atan2 (vectorY, vectorX) - 90 * Math.PI / 180;
+        this.angle = Math.atan2(vectorY, vectorX) - 90 * Math.PI / 180;
         this.x += vectorX * this.speed;
         this.y += vectorY * this.speed;
 
         // collision
-        const collisionVector = EntityCollision.vector (this.x, this.y, game.walls);
+        const collisionVector = EntityCollision.vector(this.x, this.y, game.walls);
         this.x += collisionVector.x * this.speed;
         this.y += collisionVector.y * this.speed;
 
         this.incrementer += this.speed;
-        this.position = Math.sin (this.incrementer * Math.PI / 180);
+        this.position = Math.sin(this.incrementer * Math.PI / 180);
 
         if (length < 100) {
-          game.player.takeDamage (this);
+          game.player.takeDamage(this);
         }
       }
     }
 
     // enemy collision
-    if (Math.random () <= 0.1) {
+    if (Math.random() <= 0.1) {
       for (let i = 0; i < game.enemies.length; i++) {       
         const enemy = game.enemies[i];
   
@@ -110,19 +110,19 @@ export class Enemy
           vectorX = enemy.x - this.x;
           vectorY = enemy.y - this.y;
   
-          length = Math.sqrt (vectorX * vectorX + vectorY * vectorY);
+          length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
           if (length != 0 && length < 100) {
 
             vectorX /= length;
             vectorY /= length;
 
-            enemy.pushAlong (vectorX, vectorY);
+            enemy.pushAlong(vectorX, vectorY);
           } 
         }
         
         if (enemy.dead) {
-          game.enemies.splice (i, 1);
+          game.enemies.splice(i, 1);
         }
       }
     }
@@ -145,9 +145,9 @@ export class Enemy
     for (let i = 0; i < game.ballistics.bullets.length; i++) {
       const bullet = game.ballistics.bullets[i];
 
-      if (EntityHelper.intersection (bounds, bullet.bounds)) {
+      if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        this.pushByBullet (bullet, game.ballistics.weapon.dps, game.enemies);
+        this.pushByBullet(bullet, game.ballistics.weapon.dps, game.enemies);
       }
     }
 
@@ -158,7 +158,7 @@ export class Enemy
     this.x += this.pushBulletVelocity.x;
     this.y += this.pushBulletVelocity.y;
 
-    if (Math.abs (this.pushBulletVelocity.x) < 0.5 && Math.abs (this.pushBulletVelocity.y) < 0.5) {
+    if (Math.abs(this.pushBulletVelocity.x) < 0.5 && Math.abs(this.pushBulletVelocity.y) < 0.5) {
       this.canBePushedByBullet = true;
       this.pushBulletVelocity.x = 0;
       this.pushBulletVelocity.y = 0;
@@ -170,6 +170,6 @@ export class Enemy
       return;
     }
 
-    EntityHelper.render (context, this);
+    EntityHelper.render(context, this);
   }
 }

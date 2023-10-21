@@ -118,14 +118,7 @@ export class Enemy
         }
         
         if (enemy.dead) {
-          // TODO condition not hit on last remaining enemy
           enemies.splice(i, 1);
-
-          // // TODO fix this bullshit hack
-          // if (enemies.length === 1) {
-          //   console.log(enemies.length);
-          //   enemies.length = 0;
-          // }
         }
       }
     }
@@ -150,7 +143,7 @@ export class Enemy
 
       if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        this.pushByBullet(bullet, bulletFactory.equippedWeapon.dps, enemies);
+        this.pushByBullet(bullet, bulletFactory.weapon.dps, enemies);
       }
     }
 

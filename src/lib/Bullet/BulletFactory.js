@@ -4,7 +4,7 @@ import { mappings } from './mappings';
 
 export class BulletFactory {
   constructor() {
-    this.equippedWeapon = null;
+    this.weapon = null;
     this.automatic = true;
     this.frames = 0;
     this.bullets = [];
@@ -14,10 +14,10 @@ export class BulletFactory {
   }
 
   update (context, player, walls, mouse, weaponIndex = 0) {
-    this.equippedWeapon = mappings[weaponIndex];
+    this.weapon = mappings[weaponIndex];
     this.setEquippedWeaponDisplayInformation();
 
-    if (this.equippedWeapon && this.automatic && ! player.dead) {
+    if (this.weapon && this.automatic && ! player.dead) {
       this.reloadDisplay.style.display = 'none';
       if (mouse.pressed) {
         this.handleFire(context, player);
@@ -35,41 +35,42 @@ export class BulletFactory {
 
   render () {
     for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].render();
+      this.bullets[i].render(this.weapon.bulletColor);
     }
   }
 
   handleFire(context, player) {
-    --this.equippedWeapon.clip;
+    --this.weapon.clip;
     if (this.shouldReloadWeaponAmmoClip()) {
       return;
     }
 
     AudioHandler.play({
-      equippedWeapon: this.equippedWeapon
+      equippedWeapon: this.weapon
     }, 'fire', 1.5);
 
     this.registerBullets(context, player);
-    this.automatic = this.equippedWeapon.automatic;
+    this.automatic = this.weapon.automatic;
 
     if ( ! this.automatic) {
       setTimeout(() => {
         AudioHandler.play({
-          equippedWeapon: this.equippedWeapon
+          equippedWeapon: this.weapon
         }, 'reload');
       }, 900);
     }
   }
 
   setEquippedWeaponDisplayInformation() {
-    document.querySelector('#equipped-weapon').innerHTML = this.equippedWeapon.name;
-    document.querySelector('#ammo-remaining').innerHTML = this.equippedWeapon.clip;
-    document.querySelector('#ammo-capacity').innerHTML = this.equippedWeapon.capacity;
+    const { name, clip, capacity } = this.weapon;
+    document.querySelector('#equipped-weapon').innerHTML = name;
+    document.querySelector('#ammo-remaining').innerHTML = clip;
+    document.querySelector('#ammo-capacity').innerHTML = capacity;
   }
 
   shouldReloadWeaponAmmoClip() {
-    if (this.equippedWeapon.clip < 0) {
-      this.equippedWeapon.clip = 0;
+    if (this.weapon.clip < 0) {
+      this.weapon.clip = 0;
       this.reload = true;
       this.reloadDisplay.style.display = 'inline';
       return true;
@@ -79,7 +80,7 @@ export class BulletFactory {
   }
 
   registerBullets(context, player) {
-    const { spread } = this.equippedWeapon;
+    const { spread } = this.weapon;
     for (let i = spread.min; i <= spread.max; i++) {
       const bullet = new Bullet(context, player, i);
       this.bullets.push(bullet);

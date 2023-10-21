@@ -6,6 +6,7 @@ import { Wall } from './lib/Wall';
 import { BulletFactory } from './lib/Bullet/BulletFactory';
 import { LevelManager } from './lib/Scene/Levels/LevelManager';
 import { randomNumber } from './util';
+import { config } from './config';
 
 import './css/main.css';
 
@@ -13,20 +14,10 @@ const canvas = document.querySelector('canvas#main');
 const context = canvas.getContext('2d');
 const camera = new Camera(context);
 
+const keyboard = config.device.keyboard;
+const mouse = config.device.mouse;
+
 const gameEndedDisplay = document.querySelector('.game-ended-wrapper');
-
-const keyboard = {
-  up: false,
-  down: false,
-  left: false,
-  right: false
-};
-
-const mouse = {
-  x: 0,
-  y: 0,
-  pressed: false
-};
 
 const map = new Map();
 map.generate(randomNumber(0, (LevelManager.levels.length - 1)));
@@ -34,6 +25,8 @@ map.generate(randomNumber(0, (LevelManager.levels.length - 1)));
 const entities = [];
 const walls = [];
 const enemies = [];
+
+let selectedWeaponIndex = 0;
 const bulletFactory = new BulletFactory();
 
 const player = new Player(
@@ -42,8 +35,6 @@ const player = new Player(
   LevelManager
 );
 entities.push(player);
-
-let weapon = 0;
 
 for (let i = 0; i < map.getEnemyPositions().length; i++) {
   const enemy = new Enemy(map.getEnemyPositions()[i]);
@@ -66,7 +57,7 @@ const onResize = (width, height) => {
 
 const onUpdate = () => {
   camera.update(player, entities);
-  bulletFactory.update(context, player, walls, mouse, weapon);
+  bulletFactory.update(context, player, walls, mouse, selectedWeaponIndex);
   for (let i = 0; i < entities.length; i++) {
     if (typeof entities[i] !== undefined && typeof entities[i].update === 'function') {
       entities[i].update(
@@ -120,10 +111,10 @@ document.addEventListener('keydown', (event) => {
     case 's': keyboard.down = true; break;
     case 'a': keyboard.left = true; break;
     case 'd': keyboard.right = true; break;
-    case '1': weapon = 0; break;
-    case '2': weapon = 1; break;
-    case '3': weapon = 2; break;
-    case '4': weapon = 3; break;
+    case '1': selectedWeaponIndex = 0; break;
+    case '2': selectedWeaponIndex = 1; break;
+    case '3': selectedWeaponIndex = 2; break;
+    case '4': selectedWeaponIndex = 3; break;
   }
 });
 

@@ -25,6 +25,8 @@ export class Player
       y: 0
     };
     this.dead = false;
+    this.gameover = false;
+
     this.gameEndedDisplay = gameEndedDisplay;
     this.levelManager = levelManager;
   }
@@ -45,6 +47,7 @@ export class Player
 
         if (this.health == 0) {
           this.dead = true;
+          this.gameover = true;
 
           setTimeout(() => {
             this.gameEndedDisplay.style.display = 'block';

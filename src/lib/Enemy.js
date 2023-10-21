@@ -30,6 +30,7 @@ export class Enemy
 
     this.health = 100;
     this.dead = false;
+    this.gameover = false;
   }
 
   pushAlong (vectorX, vectorY) {
@@ -51,7 +52,10 @@ export class Enemy
 
         // Last remaining enemy has been killed
         // update is not called on the next tick
-        if (enemies.length === 1) enemies.length = 0;
+        if (enemies.length === 1) {
+          enemies.length = 0;
+          this.gameover = true;
+        }
       }
     }
   }

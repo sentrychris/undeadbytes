@@ -106,6 +106,7 @@ export class Manager
     this.enemies = [];
 
     this.selectedWeaponIndex = 0;
+    // TODO reset weapons and clips on level progression 
     this.bulletFactory = new BulletFactory();
   }
 

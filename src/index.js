@@ -1,46 +1,34 @@
-import { Camera } from './lib/Scene/Camera';
 import { Manager } from './lib/Manager';
-import { config } from './config';
 import './css/main.css';
 
-// Create the canvas, set the context for rendering
-// and setup the camera tracking implementation
-const canvas = document.querySelector('canvas#main');
-const context = canvas.getContext('2d');
-const camera = new Camera(context);
-
-// Initialise devices
-const keyboard = config.device.keyboard;
-const mouse = config.device.mouse;
-
 // Create a new game manager and setup a new game
-const manager = new Manager();
+const manager = new Manager(document.querySelector('canvas#main').getContext('2d'));
 manager.setup({
   level: 0
 });
 
 // Add resize event listeners
-const onResize = () => manager.onResize(context, camera, window.innerWidth, window.innerHeight);
+const onResize = () => manager.onResize(window.innerWidth, window.innerHeight);
 window.addEventListener('resize', onResize);
 onResize();
 
-// Register listeners for the game controls
-manager.createKeyboardMouseControls(keyboard, mouse);
+// Add game control listeners
+manager.createKeyboardMouseControls();
 
 // Handle the game loop
 const tick = () => {
-  manager.onUpdate(context, camera, keyboard, mouse);
-  manager.onRender(context, camera);
+  manager.onUpdate();
+  manager.onRender();
 
   if (manager.gameover) {
     if (manager.levelPassed) {
+      // document.querySelector('.game-ended-wrapper').style.display = 'flex';
       // Proceed to the next level
     } else {
       document.querySelector('.game-ended-wrapper').style.display = 'flex';
       // Clear all entities and rebuild level
     }
   }
-
 
   requestAnimationFrame(tick);
 };

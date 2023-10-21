@@ -1,13 +1,19 @@
 import { BulletFactory } from './Bullet/BulletFactory';
-import { Enemy } from './Enemy';
 import { Player } from './Player';
-import { LevelManager } from './Scene/Levels/LevelManager';
-import { Map } from './Scene/Map';
+import { Enemy } from './Enemy';
 import { Wall } from './Wall';
+import { Map } from './Scene/Map';
+import { Camera } from './Scene/Camera';
+import { config } from '../config';
 
 export class Manager
 {
-  constructor() {
+  constructor(context) {
+    this.context = context;
+    this.camera = new Camera(this.context);
+    this.keyboard = config.device.keyboard;
+    this.mouse = config.device.mouse;
+
     this.player = null;
     this.entities = [];
     this.walls = [];
@@ -33,22 +39,13 @@ export class Manager
       .createWalls();
   }
 
-  onUpdate(context, camera, keyboard, mouse) {
-    camera.update(this.player, this.entities);
-    this.bulletFactory.update(context, this.player, this.walls, mouse, this.selectedWeaponIndex);
+  onUpdate() {
+    this.camera.update(this.player, this.entities);
+    this.bulletFactory.update(this.context, this.player, this.walls, this.mouse, this.selectedWeaponIndex);
+
     for (let i = 0; i < this.entities.length; i++) {
-      if (typeof this.entities[i] !== undefined
-        && typeof this.entities[i].update === 'function') {
-        this.entities[i].update(
-          context,
-          this.player,
-          this.enemies,
-          this.walls,
-          this.bulletFactory,
-          camera,
-          keyboard,
-          mouse
-        );
+      if (typeof this.entities[i] !== undefined && typeof this.entities[i].update === 'function') {
+        this.entities[i].update(this.context, this.player, this.enemies, this.walls, this.bulletFactory, this.camera, this.keyboard, this.mouse);
       }
 
       if (this.entities[i].type === 'player') {
@@ -65,23 +62,23 @@ export class Manager
       }
     }
 
-    document.querySelector('strong#enemies-remaining').innerHTML = this.enemies.length;
+    document.querySelector('#enemies-remaining').innerHTML = this.enemies.length;
   }
 
-  onRender(context, camera) {
-    context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    camera.preRender(this.player);
+  onRender() {
+    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    this.camera.preRender(this.player);
     this.bulletFactory.render();
     for (let i = 0; i < this.entities.length; i++) {
-      this.entities[i].render(context);
+      this.entities[i].render(this.context);
     }
-    camera.postRender();
+    this.camera.postRender();
   }
 
-  onResize(context, camera, width, height) {
-    context.canvas.width = width;
-    context.canvas.height = height;
-    camera.resize();
+  onResize(width, height) {
+    this.context.canvas.width = width;
+    this.context.canvas.height = height;
+    this.camera.resize();
   }
 
   generateMap(levelIndex = 0) {
@@ -126,13 +123,13 @@ export class Manager
     return entity.type === 'enemy' && entity.allEnemiesDead;
   }
 
-  createKeyboardMouseControls(keyboard, mouse) {
+  createKeyboardMouseControls() {
     document.addEventListener('keydown', (event) => {
       switch (event.key) {
-        case 'w': keyboard.up = true; break;
-        case 's': keyboard.down = true; break;
-        case 'a': keyboard.left = true; break;
-        case 'd': keyboard.right = true; break;
+        case 'w': this.keyboard.up = true; break;
+        case 's': this.keyboard.down = true; break;
+        case 'a': this.keyboard.left = true; break;
+        case 'd': this.keyboard.right = true; break;
         case '1': this.selectedWeaponIndex = 0; break;
         case '2': this.selectedWeaponIndex = 1; break;
         case '3': this.selectedWeaponIndex = 2; break;
@@ -142,24 +139,24 @@ export class Manager
     
     document.addEventListener('keyup', (event) => {
       switch (event.key) {
-        case 'w': keyboard.up = false; break;
-        case 's': keyboard.down = false; break;
-        case 'a': keyboard.left = false; break;
-        case 'd': keyboard.right = false; break;
+        case 'w': this.keyboard.up = false; break;
+        case 's': this.keyboard.down = false; break;
+        case 'a': this.keyboard.left = false; break;
+        case 'd': this.keyboard.right = false; break;
       }
     });
     
     document.addEventListener('mousemove', (event) => {
-      mouse.x = event.clientX;
-      mouse.y = event.clientY;
+      this.mouse.x = event.clientX;
+      this.mouse.y = event.clientY;
     });
     
-    document.addEventListener('mousedown', (event) => {
-      mouse.pressed = true;
+    document.addEventListener('mousedown', () => {
+      this.mouse.pressed = true;
     });
     
-    document.addEventListener('mouseup', (event) => {
-      mouse.pressed = false;
+    document.addEventListener('mouseup', () => {
+      this.mouse.pressed = false;
     });
   }
 }

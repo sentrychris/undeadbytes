@@ -29,28 +29,18 @@ export class Manager
   loop() {
     if (! this.stopped) {
       this.gameID = null;
-    }
 
-    this.onUpdate();
-    this.onRender();
+      this.onUpdate();
+      this.onRender();
+    }
   
     if (this.gameover) {
       const gameover = document.querySelector('.game-ended-wrapper');
+      gameover.style.display = 'flex';
       if (this.levelPassed) {
-        gameover.style.display = 'flex';
-        // Proceed to the next level
+        this.stop().then((stopped) => this.restart(stopped, true));
       } else {
-        this.stop().then((stopped) => {
-          gameover.style.display = 'flex';
-          if (stopped && ! this.gameID) {
-            setTimeout(() => {
-              gameover.style.display = 'none';
-              this.setup({
-                level: this.currentLevel
-              }, true);
-            }, 2000);
-          }
-        });
+        this.stop().then((stopped) => this.restart(stopped, false));
       }
     }
   
@@ -60,6 +50,24 @@ export class Manager
   run() {
     if (! this.gameID && ! this.stopped) {
       this.gameID = requestAnimationFrame(this.loop.bind(this));
+    }
+  }
+
+  restart (stopped, nextLevel = false) {
+    if (stopped && ! this.gameID) {
+      const gameover = document.querySelector('.game-ended-wrapper');
+      gameover.style.display = 'flex';
+
+      if (nextLevel) {
+        ++this.currentLevel;
+      }
+
+      setTimeout(() => {
+        gameover.style.display = 'none';
+        this.setup({
+          level: this.currentLevel
+        }, true);
+      }, 2000)
     }
   }
 
@@ -77,14 +85,14 @@ export class Manager
     this.gameover = false;
     this.levelPassed = false;
     
-    if (reset) {
-      this.newGameParams();
-    }
+    this.newGameParams();
 
     this.generateMap(level)
       .createPlayer()
       .createEnemies()
       .createWalls();
+
+    document.querySelector('#current-level').innerHTML = this.currentLevel;
 
     if (reset) {
       this.loop();
@@ -144,7 +152,9 @@ export class Manager
   }
 
   generateMap(levelIndex = 0) {
+    this.map.newMapConfiguration();
     this.map.generate(levelIndex);
+
     return this;
   }
 

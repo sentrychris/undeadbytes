@@ -3,13 +3,7 @@ import { LevelManager } from './Levels/LevelManager';
 export class Map
 {
   constructor() {
-    this.playerPosition = {
-      x: 0,
-      y: 0
-    };
-    this.enemyPositions = [];
-    this.wallPositions = [];
-    this.nextLevelPositions = [];
+    this.newMapConfiguration();
   }
 
   generate (levelIndex = 1) {
@@ -29,6 +23,16 @@ export class Map
         }
       }
     }
+  }
+
+  newMapConfiguration() {
+    this.playerPosition = {
+      x: 0,
+      y: 0
+    };
+    this.enemyPositions = [];
+    this.wallPositions = [];
+    this.nextLevelPositions = [];
   }
 
   getPlayerPosition () {

@@ -21,11 +21,16 @@ export class Manager
 
     this.newGameParams();
   
+    this.stopped = false;
     this.gameover = false;
     this.levelPassed = false;
   }
 
   loop() {
+    if (! this.stopped) {
+      this.gameID = null;
+    }
+
     this.onUpdate();
     this.onRender();
   
@@ -35,7 +40,17 @@ export class Manager
         gameover.style.display = 'flex';
         // Proceed to the next level
       } else {
-        gameover.style.display = 'flex';
+        this.stop().then((stopped) => {
+          gameover.style.display = 'flex';
+          if (stopped && ! this.gameID) {
+            setTimeout(() => {
+              gameover.style.display = 'none';
+              this.setup({
+                level: this.currentLevel
+              }, true);
+            }, 2000);
+          }
+        });
       }
     }
   
@@ -43,17 +58,25 @@ export class Manager
   };
 
   run() {
-    this.gameID = requestAnimationFrame(this.loop.bind(this));
-  }
-
-  stop() {
-    if (this.gameID) {
-      window.cancelAnimationFrame(this.gameID);
-      this.gameID = null;
+    if (! this.gameID && ! this.stopped) {
+      this.gameID = requestAnimationFrame(this.loop.bind(this));
     }
   }
 
+  async stop() {
+    this.stopped = true;
+    this.gameID = null;
+    cancelAnimationFrame(this.loop.bind(this));
+
+    return this.stopped;
+  }
+
   setup({ level = 1 }, reset = false) {
+    this.gameID = null;
+    this.stopped = false;
+    this.gameover = false;
+    this.levelPassed = false;
+    
     if (reset) {
       this.newGameParams();
     }
@@ -62,6 +85,10 @@ export class Manager
       .createPlayer()
       .createEnemies()
       .createWalls();
+
+    if (reset) {
+      this.loop();
+    }
   }
 
   newGameParams() {

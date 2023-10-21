@@ -60,15 +60,15 @@ export class Enemy
     }
   }
 
-  update (context, player, enemies, walls, bulletFactory, camera, keyboard, mouse) {
+  update (game) {
     if (this.sleep || this.dead) {
       return;
     }
 
-    let vectorX = player.x - this.x;
-    let vectorY = player.y - this.y;
+    let vectorX = game.player.x - this.x;
+    let vectorY = game.player.y - this.y;
 
-    if (player.dead) {
+    if (game.player.dead) {
       vectorX = this.lastVectorX;
       vectorY = this.lastVectorY;
     } else {
@@ -88,7 +88,7 @@ export class Enemy
         this.y += vectorY * this.speed;
 
         // collision
-        const collisionVector = EntityCollision.vector(this.x, this.y, walls);
+        const collisionVector = EntityCollision.vector(this.x, this.y, game.walls);
         this.x += collisionVector.x * this.speed;
         this.y += collisionVector.y * this.speed;
 
@@ -96,15 +96,15 @@ export class Enemy
         this.position = Math.sin(this.incrementer * Math.PI / 180);
 
         if (length < 100) {
-          player.takeDamage(this);
+          game.player.takeDamage(this);
         }
       }
     }
 
     // enemy collision
     if (Math.random() <= 0.1) {
-      for (let i = 0; i < enemies.length; i++) {       
-        const enemy = enemies[i];
+      for (let i = 0; i < game.enemies.length; i++) {       
+        const enemy = game.enemies[i];
   
         if (enemy != this) {
           vectorX = enemy.x - this.x;
@@ -122,7 +122,7 @@ export class Enemy
         }
         
         if (enemy.dead) {
-          enemies.splice(i, 1);
+          game.enemies.splice(i, 1);
         }
       }
     }
@@ -142,12 +142,12 @@ export class Enemy
       height: config.radius * 2
     };
 
-    for (let i = 0; i < bulletFactory.bullets.length; i++) {
-      const bullet = bulletFactory.bullets[i];
+    for (let i = 0; i < game.ballistics.bullets.length; i++) {
+      const bullet = game.ballistics.bullets[i];
 
       if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        this.pushByBullet(bullet, bulletFactory.weapon.dps, enemies);
+        this.pushByBullet(bullet, game.ballistics.weapon.dps, game.enemies);
       }
     }
 

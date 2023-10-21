@@ -2,7 +2,8 @@ import { Bullet } from './Bullet';
 import { AudioHandler } from './AudioHandler';
 import { mappings } from './mappings';
 
-export class BulletFactory {
+export class Ballistics
+{
   constructor() {
     this.weapon = null;
     this.automatic = true;
@@ -13,14 +14,14 @@ export class BulletFactory {
     this.reloadDisplay = document.querySelector('#gun-reload');
   }
 
-  update (context, player, walls, mouse, weaponIndex = 0) {
-    this.weapon = mappings[weaponIndex];
+  update (game) {
+    this.weapon = mappings[game.selectedWeaponIndex];
     this.setEquippedWeaponDisplayInformation();
 
-    if (this.weapon && this.automatic && ! player.dead) {
+    if (this.weapon && this.automatic && ! game.player.dead) {
       this.reloadDisplay.style.display = 'none';
-      if (mouse.pressed) {
-        this.handleFire(context, player);
+      if (game.mouse.pressed) {
+        this.handleFire(game.context, game.player);
       }
     } else {
       this.frames++;
@@ -30,7 +31,7 @@ export class BulletFactory {
       }
     }
 
-    this.cleanupBullets(walls);
+    this.cleanupBullets(game.walls);
   }
 
   render () {

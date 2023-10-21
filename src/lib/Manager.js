@@ -1,4 +1,4 @@
-import { BulletFactory } from './Bullet/BulletFactory';
+import { Ballistics } from './Bullet/Ballistics';
 import { Player } from './Player';
 import { Enemy } from './Enemy';
 import { Wall } from './Wall';
@@ -106,17 +106,16 @@ export class Manager
     this.enemies = [];
 
     this.selectedWeaponIndex = 0;
-    // TODO reset weapons and clips on level progression 
-    this.bulletFactory = new BulletFactory();
+    this.ballistics = new Ballistics();
   }
 
   onUpdate() {
     this.camera.update(this.player, this.entities);
-    this.bulletFactory.update(this.context, this.player, this.walls, this.mouse, this.selectedWeaponIndex);
+    this.ballistics.update(this);
 
     for (let i = 0; i < this.entities.length; i++) {
-      if (typeof this.entities[i] !== undefined && typeof this.entities[i].update === 'function') {
-        this.entities[i].update(this.context, this.player, this.enemies, this.walls, this.bulletFactory, this.camera, this.keyboard, this.mouse);
+      if (this.canUpdateEntity(this.entities[i])) {
+        this.entities[i].update(this);
       }
 
       if (this.entities[i].type === 'player') {
@@ -139,7 +138,7 @@ export class Manager
   onRender() {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     this.camera.preRender(this.player);
-    this.bulletFactory.render();
+    this.ballistics.render();
     for (let i = 0; i < this.entities.length; i++) {
       this.entities[i].render(this.context);
     }
@@ -157,6 +156,10 @@ export class Manager
     this.map.generate(levelIndex);
 
     return this;
+  }
+
+  canUpdateEntity(entity) {
+    return typeof entity !== undefined && typeof entity.update === 'function';
   }
 
   createPlayer() {

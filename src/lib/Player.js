@@ -48,16 +48,16 @@ export class Player
     }
   }
 
-  update (context, player, enemies, walls, bulletManager, camera, keyboard, mouse) {
+  update (game) {
     if (this.sleep || this.dead) {
       return;
     }
 
     let count = 0;
-    count += keyboard.up ? 1 : 0;
-    count += keyboard.down ? 1 : 0;
-    count += keyboard.left ? 1 : 0;
-    count += keyboard.right ? 1 : 0;
+    count += game.keyboard.up ? 1 : 0;
+    count += game.keyboard.down ? 1 : 0;
+    count += game.keyboard.left ? 1 : 0;
+    count += game.keyboard.right ? 1 : 0;
 
     let currentSpeed = this.speed;
 
@@ -82,20 +82,20 @@ export class Player
         this.invincible = false;
       }
     } else {
-      if (keyboard.up) this.y -= currentSpeed;
-      if (keyboard.down) this.y += currentSpeed;
-      if (keyboard.left) this.x -= currentSpeed;
-      if (keyboard.right) this.x += currentSpeed;
+      if (game.keyboard.up) this.y -= currentSpeed;
+      if (game.keyboard.down) this.y += currentSpeed;
+      if (game.keyboard.left) this.x -= currentSpeed;
+      if (game.keyboard.right) this.x += currentSpeed;
     }
 
     // collision
-    const collisionVector = EntityCollision.vector(this.x, this.y, walls);
+    const collisionVector = EntityCollision.vector(this.x, this.y, game.walls);
     this.x += collisionVector.x * currentSpeed;
     this.y += collisionVector.y * currentSpeed;
 
     // mouse
-    let vectorX = camera.offsetX + context.canvas.width / 2 - mouse.x;
-    let vectorY = camera.offsetY + context.canvas.height / 2 - mouse.y;
+    let vectorX = game.camera.offsetX + game.context.canvas.width / 2 - game.mouse.x;
+    let vectorY = game.camera.offsetY + game.context.canvas.height / 2 - game.mouse.y;
 
     const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
@@ -107,7 +107,7 @@ export class Player
     }
 
     // foot
-    if (keyboard.up || keyboard.down || keyboard.left || keyboard.right) {
+    if (game.keyboard.up || game.keyboard.down || game.keyboard.left || game.keyboard.right) {
       this.incrementer += this.speed;
     }
 

@@ -25,4 +25,4 @@ export class _LevelManager
   }
 }
 
-export const LevelManager = new _LevelManager();
+export const LevelManager = new _LevelManager ();

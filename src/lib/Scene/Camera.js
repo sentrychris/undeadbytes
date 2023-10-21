@@ -40,7 +40,7 @@ export class Camera
           bounds.width = config.size;
           bounds.height = config.size;
         }
-        entity.sleep = ! EntityHelper.intersection(bounds, screen);
+        entity.sleep = ! EntityHelper.intersection (bounds, screen);
       }
     }
   }
@@ -60,11 +60,11 @@ export class Camera
     this.x += vectorX / 10;
     this.y += vectorY / 10;
 
-    this.context.save();
-    this.context.translate(this.x, this.y);
+    this.context.save ();
+    this.context.translate (this.x, this.y);
   }
 
   postRender () {
-    this.context.restore();
+    this.context.restore ();
   }
 }

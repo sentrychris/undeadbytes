@@ -37,6 +37,10 @@ module.exports = {
         'semi': [
             'error',
             'always'
+        ],
+        'func-call-spacing': [
+            'error',
+            'always'
         ]
-    }
+    },
 };

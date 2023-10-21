@@ -3,7 +3,7 @@ import { LevelManager } from './Levels/LevelManager';
 export class Map
 {
   constructor() {
-    this.newMapConfiguration();
+    this.newMapConfiguration ();
   }
 
   generate (levelIndex = 1) {
@@ -16,9 +16,9 @@ export class Map
         const realX = x / 2;
 
         switch (char) {
-        case 'N': this.nextLevelPositions.push({ x: realX, y: y }); break;
-        case 'W': this.wallPositions.push({ x: realX, y: y }); break;
-        case 'E': this.enemyPositions.push({ x: realX, y: y }); break;
+        case 'N': this.nextLevelPositions.push ({ x: realX, y: y }); break;
+        case 'W': this.wallPositions.push ({ x: realX, y: y }); break;
+        case 'E': this.enemyPositions.push ({ x: realX, y: y }); break;
         case 'P': this.playerPosition = { x: realX, y: y }; break;
         }
       }

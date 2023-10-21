@@ -9,8 +9,8 @@ export class _EntityCollision
    * @returns 
    */
   arcWallVector({ arcX, arcY, radius, wallX, wallY, size }) {
-    const distX = Math.abs(arcX - wallX - size / 2);
-    const distY = Math.abs(arcY - wallY - size / 2);
+    const distX = Math.abs (arcX - wallX - size / 2);
+    const distY = Math.abs (arcY - wallY - size / 2);
   
     if (distX > (size / 2 + radius)) {
       return false;
@@ -51,7 +51,7 @@ export class _EntityCollision
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
   
-      if (this.arcWallVector({
+      if (this.arcWallVector ({
         arcX: x,
         arcY: y,
         radius: 60,
@@ -65,7 +65,7 @@ export class _EntityCollision
         let vectorX = x - wallCenterX;
         let vectorY = y - wallCenterY;
   
-        const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+        const length = Math.sqrt (vectorX * vectorX + vectorY * vectorY);
   
         if (length > 0) {
           vectorX /= length;
@@ -81,4 +81,4 @@ export class _EntityCollision
   }
 }
 
-export const EntityCollision = new _EntityCollision();
+export const EntityCollision = new _EntityCollision ();

@@ -21,9 +21,9 @@ export class Wall
       return;
     }
 
-    context.beginPath();
-    context.rect(this.x, this.y, config.size, config.size);
+    context.beginPath ();
+    context.rect (this.x, this.y, config.size, config.size);
     context.fillStyle = '#8fce00';
-    context.fill();
+    context.fill ();
   }
 }

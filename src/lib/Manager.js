@@ -45,7 +45,7 @@ export class Manager
     }
   
     this.run();
-  };
+  }
 
   run() {
     if (! this.frame && ! this.stopped) {
@@ -67,7 +67,7 @@ export class Manager
         this.setup({
           level: this.currentLevel
         }, true);
-      }, 2000)
+      }, 2000);
     }
   }
 
@@ -159,7 +159,7 @@ export class Manager
   }
 
   canUpdateEntity(entity) {
-    return typeof entity !== undefined && typeof entity.update === 'function';
+    return typeof entity !== 'undefined' && typeof entity.update === 'function';
   }
 
   createPlayer() {
@@ -202,23 +202,23 @@ export class Manager
   createKeyboardMouseControls() {
     document.addEventListener('keydown', (event) => {
       switch (event.key) {
-        case 'w': this.keyboard.up = true; break;
-        case 's': this.keyboard.down = true; break;
-        case 'a': this.keyboard.left = true; break;
-        case 'd': this.keyboard.right = true; break;
-        case '1': this.selectedWeaponIndex = 0; break;
-        case '2': this.selectedWeaponIndex = 1; break;
-        case '3': this.selectedWeaponIndex = 2; break;
-        case '4': this.selectedWeaponIndex = 3; break;
+      case 'w': this.keyboard.up = true; break;
+      case 's': this.keyboard.down = true; break;
+      case 'a': this.keyboard.left = true; break;
+      case 'd': this.keyboard.right = true; break;
+      case '1': this.selectedWeaponIndex = 0; break;
+      case '2': this.selectedWeaponIndex = 1; break;
+      case '3': this.selectedWeaponIndex = 2; break;
+      case '4': this.selectedWeaponIndex = 3; break;
       }
     });
     
     document.addEventListener('keyup', (event) => {
       switch (event.key) {
-        case 'w': this.keyboard.up = false; break;
-        case 's': this.keyboard.down = false; break;
-        case 'a': this.keyboard.left = false; break;
-        case 'd': this.keyboard.right = false; break;
+      case 'w': this.keyboard.up = false; break;
+      case 's': this.keyboard.down = false; break;
+      case 'a': this.keyboard.left = false; break;
+      case 'd': this.keyboard.right = false; break;
       }
     });
     

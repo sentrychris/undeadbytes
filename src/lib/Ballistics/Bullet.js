@@ -17,7 +17,7 @@ export class Bullet
       height: this.radius * 2
     };
   
-    this.context = context
+    this.context = context;
     this.frames = 0;
     this.markToDelete = false;
   }
@@ -42,7 +42,7 @@ export class Bullet
       }
     }
 
-  };
+  }
 
   render (color) {
     if (Array.isArray(color)) {
@@ -53,5 +53,5 @@ export class Bullet
     this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
     this.context.fillStyle = color;
     this.context.fill();
-  };
-};
+  }
+}

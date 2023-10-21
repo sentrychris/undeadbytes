@@ -9,7 +9,7 @@ export class Camera
     this.offsetX = 0;
     this.offsetY = 0;
 
-    this.context = context
+    this.context = context;
     this.frames = frames;
   }
 
@@ -67,4 +67,4 @@ export class Camera
   postRender () {
     this.context.restore();
   }
-};
+}

@@ -25,5 +25,5 @@ export class Wall
     context.rect(this.x, this.y, config.size, config.size);
     context.fillStyle = '#8fce00';
     context.fill();
-  };
-};
+  }
+}

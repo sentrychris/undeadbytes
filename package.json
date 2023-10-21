@@ -6,12 +6,15 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch",
-    "play": "http-server dist/"
+    "play": "http-server dist/",
+    "lint": "eslint src --ext .js",
+    "lint:fix": "eslint src --ext .js --fix"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^6.8.1",
+    "eslint": "^8.52.0",
     "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",

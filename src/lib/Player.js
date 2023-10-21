@@ -112,7 +112,7 @@ export class Player
     }
 
     this.position = Math.sin(this.incrementer * Math.PI / 180);
-  };
+  }
 
   render (context) {
     if (this.sleep) {
@@ -120,5 +120,5 @@ export class Player
     }
 
     EntityHelper.render(context, this);
-  };
-};
+  }
+}

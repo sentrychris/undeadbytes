@@ -171,5 +171,5 @@ export class Enemy
     }
 
     EntityHelper.render(context, this);
-  };
-};
+  }
+}

@@ -5,7 +5,7 @@ import { config } from '../config';
 
 export class Player
 {
-  constructor (spawn, gameEndedDisplay, levelManager) {
+  constructor (spawn) {
     this.type = 'player';
     this.bounding = 'arc';
     this.x = spawn.x * config.size;
@@ -25,10 +25,6 @@ export class Player
       y: 0
     };
     this.dead = false;
-    this.gameover = false;
-
-    this.gameEndedDisplay = gameEndedDisplay;
-    this.levelManager = levelManager;
   }
 
   takeDamage (enemy) {
@@ -47,11 +43,6 @@ export class Player
 
         if (this.health == 0) {
           this.dead = true;
-          this.gameover = true;
-
-          setTimeout(() => {
-            this.gameEndedDisplay.style.display = 'block';
-          }, 1000);
         }
       }
     }

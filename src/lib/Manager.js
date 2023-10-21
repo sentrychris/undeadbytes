@@ -17,6 +17,9 @@ export class Manager
     this.bulletFactory = new BulletFactory();
     
     this.map = new Map();
+
+    this.gameover = false;
+    this.levelPassed = false;
   }
 
   run(tick) {
@@ -47,17 +50,22 @@ export class Manager
           mouse
         );
       }
+
+      if (this.entities[i].type === 'player') {
+        if (this.isPlayerDead(this.entities[i])) {
+          this.gameover = true;
+        }
+      }
+
+      if (this.entities[i].type === 'enemy') {
+        if (this.areAllEnemiesDead(this.entities[i])) {
+          this.gameover = true;
+          this.levelPassed = true;
+        }
+      }
     }
 
-    document.querySelector('strong#enemies-remaining')
-      .innerHTML = this.enemies.length;
-    
-      if (this.enemies.length === 0) {
-        setTimeout(() => {
-          document.querySelector('.game-ended-wrapper')
-            .style.display = 'flex';
-        }, 1000);
-      }
+    document.querySelector('strong#enemies-remaining').innerHTML = this.enemies.length;
   }
 
   onRender(context, camera) {
@@ -82,12 +90,7 @@ export class Manager
   }
 
   createPlayer() {
-    this.player = new Player(
-      this.map.getPlayerPosition(),
-      document.querySelector('.game-ended-wrapper'),
-      LevelManager
-    );
-
+    this.player = new Player(this.map.getPlayerPosition());
     this.entities.push(this.player);
 
     return this;
@@ -95,12 +98,7 @@ export class Manager
 
   createEnemies() {
     for (let i = 0; i < this.map.getEnemyPositions().length; i++) {
-      const enemy = new Enemy(
-        this.map.getEnemyPositions()[i]
-      );
-
-      console.log({ enemy });
-
+      const enemy = new Enemy(this.map.getEnemyPositions()[i]);
       this.entities.push(enemy);
       this.enemies.push(enemy);
     }
@@ -118,6 +116,14 @@ export class Manager
     }
 
     return this;
+  }
+
+  isPlayerDead(entity) {
+    return entity.type === 'player' && entity.dead;
+  }
+
+  areAllEnemiesDead(entity) {
+    return entity.type === 'enemy' && entity.allEnemiesDead;
   }
 
   createKeyboardMouseControls(keyboard, mouse) {

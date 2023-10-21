@@ -31,6 +31,17 @@ manager.createKeyboardMouseControls(keyboard, mouse);
 const tick = () => {
   manager.onUpdate(context, camera, keyboard, mouse);
   manager.onRender(context, camera);
+
+  if (manager.gameover) {
+    if (manager.levelPassed) {
+      // Proceed to the next level
+    } else {
+      document.querySelector('.game-ended-wrapper').style.display = 'flex';
+      // Clear all entities and rebuild level
+    }
+  }
+
+
   requestAnimationFrame(tick);
 };
 

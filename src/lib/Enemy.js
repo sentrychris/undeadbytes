@@ -30,7 +30,7 @@ export class Enemy
 
     this.health = 100;
     this.dead = false;
-    this.gameover = false;
+    this.allEnemiesDead = false;
   }
 
   pushAlong (vectorX, vectorY) {
@@ -54,7 +54,7 @@ export class Enemy
         // update is not called on the next tick
         if (enemies.length === 1) {
           enemies.length = 0;
-          this.gameover = true;
+          this.allEnemiesDead = true;
         }
       }
     }

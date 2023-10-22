@@ -14,17 +14,29 @@
   <canvas id="main"></canvas>
   
   <div class="help">
-    <p>WSAD - movement</p>
-    <p>mouse - direction/shooting</p>
+    <p>Current Level: <strong id="current-level"></strong></p>
     <hr />
 
-    <p>Current Level: <strong id="current-level"></strong></p>
-    <p>Enemies Remaining: <strong id="enemies-remaining"></strong></p>
+    <p>WASD - movement</p>
+    <p>Mouse - direction/shooting</p>
+    <hr />
+
+    <p>Enemies:</p>
+    <p style="display: flex;align-items: center;margin-bottom: 20px;">
+      <img src="./img/zombie.png" style="width: 40px; margin-right: 20px">
+      <strong id="enemies-remaining"></strong>
+    </p>
     <hr />
 
     <p>Weapon: <strong id="equipped-weapon"></strong></p>
-    <p>Ammo: <strong id="gun-ammo"><span id="ammo-remaining"></span> / <span id="ammo-capacity"></span></strong></p>
-    <p>Magazines: <strong id="gun-magazines"><span id="magazines-remaining"></span> / <span id="magazines-total"></span></strong></p>
+    <p style="display: flex;align-items: center;margin-bottom: 20px;">
+      <img src="./img/ammunition.png" style="width: 40px; margin-right: 20px">
+      <strong id="gun-ammo"><span id="ammo-remaining"></span> / <span id="ammo-capacity"></span></strong>
+    </p>
+    <p style="display: flex;align-items: center">
+      <img src="./img/magazine.png" style="width: 40px; margin-right: 20px">
+      <strong id="gun-magazines"><span id="magazines-remaining"></span> / <span id="magazines-total"></span></strong>
+    </p>
     <p><strong id="out-of-ammo" class="out-of-ammo"><span>OUT OF AMMO</span></strong></p>
     <hr />
     <p>

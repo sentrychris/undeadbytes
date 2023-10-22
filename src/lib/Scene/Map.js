@@ -4,7 +4,7 @@ export class Map
 {
   constructor () {
     this.newMapConfiguration();
-  }sss
+  }
 
   generate (levelIndex = 1) {
     const level = mappings[levelIndex];

@@ -29,31 +29,13 @@ export class Manager
   loop () {
     if (! this.stopped) {
       this.frame = null;
-
       this.onUpdate();
       this.onRender();
     }
   
     if (this.gameover) {
-      const gameover = document.querySelector('.game-ended-wrapper');
-      setTimeout(() => {
-        if (this.levelPassed) {
-          gameover.querySelector('h1').innerHTML = 'You Win!';
-          gameover.classList.add('level-passed');
-          gameover.classList.remove('level-failed');
-        } else {
-          gameover.querySelector('h1').innerHTML = 'You Died!';
-          gameover.classList.remove('level-passed');
-          gameover.classList.add('level-failed');
-        }
-        gameover.style.display = 'flex';
-      }, 1000);
-
-      if (this.levelPassed) {
-        this.stop().then((stopped) => this.restart(stopped, true));
-      } else {
-        this.stop().then((stopped) => this.restart(stopped, false));
-      }
+      this.displayGameEnd();
+      this.restart();
     }
   
     this.run();
@@ -65,7 +47,15 @@ export class Manager
     }
   }
 
-  restart (stopped, nextLevel = false) {
+  restart () {
+    if (this.levelPassed) {
+      this.stop().then(async (stopped) => await this.start(stopped, true));
+    } else {
+      this.stop().then(async (stopped) => await this.start(stopped, false));
+    }
+  }
+
+  async start (stopped, nextLevel = false) {
     if (stopped && ! this.frame) {
       const gameover = document.querySelector('.game-ended-wrapper');
 
@@ -208,6 +198,22 @@ export class Manager
 
   areAllEnemiesDead (entity) {
     return entity.type === 'enemy' && entity.allEnemiesDead;
+  }
+
+  displayGameEnd() {
+    const gameover = document.querySelector('.game-ended-wrapper');
+      setTimeout(() => {
+        if (this.levelPassed) {
+          gameover.querySelector('h1').innerHTML = 'You Win!';
+          gameover.classList.add('level-passed');
+          gameover.classList.remove('level-failed');
+        } else {
+          gameover.querySelector('h1').innerHTML = 'You Died!';
+          gameover.classList.remove('level-passed');
+          gameover.classList.add('level-failed');
+        }
+        gameover.style.display = 'flex';
+      }, 500);
   }
 
   createKeyboardMouseControls () {

@@ -1,4 +1,5 @@
 import { Manager } from './lib/Manager';
+import { trackWASD } from './util';
 import './css/main.css';
 
 // Create a new game manager and setup a new game
@@ -18,19 +19,5 @@ manager.createKeyboardMouseControls();
 // Run the game loop
 manager.loop();
 
-function wasd(e) {
-  const key = document.querySelector(`[data-key="${e.key}"]`);
-  if (
-    e.key === "w" ||
-    e.key === "a" ||
-    e.key === "s" ||
-    e.key === "d"
-  ) {
-    key.classList.add("keyboard-key__active");
-  }
-}
-
-window.addEventListener("keydown", wasd);
-window.addEventListener("keyup", (e) => {
-  document.querySelector(`[data-key="${e.key}"]`).classList.remove('keyboard-key__active');
-});
+// Track WASD for UI
+trackWASD();

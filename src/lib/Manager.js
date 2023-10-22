@@ -20,7 +20,7 @@ export class Manager
     this.map = new Map();
     this.currentLevel = 1;
 
-    this.newGameParams();
+    this.newGameEntities();
   
     this.gameover = false;
     this.levelPassed = false;
@@ -86,7 +86,7 @@ export class Manager
     this.gameover = false;
     this.levelPassed = false;
     
-    this.newGameParams();
+    this.newGameEntities();
 
     this.generateMap(level)
       .createPlayer()
@@ -100,7 +100,7 @@ export class Manager
     }
   }
 
-  newGameParams () {
+  newGameEntities () {
     this.player = null;
     this.entities = [];
     this.walls = [];

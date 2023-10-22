@@ -17,3 +17,21 @@ manager.createKeyboardMouseControls();
 
 // Run the game loop
 manager.loop();
+
+function wasd(e) {
+  const key = document.querySelector(`[data-key="${e.key}"]`);
+  if (
+    e.key === "w" ||
+    e.key === "a" ||
+    e.key === "s" ||
+    e.key === "d"
+  ) {
+    // Adds class activeKey
+    key.classList.add("activeKey");
+  }
+}
+
+window.addEventListener("keydown", wasd);
+window.addEventListener("keyup", (e) => {
+  document.querySelector(`[data-key="${e.key}"]`).classList.remove('activeKey');
+});

@@ -9,9 +9,10 @@ html, body {
 
 .help {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 30px;
+  left: 20px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5rem;
   color: white;
   background: rgba(34, 34, 34, 0.75);
   border: 1px solid rgb(34, 34, 34);
@@ -21,16 +22,29 @@ html, body {
 
 .help p {
   margin-top: 0;
-  margin-bottom: 1px;
+  margin-bottom: 12px;
+}
+
+.help hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#current-level {
+  color: #74f074;
 }
 
 #equipped-weapon {
   color: #27a2f5;
 }
 
+#enemies-remaining {
+  color: #ff4040;
+}
+
 #gun-reload {
   display: none;
-  color: red;
+  color: #be3e3e;
 }
 
 .game-ended-wrapper {
@@ -108,4 +122,42 @@ html, body {
     text-shadow: 0 0 2px rgba(255, 255, 255, .1), 0 0 10px rgba(255, 255, 255, .4);
     text-stroke: 2px rgba(255, 255, 255, 0.05);
   }
+}
+
+/* Keyboard style */
+.keyboard {
+  width: 300px;
+  margin: 0 auto;
+}
+.keyboard .top-row {
+  width: 120px;
+  margin: 0 auto;
+}
+.keyboard .bottom-row {
+  display: inline-flex;
+}
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #353943;
+  border: 1px solid #8fce00;
+  box-shadow: 3px 3px #d9ff82;
+  border-radius: 5px;
+  color: #ffffff;
+  width: 60px;
+  margin: 15px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  transition: all 0.07s ease;
+}
+.activeKey {
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 3px 3px #7e7e7d;
+}
+.key > p {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }

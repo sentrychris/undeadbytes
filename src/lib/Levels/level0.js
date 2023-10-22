@@ -6,7 +6,7 @@ export const level0 = [
   'W                           W',
   'W                           W',
   'W                           W',
-  'W       E         E         W',
+  'W                 E         W',
   'W                           W',
   'W W W W W W W W W W W W W W W '
 ];

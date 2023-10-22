@@ -26,12 +26,11 @@ function wasd(e) {
     e.key === "s" ||
     e.key === "d"
   ) {
-    // Adds class activeKey
-    key.classList.add("activeKey");
+    key.classList.add("keyboard-key__active");
   }
 }
 
 window.addEventListener("keydown", wasd);
 window.addEventListener("keyup", (e) => {
-  document.querySelector(`[data-key="${e.key}"]`).classList.remove('activeKey');
+  document.querySelector(`[data-key="${e.key}"]`).classList.remove('keyboard-key__active');
 });

@@ -124,7 +124,6 @@ html, body {
   }
 }
 
-/* Keyboard style */
 .keyboard {
   width: 300px;
   margin: 0 auto;
@@ -136,7 +135,7 @@ html, body {
 .keyboard .bottom-row {
   display: inline-flex;
 }
-.key {
+.keyboard-key {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,12 +151,12 @@ html, body {
   left: 0;
   transition: all 0.07s ease;
 }
-.activeKey {
+.keyboard-key__active {
   background: #ffffff;
   color: #000000;
   box-shadow: 3px 3px #7e7e7d;
 }
-.key > p {
+.keyboard-key > p {
   margin-top: 5px;
   margin-bottom: 10px;
 }

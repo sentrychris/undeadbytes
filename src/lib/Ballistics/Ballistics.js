@@ -10,8 +10,6 @@ export class Ballistics
     this.frames = 0;
     this.bullets = [];
     this.indexesToDelete = [];
-    this.reload = false;
-    this.reloadDisplay = document.querySelector('#gun-reload');
   }
 
   update (game) {
@@ -19,7 +17,7 @@ export class Ballistics
     this.setEquippedWeaponDisplayInformation();
 
     if (this.weapon && this.automatic && ! game.player.dead) {
-      this.reloadDisplay.style.display = 'none';
+      document.querySelector('#out-of-ammo').style.display = 'none';
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
       }
@@ -63,18 +61,25 @@ export class Ballistics
   }
 
   setEquippedWeaponDisplayInformation () {
-    const { name, clip, capacity } = this.weapon;
+    const { name, clip, capacity, magazines, magazinesTotal } = this.weapon;
     document.querySelector('#equipped-weapon').innerHTML = name;
     document.querySelector('#ammo-remaining').innerHTML = clip;
     document.querySelector('#ammo-capacity').innerHTML = capacity;
+    document.querySelector('#magazines-remaining').innerHTML = magazines;
+    document.querySelector('#magazines-total').innerHTML = magazinesTotal;
   }
 
   shouldReloadWeaponAmmoClip () {
-    if (this.weapon.clip < 0) {
-      this.weapon.clip = 0;
-      this.reload = true;
-      this.reloadDisplay.style.display = 'inline';
-      return true;
+    if (this.weapon.clip <= 0) {
+      if (this.weapon.magazines > 0) {
+        --this.weapon.magazines;
+        this.weapon.clip = this.weapon.capacity;
+      } else {
+        this.weapon.clip = 0;
+        document.querySelector('#out-of-ammo').style.display = 'inline';
+
+        return true;
+      }
     }
 
     return false;

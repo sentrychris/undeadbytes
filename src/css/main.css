@@ -42,7 +42,7 @@ html, body {
   color: #ff4040;
 }
 
-#gun-reload {
+#out-of-ammo {
   display: none;
   color: #be3e3e;
 }
@@ -82,23 +82,18 @@ html, body {
   background: rgba(13, 197, 38, 0.712);
 }
 
-.reload {
+.out-of-ammo {
   border: none;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   text-align: center;
-  text-shadow: 1px 5px 4px rgba(0, 0, 0, .3), 0 0 2px
-   rgba(255, 255, 255, 1), 0 0 10px
-   rgba(255, 255, 255, 1), 0 0 20px
-   rgba(255, 255, 255, 1), 0 0 30px
-   rgba(255, 255, 255, 1), 0 0 40px
-   #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de;
+  text-shadow: 1px 5px 4px rgba(0, 0, 0, .3), 0 0 2px rgb(221, 145, 145), 0 0 10px;
 }
 
-.reload span {
-  animation: blink .3s infinite alternate;
+.out-of-ammo span {
+  animation: blink .7s infinite alternate;
 }
 
-.reload span.delay {
+.out-of-ammo span.delay {
   animation-duration: 6s;
   animation-delay: 2s;
   animation-direction: alternate cubic-bezier(0.5, 0.2, 0.3, 1.0)
@@ -107,17 +102,6 @@ html, body {
 @keyframes blink {
   0% {}
   50% {}
-  60% {
-    text-shadow: 0 0 2px rgba(211, 139, 139, 0.1), 0 0 10px rgba(235, 171, 171, 0.4);
-    text-stroke: 2px rgba(228, 153, 153, 0.05);
-  }
-  70% {
-    text-shadow: 0 0 2px rgb(192, 124, 124), 0 0 10px
-      rgb(211, 116, 116), 0 0 20px
-      rgb(221, 145, 145), 0 0 30px
-      rgb(190, 118, 118), 0 0 40px
-      #da5656, 0 0 70px #da5656, 0 0 80px #da5656, 0 0 100px #da5656;
-  }
   80% {
     text-shadow: 0 0 2px rgba(255, 255, 255, .1), 0 0 10px rgba(255, 255, 255, .4);
     text-stroke: 2px rgba(255, 255, 255, 0.05);

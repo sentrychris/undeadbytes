@@ -36,7 +36,19 @@ export class Manager
   
     if (this.gameover) {
       const gameover = document.querySelector('.game-ended-wrapper');
-      gameover.style.display = 'flex';
+      setTimeout(() => {
+        if (this.levelPassed) {
+          gameover.querySelector('h1').innerHTML = 'You Win!';
+          gameover.classList.add('level-passed');
+          gameover.classList.remove('level-failed');
+        } else {
+          gameover.querySelector('h1').innerHTML = 'You Died!';
+          gameover.classList.remove('level-passed');
+          gameover.classList.add('level-failed');
+        }
+        gameover.style.display = 'flex';
+      }, 1000);
+
       if (this.levelPassed) {
         this.stop().then((stopped) => this.restart(stopped, true));
       } else {
@@ -56,7 +68,6 @@ export class Manager
   restart (stopped, nextLevel = false) {
     if (stopped && ! this.frame) {
       const gameover = document.querySelector('.game-ended-wrapper');
-      gameover.style.display = 'flex';
 
       if (nextLevel) {
         ++this.currentLevel;

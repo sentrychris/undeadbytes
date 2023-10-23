@@ -5,6 +5,7 @@ import { EntityHelper } from './Entity/EntityHelper';
 export class Ammo
 {
   constructor (x, y) {
+    this.type = 'pickup';
     this.bounding = 'arc';
     this.x = x * config.size;
     this.y = y * config.size;
@@ -16,6 +17,32 @@ export class Ammo
       width: config.size,
       height: config.size
     };
+
+    this.markToDelete = false;
+  }
+
+  update (game) {
+    // Determine the next x,y position vectors based on the distance
+    // between the player and the enemy's current x,y position.
+    let vectorX = game.player.x - this.x;
+    let vectorY = game.player.y - this.y;
+
+    if (game.player.dead) {
+      // If the player is dead, set the enemy's x,y position to their
+      // last known position.
+      vectorX = this.lastVectorX;
+      vectorY = this.lastVectorY;
+    } else {
+      // Otherwise update their last known position with the newly
+      // determined x,y position.
+      this.lastVectorX = vectorX;
+      this.lastVectorY = vectorY;
+    }
+
+    // Player-to-entity collision
+    EntityHelper.playerToEntity(this, game, () => {
+      console.log('picked up!');
+    });
   }
 
   render (context) {
@@ -34,11 +61,7 @@ export class Ammo
     context.fill();
   }
 
-  pickup(game) {
-    if (EntityHelper.intersection(game.player, this)) {
-      // Pickup logic here.
-    } else {
-      // ignore bounds check.
-    }
+  pickup() {
+    this.markToDelete = true;
   }
 }

@@ -64,26 +64,9 @@ export class Enemy
     if (this.sleep || this.dead) {
       return;
     }
-
-    // Determine the next x,y position vectors based on the distance
-    // between the player and the enemy's current x,y position.
-    let vectorX = game.player.x - this.x;
-    let vectorY = game.player.y - this.y;
-
-    if (game.player.dead) {
-      // If the player is dead, set the enemy's x,y position to their
-      // last known position.
-      vectorX = this.lastVectorX;
-      vectorY = this.lastVectorY;
-    } else {
-      // Otherwise update their last known position with the newly
-      // determined x,y position.
-      this.lastVectorX = vectorX;
-      this.lastVectorY = vectorY;
-    }
-
+    
     // Player-to-entity collision
-    EntityHelper.playerToEntity(vectorX, vectorY, this, game);
+    EntityHelper.playerToEntity(this, game);
 
     // Enemy-to-enemy collision
     if (Math.random() <= 0.1) {
@@ -91,8 +74,8 @@ export class Enemy
         const enemy = game.enemies[i];
   
         if (enemy != this) {
-          vectorX = enemy.x - this.x;
-          vectorY = enemy.y - this.y;
+          let vectorX = enemy.x - this.x;
+          let vectorY = enemy.y - this.y;
   
           length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 

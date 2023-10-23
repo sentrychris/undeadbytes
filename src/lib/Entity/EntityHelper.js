@@ -71,11 +71,34 @@ export class _EntityHelper
     EntityDrawer.health(context, entity.health, entity.x, entity.y);
   }
 
-  playerToEntity (vectorX, vectorY, entity, game) {
+  playerToEntity (entity, game, callback) {
+    // Determine the next x,y position vectors based on the distance
+    // between the player and the enemy's current x,y position.
+    let vectorX = game.player.x - entity.x;
+    let vectorY = game.player.y - entity.y;
+
+    if (game.player.dead) {
+      // If the player is dead, set the enemy's x,y position to their
+      // last known position.
+      vectorX = entity.lastVectorX;
+      vectorY = entity.lastVectorY;
+    } else {
+      // Otherwise update their last known position with the newly
+      // determined x,y position.
+      entity.lastVectorX = vectorX;
+      entity.lastVectorY = vectorY;
+    }
+
     // Determine the distance between the enemy and the player
     let distance = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
-    if (distance > 0) {
+    if (entity.type === 'pickup') {
+      if (callback && distance <= 80) {
+        callback();
+      }
+    }
+
+    if (distance > 0 && entity.type !== 'pickup') {
       vectorX /= distance;
       vectorY /= distance;
 

@@ -1,5 +1,6 @@
 import { EntityHelper } from './Entity/EntityHelper';
 import { config } from '../config';
+import { randomNumber } from '../util';
 
 export class Ammo
 {
@@ -14,7 +15,9 @@ export class Ammo
     this.image = new Image();
     this.image.src = '/img/magazine.png';
     this.image.width = 50;
-    
+
+    this.glow = 40;
+
     this.bounds = {
       x: this.x,
       y: this.y,
@@ -29,7 +32,6 @@ export class Ammo
     // Player-to-entity collision
     EntityHelper.playerToEntity(this, game, () => {
       this.pickup();
-      console.log('picked up!');
     });
   }
 
@@ -38,11 +40,15 @@ export class Ammo
       return;
     }
 
+    context.shadowBlur = this.glow;
+    context.shadowColor = 'yellow';
     if (this.image.complete) {
       context.drawImage(this.image, this.x, this.y, 75, 75);
     } else {
       this.image.onload = () => context.drawImage(this.image, this.x, this.y, 75, 75);
     }
+
+    // this.glow = this.glow === 40 ? 20 : 40;
   }
 
   pickup() {

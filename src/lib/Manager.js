@@ -93,7 +93,7 @@ export class Manager
       .createPlayer()
       .createEnemies()
       .createWalls()
-      .createAmmo()
+      .createAmmoPickups()
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
 
@@ -209,12 +209,10 @@ export class Manager
     return this;
   }
 
-  createAmmo () {
+  createAmmoPickups () {
     for (let i = 0; i < this.map.getAmmoPickupPositions().length; i++) {
       const ammoPickupPosition = this.map.getAmmoPickupPositions()[i];
       const ammoPickup = new Ammo(ammoPickupPosition.x, ammoPickupPosition.y);
-
-      console.log(ammoPickup);
       
       this.entities.push(ammoPickup);
       this.ammoPickups.push(ammoPickup);

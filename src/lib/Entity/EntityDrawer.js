@@ -130,6 +130,9 @@ export class EntityDrawer
    * @param {*} position 
    */
   static enemy (context, position) {
+    context.shadowBlur = 10;
+    context.shadowColor = '#8fce00';
+    
     // left foot
     context.beginPath();
     context.rect(20, -20 + (position * 35), 25, 40);

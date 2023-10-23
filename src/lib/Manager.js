@@ -2,7 +2,8 @@ import { Ballistics } from './Ballistics/Ballistics';
 import { Player } from './Player';
 import { Enemy } from './Enemy';
 import { Wall } from './Wall';
-import { Ammo } from './Ammo';
+import { Ammo } from './Pickup/Ammo';
+import { Health } from './Pickup/Health';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
 import { config } from '../config';
@@ -19,7 +20,7 @@ export class Manager
     this.mouse = config.device.mouse;
 
     this.map = new Map();
-    this.currentLevel = 1;
+    this.currentLevel = 0;
 
     this.newGameEntities();
   
@@ -81,7 +82,7 @@ export class Manager
     return this.stopped;
   }
 
-  setup ({ level = 1 }, reset = false) {
+  setup ({ level = 0 }, reset = false) {
     this.frame = null;
     this.stopped = false;
     this.gameover = false;
@@ -94,6 +95,7 @@ export class Manager
       .createEnemies()
       .createWalls()
       .createAmmoPickups()
+      .createHealthPickups();
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
 
@@ -108,6 +110,7 @@ export class Manager
     this.walls = [];
     this.enemies = [];
     this.ammoPickups = [];
+    this.healthPickups = [];
 
     this.selectedWeaponIndex = 0;
     this.ballistics = new Ballistics();
@@ -137,11 +140,12 @@ export class Manager
 
       if (this.entities[i].type === 'pickup') {
         if (this.entities[i].markToDelete) {
-          // TODO either:
-          //   - assign different weapon ammo and quantities to the blocks
-          //   - check the current weapon clip, don't pick up if it is full
           if (this.entities[i].item === 'ammo') {
             this.ballistics.refillWeaponAmmoClip();
+          }
+
+          if (this.entities[i].item === 'health') {
+            this.player.refillHealth(this.entities[i].value);
           }
 
           // Remove picked up entities
@@ -216,6 +220,18 @@ export class Manager
       
       this.entities.push(ammoPickup);
       this.ammoPickups.push(ammoPickup);
+    }
+
+    return this;
+  }
+
+  createHealthPickups () {
+    for (let i = 0; i < this.map.getHealthPickupPositions().length; i++) {
+      const healthPickupPosition = this.map.getHealthPickupPositions()[i];
+      const healthPickup = new Health(healthPickupPosition.x, healthPickupPosition.y);
+      
+      this.entities.push(healthPickup);
+      this.healthPickups.push(healthPickup);
     }
 
     return this;

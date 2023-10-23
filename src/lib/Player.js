@@ -48,6 +48,13 @@ export class Player
     }
   }
 
+  refillHealth(amount) {
+    if (this.health < 100) {
+      const increase = this.health + amount;
+      if (increase <= 100) this.health = increase;
+    }
+  }
+
   update (game) {
     if (this.sleep || this.dead) {
       return;

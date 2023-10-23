@@ -1,21 +1,20 @@
-import { EntityHelper } from './Entity/EntityHelper';
-import { config } from '../config';
-import { randomNumber } from '../util';
+import { EntityHelper } from '../Entity/EntityHelper';
+import { config } from '../../config';
 
-export class Ammo
+export class Health
 {
   constructor (x, y) {
     this.type = 'pickup';
-    this.item = 'ammo';
+    this.item = 'health';
+    this.value = 25;
     this.bounding = 'arc';
     this.x = x * config.size;
     this.y = y * config.size;
     this.sleep = true;
 
     this.image = new Image();
-    this.image.src = 'https://sentrychris.github.io/squareshoot/img/magazine.png';
+    this.image.src = 'https://sentrychris.github.io/squareshoot/img/first-aid-box.png';
     this.image.width = 50;
-
     this.glow = 40;
 
     this.bounds = {
@@ -41,14 +40,12 @@ export class Ammo
     }
 
     context.shadowBlur = this.glow;
-    context.shadowColor = 'yellow';
+    context.shadowColor = '#6c95c2';
     if (this.image.complete) {
       context.drawImage(this.image, this.x, this.y, 75, 75);
     } else {
       this.image.onload = () => context.drawImage(this.image, this.x, this.y, 75, 75);
     }
-
-    // this.glow = this.glow === 40 ? 20 : 40;
   }
 
   pickup() {

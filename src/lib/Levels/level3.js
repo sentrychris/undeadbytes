@@ -4,7 +4,7 @@ export const level3 = [
   'W   A E     E     W     E    E    A   W',
   'W                 W       E           W',
   'W                                     W',
-  'W W W W W W           W         W     W',
+  'W W W W W W           W   H     W     W',
   'W         W     W                     W',
   'W   E     W     W     E               W',
   'W               W                     W',

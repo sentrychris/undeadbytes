@@ -6,6 +6,8 @@ export class Bullet
   constructor (context, player, i) {
     this.vectorX = Math.cos(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
     this.vectorY = Math.sin(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
+
+    // Bullet start position
     this.x = player.x + this.vectorX * config.radius * 1.5;
     this.y = player.y + this.vectorY * config.radius * 1.5;
 
@@ -22,9 +24,9 @@ export class Bullet
     this.markToDelete = false;
   }
 
-  update (walls) {
-    this.x += this.vectorX * 25;
-    this.y += this.vectorY * 25;
+  update (walls, dropoff = 25) {
+    this.x += this.vectorX * dropoff;
+    this.y += this.vectorY * dropoff;
 
     this.bounds.x = this.x - this.radius;
     this.bounds.y = this.y - this.radius;

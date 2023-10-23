@@ -96,7 +96,7 @@ export class Ballistics
   cleanupBullets (walls) {
     this.indexesToDelete = [];
     for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].update(walls);
+      this.bullets[i].update(walls, this.weapon.dropoff);
       if (this.bullets[i].markToDelete) {
         this.indexesToDelete.push(i);
       }

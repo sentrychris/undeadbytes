@@ -1,4 +1,3 @@
-import { EntityCollision } from './Entity/EntityCollision';
 import { EntityHelper } from './Entity/EntityHelper';
 import { config } from '../config';
 

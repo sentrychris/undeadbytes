@@ -1,11 +1,11 @@
-import { config } from '../config';
-import { EntityCollision } from './Entity/EntityCollision';
 import { EntityHelper } from './Entity/EntityHelper';
+import { config } from '../config';
 
 export class Ammo
 {
   constructor (x, y) {
     this.type = 'pickup';
+    this.item = 'ammo';
     this.bounding = 'arc';
     this.x = x * config.size;
     this.y = y * config.size;

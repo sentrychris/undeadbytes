@@ -134,6 +134,20 @@ export class Manager
           this.levelPassed = true;
         }
       }
+
+      if (this.entities[i].type === 'pickup') {
+        if (this.entities[i].markToDelete) {
+          // TODO either:
+          //   - assign different weapon ammo and quantities to the blocks
+          //   - check the current weapon clip, don't pick up if it is full
+          if (this.entities[i].item === 'ammo') {
+            this.ballistics.refillWeaponAmmoClip();
+          }
+
+          // Remove picked up entities
+          this.entities.splice(i, 1);
+        }
+      }
     }
 
     document.querySelector('#enemies-remaining').innerHTML = this.enemies.length;

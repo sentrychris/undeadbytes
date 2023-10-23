@@ -3,6 +3,7 @@ import { mappings } from '../Levels/mappings';
 export class Map
 {
   constructor () {
+    this.levels = mappings;
     this.newMapConfiguration();
   }
 

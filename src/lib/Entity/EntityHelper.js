@@ -93,7 +93,7 @@ export class EntityHelper
     let distance = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
     if (entity.type === 'pickup') {
-      if (callback && distance <= 80) {
+      if (callback && distance <= 95) {
         callback();
       }
     }

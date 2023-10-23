@@ -204,7 +204,7 @@ export class Manager
   createWalls () {
     for (let i = 0; i < this.map.getWallPositions().length; i++) {
       const wallPosition = this.map.getWallPositions()[i];
-      const wall = new Wall(wallPosition.x, wallPosition.y);
+      const wall = new Wall(wallPosition.x, wallPosition.y, true);
       
       this.entities.push(wall);
       this.walls.push(wall);

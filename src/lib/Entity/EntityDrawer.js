@@ -7,6 +7,9 @@ export class EntityDrawer
    * @param {*} position 
    */
   static player (context, position) {
+    context.shadowBlur = 5;
+    context.shadowColor = 'white';
+
     // left foot
     context.beginPath();
     context.rect(20, -20 + (position * 35), 25, 40);

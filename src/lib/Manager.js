@@ -2,6 +2,7 @@ import { Ballistics } from './Ballistics/Ballistics';
 import { Player } from './Player';
 import { Enemy } from './Enemy';
 import { Wall } from './Wall';
+import { Ammo } from './Ammo';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
 import { config } from '../config';
@@ -91,7 +92,8 @@ export class Manager
     this.generateMap(level)
       .createPlayer()
       .createEnemies()
-      .createWalls();
+      .createWalls()
+      .createAmmo()
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
 
@@ -105,6 +107,7 @@ export class Manager
     this.entities = [];
     this.walls = [];
     this.enemies = [];
+    this.ammoPickups = [];
 
     this.selectedWeaponIndex = 0;
     this.ballistics = new Ballistics();
@@ -187,6 +190,20 @@ export class Manager
       
       this.entities.push(wall);
       this.walls.push(wall);
+    }
+
+    return this;
+  }
+
+  createAmmo () {
+    for (let i = 0; i < this.map.getAmmoPickupPositions().length; i++) {
+      const ammoPickupPosition = this.map.getAmmoPickupPositions()[i];
+      const ammoPickup = new Ammo(ammoPickupPosition.x, ammoPickupPosition.y);
+
+      console.log(ammoPickup);
+      
+      this.entities.push(ammoPickup);
+      this.ammoPickups.push(ammoPickup);
     }
 
     return this;

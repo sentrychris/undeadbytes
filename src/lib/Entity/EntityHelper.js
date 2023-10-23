@@ -1,3 +1,4 @@
+import { EntityCollision } from './EntityCollision';
 import { EntityDrawer } from './EntityDrawer';
 
 export class _EntityHelper
@@ -68,6 +69,43 @@ export class _EntityHelper
     
     this.endRotationOffset(context, entity.x, entity.y, entity.angle);
     EntityDrawer.health(context, entity.health, entity.x, entity.y);
+  }
+
+  playerToEntity (vectorX, vectorY, entity, game) {
+    // Determine the distance between the enemy and the player
+    let distance = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+
+    if (distance > 0) {
+      vectorX /= distance;
+      vectorY /= distance;
+
+      // If the vector length is lower than 800, than set the enemy's
+      // angle and position toward the player.
+      if (distance < 800) {
+        entity.angle = Math.atan2(vectorY, vectorX) - 90 * Math.PI / 180;
+        entity.x += vectorX * entity.speed;
+        entity.y += vectorY * entity.speed;
+
+        // Determine the wall position vectors for collision to stop enemies phasing
+        // through walls to try and get to you.
+        const collisionVector = EntityCollision.vector(entity.x, entity.y, game.walls);
+        // If there is a wall in the way, repeatedly set the enemy's x,y position to the wall
+        // position while maintaining speed.
+        entity.x += collisionVector.x * entity.speed;
+        entity.y += collisionVector.y * entity.speed;
+
+        // Use the enemy's momentum to adjust the angle until they work their way around
+        // the wall.
+        entity.incrementer += entity.speed;
+        entity.position = Math.sin(entity.incrementer * Math.PI / 180);
+
+        if (distance < 100 && entity.type === 'enemy') {
+          // If the vecotr length is lower than 100
+          // hurt the player
+          game.player.takeDamage(entity);
+        }
+      }
+    }
   }
 }
 

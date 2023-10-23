@@ -2,6 +2,18 @@ import { mappings } from './mappings';
 
 export class _AudioHandler
 {
+  constructor()
+  {
+    this.audio = {};
+    // Eager load all audio files.
+    for (const weapon of mappings) {
+      this.audio[weapon.name] = {
+        fire: new Audio(weapon.audioFire),
+        reload: new Audio(weapon.audioReload)
+      }
+    }
+  }
+
   play ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
     const config = weaponIndex
       ? mappings[weaponIndex]
@@ -12,8 +24,8 @@ export class _AudioHandler
     }
 
     const audio = action === 'fire'
-      ? new Audio(config.audioFire)
-      : new Audio(config.audioReload);
+      ? this.audio[config.name].fire
+      : this.audio[config.name].reload;
 
     if (! audio) {
       return;

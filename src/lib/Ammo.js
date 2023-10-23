@@ -13,7 +13,7 @@ export class Ammo
     this.sleep = true;
 
     this.image = new Image();
-    this.image.src = '/img/magazine.png';
+    this.image.src = 'https://sentrychris.github.io/squareshoot/img/magazine.png';
     this.image.width = 50;
 
     this.glow = 40;

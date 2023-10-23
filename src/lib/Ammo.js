@@ -41,6 +41,7 @@ export class Ammo
 
     // Player-to-entity collision
     EntityHelper.playerToEntity(this, game, () => {
+      this.pickup();
       console.log('picked up!');
     });
   }

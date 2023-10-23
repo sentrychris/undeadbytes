@@ -1,6 +1,6 @@
 import { config } from '../../config';
 
-export class _EntityCollision
+export class EntityCollision
 {
   /**
    * Caclulate collision beween entity (arc) and wall (box)
@@ -8,7 +8,7 @@ export class _EntityCollision
    * @param {*} param0 
    * @returns 
    */
-  arcWallVector ({ arcX, arcY, radius, wallX, wallY, size }) {
+  static arcWallVector ({ arcX, arcY, radius, wallX, wallY, size }) {
     const distX = Math.abs(arcX - wallX - size / 2);
     const distY = Math.abs(arcY - wallY - size / 2);
   
@@ -42,7 +42,7 @@ export class _EntityCollision
    * @param {*} walls 
    * @returns 
    */
-  vector (x, y, walls) {
+  static vector (x, y, walls) {
     const result = {
       x: 0,
       y: 0
@@ -51,7 +51,7 @@ export class _EntityCollision
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
   
-      if (this.arcWallVector({
+      if (EntityCollision.arcWallVector({
         arcX: x,
         arcY: y,
         radius: 60,
@@ -80,5 +80,3 @@ export class _EntityCollision
     return result;
   }
 }
-
-export const EntityCollision = new _EntityCollision();

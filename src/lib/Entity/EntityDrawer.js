@@ -1,4 +1,4 @@
-export class _EntityDrawer
+export class EntityDrawer
 {
   /**
    * Draw player
@@ -6,7 +6,7 @@ export class _EntityDrawer
    * @param {*} context 
    * @param {*} position 
    */
-  player (context, position) {
+  static player (context, position) {
     // left foot
     context.beginPath();
     context.rect(20, -20 + (position * 35), 25, 40);
@@ -67,7 +67,7 @@ export class _EntityDrawer
    * 
    * @param {*} context 
    */
-  deadPlayer (context) {
+  static deadPlayer (context) {
     // left foot
     context.beginPath();
     context.rect(30, 20, 25, 40);
@@ -129,7 +129,7 @@ export class _EntityDrawer
    * @param {*} context 
    * @param {*} position 
    */
-  enemy (context, position) {
+  static enemy (context, position) {
     // left foot
     context.beginPath();
     context.rect(20, -20 + (position * 35), 25, 40);
@@ -180,7 +180,7 @@ export class _EntityDrawer
    * 
    * @param {*} context 
    */
-  deadEnemy (context) {
+  static deadEnemy (context) {
     // left foot
     context.beginPath();
     context.rect(52, -30, 25, 40);
@@ -234,7 +234,7 @@ export class _EntityDrawer
    * @param {*} centerX 
    * @param {*} centerY 
    */
-  health (context, health, centerX, centerY) {
+  static health (context, health, centerX, centerY) {
     context.beginPath();
     context.rect(centerX - 50, centerY + 60, 100, 5);
     context.strokeStyle = 'black';
@@ -255,5 +255,3 @@ export class _EntityDrawer
     context.fill();
   }
 }
-
-export const EntityDrawer = new _EntityDrawer();

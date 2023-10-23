@@ -1,7 +1,7 @@
 import { EntityCollision } from './EntityCollision';
 import { EntityDrawer } from './EntityDrawer';
 
-export class _EntityHelper
+export class EntityHelper
 {
   /**
    * Determine intersection between entities
@@ -10,7 +10,7 @@ export class _EntityHelper
    * @param {*} r2 
    * @returns 
    */
-  intersection (r1, r2) {
+  static intersection (r1, r2) {
     return ! (r1.x + r1.width < r2.x
       || r1.y + r1.height < r2.y
       || r1.x > r2.x + r2.width
@@ -26,7 +26,7 @@ export class _EntityHelper
    * @param {*} y 
    * @param {*} angle 
    */
-  beginRotationOffset (context, x, y, angle) {
+  static beginRotationOffset (context, x, y, angle) {
     context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
     context.translate(context.canvas.width / 2, context.canvas.height / 2);
 
@@ -41,7 +41,7 @@ export class _EntityHelper
    * @param {*} y 
    * @param {*} angle 
    */
-  endRotationOffset (context, x, y, angle) {
+  static endRotationOffset (context, x, y, angle) {
     context.rotate(-angle);
 
     context.translate(-context.canvas.width / 2, -context.canvas.height / 2);
@@ -54,8 +54,8 @@ export class _EntityHelper
    * @param {*} context 
    * @param {*} entity 
    */
-  render (context, entity) {
-    this.beginRotationOffset(context, entity.x, entity.y, entity.angle);
+  static render (context, entity) {
+    EntityHelper.beginRotationOffset(context, entity.x, entity.y, entity.angle);
 
     if (! entity.dead) {
       entity.type === 'enemy'
@@ -67,11 +67,11 @@ export class _EntityHelper
         : EntityDrawer.deadPlayer(context);
     }
     
-    this.endRotationOffset(context, entity.x, entity.y, entity.angle);
+    EntityHelper.endRotationOffset(context, entity.x, entity.y, entity.angle);
     EntityDrawer.health(context, entity.health, entity.x, entity.y);
   }
 
-  playerToEntity (entity, game, callback) {
+  static playerToEntity (entity, game, callback) {
     // Determine the next x,y position vectors based on the distance
     // between the player and the enemy's current x,y position.
     let vectorX = game.player.x - entity.x;
@@ -131,5 +131,3 @@ export class _EntityHelper
     }
   }
 }
-
-export const EntityHelper = new _EntityHelper();

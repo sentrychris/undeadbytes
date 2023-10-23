@@ -2,6 +2,7 @@ import { Ballistics } from './Ballistics/Ballistics';
 import { Player } from './Player';
 import { Enemy } from './Enemy';
 import { Wall } from './Wall';
+import { Ammo } from './Ammo';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
 import { config } from '../config';
@@ -91,7 +92,8 @@ export class Manager
     this.generateMap(level)
       .createPlayer()
       .createEnemies()
-      .createWalls();
+      .createWalls()
+      .createAmmoPickups()
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
 
@@ -105,6 +107,7 @@ export class Manager
     this.entities = [];
     this.walls = [];
     this.enemies = [];
+    this.ammoPickups = [];
 
     this.selectedWeaponIndex = 0;
     this.ballistics = new Ballistics();
@@ -129,6 +132,20 @@ export class Manager
         if (this.areAllEnemiesDead(this.entities[i])) {
           this.gameover = true;
           this.levelPassed = true;
+        }
+      }
+
+      if (this.entities[i].type === 'pickup') {
+        if (this.entities[i].markToDelete) {
+          // TODO either:
+          //   - assign different weapon ammo and quantities to the blocks
+          //   - check the current weapon clip, don't pick up if it is full
+          if (this.entities[i].item === 'ammo') {
+            this.ballistics.refillWeaponAmmoClip();
+          }
+
+          // Remove picked up entities
+          this.entities.splice(i, 1);
         }
       }
     }
@@ -187,6 +204,18 @@ export class Manager
       
       this.entities.push(wall);
       this.walls.push(wall);
+    }
+
+    return this;
+  }
+
+  createAmmoPickups () {
+    for (let i = 0; i < this.map.getAmmoPickupPositions().length; i++) {
+      const ammoPickupPosition = this.map.getAmmoPickupPositions()[i];
+      const ammoPickup = new Ammo(ammoPickupPosition.x, ammoPickupPosition.y);
+      
+      this.entities.push(ammoPickup);
+      this.ammoPickups.push(ammoPickup);
     }
 
     return this;

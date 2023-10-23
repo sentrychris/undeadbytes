@@ -73,7 +73,7 @@ export class Ballistics
     if (this.weapon.clip <= 0) {
       if (this.weapon.magazines > 0) {
         --this.weapon.magazines;
-        this.weapon.clip = this.weapon.capacity;
+        this.refillWeaponAmmoClip();
       } else {
         this.weapon.clip = 0;
         document.querySelector('#out-of-ammo').style.display = 'inline';
@@ -83,6 +83,10 @@ export class Ballistics
     }
 
     return false;
+  }
+
+  refillWeaponAmmoClip() {
+    this.weapon.clip = this.weapon.capacity;
   }
 
   registerBullets (context, player) {

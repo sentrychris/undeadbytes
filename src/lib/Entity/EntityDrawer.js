@@ -59,8 +59,8 @@ export class EntityDrawer
     // hair
     context.rotate(-180 * Math.PI / 180);
     context.beginPath();
-    context.arc(0, 0, 37, 0, 180 * Math.PI / 180);
-    context.fillStyle = '#4d2600';
+    context.arc(0, 0, 50, 0, 180 * Math.PI / 180);
+    context.fillStyle = '#454B1B';
     context.fill();
     context.rotate(180 * Math.PI / 180);
   }
@@ -176,7 +176,7 @@ export class EntityDrawer
     context.rotate(-180 * Math.PI / 180);
     context.beginPath();
     context.arc(0, 0, 37, 0, 180 * Math.PI / 180);
-    context.fillStyle = '#4d2600';
+    context.fillStyle = '#880808';
     context.fill();
     context.rotate(180 * Math.PI / 180);
   }

@@ -20,7 +20,7 @@ export class Manager
     this.mouse = config.device.mouse;
 
     this.map = new Map();
-    this.currentLevel = 0;
+    this.currentLevel = 1;
 
     this.newGameEntities();
   
@@ -82,7 +82,7 @@ export class Manager
     return this.stopped;
   }
 
-  setup ({ level = 0 }, reset = false) {
+  setup ({ level = 1 }, reset = false) {
     this.frame = null;
     this.stopped = false;
     this.gameover = false;

@@ -1,19 +1,19 @@
-import { Manager } from './lib/Manager';
+import { Game } from './lib/Game';
 import { trackWASD, logGameStateToConsole } from './util';
 
 // Styles
 import './css/main.css';
 
-// Create a new game manager
-const manager = new Manager(
+// Create a new game
+const game = new Game(
   document.querySelector('canvas#main').getContext('2d')
 );
 
-// Setup a new game and start the game loop
-manager.setup({ level: 1 }, true);
+// Setup the level and start the game loop
+game.setup({ level: 1 }, true);
 
 // Track WASD for UI
 trackWASD();
 
 // Track game state in the console
-logGameStateToConsole(manager, 3000);
+logGameStateToConsole(game, 3000);

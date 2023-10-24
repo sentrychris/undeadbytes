@@ -8,7 +8,7 @@ import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
 import { config } from '../config';
 
-export class Manager
+export class Game
 {
   constructor (context) {
     this.frame = null;

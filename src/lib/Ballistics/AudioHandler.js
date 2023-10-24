@@ -33,7 +33,7 @@ export class _AudioHandler
       return;
     }
 
-    this.playback.volume = 0.6;
+    this.playback.volume = 0.3;
 
     if (config.audioType !== 'repeat') {
       this.stop();

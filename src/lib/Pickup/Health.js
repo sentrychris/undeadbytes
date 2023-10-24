@@ -13,7 +13,7 @@ export class Health
     this.sleep = true;
 
     this.image = new Image();
-    this.image.src = 'https://sentrychris.github.io/squareshoot/img/first-aid-box.png';
+    this.image.src = 'img/first-aid-box.png';
     this.image.width = 50;
     this.glow = 40;
 

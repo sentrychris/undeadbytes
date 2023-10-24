@@ -68,6 +68,12 @@
         </div>
       </div>
     </div>
+  
+    <hr />
+    <p style="font-size: 0.75rem;color:#aaaaaa">
+      <strong>ATTENTION</strong>:<br />Enable sound through your browser's site settings<br />
+      for the best experience.
+    </p>
   </div>
   
   <div class="game-ended-wrapper">
@@ -75,14 +81,15 @@
       <h1>Game Over</h1>
     </div>
   </div>
-  <!-- <iframe src="./fx/audio/soundtrack/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+  <iframe src="./fx/audio/soundtrack/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe>
   <audio autoplay loop id="myaudio">
-    <source src="./fx/audio/soundtrack/deadite.mp3">
-  </audio>   -->
+    <source src="./fx/audio/soundtrack/track0.mp3">
+  </audio>  
   <script src="./main.js"></script>
-  <!-- <script>
+  <script>
     const audio = document.getElementById("myaudio");
-    audio.volume = 0.3;
-  </script> -->
+    audio.volume = 0.6;
+    audio.play();
+  </script>
 </body>
 </html>

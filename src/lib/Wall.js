@@ -13,7 +13,7 @@ export class Wall
     if (this.textured) {
       this.textured = true;
       this.image = new Image();
-      this.image.src = 'https://sentrychris.github.io/squareshoot/img/wall.png';
+      this.image.src = 'img/wall.png';
       this.image.width = config.size;
       this.image.height = config.size;
     }

@@ -80,13 +80,12 @@ export class Enemy
         if (enemy != this) {
           let vectorX = enemy.x - this.x;
           let vectorY = enemy.y - this.y;
-  
-          const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+          let distance = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
-          if (length != 0 && length < 100) {
+          if (distance != 0 && distance < 100) {
 
-            vectorX /= length;
-            vectorY /= length;
+            vectorX /= distance;
+            vectorY /= distance;
 
             enemy.pushAlong(vectorX, vectorY);
           } 

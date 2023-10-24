@@ -26,6 +26,12 @@ export class Manager
   
     this.gameover = false;
     this.levelPassed = false;
+
+    const onResize = () => this.onResize(window.innerWidth, window.innerHeight);
+    window.addEventListener('resize', onResize);
+    onResize();
+
+    this.createKeyboardMouseControls();
   }
 
   loop () {
@@ -82,7 +88,7 @@ export class Manager
     return this.stopped;
   }
 
-  setup ({ level = 1 }, reset = false) {
+  setup ({ level = 1 }, loop = false) {
     this.frame = null;
     this.stopped = false;
     this.gameover = false;
@@ -99,7 +105,7 @@ export class Manager
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
 
-    if (reset) {
+    if (loop) {
       this.loop();
     }
   }

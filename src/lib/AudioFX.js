@@ -10,7 +10,7 @@ export class _AudioFX
 
     // Eager load all weapon fx.
     for (const weapon of weaponMap) {
-      this.audio[weapon.name] = {
+      this.audio.weapons[weapon.name] = {
         fire: new Audio(weapon.audio.fire),
         reload: new Audio(weapon.audio.reload)
       };
@@ -29,8 +29,8 @@ export class _AudioFX
     }
 
     this.playback = action === 'fire'
-      ? this.audio[config.name].fire
-      : this.audio[config.name].reload;
+      ? this.audio.weapons[config.name].fire
+      : this.audio.weapons[config.name].reload;
 
     if (! this.playback) {
       return;

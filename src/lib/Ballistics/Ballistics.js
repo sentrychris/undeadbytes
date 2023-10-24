@@ -18,6 +18,15 @@ export class Ballistics
 
     if (this.weapon && this.trigger && ! game.player.dead) {
       document.querySelector('#out-of-ammo').style.display = 'none';
+
+      // TODO fix audio desync issue with single shot weapons
+      //   The audio.repeat flag is used for something else, so
+      //   add another flag for these weapons e.g. "receiver".
+      //   This is a workaround!
+      if (['Pistol', 'Shotgun'].includes(this.weapon.name)) {
+        AudioFX.stop();
+      }
+
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
       } else {

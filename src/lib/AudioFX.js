@@ -1,12 +1,15 @@
-import { mappings } from './mappings';
+import { mappings as weaponMap } from './Ballistics/mappings';
 
-export class _AudioHandler
+export class _AudioFX
 {
   constructor ()
   {
-    this.audio = {};
-    // Eager load all audio files.
-    for (const weapon of mappings) {
+    this.audio = {
+      weapons: {}
+    };
+
+    // Eager load all weapon fx.
+    for (const weapon of weaponMap) {
       this.audio[weapon.name] = {
         fire: new Audio(weapon.audio.fire),
         reload: new Audio(weapon.audio.reload)
@@ -16,9 +19,9 @@ export class _AudioHandler
     this.playback = null;
   }
 
-  play ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
+  weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
     const config = weaponIndex
-      ? mappings[weaponIndex]
+      ? weaponMap[weaponIndex]
       : equippedWeapon;
 
     if (! config)  {
@@ -51,4 +54,4 @@ export class _AudioHandler
   }
 }
 
-export const AudioHandler = new _AudioHandler();
+export const AudioFX = new _AudioFX();

@@ -1,4 +1,4 @@
-import { AudioHandler } from './AudioHandler';
+import { AudioFX } from '../AudioFX';
 import { Bullet } from './Bullet';
 import { mappings } from './mappings';
 
@@ -21,7 +21,7 @@ export class Ballistics
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
       } else {
-        AudioHandler.stop();
+        AudioFX.stop();
       }
     } else {
       this.frames++;
@@ -46,7 +46,7 @@ export class Ballistics
       return;
     }
 
-    AudioHandler.play({
+    AudioFX.weapon({
       equippedWeapon: this.weapon
     }, 'fire', 1.5);
 

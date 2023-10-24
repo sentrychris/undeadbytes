@@ -41,7 +41,7 @@ export class Ballistics
   }
 
   handleFire (context, player) {
-    --this.weapon.clip;
+    --this.weapon.clip.current;
     if (this.shouldReloadWeaponAmmoClip()) {
       return;
     }
@@ -55,21 +55,21 @@ export class Ballistics
   }
 
   setEquippedWeaponDisplayInformation () {
-    const { name, clip, capacity, magazines, magazinesTotal } = this.weapon;
+    const { name, clip, magazines } = this.weapon;
     document.querySelector('#equipped-weapon').innerHTML = name;
-    document.querySelector('#ammo-remaining').innerHTML = clip;
-    document.querySelector('#ammo-capacity').innerHTML = capacity;
-    document.querySelector('#magazines-remaining').innerHTML = magazines;
-    document.querySelector('#magazines-total').innerHTML = magazinesTotal;
+    document.querySelector('#ammo-remaining').innerHTML = clip.current;
+    document.querySelector('#ammo-capacity').innerHTML = clip.capacity;
+    document.querySelector('#magazines-remaining').innerHTML = magazines.current;
+    document.querySelector('#magazines-total').innerHTML = magazines.capacity;
   }
 
   shouldReloadWeaponAmmoClip () {
-    if (this.weapon.clip <= 0) {
-      if (this.weapon.magazines > 0) {
-        --this.weapon.magazines;
+    if (this.weapon.clip.current <= 0) {
+      if (this.weapon.magazines.current > 0) {
+        --this.weapon.magazines.current;
         this.refillWeaponAmmoClip();
       } else {
-        this.weapon.clip = 0;
+        this.weapon.clip.current = 0;
         document.querySelector('#out-of-ammo').style.display = 'inline';
 
         return true;
@@ -80,7 +80,7 @@ export class Ballistics
   }
 
   refillWeaponAmmoClip () {
-    this.weapon.clip = this.weapon.capacity;
+    this.weapon.clip.current = this.weapon.clip.capacity;
   }
 
   registerBullets (context, player) {

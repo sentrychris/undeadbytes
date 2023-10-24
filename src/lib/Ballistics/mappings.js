@@ -12,15 +12,21 @@ export const mappings = [
     },
     dps: 30,
     dropoff: 40,
-    clip: 10,
-    capacity: 10,
-    magazines: 2,
-    magazinesTotal: 2,
+    clip: {
+      current: 10,
+      capacity: 10
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
     bulletColor: '#F8CA00',
     automatic: false,
-    audioType: 'single',
-    audioFire: './fx/audio/pistol/pistol-fire.mp3',
-    audioReload: './fx/audio/pistol/pistol-reload.mp3'
+    audio: {
+      type: 'repeat',
+      fire: './fx/audio/pistol/pistol-fire.mp3',
+      reload: './fx/audio/pistol/pistol-reload.mp3'
+    }
   },
   {
     name: 'Shotgun',
@@ -30,15 +36,21 @@ export const mappings = [
     },
     dps: 50,
     dropoff: 25,
-    clip: 6,
-    capacity: 6,
-    magazines: 2,
-    magazinesTotal: 2,
+    clip: {
+      current: 6,
+      capacity: 6
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
     bulletColor: '#F8CA00',
     automatic: false,
-    audioType: 'single',
-    audioFire: './fx/audio/shotgun/shotgun-fire.mp3',
-    audioReload: './fx/audio/shotgun/shotgun-reload.mp3'
+    audio: {
+      type: 'repeat',
+      fire: './fx/audio/shotgun/shotgun-fire.mp3',
+      reload: './fx/audio/shotgun/shotgun-reload.mp3'
+    }
   },
   {
     name: 'Machine Gun',
@@ -48,15 +60,21 @@ export const mappings = [
     },
     dps: 15,
     dropoff: 40,
-    clip: 225,
-    capacity: 225,
-    magazines: 1,
-    magazinesTotal: 1,
+    clip: {
+      current: 225,
+      capacity: 225
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
     bulletColor: ['#CC5500', '#F8CA00'],
     automatic: true,
-    audioType: 'repeat',
-    audioFire: './fx/audio/machine-gun/machine-gun-fire.mp3',
-    audioReload: './fx/audio/machine-gun/machine-gun-reload.mp3'
+    audio: {
+      type: 'repeat',
+      fire: './fx/audio/machine-gun/machine-gun-fire.mp3',
+      reload: './fx/audio/machine-gun/machine-gun-reload.mp3'
+    }
   },
   {
     name: 'Flamethrower',
@@ -66,14 +84,20 @@ export const mappings = [
     },
     dps: 10,
     dropoff: 20,
-    clip: 600,
-    capacity: 600,
-    magazines: 2,
-    magazinesTotal: 2,
+    clip: {
+      current: 600,
+      capacity: 600
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
     bulletColor: ['#CC5500', '#F8CA00'],
     automatic: true,
-    audioType: 'repeat',
-    audioFire: './fx/audio/flamethrower/flamethrower-fire.mp3',
-    audioReload: './fx/audio/flamethrower/flamethrower-reload.mp3'
+    audio: {
+      type: 'repeat',
+      fire: './fx/audio/flamethrower/flamethrower-fire.mp3',
+      reload: './fx/audio/flamethrower/flamethrower-reload.mp3'
+    }
   }
 ];

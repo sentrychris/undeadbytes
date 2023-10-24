@@ -8,8 +8,8 @@ export class _AudioHandler
     // Eager load all audio files.
     for (const weapon of mappings) {
       this.audio[weapon.name] = {
-        fire: new Audio(weapon.audioFire),
-        reload: new Audio(weapon.audioReload)
+        fire: new Audio(weapon.audio.fire),
+        reload: new Audio(weapon.audio.reload)
       };
     }
 
@@ -35,7 +35,7 @@ export class _AudioHandler
 
     this.playback.volume = 0.3;
 
-    if (config.audioType !== 'repeat') {
+    if (config.audio.type !== 'repeat') {
       this.stop();
     }
     

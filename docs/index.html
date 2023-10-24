@@ -75,6 +75,14 @@
       <h1>Game Over</h1>
     </div>
   </div>
+  <iframe src="./fx/audio/soundtrack/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe>
+  <audio autoplay loop id="myaudio">
+    <source src="./fx/audio/soundtrack/deadite.mp3">
+  </audio>  
   <script src="./main.js"></script>
+  <script>
+    const audio = document.getElementById("myaudio");
+    audio.volume = 0.3;
+  </script>
 </body>
 </html>

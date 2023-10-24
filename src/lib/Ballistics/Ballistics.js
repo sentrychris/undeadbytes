@@ -20,6 +20,8 @@ export class Ballistics
       document.querySelector('#out-of-ammo').style.display = 'none';
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
+      } else {
+        AudioHandler.stop();
       }
     } else {
       this.frames++;
@@ -50,14 +52,6 @@ export class Ballistics
 
     this.registerBullets(context, player);
     this.automatic = this.weapon.automatic;
-
-    if ( ! this.automatic) {
-      setTimeout(() => {
-        AudioHandler.play({
-          equippedWeapon: this.weapon
-        }, 'reload');
-      }, 900);
-    }
   }
 
   setEquippedWeaponDisplayInformation () {

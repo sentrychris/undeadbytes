@@ -12,6 +12,8 @@ export class _AudioHandler
         reload: new Audio(weapon.audioReload)
       }
     }
+
+    this.playback = null;
   }
 
   play ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
@@ -23,21 +25,29 @@ export class _AudioHandler
       return;
     }
 
-    const audio = action === 'fire'
+    this.playback = action === 'fire'
       ? this.audio[config.name].fire
       : this.audio[config.name].reload;
 
-    if (! audio) {
+    if (! this.playback) {
       return;
     }
 
-    if (audio.duration > 0 && !audio.paused) {
-      audio.pause();
-      audio.currentTime = 0;
+    this.playback.volume = 0.6;
+
+    if (config.audioType !== 'repeat') {
+      this.stop();
     }
     
-    audio.playbackRate = playbackRate;
-    audio.play();
+    this.playback.playbackRate = playbackRate;
+    this.playback.play();
+  }
+
+  stop() {
+    if (this.playback && ! this.playback.paused) {
+      this.playback.pause();
+      this.playback.currentTime = 0;
+    }
   }
 }
 

@@ -49,6 +49,11 @@ export class Enemy
       if (this.health == 0) {
         this.dead = true;
 
+        document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
+        setTimeout(() => {
+          document.querySelector('body').style.background = 'black';
+        }, 50)
+
         // Last remaining enemy has been killed
         // update is not called on the next tick
         if (enemies.length === 1) {

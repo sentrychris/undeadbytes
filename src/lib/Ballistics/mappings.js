@@ -18,6 +18,7 @@ export const mappings = [
     magazinesTotal: 2,
     bulletColor: '#F8CA00',
     automatic: false,
+    audioType: 'single',
     audioFire: './fx/audio/pistol/pistol-fire.mp3',
     audioReload: './fx/audio/pistol/pistol-reload.mp3'
   },
@@ -35,6 +36,7 @@ export const mappings = [
     magazinesTotal: 2,
     bulletColor: '#F8CA00',
     automatic: false,
+    audioType: 'single',
     audioFire: './fx/audio/shotgun/shotgun-fire.mp3',
     audioReload: './fx/audio/shotgun/shotgun-reload.mp3'
   },
@@ -52,6 +54,7 @@ export const mappings = [
     magazinesTotal: 1,
     bulletColor: ['#CC5500', '#F8CA00'],
     automatic: true,
+    audioType: 'repeat',
     audioFire: './fx/audio/machine-gun/machine-gun-fire.mp3',
     audioReload: './fx/audio/machine-gun/machine-gun-reload.mp3'
   },
@@ -69,6 +72,7 @@ export const mappings = [
     magazinesTotal: 2,
     bulletColor: ['#CC5500', '#F8CA00'],
     automatic: true,
+    audioType: 'repeat',
     audioFire: './fx/audio/flamethrower/flamethrower-fire.mp3',
     audioReload: './fx/audio/flamethrower/flamethrower-reload.mp3'
   }

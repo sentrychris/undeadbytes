@@ -44,7 +44,7 @@ export class Player
         AudioFX.snippet({ name: 'eoww' });
 
         if (this.health == 0) {
-          AudioFX.snippet({ name: 'nofucks' });
+          AudioFX.snippet({ name: 'eoww' });
           this.dead = true;
         }
       }

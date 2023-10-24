@@ -26,6 +26,9 @@ const snippets = [
 
 export class _AudioFX
 {
+  /**
+   * Audio FX
+   */
   constructor ()
   {
     this.audio = {
@@ -41,6 +44,7 @@ export class _AudioFX
       };
     }
 
+    // Eager load all snippets.
     for (const snippet of snippets) {
       this.audio.snippets[snippet.name] = {
         types: snippet.types,
@@ -48,9 +52,13 @@ export class _AudioFX
       }
     }
 
+    // Game loop playback
     this.playback = null;
   }
 
+  /**
+   * Weapon audio FX handler 
+   */
   weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
     const config = weaponIndex
       ? weaponMap[weaponIndex]
@@ -78,22 +86,33 @@ export class _AudioFX
     this.playback.play();
   }
 
+  /**
+   * Snippet audio FX handler
+   */
   snippet ({name = null, random = false}) {
     // Note: snippets override the current playback.
     // Do not assign snippets to the AudioFX playback
     // property as that is used by the game loop.
     this.stop();
 
-    const { snippets } = this.audio;
     const snippet = random
-      ? snippets[Object.keys(snippets[Math.floor(Math.random() * length)])]
-      : snippets[name];
+      ? snippets[Math.floor(Math.random() * snippets.length)]
+      : this.audio.snippets[name];
+
+    console.log(snippet)
 
     if (snippet) {
-      snippet.playback.play();
+      const audio = random
+        ? this.audio.snippets[snippet.name]
+        : snippet;
+      
+        audio.playback.play();
     }
   }
 
+  /**
+   * Stop game loop playback
+   */
   stop () {
     if (this.playback && ! this.playback.paused) {
       this.playback.pause();

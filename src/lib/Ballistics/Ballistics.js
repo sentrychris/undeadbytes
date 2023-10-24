@@ -36,7 +36,7 @@ export class Ballistics
 
   render () {
     for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].render(this.weapon.bulletColor);
+      this.bullets[i].render(this.weapon.projectile.color);
     }
   }
 
@@ -84,7 +84,7 @@ export class Ballistics
   }
 
   registerBullets (context, player) {
-    const { spread } = this.weapon;
+    const { spread } = this.weapon.projectile;
     for (let i = spread.min; i <= spread.max; i++) {
       const bullet = new Bullet(context, player, i);
       this.bullets.push(bullet);
@@ -94,7 +94,7 @@ export class Ballistics
   cleanupBullets (walls) {
     this.indexesToDelete = [];
     for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].update(walls, this.weapon.dropoff);
+      this.bullets[i].update(walls, this.weapon.projectile.dropoff);
       if (this.bullets[i].markToDelete) {
         this.indexesToDelete.push(i);
       }

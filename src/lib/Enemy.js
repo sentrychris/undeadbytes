@@ -118,7 +118,7 @@ export class Enemy
 
       if (EntityHelper.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
-        this.pushByBullet(bullet, game.ballistics.weapon.dps, game.enemies);
+        this.pushByBullet(bullet, game.ballistics.weapon.projectile.dps, game.enemies);
       }
     }
 

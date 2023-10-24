@@ -7,12 +7,15 @@ export const mappings = [
   {
     name: 'Pistol',
     type: 'gun',
-    spread: {
-      min: 0,
-      max: 0,
+    projectile: {
+      color: '#F8CA00',
+      spread: {
+        min: 0,
+        max: 0,
+      },
+      dps: 30,
+      dropoff: 40,
     },
-    dps: 30,
-    dropoff: 40,
     clip: {
       current: 10,
       capacity: 10
@@ -21,7 +24,6 @@ export const mappings = [
       current: 2,
       capacity: 2
     },
-    bulletColor: '#F8CA00',
     trigger: false,
     audio: {
       type: 'repeat',
@@ -32,12 +34,15 @@ export const mappings = [
   {
     name: 'Shotgun',
     type: 'gun',
-    spread: {
-      min: -3,
-      max: 3,
+    projectile: {
+      color: '#F8CA00',
+      spread: {
+        min: -3,
+        max: 3,
+      },
+      dps: 50,
+      dropoff: 25,
     },
-    dps: 50,
-    dropoff: 25,
     clip: {
       current: 6,
       capacity: 6
@@ -46,7 +51,6 @@ export const mappings = [
       current: 2,
       capacity: 2
     },
-    bulletColor: '#F8CA00',
     trigger: false,
     audio: {
       type: 'repeat',
@@ -57,12 +61,15 @@ export const mappings = [
   {
     name: 'Machine Gun',
     type: 'gun',
-    spread: {
-      min: 0,
-      max: 0,
+    projectile: {
+      color: ['#CC5500', '#F8CA00'],
+      spread: {
+        min: 0,
+        max: 0,
+      },
+      dps: 15,
+      dropoff: 40,
     },
-    dps: 15,
-    dropoff: 40,
     clip: {
       current: 225,
       capacity: 225
@@ -71,7 +78,6 @@ export const mappings = [
       current: 2,
       capacity: 2
     },
-    bulletColor: ['#CC5500', '#F8CA00'],
     trigger: true,
     audio: {
       type: 'repeat',
@@ -82,12 +88,15 @@ export const mappings = [
   {
     name: 'Flamethrower',
     type: 'gun',
-    spread: {
-      min: -5,
-      max: 5,
+    projectile: {
+      color: ['#CC5500', '#F8CA00'],
+      spread: {
+        min: -5,
+        max: 5,
+      },
+      dps: 10,
+      dropoff: 20,
     },
-    dps: 10,
-    dropoff: 20,
     clip: {
       current: 600,
       capacity: 600
@@ -96,7 +105,6 @@ export const mappings = [
       current: 2,
       capacity: 2
     },
-    bulletColor: ['#CC5500', '#F8CA00'],
     trigger: true,
     audio: {
       type: 'repeat',

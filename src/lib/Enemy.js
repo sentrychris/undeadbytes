@@ -52,7 +52,7 @@ export class Enemy
         document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
         setTimeout(() => {
           document.querySelector('body').style.background = 'black';
-        }, 50)
+        }, 50);
 
         // Last remaining enemy has been killed
         // update is not called on the next tick
@@ -81,7 +81,7 @@ export class Enemy
           let vectorX = enemy.x - this.x;
           let vectorY = enemy.y - this.y;
   
-          length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+          const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
           if (length != 0 && length < 100) {
 

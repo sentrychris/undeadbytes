@@ -245,20 +245,20 @@ export class Manager
     return entity.type === 'enemy' && entity.allEnemiesDead;
   }
 
-  displayGameEnd() {
+  displayGameEnd () {
     const gameover = document.querySelector('.game-ended-wrapper');
-      setTimeout(() => {
-        if (this.levelPassed) {
-          gameover.querySelector('h1').innerHTML = 'You Win!';
-          gameover.classList.add('level-passed');
-          gameover.classList.remove('level-failed');
-        } else {
-          gameover.querySelector('h1').innerHTML = 'You Died!';
-          gameover.classList.remove('level-passed');
-          gameover.classList.add('level-failed');
-        }
-        gameover.style.display = 'flex';
-      }, 500);
+    setTimeout(() => {
+      if (this.levelPassed) {
+        gameover.querySelector('h1').innerHTML = 'You Win!';
+        gameover.classList.add('level-passed');
+        gameover.classList.remove('level-failed');
+      } else {
+        gameover.querySelector('h1').innerHTML = 'You Died!';
+        gameover.classList.remove('level-passed');
+        gameover.classList.add('level-failed');
+      }
+      gameover.style.display = 'flex';
+    }, 500);
   }
 
   createKeyboardMouseControls () {

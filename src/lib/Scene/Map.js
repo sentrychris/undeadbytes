@@ -17,11 +17,11 @@ export class Map
         const realX = x / 2;
 
         switch (char) {
-          case 'W': this.wallPositions.push({ x: realX, y: y }); break;
-          case 'E': this.enemyPositions.push({ x: realX, y: y }); break;
-          case 'A': this.ammoPickupPositions.push({ x: realX, y: y }); break;
-          case 'H': this.healthPickupPositions.push({ x: realX, y: y }); break;
-          case 'P': this.playerPosition = { x: realX, y: y }; break;
+        case 'W': this.wallPositions.push({ x: realX, y: y }); break;
+        case 'E': this.enemyPositions.push({ x: realX, y: y }); break;
+        case 'A': this.ammoPickupPositions.push({ x: realX, y: y }); break;
+        case 'H': this.healthPickupPositions.push({ x: realX, y: y }); break;
+        case 'P': this.playerPosition = { x: realX, y: y }; break;
         }
       }
     }
@@ -50,11 +50,11 @@ export class Map
     return this.wallPositions;
   }
 
-  getAmmoPickupPositions() {
+  getAmmoPickupPositions () {
     return this.ammoPickupPositions;
   }
 
-  getHealthPickupPositions() {
+  getHealthPickupPositions () {
     return this.healthPickupPositions;
   }
 }

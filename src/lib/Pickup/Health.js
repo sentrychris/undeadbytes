@@ -48,7 +48,7 @@ export class Health
     }
   }
 
-  pickup() {
+  pickup () {
     this.markToDelete = true;
   }
 }

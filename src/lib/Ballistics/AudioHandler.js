@@ -2,7 +2,7 @@ import { mappings } from './mappings';
 
 export class _AudioHandler
 {
-  constructor()
+  constructor ()
   {
     this.audio = {};
     // Eager load all audio files.
@@ -10,7 +10,7 @@ export class _AudioHandler
       this.audio[weapon.name] = {
         fire: new Audio(weapon.audioFire),
         reload: new Audio(weapon.audioReload)
-      }
+      };
     }
 
     this.playback = null;
@@ -43,7 +43,7 @@ export class _AudioHandler
     this.playback.play();
   }
 
-  stop() {
+  stop () {
     if (this.playback && ! this.playback.paused) {
       this.playback.pause();
       this.playback.currentTime = 0;

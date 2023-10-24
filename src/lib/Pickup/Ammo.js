@@ -48,7 +48,7 @@ export class Ammo
     }
   }
 
-  pickup() {
+  pickup () {
     this.markToDelete = true;
   }
 }

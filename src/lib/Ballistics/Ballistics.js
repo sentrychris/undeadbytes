@@ -79,7 +79,7 @@ export class Ballistics
     return false;
   }
 
-  refillWeaponAmmoClip() {
+  refillWeaponAmmoClip () {
     this.weapon.clip = this.weapon.capacity;
   }
 

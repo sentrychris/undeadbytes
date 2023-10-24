@@ -48,7 +48,7 @@ export class Player
     }
   }
 
-  refillHealth(amount) {
+  refillHealth (amount) {
     if (this.health < 100) {
       const increase = this.health + amount;
       if (increase <= 100) this.health = increase;

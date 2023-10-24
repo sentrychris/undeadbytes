@@ -6,6 +6,7 @@
 export const mappings = [
   {
     name: 'Pistol',
+    type: 'gun',
     spread: {
       min: 0,
       max: 0,
@@ -21,7 +22,7 @@ export const mappings = [
       capacity: 2
     },
     bulletColor: '#F8CA00',
-    automatic: false,
+    trigger: false,
     audio: {
       type: 'repeat',
       fire: './fx/audio/pistol/pistol-fire.mp3',
@@ -30,6 +31,7 @@ export const mappings = [
   },
   {
     name: 'Shotgun',
+    type: 'gun',
     spread: {
       min: -3,
       max: 3,
@@ -45,7 +47,7 @@ export const mappings = [
       capacity: 2
     },
     bulletColor: '#F8CA00',
-    automatic: false,
+    trigger: false,
     audio: {
       type: 'repeat',
       fire: './fx/audio/shotgun/shotgun-fire.mp3',
@@ -54,6 +56,7 @@ export const mappings = [
   },
   {
     name: 'Machine Gun',
+    type: 'gun',
     spread: {
       min: 0,
       max: 0,
@@ -69,7 +72,7 @@ export const mappings = [
       capacity: 2
     },
     bulletColor: ['#CC5500', '#F8CA00'],
-    automatic: true,
+    trigger: true,
     audio: {
       type: 'repeat',
       fire: './fx/audio/machine-gun/machine-gun-fire.mp3',
@@ -78,6 +81,7 @@ export const mappings = [
   },
   {
     name: 'Flamethrower',
+    type: 'gun',
     spread: {
       min: -5,
       max: 5,
@@ -93,7 +97,7 @@ export const mappings = [
       capacity: 2
     },
     bulletColor: ['#CC5500', '#F8CA00'],
-    automatic: true,
+    trigger: true,
     audio: {
       type: 'repeat',
       fire: './fx/audio/flamethrower/flamethrower-fire.mp3',

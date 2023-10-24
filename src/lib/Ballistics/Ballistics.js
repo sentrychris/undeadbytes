@@ -6,7 +6,7 @@ export class Ballistics
 {
   constructor () {
     this.weapon = null;
-    this.automatic = true;
+    this.trigger = true;
     this.frames = 0;
     this.bullets = [];
     this.indexesToDelete = [];
@@ -16,7 +16,7 @@ export class Ballistics
     this.weapon = mappings[game.selectedWeaponIndex];
     this.setEquippedWeaponDisplayInformation();
 
-    if (this.weapon && this.automatic && ! game.player.dead) {
+    if (this.weapon && this.trigger && ! game.player.dead) {
       document.querySelector('#out-of-ammo').style.display = 'none';
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
@@ -27,7 +27,7 @@ export class Ballistics
       this.frames++;
       if (this.frames >= 60) {
         this.frames = 0;
-        this.automatic = true;
+        this.trigger = true;
       }
     }
 
@@ -51,7 +51,7 @@ export class Ballistics
     }, 'fire', 1.5);
 
     this.registerBullets(context, player);
-    this.automatic = this.weapon.automatic;
+    this.trigger = this.weapon.trigger;
   }
 
   setEquippedWeaponDisplayInformation () {

@@ -98,7 +98,7 @@ export class EntityHelper
       }
     }
 
-    if (distance > 0 && entity.type !== 'pickup') {
+    if (distance > 0 && entity.type === 'enemy') {
       vectorX /= distance;
       vectorY /= distance;
 

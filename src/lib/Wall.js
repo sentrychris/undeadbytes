@@ -3,6 +3,7 @@ import { config } from '../config';
 export class Wall
 {
   constructor (x, y, textured = false) {
+    this.type = 'wall';
     this.bounding = 'box';
     this.x = x * config.size;
     this.y = y * config.size;

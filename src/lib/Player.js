@@ -1,6 +1,6 @@
 
-import { EntityCollision } from './Entity/EntityCollision';
-import { EntityHelper } from './Entity/EntityHelper';
+import { Collision } from './Entity/Collision';
+import { Calculator } from './Entity/Calculator';
 import { config } from '../config';
 
 export class Player
@@ -96,7 +96,7 @@ export class Player
     }
 
     // collision
-    const collisionVector = EntityCollision.vector(this.x, this.y, game.walls);
+    const collisionVector = Collision.vector(this.x, this.y, game.walls);
     this.x += collisionVector.x * currentSpeed;
     this.y += collisionVector.y * currentSpeed;
 
@@ -126,6 +126,6 @@ export class Player
       return;
     }
 
-    EntityHelper.render(context, this);
+    Calculator.render(context, this);
   }
 }

@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Entity/EntityHelper';
+import { Calculator } from '../Entity/Calculator';
 import { config } from '../../config';
 
 export class Health
@@ -28,8 +28,7 @@ export class Health
   }
 
   update (game) {
-    // Player-to-entity collision
-    EntityHelper.playerToEntity(this, game, () => {
+    Calculator.playerToEntity(this, game, () => {
       this.pickup();
     });
   }

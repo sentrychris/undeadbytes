@@ -1,4 +1,4 @@
-import { EntityHelper } from './Entity/EntityHelper';
+import { Calculator } from './Entity/Calculator';
 import { config } from '../config';
 
 export class Enemy
@@ -70,7 +70,7 @@ export class Enemy
     }
     
     // Player-to-entity collision
-    EntityHelper.playerToEntity(this, game);
+    Calculator.playerToEntity(this, game);
 
     // Enemy-to-enemy collision
     if (Math.random() <= 0.1) {
@@ -115,7 +115,7 @@ export class Enemy
     for (let i = 0; i < game.ballistics.bullets.length; i++) {
       const bullet = game.ballistics.bullets[i];
 
-      if (EntityHelper.intersection(bounds, bullet.bounds)) {
+      if (Calculator.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
         this.pushByBullet(bullet, game.ballistics.weapon.projectile.dps, game.enemies);
       }
@@ -140,6 +140,6 @@ export class Enemy
       return;
     }
 
-    EntityHelper.render(context, this);
+    Calculator.render(context, this);
   }
 }

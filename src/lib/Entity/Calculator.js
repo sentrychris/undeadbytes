@@ -1,7 +1,7 @@
-import { EntityCollision } from './EntityCollision';
-import { EntityDrawer } from './EntityDrawer';
+import { Collision } from './Collision';
+import { Renderer } from './Renderer';
 
-export class EntityHelper
+export class Calculator
 {
   /**
    * Determine intersection between entities
@@ -55,20 +55,20 @@ export class EntityHelper
    * @param {*} entity 
    */
   static render (context, entity) {
-    EntityHelper.beginRotationOffset(context, entity.x, entity.y, entity.angle);
+    Calculator.beginRotationOffset(context, entity.x, entity.y, entity.angle);
 
     if (! entity.dead) {
       entity.type === 'enemy'
-        ? EntityDrawer.enemy(context, entity.position)
-        : EntityDrawer.player(context, entity.position);
+        ? Renderer.enemy(context, entity.position)
+        : Renderer.player(context, entity.position);
     } else {
       entity.type === 'enemy'
-        ? EntityDrawer.deadEnemy(context)
-        : EntityDrawer.deadPlayer(context);
+        ? Renderer.deadEnemy(context)
+        : Renderer.deadPlayer(context);
     }
     
-    EntityHelper.endRotationOffset(context, entity.x, entity.y, entity.angle);
-    EntityDrawer.health(context, entity.health, entity.x, entity.y);
+    Calculator.endRotationOffset(context, entity.x, entity.y, entity.angle);
+    Renderer.health(context, entity.health, entity.x, entity.y);
   }
 
   static playerToEntity (entity, game, callback) {
@@ -111,7 +111,7 @@ export class EntityHelper
 
         // Determine the wall position vectors for collision to stop enemies phasing
         // through walls to try and get to you.
-        const collisionVector = EntityCollision.vector(entity.x, entity.y, game.walls);
+        const collisionVector = Collision.vector(entity.x, entity.y, game.walls);
         // If there is a wall in the way, repeatedly set the enemy's x,y position to the wall
         // position while maintaining speed.
         entity.x += collisionVector.x * entity.speed;

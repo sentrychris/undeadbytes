@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Entity/EntityHelper';
+import { Calculator } from '../Entity/Calculator';
 import { config } from '../../config';
 
 export class Bullet
@@ -39,7 +39,7 @@ export class Bullet
 
     for (let i = 0; i < walls.length; i++) {
       const wall = walls[i];
-      if (EntityHelper.intersection(wall.bounds, this.bounds)) {
+      if (Calculator.intersection(wall.bounds, this.bounds)) {
         this.markToDelete = true;
       }
     }

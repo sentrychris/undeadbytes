@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Entity/EntityHelper';
+import { Calculator } from '../Entity/Calculator';
 import { config } from '../../config';
 
 export class Camera
@@ -40,7 +40,7 @@ export class Camera
           bounds.width = config.size;
           bounds.height = config.size;
         }
-        entity.sleep = ! EntityHelper.intersection(bounds, screen);
+        entity.sleep = ! Calculator.intersection(bounds, screen);
       }
     }
   }

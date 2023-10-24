@@ -18,6 +18,13 @@ export class Calculator
     );
   }
 
+  static distance (e1, e2) {
+    const vectorX = e1.x - e2.x;
+    const vectorY = e2.y - e2.y;
+
+    return Math.sqrt(vectorX*vectorX + vectorY*vectorY);
+  }
+
   /**
    * Begin rotating entity to given angle at position
    * 

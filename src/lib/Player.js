@@ -1,6 +1,7 @@
 
-import { Collision } from './Entity/Collision';
 import { Calculator } from './Entity/Calculator';
+import { Collision } from './Entity/Collision';
+import { AudioFX } from './AudioFX';
 import { config } from '../config';
 
 export class Player
@@ -40,8 +41,10 @@ export class Player
         
         this.health -= 25; // TODO difficulty setting and power-ups
         this.health = this.health < 0 ? 0 : this.health;
+        AudioFX.snippet({ name: 'eoww' });
 
         if (this.health == 0) {
+          AudioFX.snippet({ name: 'nofucks' });
           this.dead = true;
         }
       }

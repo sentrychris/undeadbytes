@@ -1,4 +1,5 @@
 import { Calculator } from './Entity/Calculator';
+import { AudioFX } from './AudioFX';
 import { config } from '../config';
 
 export class Enemy
@@ -92,6 +93,7 @@ export class Enemy
         }
         
         if (enemy.dead) {
+          AudioFX.snippet({ random: true });
           game.enemies.splice(i, 1);
         }
       }

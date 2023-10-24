@@ -1,11 +1,36 @@
 import { mappings as weaponMap } from './Ballistics/mappings';
 
+
+const snippets = [
+  {
+    name: 'lilbitch',
+    types: ['passed', 'kill'],
+    file: './fx/audio/snippets/lilbitch.mp3'
+  },
+  {
+    name: 'bloodyshoes',
+    types: ['passed', 'kill'],
+    file: './fx/audio/snippets/bloodyshoes.mp3'
+  },
+  {
+    name: 'nofucks',
+    types: ['passed', 'kill'],
+    file: './fx/audio/snippets/nofucks.mp3'
+  },
+  {
+    name: 'eoww',
+    types: ['hurt', 'kill'],
+    file: './fx/audio/snippets/eoww.mp3'
+  },
+];
+
 export class _AudioFX
 {
   constructor ()
   {
     this.audio = {
-      weapons: {}
+      weapons: {},
+      snippets: {}
     };
 
     // Eager load all weapon fx.
@@ -14,6 +39,13 @@ export class _AudioFX
         fire: new Audio(weapon.audio.fire),
         reload: new Audio(weapon.audio.reload)
       };
+    }
+
+    for (const snippet of snippets) {
+      this.audio.snippets[snippet.name] = {
+        types: snippet.types,
+        playback: new Audio(snippet.file)
+      }
     }
 
     this.playback = null;
@@ -44,6 +76,22 @@ export class _AudioFX
     
     this.playback.playbackRate = playbackRate;
     this.playback.play();
+  }
+
+  snippet ({name = null, random = false}) {
+    // Note: snippets override the current playback.
+    // Do not assign snippets to the AudioFX playback
+    // property as that is used by the game loop.
+    this.stop();
+
+    const { snippets } = this.audio;
+    const snippet = random
+      ? snippets[Object.keys(snippets[Math.floor(Math.random() * length)])]
+      : snippets[name];
+
+    if (snippet) {
+      snippet.playback.play();
+    }
   }
 
   stop () {

@@ -1,19 +1,27 @@
+/**
+ * Level 5
+ * 
+ * 22 Enemies
+ * 06 Ammo
+ * 03 Health
+ * 03 Stamina
+ */
 export const level5 = [
   'W W W W W W W W W W W W W W W W W W W W W W W W W',
   'W                                               W',
-  'W     E       E       A     E     H             W',
+  'W     E       E             E     H             W',
   'W                   W W W             E     E   W',
   'W   E                             W       W     W',
   'W     W W     E                                 W',
-  'W                   W W W             E     H   W',
-  'W     A       E     W             E             W',
-  'W                       H           H     W     W',
+  'W                   W W W             E     S   W',
+  'W     A   S   E     W             E             W',
+  'W                                   H     W     W',
   'W       W     W W W               W       W     W',
   'W   E   W         W   E   W   E   W   E   W     W',
   'W       W     A   W       W       W             W',
   'W W W W W     W W W W W W W W W W W       W W W W',
   'W       W     W                   W             W',
-  'W   E   W     W   A               W       W     W',
+  'W   E   W     W   A         S     W       W     W',
   'W       W             W W                 W     W',
   'W             E       W W                       W',
   'W     W     W     E             W     E     E   W',

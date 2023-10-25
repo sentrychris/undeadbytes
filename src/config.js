@@ -8,7 +8,7 @@ export const config = {
     speed: 5,
   },
   pickups: {
-    size: 75,    // Default render size
+    size: 75,    // Default render size (config.cell.size / 2)
     ammo: false, // Ammo pickup values are handled by ballistics on a per-weapon basis
     health: 25,  // Health is depleted in increments of 25, so regain a depleted "unit"
     stamina: 7.5 // Speed is set to 5, use 7.5 when stamina is picked up

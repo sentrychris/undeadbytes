@@ -1,5 +1,6 @@
 import { Collision } from '../../Collision';
 import { Renderer } from '../../Renderer';
+import { AudioFX } from '../../AudioFX';
 import { config } from '../../../config';
 
 export class Ammo
@@ -41,6 +42,7 @@ export class Ammo
   }
 
   pickup () {
+    AudioFX.snippet({ name: 'pickup' });
     this.markToDelete = true;
   }
 }

@@ -23,7 +23,7 @@ export class Ballistics
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
       } else {
-        AudioFX.stop();
+        AudioFX.stop('weapon');
       }
     } else {
       this.frames++;

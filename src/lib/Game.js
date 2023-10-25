@@ -278,6 +278,7 @@ export class Game
       case '2': this.selectedWeaponIndex = 1; break;
       case '3': this.selectedWeaponIndex = 2; break;
       case '4': this.selectedWeaponIndex = 3; break;
+      case '5': this.selectedWeaponIndex = 4; break;
       }
     });
     

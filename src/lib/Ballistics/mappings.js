@@ -1,5 +1,5 @@
 /**
- * Weapons mapping for the bullet factory.
+ * Weapon mappings.
  * 
  * Weapons are mapped by array index to hotkey.
  */
@@ -9,6 +9,7 @@ export const mappings = [
     type: 'gun',
     projectile: {
       color: '#F8CA00',
+      delay: null,
       spread: {
         min: 0,
         max: 0,
@@ -36,6 +37,7 @@ export const mappings = [
     type: 'gun',
     projectile: {
       color: '#F8CA00',
+      delay: null,
       spread: {
         min: -3,
         max: 3,
@@ -63,6 +65,7 @@ export const mappings = [
     type: 'gun',
     projectile: {
       color: ['#CC5500', '#F8CA00'],
+      delay: null,
       spread: {
         min: 0,
         max: 0,
@@ -90,6 +93,7 @@ export const mappings = [
     type: 'gun',
     projectile: {
       color: ['#CC5500', '#F8CA00'],
+      delay: null,
       spread: {
         min: -5,
         max: 5,
@@ -108,6 +112,34 @@ export const mappings = [
     trigger: true,
     audio: {
       type: 'repeat',
+      fire: './fx/audio/flamethrower/flamethrower-fire.mp3',
+      reload: './fx/audio/flamethrower/flamethrower-reload.mp3'
+    }
+  },
+  {
+    name: 'Grenade',
+    type: 'throwable',
+    projectile: {
+      color: ['#CC5500', '#F8CA00'],
+      delay: 2,
+      spread: {
+        min: -8,
+        max: 8,
+      },
+      dps: 75,
+      dropoff: [20,40],
+    },
+    clip: {
+      current: 2,
+      capacity: 2
+    },
+    magazines: {
+      current: 1,
+      capacity: 1
+    },
+    trigger: false,
+    audio: {
+      type: 'single',
       fire: './fx/audio/flamethrower/flamethrower-fire.mp3',
       reload: './fx/audio/flamethrower/flamethrower-reload.mp3'
     }

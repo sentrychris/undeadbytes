@@ -1,7 +1,7 @@
 import { Collision } from '../Collision';
 import { config } from '../../config';
 
-export class Bullet
+export class Grenade
 {
   constructor (context, player, i) {
     this.vectorX = Math.cos(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);

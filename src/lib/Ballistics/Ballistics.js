@@ -1,5 +1,6 @@
 import { AudioFX } from '../AudioFX';
 import { Bullet } from './Bullet';
+import { Grenade } from './Grenade';
 import { mappings } from './mappings';
 
 export class Ballistics
@@ -8,7 +9,7 @@ export class Ballistics
     this.weapon = null;
     this.trigger = true;
     this.frames = 0;
-    this.bullets = [];
+    this.projectiles = [];
     this.indexesToDelete = [];
   }
 
@@ -32,12 +33,12 @@ export class Ballistics
       }
     }
 
-    this.cleanupBullets(game.walls);
+    this.cleanupProjectiles(game.walls);
   }
 
   render () {
-    for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].render(this.weapon.projectile.color);
+    for (let i = 0; i < this.projectiles.length; i++) {
+      this.projectiles[i].render(this.weapon.projectile.color);
     }
   }
 
@@ -51,7 +52,7 @@ export class Ballistics
       equippedWeapon: this.weapon
     }, 'fire', 1.5);
 
-    this.registerBullets(context, player);
+    this.registerProjectiles(context, player);
     this.trigger = this.weapon.trigger;
   }
 
@@ -84,25 +85,29 @@ export class Ballistics
     this.weapon.clip.current = this.weapon.clip.capacity;
   }
 
-  registerBullets (context, player) {
-    const { spread } = this.weapon.projectile;
+  registerProjectiles (context, player) {
+    const { spread, delay } = this.weapon.projectile;
     for (let i = spread.min; i <= spread.max; i++) {
-      const bullet = new Bullet(context, player, i);
-      this.bullets.push(bullet);
+
+      const projectile = (this.weapon.type === 'throwable' && delay)
+        ? new Grenade(context, player, i)
+        : new Bullet(context, player, i);
+
+      this.projectiles.push(projectile);
     }
   }
 
-  cleanupBullets (walls) {
+  cleanupProjectiles (walls) {
     this.indexesToDelete = [];
-    for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].update(walls, this.weapon.projectile.dropoff);
-      if (this.bullets[i].markToDelete) {
+    for (let i = 0; i < this.projectiles.length; i++) {
+      this.projectiles[i].update(walls, this.weapon.projectile.dropoff);
+      if (this.projectiles[i].markToDelete) {
         this.indexesToDelete.push(i);
       }
     }
 
     for (let i = 0; i < this.indexesToDelete.length; i++) {
-      this.bullets.splice(this.indexesToDelete[i], 1);
+      this.projectiles.splice(this.indexesToDelete[i], 1);
     }
   }
 }

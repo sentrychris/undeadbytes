@@ -21,11 +21,11 @@ export class Enemy
       x: 0,
       y: 0
     };
-    this.pushBulletVelocity = {
+    this.pushProjectileVelocity = {
       x: 0,
       y: 0
     };
-    this.canBePushedByBullet = true;
+    this.canBePushedByProjectile = true;
     this.lastVectorX = 0;
     this.lastVectorY = 0;
 
@@ -39,11 +39,11 @@ export class Enemy
     this.pushAlongVelocity.y = vectorY * 10;
   }
 
-  pushByBullet (bullet, dps, enemies) {
-    if (this.canBePushedByBullet) {
-      this.pushBulletVelocity.x = bullet.vectorX * 15;
-      this.pushBulletVelocity.y = bullet.vectorY * 15;
-      this.canBePushedByBullet = false;
+  pushByProjectile (projectile, dps, enemies) {
+    if (this.canBePushedByProjectile) {
+      this.pushProjectileVelocity.x = projectile.vectorX * 15;
+      this.pushProjectileVelocity.y = projectile.vectorY * 15;
+      this.canBePushedByProjectile = false;
   
       this.health -= dps;
       this.health = this.health < 0 ? 0 : this.health;
@@ -97,14 +97,12 @@ export class Enemy
       }
     }
 
-    // push along velocity
     this.pushAlongVelocity.x *= 0.9;
     this.pushAlongVelocity.y *= 0.9;
     
     this.x += this.pushAlongVelocity.x;
     this.y += this.pushAlongVelocity.y;
 
-    // bullet collision
     const bounds = {
       x: this.x - config.radius,
       y: this.y - config.radius,
@@ -112,26 +110,25 @@ export class Enemy
       height: config.radius * 2
     };
 
-    for (let i = 0; i < game.ballistics.bullets.length; i++) {
-      const bullet = game.ballistics.bullets[i];
+    for (let i = 0; i < game.ballistics.projectiles.length; i++) {
+      const projectile = game.ballistics.projectiles[i];
 
-      if (Collision.intersection(bounds, bullet.bounds)) {
-        bullet.markToDelete = true;
-        this.pushByBullet(bullet, game.ballistics.weapon.projectile.dps, game.enemies);
+      if (Collision.intersection(bounds, projectile.bounds)) {
+        projectile.markToDelete = true;
+        this.pushByProjectile(projectile, game.ballistics.weapon.projectile.dps, game.enemies);
       }
     }
 
-    // push bullet velocity
-    this.pushBulletVelocity.x *= 0.9;
-    this.pushBulletVelocity.y *= 0.9;
+    this.pushProjectileVelocity.x *= 0.9;
+    this.pushProjectileVelocity.y *= 0.9;
     
-    this.x += this.pushBulletVelocity.x;
-    this.y += this.pushBulletVelocity.y;
+    this.x += this.pushProjectileVelocity.x;
+    this.y += this.pushProjectileVelocity.y;
 
-    if (Math.abs(this.pushBulletVelocity.x) < 0.5 && Math.abs(this.pushBulletVelocity.y) < 0.5) {
-      this.canBePushedByBullet = true;
-      this.pushBulletVelocity.x = 0;
-      this.pushBulletVelocity.y = 0;
+    if (Math.abs(this.pushProjectileVelocity.x) < 0.5 && Math.abs(this.pushProjectileVelocity.y) < 0.5) {
+      this.canBePushedByProjectile = true;
+      this.pushProjectileVelocity.x = 0;
+      this.pushProjectileVelocity.y = 0;
     }
   }
 

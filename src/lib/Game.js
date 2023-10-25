@@ -6,6 +6,7 @@ import { Health } from './Entity/Pickup/Health';
 import { Ballistics } from './Ballistics/Ballistics';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
+import { AudioFX } from './AudioFX';
 import { config } from '../config';
 
 export class Game
@@ -35,6 +36,9 @@ export class Game
   }
 
   loop () {
+    
+    AudioFX.soundtrack();
+
     if (! this.stopped) {
       this.frame = null;
       this.onUpdate();

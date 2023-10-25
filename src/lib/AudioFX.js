@@ -24,6 +24,14 @@ const snippets = [
   },
 ];
 
+const soundtrack = [
+  // './soundtrack/track0.mp3',
+  './soundtrack/track1.mp3',
+  './soundtrack/track2.mp3',
+  './soundtrack/track3.mp3',
+  './soundtrack/track4.mp3',
+];
+
 export class _AudioFX
 {
   /**
@@ -33,7 +41,7 @@ export class _AudioFX
   {
     this.audio = {
       weapons: {},
-      snippets: {}
+      snippets: {},
     };
 
     // Eager load all weapon fx.
@@ -52,6 +60,22 @@ export class _AudioFX
       };
     }
 
+    this.soundtracks = [];
+    this.index = 0;
+
+    // Eager load soundtrack.
+    for (const track of soundtrack) {
+      this.soundtracks.push({
+        name: track.split('/').pop(),
+        played: false,
+        playback: new Audio(track)
+      });
+    }
+
+    this.track = this.soundtracks[0];
+    this.nextTrackReady = false;
+    this.trackListener = false;
+
     // Game loop playback
     this.playback = null;
   }
@@ -60,17 +84,17 @@ export class _AudioFX
    * Weapon audio FX handler 
    */
   weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
-    const config = weaponIndex
+    const weapon = weaponIndex
       ? weaponMap[weaponIndex]
       : equippedWeapon;
 
-    if (! config)  {
+    if (! weapon)  {
       return;
     }
 
     this.playback = action === 'fire'
-      ? this.audio.weapons[config.name].fire
-      : this.audio.weapons[config.name].reload;
+      ? this.audio.weapons[weapon.name].fire
+      : this.audio.weapons[weapon.name].reload;
 
     if (! this.playback) {
       return;
@@ -78,7 +102,7 @@ export class _AudioFX
 
     this.playback.volume = 0.3;
 
-    if (config.audio.type !== 'repeat') {
+    if (weapon.audio.type !== 'repeat') {
       this.stop();
     }
     
@@ -105,6 +129,41 @@ export class _AudioFX
         : snippet;
       
       audio.playback.play();
+    }
+  }
+
+  /**
+   * Game soundtrack
+   */
+  soundtrack () {
+    if (this.track && (this.track.playback.paused || this.track.playback.currentTime === 0)) {
+      console.log(`now playing ${this.track.name}`);
+      this.track.playback.play();
+    } else {
+      if (this.nextTrackReady) {
+        this.track.playback.pause();
+        this.track.playback.currentTime = 0;
+
+        ++this.index;
+        if (this.index >= this.soundtracks.length) {
+          this.index = 0 
+        }
+
+        console.log(`changed track index to ${this.index}`);
+
+        this.trackListener = false;
+        this.track = this.soundtracks[this.index];
+
+        console.log(`selected track ${this.track.name}`);
+      }
+    }
+
+    if (this.track && ! this.trackListener) {
+      this.nextTrackReady = false;
+      this.track.playback.addEventListener('ended', () => {
+        this.nextTrackReady = true;
+        this.trackListener = true;
+      });
     }
   }
 

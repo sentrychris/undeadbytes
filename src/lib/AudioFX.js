@@ -24,6 +24,10 @@ const snippets = [
 ];
 
 const soundtrack = [
+  // './fx/audio/snippets/lilbitch.mp3',
+  // './fx/audio/snippets/bloodyshoes.mp3',
+  // './fx/audio/snippets/nofucks.mp3',
+  // './fx/audio/snippets/eoww.mp3',
   './soundtrack/track0.mp3',
   './soundtrack/track1.mp3',
   './soundtrack/track2.mp3',

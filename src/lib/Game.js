@@ -3,6 +3,7 @@ import { Enemy } from './Entity/Enemy';
 import { Wall } from './Entity/Wall';
 import { Ammo } from './Entity/Pickup/Ammo';
 import { Health } from './Entity/Pickup/Health';
+import { Stamina } from './Entity/Pickup/Stamina';
 import { Ballistics } from './Ballistics/Ballistics';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
@@ -104,7 +105,8 @@ export class Game
       .createEnemies()
       .createWalls()
       .createAmmoPickups()
-      .createHealthPickups();
+      .createHealthPickups()
+      .createStaminaPickups();
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
 
@@ -120,6 +122,7 @@ export class Game
     this.enemies = [];
     this.ammoPickups = [];
     this.healthPickups = [];
+    this.staminaPickups = [];
 
     this.selectedWeaponIndex = 0;
     this.ballistics = new Ballistics();
@@ -155,6 +158,10 @@ export class Game
 
           if (this.entities[i].item === 'health') {
             this.player.refillHealth(this.entities[i].value);
+          }
+
+          if (this.entities[i].item === 'stamina') {
+            this.player.boostSpeed(this.entities[i].value);
           }
 
           // Remove picked up entities
@@ -245,6 +252,18 @@ export class Game
       
       this.entities.push(healthPickup);
       this.healthPickups.push(healthPickup);
+    }
+
+    return this;
+  }
+
+  createStaminaPickups () {
+    for (let i = 0; i < this.map.getStaminaPickupPositions().length; i++) {
+      const staminaPickupPosition = this.map.getStaminaPickupPositions()[i];
+      const staminaPickup = new Stamina(staminaPickupPosition.x, staminaPickupPosition.y);
+      
+      this.entities.push(staminaPickup);
+      this.staminaPickups.push(staminaPickup);
     }
 
     return this;

@@ -1,5 +1,4 @@
-import { mappings as weaponMap } from './Ballistics/mappings';
-
+import { mappings as weapons } from './Ballistics/mappings';
 
 const snippets = [
   {
@@ -25,7 +24,7 @@ const snippets = [
 ];
 
 const soundtrack = [
-  // './soundtrack/track0.mp3',
+  './soundtrack/track0.mp3',
   './soundtrack/track1.mp3',
   './soundtrack/track2.mp3',
   './soundtrack/track3.mp3',
@@ -37,46 +36,25 @@ export class _AudioFX
   /**
    * Audio FX
    */
-  constructor ()
+  constructor (eagerLoad = true)
   {
     this.audio = {
       weapons: {},
       snippets: {},
     };
 
-    // Eager load all weapon fx.
-    for (const weapon of weaponMap) {
-      this.audio.weapons[weapon.name] = {
-        fire: new Audio(weapon.audio.fire),
-        reload: new Audio(weapon.audio.reload)
-      };
-    }
-
-    // Eager load all snippets.
-    for (const snippet of snippets) {
-      this.audio.snippets[snippet.name] = {
-        types: snippet.types,
-        playback: new Audio(snippet.file)
-      };
-    }
-
     this.soundtracks = [];
-    this.index = 0;
 
-    // Eager load soundtrack.
-    for (const track of soundtrack) {
-      this.soundtracks.push({
-        name: track.split('/').pop(),
-        played: false,
-        playback: new Audio(track)
-      });
+    if (eagerLoad) {
+      this.load(['weapons', 'snippets', 'soundtrack']);
     }
 
-    this.track = this.soundtracks[0];
+    this.trackIndex = 0;
+    this.currentTrack = this.soundtracks[this.trackIndex];
     this.nextTrackReady = false;
     this.trackListener = false;
 
-    // Game loop playback
+    // FX playback loop
     this.playback = null;
   }
 
@@ -85,7 +63,7 @@ export class _AudioFX
    */
   weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
     const weapon = weaponIndex
-      ? weaponMap[weaponIndex]
+      ? weapons[weaponIndex]
       : equippedWeapon;
 
     if (! weapon)  {
@@ -136,31 +114,31 @@ export class _AudioFX
    * Game soundtrack
    */
   soundtrack () {
-    if (this.track && (this.track.playback.paused || this.track.playback.currentTime === 0)) {
-      console.log(`now playing ${this.track.name}`);
-      this.track.playback.play();
+    if (this.currentTrack && this.currentTrack.playback
+      && (this.currentTrack.playback.paused || this.currentTrack.playback.currentTime === 0)
+    ) {
+      console.log(`now playing ${this.currentTrack.name}`);
+      this.currentTrack.playback.play();
     } else {
       if (this.nextTrackReady) {
-        this.track.playback.pause();
-        this.track.playback.currentTime = 0;
+        this.currentTrack.playback.pause();
+        this.currentTrack.playback.currentTime = 0;
 
-        ++this.index;
-        if (this.index >= this.soundtracks.length) {
-          this.index = 0 
+        ++this.trackIndex;
+        if (this.trackIndex >= this.soundtracks.length) {
+          this.trackIndex = 0 
         }
 
-        console.log(`changed track index to ${this.index}`);
+        console.log(`changed track index to ${this.trackIndex}`);
 
         this.trackListener = false;
-        this.track = this.soundtracks[this.index];
-
-        console.log(`selected track ${this.track.name}`);
+        this.currentTrack = this.soundtracks[this.trackIndex];
       }
     }
 
-    if (this.track && ! this.trackListener) {
+    if (this.currentTrack && ! this.trackListener) {
       this.nextTrackReady = false;
-      this.track.playback.addEventListener('ended', () => {
+      this.currentTrack.playback.addEventListener('ended', () => {
         this.nextTrackReady = true;
         this.trackListener = true;
       });
@@ -174,6 +152,44 @@ export class _AudioFX
     if (this.playback && ! this.playback.paused) {
       this.playback.pause();
       this.playback.currentTime = 0;
+    }
+  }
+
+  /**
+   * Load audio objects
+   * 
+   * @param {*} keys 
+   */
+  load(keys = []) {
+    if (keys.includes('weapons')) {
+      // Eager load all weapon fx.
+      for (const weapon of weapons) {
+        this.audio.weapons[weapon.name] = {
+          fire: new Audio(weapon.audio.fire),
+          reload: new Audio(weapon.audio.reload)
+        };
+      }
+    }
+
+    if (keys.includes('snippets')) {
+      // Eager load all snippets.
+      for (const snippet of snippets) {
+        this.audio.snippets[snippet.name] = {
+          types: snippet.types,
+          playback: new Audio(snippet.file)
+        };
+      }
+    }
+
+    if (keys.includes('soundtrack')) {
+      // Eager load soundtrack.
+      for (const track of soundtrack) {
+        this.soundtracks.push({
+          name: track.split('/').pop(),
+          played: false,
+          playback: new Audio(track)
+        });
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 
-import { Calculator } from './Entity/Calculator';
 import { Collision } from './Entity/Collision';
+import { Renderer } from './Entity/Renderer';
 import { AudioFX } from './AudioFX';
 import { config } from '../config';
 
@@ -33,7 +33,7 @@ export class Player
       const vectorX = this.x - enemy.x;
       const vectorY = this.y - enemy.y;
 
-      const distance = Calculator.distance(vectorX, vectorY);
+      const distance = Collision.distance(vectorX, vectorY);
 
       if (distance > 0) {
         this.damage.x = vectorX / distance * 20;
@@ -107,7 +107,7 @@ export class Player
     let vectorX = game.camera.offsetX + game.context.canvas.width / 2 - game.mouse.x;
     let vectorY = game.camera.offsetY + game.context.canvas.height / 2 - game.mouse.y;
 
-    const distance = Calculator.distance(vectorX, vectorY);
+    const distance = Collision.distance(vectorX, vectorY);
 
     if (distance > 0) {
       vectorX /= distance;
@@ -129,6 +129,6 @@ export class Player
       return;
     }
 
-    Calculator.render(context, this);
+    Renderer.render(context, this);
   }
 }

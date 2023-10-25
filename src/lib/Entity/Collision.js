@@ -1,5 +1,4 @@
 import { config } from '../../config';
-import { Calculator } from './Calculator';
 
 export class Collision
 {
@@ -66,7 +65,7 @@ export class Collision
         let vectorX = x - wallCenterX;
         let vectorY = y - wallCenterY;
   
-        const distance = Calculator.distance(vectorX, vectorY);
+        const distance = Collision.distance(vectorX, vectorY);
   
         if (distance > 0) {
           vectorX /= distance;
@@ -79,5 +78,104 @@ export class Collision
     }
   
     return result;
+  }
+
+  /**
+   * Determine intersection between entities
+   * 
+   * @param {*} r1 
+   * @param {*} r2 
+   * @returns 
+   */
+  static intersection (r1, r2) {
+    return ! (r1.x + r1.width < r2.x
+      || r1.y + r1.height < r2.y
+      || r1.x > r2.x + r2.width
+      || r1.y > r2.y + r2.height
+    );
+  }
+
+  /**
+   * Determine distance between two vectors
+   * 
+   * @param {*} e1 
+   * @param {*} e2 
+   * @param {*} vectors 
+   * @returns 
+   */
+  static distance (e1, e2, vectors = true) {
+    if (vectors) {
+      return Math.sqrt(e1*e1 + e2*e2);
+    }
+
+    const vectorX = e1.x - e2.x;
+    const vectorY = e1.y - e2.y;
+
+    return Math.sqrt(vectorX*vectorX + vectorY*vectorY);
+  }
+
+  /**
+   * Player-to-entity collision
+   * 
+   * @param {*} entity 
+   * @param {*} game 
+   * @param {*} callback 
+   */
+  static playerToEntity (entity, game, callback) {
+    // Determine the next x,y position vectors based on the distance
+    // between the player and the enemy's current x,y position.
+    let vectorX = game.player.x - entity.x;
+    let vectorY = game.player.y - entity.y;
+
+    if (game.player.dead) {
+      // If the player is dead, set the enemy's x,y position to their
+      // last known position.
+      vectorX = entity.lastVectorX;
+      vectorY = entity.lastVectorY;
+    } else {
+      // Otherwise update their last known position with the newly
+      // determined x,y position.
+      entity.lastVectorX = vectorX;
+      entity.lastVectorY = vectorY;
+    }
+
+    // Determine the distance between the enemy and the player
+    const distance = Collision.distance(vectorX, vectorY);
+
+    if (entity.type === 'pickup') {
+      if (callback && distance <= 95) {
+        callback();
+      }
+    }
+
+    if (distance > 0 && entity.type === 'enemy') {
+      vectorX /= distance;
+      vectorY /= distance;
+
+      // If the distance is lower than 800, than set the enemy's
+      // angle and position toward the player.
+      if (distance < 800) {
+        entity.angle = Math.atan2(vectorY, vectorX) - 90 * Math.PI / 180;
+        entity.x += vectorX * entity.speed;
+        entity.y += vectorY * entity.speed;
+
+        // Determine the wall position vectors for collision to stop enemies phasing
+        // through walls to try and get to you.
+        const collisionVector = Collision.vector(entity.x, entity.y, game.walls);
+        // If there is a wall in the way, repeatedly set the enemy's x,y position to the wall
+        // position while maintaining speed.
+        entity.x += collisionVector.x * entity.speed;
+        entity.y += collisionVector.y * entity.speed;
+
+        // Use the enemy's momentum to adjust the angle until they work their way around the wall
+        entity.incrementer += entity.speed;
+        entity.position = Math.sin(entity.incrementer * Math.PI / 180);
+
+        if (distance < 100 && entity.type === 'enemy') {
+          // If the distance is lower than 100 then hurt the player
+          game.player.takeDamage(entity);
+        }
+      }
+    }
   }
 }

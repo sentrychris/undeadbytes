@@ -1,4 +1,4 @@
-import { Calculator } from '../Entity/Calculator';
+import { Collision } from '../Entity/Collision';
 import { config } from '../../config';
 
 export class Health
@@ -28,7 +28,7 @@ export class Health
   }
 
   update (game) {
-    Calculator.playerToEntity(this, game, () => {
+    Collision.playerToEntity(this, game, () => {
       this.pickup();
     });
   }

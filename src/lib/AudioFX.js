@@ -49,7 +49,7 @@ export class _AudioFX
       this.audio.snippets[snippet.name] = {
         types: snippet.types,
         playback: new Audio(snippet.file)
-      }
+      };
     }
 
     // Game loop playback
@@ -104,7 +104,7 @@ export class _AudioFX
         ? this.audio.snippets[snippet.name]
         : snippet;
       
-        audio.playback.play();
+      audio.playback.play();
     }
   }
 

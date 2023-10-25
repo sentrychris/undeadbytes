@@ -1,4 +1,4 @@
-import { Calculator } from '../Entity/Calculator';
+import { Collision } from '../Entity/Collision';
 import { config } from '../../config';
 
 export class Camera
@@ -40,7 +40,7 @@ export class Camera
           bounds.width = config.size;
           bounds.height = config.size;
         }
-        entity.sleep = ! Calculator.intersection(bounds, screen);
+        entity.sleep = ! Collision.intersection(bounds, screen);
       }
     }
   }

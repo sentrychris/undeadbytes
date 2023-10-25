@@ -1,4 +1,5 @@
-import { Calculator } from './Entity/Calculator';
+import { Collision } from './Entity/Collision';
+import { Renderer } from './Entity/Renderer';
 import { AudioFX } from './AudioFX';
 import { config } from '../config';
 
@@ -70,7 +71,7 @@ export class Enemy
       return;
     }
     
-    Calculator.playerToEntity(this, game);
+    Collision.playerToEntity(this, game);
 
     if (Math.random() <= 0.1) {
       for (let i = 0; i < game.enemies.length; i++) {       
@@ -80,7 +81,7 @@ export class Enemy
           let vectorX = enemy.x - this.x;
           let vectorY = enemy.y - this.y;
 
-          const distance = Calculator.distance(vectorX, vectorY);
+          const distance = Collision.distance(vectorX, vectorY);
           
           if (distance != 0 && distance < 100) {
             vectorX /= distance;
@@ -114,7 +115,7 @@ export class Enemy
     for (let i = 0; i < game.ballistics.bullets.length; i++) {
       const bullet = game.ballistics.bullets[i];
 
-      if (Calculator.intersection(bounds, bullet.bounds)) {
+      if (Collision.intersection(bounds, bullet.bounds)) {
         bullet.markToDelete = true;
         this.pushByBullet(bullet, game.ballistics.weapon.projectile.dps, game.enemies);
       }
@@ -139,6 +140,6 @@ export class Enemy
       return;
     }
 
-    Calculator.render(context, this);
+    Renderer.render(context, this);
   }
 }

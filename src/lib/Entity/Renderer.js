@@ -260,4 +260,57 @@ export class Renderer
     context.fillStyle = color;
     context.fill();
   }
+
+  /**
+   * Render the entity
+   * 
+   * @param {*} context 
+   * @param {*} entity 
+   */
+  static render (context, entity) {
+    Renderer.beginRotationOffset(context, entity.x, entity.y, entity.angle);
+
+    if (! entity.dead) {
+      entity.type === 'enemy'
+        ? Renderer.enemy(context, entity.position)
+        : Renderer.player(context, entity.position);
+    } else {
+      entity.type === 'enemy'
+        ? Renderer.deadEnemy(context)
+        : Renderer.deadPlayer(context);
+    }
+    
+    Renderer.endRotationOffset(context, entity.x, entity.y, entity.angle);
+    Renderer.health(context, entity.health, entity.x, entity.y);
+  }
+
+  /**
+   * Calculate offset and begin rotating entity to given angle at position
+   * 
+   * @param {*} context 
+   * @param {*} x 
+   * @param {*} y 
+   * @param {*} angle 
+   */
+  static beginRotationOffset (context, x, y, angle) {
+    context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
+    context.translate(context.canvas.width / 2, context.canvas.height / 2);
+  
+    context.rotate(angle);
+  }
+  
+  /**
+     * Stop rotating entity to given angle at position
+     * 
+     * @param {*} context 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} angle 
+     */
+  static endRotationOffset (context, x, y, angle) {
+    context.rotate(-angle);
+  
+    context.translate(-context.canvas.width / 2, -context.canvas.height / 2);
+    context.translate(+(-x + context.canvas.width / 2), +(-y + context.canvas.height / 2));
+  }
 }

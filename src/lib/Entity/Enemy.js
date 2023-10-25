@@ -34,36 +34,8 @@ export class Enemy
     this.allEnemiesDead = false;
   }
 
-  pushAlong (vectorX, vectorY) {
-    this.pushAlongVelocity.x = vectorX * 10;
-    this.pushAlongVelocity.y = vectorY * 10;
-  }
-
-  pushByProjectile (projectile, dps, enemies) {
-    if (this.canBePushedByProjectile) {
-      this.pushProjectileVelocity.x = projectile.vectorX * 15;
-      this.pushProjectileVelocity.y = projectile.vectorY * 15;
-      this.canBePushedByProjectile = false;
-  
-      this.health -= dps;
-      this.health = this.health < 0 ? 0 : this.health;
-  
-      if (this.health == 0) {
-        this.dead = true;
-
-        document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
-        setTimeout(() => {
-          document.querySelector('body').style.background = 'black';
-        }, 50);
-
-        // Last remaining enemy has been killed
-        // update is not called on the next tick
-        if (enemies.length === 1) {
-          enemies.length = 0;
-          this.allEnemiesDead = true;
-        }
-      }
-    }
+  render (context) {
+    Renderer.render(this, context);
   }
 
   update (game) {
@@ -132,11 +104,35 @@ export class Enemy
     }
   }
 
-  render (context) {
-    if (this.sleep) {
-      return;
-    }
+  pushAlong (vectorX, vectorY) {
+    this.pushAlongVelocity.x = vectorX * 10;
+    this.pushAlongVelocity.y = vectorY * 10;
+  }
 
-    Renderer.render(context, this);
+  pushByProjectile (projectile, dps, enemies) {
+    if (this.canBePushedByProjectile) {
+      this.pushProjectileVelocity.x = projectile.vectorX * 15;
+      this.pushProjectileVelocity.y = projectile.vectorY * 15;
+      this.canBePushedByProjectile = false;
+  
+      this.health -= dps;
+      this.health = this.health < 0 ? 0 : this.health;
+  
+      if (this.health == 0) {
+        this.dead = true;
+
+        document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
+        setTimeout(() => {
+          document.querySelector('body').style.background = 'black';
+        }, 50);
+
+        // Last remaining enemy has been killed
+        // update is not called on the next tick
+        if (enemies.length === 1) {
+          enemies.length = 0;
+          this.allEnemiesDead = true;
+        }
+      }
+    }
   }
 }

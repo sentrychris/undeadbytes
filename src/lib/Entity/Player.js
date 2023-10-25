@@ -28,34 +28,8 @@ export class Player
     this.dead = false;
   }
 
-  takeDamage (enemy) {
-    if (! this.invincible) {
-      const vectorX = this.x - enemy.x;
-      const vectorY = this.y - enemy.y;
-
-      const distance = Collision.distance(vectorX, vectorY);
-
-      if (distance > 0) {
-        this.damage.x = vectorX / distance * 20;
-        this.damage.y = vectorY / distance * 20;
-        this.invincible = true;
-        
-        this.health -= 25;
-        this.health = this.health < 0 ? 0 : this.health;
-
-        if (this.health == 0) {
-          // AudioFX.snippet({ name: 'eoww' });
-          this.dead = true;
-        }
-      }
-    }
-  }
-
-  refillHealth (amount) {
-    if (this.health < 100) {
-      const increase = this.health + amount;
-      if (increase <= 100) this.health = increase;
-    }
+  render (context) {
+    Renderer.render(this, context);
   }
 
   update (game) {
@@ -125,11 +99,33 @@ export class Player
     this.position = Math.sin(this.incrementer * Math.PI / 180);
   }
 
-  render (context) {
-    if (this.sleep) {
-      return;
-    }
+  takeDamage (enemy) {
+    if (! this.invincible) {
+      const vectorX = this.x - enemy.x;
+      const vectorY = this.y - enemy.y;
 
-    Renderer.render(context, this);
+      const distance = Collision.distance(vectorX, vectorY);
+
+      if (distance > 0) {
+        this.damage.x = vectorX / distance * 20;
+        this.damage.y = vectorY / distance * 20;
+        this.invincible = true;
+        
+        this.health -= 25;
+        this.health = this.health < 0 ? 0 : this.health;
+
+        if (this.health == 0) {
+          // AudioFX.snippet({ name: 'eoww' });
+          this.dead = true;
+        }
+      }
+    }
+  }
+
+  refillHealth (amount) {
+    if (this.health < 100) {
+      const increase = this.health + amount;
+      if (increase <= 100) this.health = increase;
+    }
   }
 }

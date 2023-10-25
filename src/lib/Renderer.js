@@ -267,21 +267,36 @@ export class Renderer
    * @param {*} context 
    * @param {*} entity 
    */
-  static render (context, entity) {
-    Renderer.beginRotationOffset(context, entity.x, entity.y, entity.angle);
-
-    if (! entity.dead) {
-      entity.type === 'enemy'
-        ? Renderer.enemy(context, entity.position)
-        : Renderer.player(context, entity.position);
-    } else {
-      entity.type === 'enemy'
-        ? Renderer.deadEnemy(context)
-        : Renderer.deadPlayer(context);
+  static render (entity, context) {
+    if (entity.sleep) {
+      return;
     }
-    
-    Renderer.endRotationOffset(context, entity.x, entity.y, entity.angle);
-    Renderer.health(context, entity.health, entity.x, entity.y);
+
+    if (entity.type === 'pickup') {
+      context.shadowBlur = entity.glow;
+      context.shadowColor = entity.color;
+
+      if (entity.image.complete) {
+        context.drawImage(entity.image, entity.x, entity.y, 75, 75);
+      } else {
+        entity.image.onload = () => context.drawImage(entity.image, entity.x, entity.y, 75, 75);
+      }
+    } else {
+      Renderer.beginRotationOffset(context, entity.x, entity.y, entity.angle);
+
+      if (! entity.dead) {
+        entity.type === 'enemy'
+          ? Renderer.enemy(context, entity.position)
+          : Renderer.player(context, entity.position);
+      } else {
+        entity.type === 'enemy'
+          ? Renderer.deadEnemy(context)
+          : Renderer.deadPlayer(context);
+      }
+      
+      Renderer.endRotationOffset(context, entity.x, entity.y, entity.angle);
+      Renderer.health(context, entity.health, entity.x, entity.y);
+    }
   }
 
   /**

@@ -3,6 +3,40 @@ import { config } from '../../config';
 export class Collision
 {
   /**
+   * Determine intersection between entities
+   * 
+   * @param {*} r1 
+   * @param {*} r2 
+   * @returns 
+   */
+  static intersection (r1, r2) {
+    return ! (r1.x + r1.width < r2.x
+      || r1.y + r1.height < r2.y
+      || r1.x > r2.x + r2.width
+      || r1.y > r2.y + r2.height
+    );
+  }
+
+  /**
+   * Determine distance between two vectors
+   * 
+   * @param {*} e1 
+   * @param {*} e2 
+   * @param {*} vectors 
+   * @returns 
+   */
+  static distance (e1, e2, vectors = true) {
+    if (vectors) {
+      return Math.sqrt(e1*e1 + e2*e2);
+    }
+
+    const vectorX = e1.x - e2.x;
+    const vectorY = e1.y - e2.y;
+
+    return Math.sqrt(vectorX*vectorX + vectorY*vectorY);
+  }
+
+  /**
    * Caclulate collision beween entity (arc) and wall (box)
    * 
    * @param {*} param0 
@@ -35,14 +69,13 @@ export class Collision
   }
 
   /**
-   * Calculate collision vectors
+   * Entity-to-walls collision
    * 
-   * @param {*} x 
-   * @param {*} y 
+   * @param {*} entity
    * @param {*} walls 
    * @returns 
    */
-  static vector (x, y, walls) {
+  static entityToWalls (entity, walls) {
     const result = {
       x: 0,
       y: 0
@@ -52,8 +85,8 @@ export class Collision
       const wall = walls[i];
   
       if (Collision.arcWallVector({
-        arcX: x,
-        arcY: y,
+        arcX: entity.x,
+        arcY: entity.y,
         radius: 60,
         wallX: wall.x,
         wallY: wall.y,
@@ -62,8 +95,8 @@ export class Collision
         const wallCenterX = wall.x + config.size / 2;
         const wallCenterY = wall.y + config.size / 2;
   
-        let vectorX = x - wallCenterX;
-        let vectorY = y - wallCenterY;
+        let vectorX = entity.x - wallCenterX;
+        let vectorY = entity.y - wallCenterY;
   
         const distance = Collision.distance(vectorX, vectorY);
   
@@ -78,40 +111,6 @@ export class Collision
     }
   
     return result;
-  }
-
-  /**
-   * Determine intersection between entities
-   * 
-   * @param {*} r1 
-   * @param {*} r2 
-   * @returns 
-   */
-  static intersection (r1, r2) {
-    return ! (r1.x + r1.width < r2.x
-      || r1.y + r1.height < r2.y
-      || r1.x > r2.x + r2.width
-      || r1.y > r2.y + r2.height
-    );
-  }
-
-  /**
-   * Determine distance between two vectors
-   * 
-   * @param {*} e1 
-   * @param {*} e2 
-   * @param {*} vectors 
-   * @returns 
-   */
-  static distance (e1, e2, vectors = true) {
-    if (vectors) {
-      return Math.sqrt(e1*e1 + e2*e2);
-    }
-
-    const vectorX = e1.x - e2.x;
-    const vectorY = e1.y - e2.y;
-
-    return Math.sqrt(vectorX*vectorX + vectorY*vectorY);
   }
 
   /**
@@ -161,7 +160,7 @@ export class Collision
 
         // Determine the wall position vectors for collision to stop enemies phasing
         // through walls to try and get to you.
-        const collisionVector = Collision.vector(entity.x, entity.y, game.walls);
+        const collisionVector = Collision.entityToWalls(entity, game.walls);
         // If there is a wall in the way, repeatedly set the enemy's x,y position to the wall
         // position while maintaining speed.
         entity.x += collisionVector.x * entity.speed;

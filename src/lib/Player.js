@@ -98,8 +98,9 @@ export class Player
       if (game.keyboard.right) this.x += currentSpeed;
     }
 
-    // collision
-    const collisionVector = Collision.vector(this.x, this.y, game.walls);
+    // Detect collision between the player and the walls and "bounce" back
+    // using the vector difference multipled by the current player's speed.
+    const collisionVector = Collision.entityToWalls(this, game.walls);
     this.x += collisionVector.x * currentSpeed;
     this.y += collisionVector.y * currentSpeed;
 

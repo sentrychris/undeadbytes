@@ -175,7 +175,6 @@ export class _AudioFX
    */
   load (keys = []) {
     if (keys.includes('weapons')) {
-      // Eager load all weapon fx.
       for (const weapon of weapons) {
         this.audio.weapons[weapon.name] = {
           fire: new Audio(weapon.audio.fire),
@@ -185,7 +184,6 @@ export class _AudioFX
     }
 
     if (keys.includes('snippets')) {
-      // Eager load all snippets.
       for (const snippet of snippets) {
         this.audio.snippets[snippet.name] = {
           types: snippet.types,
@@ -195,7 +193,6 @@ export class _AudioFX
     }
 
     if (keys.includes('soundtrack')) {
-      // Eager load soundtrack.
       for (const track of soundtrack) {
         this.soundtracks.push({
           name: track.split('/').pop(),

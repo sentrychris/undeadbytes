@@ -1,6 +1,74 @@
 export class Renderer
 {
   /**
+   * Render the entity
+   * 
+   * @param {*} context 
+   * @param {*} entity 
+   */
+  static render (entity, context) {
+    if (entity.sleep) {
+      return;
+    }
+
+    if (entity.type === 'pickup') {
+      context.shadowBlur = entity.glow;
+      context.shadowColor = entity.color;
+
+      if (entity.image.complete) {
+        context.drawImage(entity.image, entity.x, entity.y, 75, 75);
+      } else {
+        entity.image.onload = () => context.drawImage(entity.image, entity.x, entity.y, 75, 75);
+      }
+    } else {
+      Renderer.beginRotationOffset(context, entity.x, entity.y, entity.angle);
+
+      if (! entity.dead) {
+        entity.type === 'enemy'
+          ? Renderer.enemy(context, entity.position)
+          : Renderer.player(context, entity.position);
+      } else {
+        entity.type === 'enemy'
+          ? Renderer.deadEnemy(context)
+          : Renderer.deadPlayer(context);
+      }
+      
+      Renderer.endRotationOffset(context, entity.x, entity.y, entity.angle);
+      Renderer.health(context, entity.health, entity.x, entity.y);
+    }
+  }
+
+  /**
+   * Calculate offset and begin rotating entity to given angle at position
+   * 
+   * @param {*} context 
+   * @param {*} x 
+   * @param {*} y 
+   * @param {*} angle 
+   */
+  static beginRotationOffset (context, x, y, angle) {
+    context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
+    context.translate(context.canvas.width / 2, context.canvas.height / 2);
+  
+    context.rotate(angle);
+  }
+  
+  /**
+     * Stop rotating entity to given angle at position
+     * 
+     * @param {*} context 
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} angle 
+     */
+  static endRotationOffset (context, x, y, angle) {
+    context.rotate(-angle);
+  
+    context.translate(-context.canvas.width / 2, -context.canvas.height / 2);
+    context.translate(+(-x + context.canvas.width / 2), +(-y + context.canvas.height / 2));
+  }
+
+  /**
    * Draw player
    * 
    * @param {*} context 
@@ -259,73 +327,5 @@ export class Renderer
     context.rect(centerX - 50, centerY + 60, health, 5);
     context.fillStyle = color;
     context.fill();
-  }
-
-  /**
-   * Render the entity
-   * 
-   * @param {*} context 
-   * @param {*} entity 
-   */
-  static render (entity, context) {
-    if (entity.sleep) {
-      return;
-    }
-
-    if (entity.type === 'pickup') {
-      context.shadowBlur = entity.glow;
-      context.shadowColor = entity.color;
-
-      if (entity.image.complete) {
-        context.drawImage(entity.image, entity.x, entity.y, 75, 75);
-      } else {
-        entity.image.onload = () => context.drawImage(entity.image, entity.x, entity.y, 75, 75);
-      }
-    } else {
-      Renderer.beginRotationOffset(context, entity.x, entity.y, entity.angle);
-
-      if (! entity.dead) {
-        entity.type === 'enemy'
-          ? Renderer.enemy(context, entity.position)
-          : Renderer.player(context, entity.position);
-      } else {
-        entity.type === 'enemy'
-          ? Renderer.deadEnemy(context)
-          : Renderer.deadPlayer(context);
-      }
-      
-      Renderer.endRotationOffset(context, entity.x, entity.y, entity.angle);
-      Renderer.health(context, entity.health, entity.x, entity.y);
-    }
-  }
-
-  /**
-   * Calculate offset and begin rotating entity to given angle at position
-   * 
-   * @param {*} context 
-   * @param {*} x 
-   * @param {*} y 
-   * @param {*} angle 
-   */
-  static beginRotationOffset (context, x, y, angle) {
-    context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
-    context.translate(context.canvas.width / 2, context.canvas.height / 2);
-  
-    context.rotate(angle);
-  }
-  
-  /**
-     * Stop rotating entity to given angle at position
-     * 
-     * @param {*} context 
-     * @param {*} x 
-     * @param {*} y 
-     * @param {*} angle 
-     */
-  static endRotationOffset (context, x, y, angle) {
-    context.rotate(-angle);
-  
-    context.translate(-context.canvas.width / 2, -context.canvas.height / 2);
-    context.translate(+(-x + context.canvas.width / 2), +(-y + context.canvas.height / 2));
   }
 }

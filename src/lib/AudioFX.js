@@ -44,6 +44,7 @@ export class _AudioFX
     };
 
     this.soundtracks = [];
+    this.loaded = false;
 
     if (eagerLoad) {
       this.load(['weapons', 'snippets', 'soundtrack']);
@@ -62,6 +63,10 @@ export class _AudioFX
    * Weapon audio FX handler 
    */
   weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
+    if (! this.loaded) {
+      return;
+    }
+  
     const weapon = weaponIndex
       ? weapons[weaponIndex]
       : equippedWeapon;
@@ -92,6 +97,10 @@ export class _AudioFX
    * Snippet audio FX handler
    */
   snippet ({name = null, random = false}) {
+    if (! this.loaded) {
+      return;
+    }
+
     // Note: snippets override the current playback.
     // Do not assign snippets to the AudioFX playback
     // property as that is used by the game loop.
@@ -114,6 +123,10 @@ export class _AudioFX
    * Game soundtrack
    */
   soundtrack () {
+    if (! this.loaded) {
+      return;
+    }
+
     if (this.currentTrack && this.currentTrack.playback
       && (this.currentTrack.playback.paused || this.currentTrack.playback.currentTime === 0)
     ) {
@@ -160,7 +173,7 @@ export class _AudioFX
    * 
    * @param {*} keys 
    */
-  load(keys = []) {
+  load (keys = []) {
     if (keys.includes('weapons')) {
       // Eager load all weapon fx.
       for (const weapon of weapons) {
@@ -191,6 +204,8 @@ export class _AudioFX
         });
       }
     }
+
+    this.loaded = true;
   }
 }
 

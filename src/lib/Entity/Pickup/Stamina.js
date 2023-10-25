@@ -7,7 +7,7 @@ export class Stamina
   constructor (x, y) {
     this.type = 'pickup';
     this.item = 'stamina';
-    this.value = 10;
+    this.value = 7.5;
 
     this.bounding = 'arc';
     this.x = x * config.size;

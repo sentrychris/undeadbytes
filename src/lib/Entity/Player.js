@@ -96,12 +96,6 @@ export class Player
 
     // foot
     if (game.keyboard.up || game.keyboard.down || game.keyboard.left || game.keyboard.right) {
-      if (this.stamina) {
-        this.speed = this.staminaAmount;
-      }
-
-      console.log(this.speed);
-
       this.incrementer += this.speed;
     }
 
@@ -132,11 +126,8 @@ export class Player
   }
 
   boostSpeed (amount) {
-    this.stamina = true;
-    this.staminaAmount = amount;
+    this.speed = amount;
     setTimeout(() => {
-      this.stamina = false;
-      this.staminaAmount = 0;
       this.speed = 5;
     }, 3000);
   }

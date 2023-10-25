@@ -7,7 +7,7 @@ export class Ammo
   constructor (x, y) {
     this.type = 'pickup';
     this.item = 'ammo';
-    this.value = false;
+    this.value = false; // handled by ballistics
 
     this.bounding = 'arc';
     this.x = x * config.size;

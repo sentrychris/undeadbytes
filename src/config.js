@@ -1,6 +1,9 @@
 export const config = {
   radius: 60,
   size: 150,
+  player: {
+    speed: 5
+  },
   device: {
     keyboard: {
       up: false,

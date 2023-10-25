@@ -36,7 +36,6 @@ export class Game
   }
 
   loop () {
-    
     AudioFX.soundtrack();
 
     if (! this.stopped) {
@@ -168,18 +167,22 @@ export class Game
   }
 
   onRender () {
-    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    this.camera.newScene();
     this.camera.preRender(this.player);
+
     this.ballistics.render();
+    
     for (let i = 0; i < this.entities.length; i++) {
       this.entities[i].render(this.context);
     }
+
     this.camera.postRender();
   }
 
   onResize (width, height) {
     this.context.canvas.width = width;
     this.context.canvas.height = height;
+    
     this.camera.resize();
   }
 

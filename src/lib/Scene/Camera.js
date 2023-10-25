@@ -47,9 +47,13 @@ export class Camera
 
   resize () {}
 
-  preRender (player) {
-    const targetX = -player.x + this.context.canvas.width / 2;
-    const targetY = -player.y + this.context.canvas.height / 2;
+  newScene() {
+    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+  }
+
+  preRender (entity) {
+    const targetX = -entity.x + this.context.canvas.width / 2;
+    const targetY = -entity.y + this.context.canvas.height / 2;
 
     const vectorX = targetX - this.x;
     const vectorY = targetY - this.y;

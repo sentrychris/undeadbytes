@@ -26,7 +26,7 @@ export const mappings = [
     },
     trigger: false,
     audio: {
-      type: 'repeat',
+      type: 'single',
       fire: './fx/audio/pistol/pistol-fire.mp3',
       reload: './fx/audio/pistol/pistol-reload.mp3'
     }
@@ -53,7 +53,7 @@ export const mappings = [
     },
     trigger: false,
     audio: {
-      type: 'repeat',
+      type: 'single',
       fire: './fx/audio/shotgun/shotgun-fire.mp3',
       reload: './fx/audio/shotgun/shotgun-reload.mp3'
     }

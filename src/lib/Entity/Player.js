@@ -9,8 +9,8 @@ export class Player
   constructor (spawn) {
     this.type = 'player';
     this.bounding = 'arc';
-    this.x = spawn.x * config.size;
-    this.y = spawn.y * config.size;
+    this.x = spawn.x * config.cell.size;
+    this.y = spawn.y * config.cell.size;
     this.angle = 0;
     this.position = 0;
     

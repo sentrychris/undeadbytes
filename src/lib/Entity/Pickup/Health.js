@@ -7,24 +7,23 @@ export class Health
   constructor (x, y) {
     this.type = 'pickup';
     this.item = 'health';
-    this.value = 25;
+    this.value = config.pickups.health;
     
     this.bounding = 'arc';
-    this.x = x * config.size;
-    this.y = y * config.size;
+    this.x = x * config.cell.size;
+    this.y = y * config.cell.size;
     
     this.bounds = {
       x: this.x,
       y: this.y,
-      width: config.size,
-      height: config.size
+      width: config.cell.size,
+      height: config.cell.size
     };
 
     this.sleep = true;
 
     this.image = new Image();
     this.image.src = 'img/first-aid-box.png';
-    this.image.width = 50;
     this.glow = 40;
     this.color = '#6C95C2';
 

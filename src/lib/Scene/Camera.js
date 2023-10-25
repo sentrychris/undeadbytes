@@ -30,15 +30,15 @@ export class Camera
         const bounds = {};
 
         if (entity.bounding === 'arc') {
-          bounds.x = entity.x - config.radius;
-          bounds.y = entity.y - config.radius;
-          bounds.width = config.radius * 2;
-          bounds.height = config.radius * 2;
+          bounds.x = entity.x - config.cell.radius;
+          bounds.y = entity.y - config.cell.radius;
+          bounds.width = config.cell.radius * 2;
+          bounds.height = config.cell.radius * 2;
         } else if (entity.bounding === 'box') {
           bounds.x = entity.x;
           bounds.y = entity.y;
-          bounds.width = config.size;
-          bounds.height = config.size;
+          bounds.width = config.cell.size;
+          bounds.height = config.cell.size;
         }
         entity.sleep = ! Collision.intersection(bounds, screen);
       }

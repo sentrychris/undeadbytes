@@ -1,3 +1,5 @@
+import { config } from "../config";
+
 export class Renderer
 {
   /**
@@ -15,10 +17,12 @@ export class Renderer
       context.shadowBlur = entity.glow;
       context.shadowColor = entity.color;
 
+      const size = config.cell.size / 2;
+
       if (entity.image.complete) {
-        context.drawImage(entity.image, entity.x, entity.y, 75, 75);
+        context.drawImage(entity.image, entity.x, entity.y, size, size);
       } else {
-        entity.image.onload = () => context.drawImage(entity.image, entity.x, entity.y, 75, 75);
+        entity.image.onload = () => context.drawImage(entity.image, entity.x, entity.y, size, size);
       }
     } else {
       Renderer.beginRotationOffset(context, entity.x, entity.y, entity.angle);

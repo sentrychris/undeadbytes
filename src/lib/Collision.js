@@ -90,10 +90,10 @@ export class Collision
         radius: 60,
         wallX: wall.x,
         wallY: wall.y,
-        size: config.size
+        size: config.cell.size
       })) {
-        const wallCenterX = wall.x + config.size / 2;
-        const wallCenterY = wall.y + config.size / 2;
+        const wallCenterX = wall.x + config.cell.size / 2;
+        const wallCenterY = wall.y + config.cell.size / 2;
   
         let vectorX = entity.x - wallCenterX;
         let vectorY = entity.y - wallCenterY;

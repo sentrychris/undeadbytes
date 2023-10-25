@@ -8,8 +8,8 @@ export class Grenade
     this.vectorY = Math.sin(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
 
     // Projectile position
-    this.x = player.x + this.vectorX * config.radius * 1.5;
-    this.y = player.y + this.vectorY * config.radius * 1.5;
+    this.x = player.x + this.vectorX * config.cell.radius * 1.5;
+    this.y = player.y + this.vectorY * config.cell.radius * 1.5;
 
     this.radius = 5;
     this.bounds = {

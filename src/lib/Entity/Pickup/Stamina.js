@@ -7,24 +7,23 @@ export class Stamina
   constructor (x, y) {
     this.type = 'pickup';
     this.item = 'stamina';
-    this.value = 7.5;
+    this.value = config.pickups.stamina;
 
     this.bounding = 'arc';
-    this.x = x * config.size;
-    this.y = y * config.size;
+    this.x = x * config.cell.size;
+    this.y = y * config.cell.size;
 
     this.bounds = {
       x: this.x,
       y: this.y,
-      width: config.size,
-      height: config.size
+      width: config.cell.size,
+      height: config.cell.size
     };
 
     this.sleep = true;
 
     this.image = new Image();
     this.image.src = 'img/stamina.png';
-    this.image.width = 50;
     this.glow = 40;
     this.color = '#F5F5F5';
 

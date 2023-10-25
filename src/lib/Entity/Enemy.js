@@ -8,8 +8,8 @@ export class Enemy
   constructor (spawn) {
     this.type = 'enemy';
     this.bounding = 'arc';
-    this.x = spawn.x * config.size;
-    this.y = spawn.y * config.size;
+    this.x = spawn.x * config.cell.size;
+    this.y = spawn.y * config.cell.size;
     this.angle = 0;
     this.position = 0;
     this.incrementer = 0;
@@ -76,10 +76,10 @@ export class Enemy
     this.y += this.pushAlongVelocity.y;
 
     const bounds = {
-      x: this.x - config.radius,
-      y: this.y - config.radius,
-      width: config.radius * 2,
-      height: config.radius * 2
+      x: this.x - config.cell.radius,
+      y: this.y - config.cell.radius,
+      width: config.cell.radius * 2,
+      height: config.cell.radius * 2
     };
 
     for (let i = 0; i < game.ballistics.projectiles.length; i++) {

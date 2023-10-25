@@ -5,8 +5,8 @@ export class Wall
   constructor (x, y, textured = false) {
     this.type = 'wall';
     this.bounding = 'box';
-    this.x = x * config.size;
-    this.y = y * config.size;
+    this.x = x * config.cell.size;
+    this.y = y * config.cell.size;
     this.sleep = true;
 
     this.textured = textured;
@@ -15,15 +15,15 @@ export class Wall
       this.textured = true;
       this.image = new Image();
       this.image.src = 'img/wall.png';
-      this.image.width = config.size;
-      this.image.height = config.size;
+      this.image.width = config.cell.size;
+      this.image.height = config.cell.size;
     }
 
     this.bounds = {
       x: this.x,
       y: this.y,
-      width: config.size,
-      height: config.size
+      width: config.cell.size,
+      height: config.cell.size
     };
   }
 
@@ -39,13 +39,13 @@ export class Wall
 
     if (this.textured) {
       if (this.image.complete) {
-        context.drawImage(this.image, this.x, this.y, config.size, config.size);
+        context.drawImage(this.image, this.x, this.y, config.cell.size, config.cell.size);
       } else {
-        this.image.onload = () => context.drawImage(this.image, this.x, this.y, config.size, config.size);
+        this.image.onload = () => context.drawImage(this.image, this.x, this.y, config.cell.size, config.cell.size);
       }
     } else {
       context.beginPath();
-      context.rect(this.x, this.y, config.size, config.size);
+      context.rect(this.x, this.y, config.cell.size, config.cell.size);
       context.fillStyle = '#444444';
       context.fill();  
     }

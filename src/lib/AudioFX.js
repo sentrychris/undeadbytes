@@ -99,8 +99,6 @@ export class _AudioFX
       ? snippets[Math.floor(Math.random() * snippets.length)]
       : this.audio.snippets[name];
 
-    console.log(snippet)
-
     if (snippet) {
       const audio = random
         ? this.audio.snippets[snippet.name]

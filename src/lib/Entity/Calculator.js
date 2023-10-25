@@ -18,9 +18,13 @@ export class Calculator
     );
   }
 
-  static distance (e1, e2) {
+  static distance (e1, e2, vectors = true) {
+    if (vectors) {
+      return Math.sqrt(e1*e1 + e2*e2);
+    }
+
     const vectorX = e1.x - e2.x;
-    const vectorY = e2.y - e2.y;
+    const vectorY = e1.y - e2.y;
 
     return Math.sqrt(vectorX*vectorX + vectorY*vectorY);
   }
@@ -97,7 +101,7 @@ export class Calculator
     }
 
     // Determine the distance between the enemy and the player
-    let distance = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+    const distance = Calculator.distance(vectorX, vectorY);
 
     if (entity.type === 'pickup') {
       if (callback && distance <= 95) {
@@ -109,7 +113,7 @@ export class Calculator
       vectorX /= distance;
       vectorY /= distance;
 
-      // If the vector length is lower than 800, than set the enemy's
+      // If the distance is lower than 800, than set the enemy's
       // angle and position toward the player.
       if (distance < 800) {
         entity.angle = Math.atan2(vectorY, vectorX) - 90 * Math.PI / 180;
@@ -124,14 +128,12 @@ export class Calculator
         entity.x += collisionVector.x * entity.speed;
         entity.y += collisionVector.y * entity.speed;
 
-        // Use the enemy's momentum to adjust the angle until they work their way around
-        // the wall.
+        // Use the enemy's momentum to adjust the angle until they work their way around the wall
         entity.incrementer += entity.speed;
         entity.position = Math.sin(entity.incrementer * Math.PI / 180);
 
         if (distance < 100 && entity.type === 'enemy') {
-          // If the vecotr length is lower than 100
-          // hurt the player
+          // If the distance is lower than 100 then hurt the player
           game.player.takeDamage(entity);
         }
       }

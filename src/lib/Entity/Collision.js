@@ -1,4 +1,5 @@
 import { config } from '../../config';
+import { Calculator } from './Calculator';
 
 export class Collision
 {
@@ -65,11 +66,11 @@ export class Collision
         let vectorX = x - wallCenterX;
         let vectorY = y - wallCenterY;
   
-        const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+        const distance = Calculator.distance(vectorX, vectorY);
   
-        if (length > 0) {
-          vectorX /= length;
-          vectorY /= length;
+        if (distance > 0) {
+          vectorX /= distance;
+          vectorY /= distance;
   
           result.x += vectorX;
           result.y += vectorY;

@@ -20,9 +20,12 @@ export class Ballistics
       document.querySelector('#out-of-ammo').style.display = 'none';
 
       // TODO fix audio desync issue with single shot weapons
-      //   The audio.repeat flag is used for something else, so
-      //   add another flag for these weapons e.g. "receiver".
-      //   This is a workaround!
+      //   The audio.type "repeat" flag is used for something
+      //   else, so add another flag for these weapons.
+      //
+      // TODO upon further inspection, it appears as though you
+      //   just forgot to change the audio.type from "repeat"
+      //   to "single" for these weapons, test fix when you have time.
       if (['Pistol', 'Shotgun'].includes(this.weapon.name)) {
         AudioFX.stop();
       }

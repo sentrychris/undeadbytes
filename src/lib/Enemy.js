@@ -70,10 +70,8 @@ export class Enemy
       return;
     }
     
-    // Player-to-entity collision
     Calculator.playerToEntity(this, game);
 
-    // Enemy-to-enemy collision
     if (Math.random() <= 0.1) {
       for (let i = 0; i < game.enemies.length; i++) {       
         const enemy = game.enemies[i];
@@ -81,13 +79,12 @@ export class Enemy
         if (enemy != this) {
           let vectorX = enemy.x - this.x;
           let vectorY = enemy.y - this.y;
-          let distance = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
+          const distance = Calculator.distance(vectorX, vectorY);
+          
           if (distance != 0 && distance < 100) {
-
             vectorX /= distance;
             vectorY /= distance;
-
             enemy.pushAlong(vectorX, vectorY);
           } 
         }

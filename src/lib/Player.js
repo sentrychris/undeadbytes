@@ -32,19 +32,19 @@ export class Player
     if (! this.invincible) {
       const vectorX = this.x - enemy.x;
       const vectorY = this.y - enemy.y;
-      const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
 
-      if (length > 0) {
-        this.damage.x = vectorX / length * 20;
-        this.damage.y = vectorY / length * 20;
+      const distance = Calculator.distance(vectorX, vectorY);
+
+      if (distance > 0) {
+        this.damage.x = vectorX / distance * 20;
+        this.damage.y = vectorY / distance * 20;
         this.invincible = true;
         
-        this.health -= 25; // TODO difficulty setting and power-ups
+        this.health -= 25;
         this.health = this.health < 0 ? 0 : this.health;
-        AudioFX.snippet({ name: 'eoww' });
 
         if (this.health == 0) {
-          AudioFX.snippet({ name: 'eoww' });
+          // AudioFX.snippet({ name: 'eoww' });
           this.dead = true;
         }
       }
@@ -107,11 +107,11 @@ export class Player
     let vectorX = game.camera.offsetX + game.context.canvas.width / 2 - game.mouse.x;
     let vectorY = game.camera.offsetY + game.context.canvas.height / 2 - game.mouse.y;
 
-    const length = Math.sqrt(vectorX * vectorX + vectorY * vectorY);
+    const distance = Calculator.distance(vectorX, vectorY);
 
-    if (length > 0) {
-      vectorX /= length;
-      vectorY /= length;
+    if (distance > 0) {
+      vectorX /= distance;
+      vectorY /= distance;
 
       this.angle = Math.atan2(vectorY, vectorX) + 90 * Math.PI / 180;
     }

@@ -28,7 +28,7 @@ export class Ammo
   }
 
   update (game) {
-    Collision.playerToEntity(this, game, () => {
+    Collision.entityToPlayer(this, game, () => {
       this.pickup();
     });
   }

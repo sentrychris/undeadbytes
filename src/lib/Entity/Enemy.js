@@ -71,7 +71,7 @@ export class Enemy
       return;
     }
     
-    Collision.playerToEntity(this, game);
+    Collision.entityToPlayer(this, game);
 
     if (Math.random() <= 0.1) {
       for (let i = 0; i < game.enemies.length; i++) {       

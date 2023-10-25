@@ -120,7 +120,7 @@ export class Collision
    * @param {*} game 
    * @param {*} callback 
    */
-  static playerToEntity (entity, game, callback) {
+  static entityToPlayer (entity, game, callback) {
     // Determine the next x,y position vectors based on the distance
     // between the player and the enemy's current x,y position.
     let vectorX = game.player.x - entity.x;

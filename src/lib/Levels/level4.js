@@ -1,4 +1,3 @@
-
 export const level4 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W                 W           W       W',

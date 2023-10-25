@@ -1,8 +1,8 @@
 export const level3 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W                 W                   W',
-  'W   A E     E     W     E    E    A   W',
-  'W                 W       E           W',
+  'W   A       E     W     E    E    A   W',
+  'W                 W                   W',
   'W                                     W',
   'W W W W W W           W   H     W     W',
   'W         W     W                     W',

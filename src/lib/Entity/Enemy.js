@@ -63,7 +63,7 @@ export class Enemy
         }
         
         if (enemy.dead) {
-          // AudioFX.snippet({ random: true });
+          AudioFX.snippet({ random: true });
           game.enemies.splice(i, 1);
         }
       }

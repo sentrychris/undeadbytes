@@ -1,6 +1,6 @@
 import { Collision } from '../../Collision';
-import { config } from '../../../config';
 import { Renderer } from '../../Renderer';
+import { config } from '../../../config';
 
 export class Ammo
 {

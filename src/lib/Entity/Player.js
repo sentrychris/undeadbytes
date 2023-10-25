@@ -115,7 +115,7 @@ export class Player
         this.health = this.health < 0 ? 0 : this.health;
 
         if (this.health == 0) {
-          // AudioFX.snippet({ name: 'eoww' });
+          AudioFX.snippet({ name: 'eoww' });
           this.dead = true;
         }
       }

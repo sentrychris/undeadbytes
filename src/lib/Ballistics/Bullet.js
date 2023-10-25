@@ -1,4 +1,4 @@
-import { Collision } from '../Entity/Collision';
+import { Collision } from '../Collision';
 import { config } from '../../config';
 
 export class Bullet

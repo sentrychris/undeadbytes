@@ -1,8 +1,8 @@
 
-import { Collision } from './Entity/Collision';
-import { Renderer } from './Entity/Renderer';
-import { AudioFX } from './AudioFX';
-import { config } from '../config';
+import { Collision } from '../Collision';
+import { Renderer } from '../Renderer';
+import { AudioFX } from '../AudioFX';
+import { config } from '../../config';
 
 export class Player
 {

@@ -1,9 +1,9 @@
+import { Player } from './Entity/Player';
+import { Enemy } from './Entity/Enemy';
+import { Wall } from './Entity/Wall';
+import { Ammo } from './Entity/Pickup/Ammo';
+import { Health } from './Entity/Pickup/Health';
 import { Ballistics } from './Ballistics/Ballistics';
-import { Player } from './Player';
-import { Enemy } from './Enemy';
-import { Wall } from './Wall';
-import { Ammo } from './Pickup/Ammo';
-import { Health } from './Pickup/Health';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
 import { config } from '../config';

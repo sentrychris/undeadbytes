@@ -1,20 +1,20 @@
-import { Collision } from '../Entity/Collision';
-import { config } from '../../config';
+import { Collision } from '../../Collision';
+import { config } from '../../../config';
 
-export class Health
+export class Ammo
 {
   constructor (x, y) {
     this.type = 'pickup';
-    this.item = 'health';
-    this.value = 25;
+    this.item = 'ammo';
     this.bounding = 'arc';
     this.x = x * config.size;
     this.y = y * config.size;
     this.sleep = true;
 
     this.image = new Image();
-    this.image.src = 'img/first-aid-box.png';
+    this.image.src = 'img/magazine.png';
     this.image.width = 50;
+
     this.glow = 40;
 
     this.bounds = {
@@ -39,7 +39,7 @@ export class Health
     }
 
     context.shadowBlur = this.glow;
-    context.shadowColor = '#6c95c2';
+    context.shadowColor = 'yellow';
     if (this.image.complete) {
       context.drawImage(this.image, this.x, this.y, 75, 75);
     } else {

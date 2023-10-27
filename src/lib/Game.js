@@ -84,6 +84,18 @@ export class Game
     }
   }
 
+  async pause() {
+    if (! this.stopped) {
+      this.stopped = true;
+      cancelAnimationFrame(this.frame);
+    } else {
+      this.stopped = false;
+      this.frame = requestAnimationFrame(this.loop.bind(this));
+    }
+
+    return this.stopped;
+  }
+
   async stop () {
     this.stopped = true;
     this.frame = null;

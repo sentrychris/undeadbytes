@@ -5,17 +5,23 @@
   "main": "index.js",
   "scripts": {
     "docs": "cp -r dist/* docs/",
-    "build": "webpack --config webpack.config.js && npm run docs",
-    "watch": "webpack --config webpack.config.js --watch",
-    "play": "http-server dist/",
-    "lint": "eslint src --ext .js",
-    "lint:fix": "eslint src --ext .js --fix"
+    "build:web": "webpack --config webpack.config.js && npm run docs",
+    "watch:web": "webpack --config webpack.config.js --watch",
+    "play:web": "http-server dist/",
+    "lint:web": "eslint src --ext .js",
+    "lint:web:fix": "eslint src --ext .js --fix",
+    "build:squareshoot": "electron-builder --dir",
+    "dev:execute": "node ./node_modules/electron/cli.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@electron/asar": "^3.2.7",
+    "about-window": "^1.15.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
+    "electron": "^27.0.2",
+    "electron-builder": "^24.6.4",
     "eslint": "^8.52.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
@@ -23,5 +29,20 @@
     "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "build": {
+    "appId": "com.squareshoot.app",
+    "directories": {
+      "output": "releases/${platform}/${arch}"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true
+    }
   }
 }

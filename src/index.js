@@ -10,7 +10,7 @@ const game = new Game(
 );
 
 // Setup the level and start the game loop
-game.setup({ level: 0 }, true);
+game.setup({ level: 1 }, true);
 
 // Track WASD for UI
 trackWASD();

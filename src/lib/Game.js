@@ -5,9 +5,9 @@ import { Ammo } from './Entity/Pickup/Ammo';
 import { Health } from './Entity/Pickup/Health';
 import { Stamina } from './Entity/Pickup/Stamina';
 import { Ballistics } from './Ballistics/Ballistics';
-import { Map } from './Scene/Map';
-import { Camera } from './Scene/Camera';
 import { AudioFX } from './Audio/AudioFX';
+import { Camera } from './Scene/Camera';
+import { Map } from './Scene/Map';
 import { config } from '../config';
 
 export class Game
@@ -96,6 +96,7 @@ export class Game
     this.frame = null;
     this.stopped = false;
     this.gameover = false;
+    this.currentLevel = level;
     this.levelPassed = false;
     
     this.newGameEntities();

@@ -1,75 +1,78 @@
-import { AudioHandler } from './AudioHandler';
+import { AudioFX } from '../Audio/AudioFX';
 import { Bullet } from './Bullet';
-import { mappings } from './mappings';
+import { Grenade } from './Grenade';
+import { weapons } from './mappings';
 
 export class Ballistics
 {
   constructor () {
     this.weapon = null;
-    this.automatic = true;
+    this.trigger = true;
     this.frames = 0;
-    this.bullets = [];
+    this.projectiles = [];
     this.indexesToDelete = [];
   }
 
   update (game) {
-    this.weapon = mappings[game.selectedWeaponIndex];
+    this.weapon = weapons[game.selectedWeaponIndex];
     this.setEquippedWeaponDisplayInformation();
 
-    if (this.weapon && this.automatic && ! game.player.dead) {
+    if (this.weapon && this.trigger && ! game.player.dead) {
       document.querySelector('#out-of-ammo').style.display = 'none';
+
       if (game.mouse.pressed) {
         this.handleFire(game.context, game.player);
       } else {
-        AudioHandler.stop();
+        AudioFX.stop('weapon');
       }
     } else {
       this.frames++;
       if (this.frames >= 60) {
         this.frames = 0;
-        this.automatic = true;
+        this.trigger = true;
       }
     }
 
-    this.cleanupBullets(game.walls);
+    this.cleanupProjectiles(game.walls);
   }
 
   render () {
-    for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].render(this.weapon.bulletColor);
+    for (let i = 0; i < this.projectiles.length; i++) {
+      this.projectiles[i].render(this.weapon.projectile.color);
     }
   }
 
   handleFire (context, player) {
-    --this.weapon.clip;
     if (this.shouldReloadWeaponAmmoClip()) {
       return;
     }
 
-    AudioHandler.play({
+    --this.weapon.clip.current;
+
+    AudioFX.weapon({
       equippedWeapon: this.weapon
     }, 'fire', 1.5);
 
-    this.registerBullets(context, player);
-    this.automatic = this.weapon.automatic;
+    this.registerProjectiles(context, player);
+    this.trigger = this.weapon.trigger;
   }
 
   setEquippedWeaponDisplayInformation () {
-    const { name, clip, capacity, magazines, magazinesTotal } = this.weapon;
+    const { name, clip, magazines } = this.weapon;
     document.querySelector('#equipped-weapon').innerHTML = name;
-    document.querySelector('#ammo-remaining').innerHTML = clip;
-    document.querySelector('#ammo-capacity').innerHTML = capacity;
-    document.querySelector('#magazines-remaining').innerHTML = magazines;
-    document.querySelector('#magazines-total').innerHTML = magazinesTotal;
+    document.querySelector('#ammo-remaining').innerHTML = clip.current;
+    document.querySelector('#ammo-capacity').innerHTML = clip.capacity;
+    document.querySelector('#magazines-remaining').innerHTML = magazines.current;
+    document.querySelector('#magazines-total').innerHTML = magazines.capacity;
   }
 
   shouldReloadWeaponAmmoClip () {
-    if (this.weapon.clip <= 0) {
-      if (this.weapon.magazines > 0) {
-        --this.weapon.magazines;
+    if (this.weapon.clip.current <= 0) {
+      if (this.weapon.magazines.current > 0) {
+        --this.weapon.magazines.current;
         this.refillWeaponAmmoClip();
       } else {
-        this.weapon.clip = 0;
+        this.weapon.clip.current = 0;
         document.querySelector('#out-of-ammo').style.display = 'inline';
 
         return true;
@@ -80,28 +83,38 @@ export class Ballistics
   }
 
   refillWeaponAmmoClip () {
-    this.weapon.clip = this.weapon.capacity;
-  }
-
-  registerBullets (context, player) {
-    const { spread } = this.weapon;
-    for (let i = spread.min; i <= spread.max; i++) {
-      const bullet = new Bullet(context, player, i);
-      this.bullets.push(bullet);
+    if (this.weapon.clip.current === this.weapon.clip.capacity) {
+      if (this.weapon.magazines.current < this.weapon.magazines.capacity) {
+        ++this.weapon.magazines.current;
+      }
+    } else {
+      this.weapon.clip.current = this.weapon.clip.capacity;
     }
   }
 
-  cleanupBullets (walls) {
+  registerProjectiles (context, player) {
+    const { spread, delay } = this.weapon.projectile;
+    for (let i = spread.min; i <= spread.max; i++) {
+
+      const projectile = (this.weapon.type === 'throwable' && delay)
+        ? new Grenade(context, player, i)
+        : new Bullet(context, player, i);
+
+      this.projectiles.push(projectile);
+    }
+  }
+
+  cleanupProjectiles (walls) {
     this.indexesToDelete = [];
-    for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].update(walls, this.weapon.dropoff);
-      if (this.bullets[i].markToDelete) {
+    for (let i = 0; i < this.projectiles.length; i++) {
+      this.projectiles[i].update(walls, this.weapon.projectile.dropoff);
+      if (this.projectiles[i].markToDelete) {
         this.indexesToDelete.push(i);
       }
     }
 
     for (let i = 0; i < this.indexesToDelete.length; i++) {
-      this.bullets.splice(this.indexesToDelete[i], 1);
+      this.projectiles.splice(this.indexesToDelete[i], 1);
     }
   }
 }

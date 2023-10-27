@@ -23,6 +23,22 @@ body {
   padding: 15px;
 }
 
+.help-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.help-section--img {
+  width: 40px;
+  margin-right: 20px;
+}
+
+.help-section--subtext {
+  font-size: 0.75rem;
+  color:#aaaaaa;
+}
+
 .help p {
   margin-top: 0;
   margin-bottom: 10px;
@@ -146,4 +162,12 @@ body {
 .keyboard-key > p {
   margin-top: 5px;
   margin-bottom: 10px;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0;
 }

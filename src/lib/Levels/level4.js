@@ -1,4 +1,11 @@
-
+/**
+ * Level 4
+ * 
+ * 18 Enemies
+ * 04 Ammo
+ * 02 Health
+ * 02 Stamina
+ */
 export const level4 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W                 W           W       W',
@@ -6,10 +13,10 @@ export const level4 = [
   'W     W           W           W       W',
   'W   H     E       W     E     W   E   W',
   'W                 W                   W',
-  'W   E                                 W',
+  'W   E       S                         W',
   'W                   E   W     W       W',
   'W         W W W W W           W       W',
-  'W   E             W           W   E   W',
+  'W   E             W     S     W   E   W',
   'W            A    W           W       W',
   'W   E             W     E     W     W W',
   'W         W W W W W                   W',
@@ -18,7 +25,7 @@ export const level4 = [
   'W       W           W W W W W W       W',
   'W W W W W   E E     W               E W',
   'W                   W     A     W     W',
-  'W P         W       W     A     W   E W',
+  'W   P       W       W     A     W   E W',
   'W                   W           W     W',
   'W W W W W W W W W W W W W W W W W W W W'
 ];

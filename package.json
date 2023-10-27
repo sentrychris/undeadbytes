@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs": "cp dist/index.html docs/index.html && cp dist/main.js docs/main.js",
+    "docs": "cp -r dist/* docs/",
     "build": "webpack --config webpack.config.js && npm run docs",
     "watch": "webpack --config webpack.config.js --watch",
     "play": "http-server dist/",
@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "eslint": "^8.52.0",
+    "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",

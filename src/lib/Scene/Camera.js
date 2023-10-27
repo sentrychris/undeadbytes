@@ -1,4 +1,4 @@
-import { EntityHelper } from '../Entity/EntityHelper';
+import { Collision } from '../Collision';
 import { config } from '../../config';
 
 export class Camera
@@ -30,26 +30,30 @@ export class Camera
         const bounds = {};
 
         if (entity.bounding === 'arc') {
-          bounds.x = entity.x - config.radius;
-          bounds.y = entity.y - config.radius;
-          bounds.width = config.radius * 2;
-          bounds.height = config.radius * 2;
+          bounds.x = entity.x - config.cell.radius;
+          bounds.y = entity.y - config.cell.radius;
+          bounds.width = config.cell.radius * 2;
+          bounds.height = config.cell.radius * 2;
         } else if (entity.bounding === 'box') {
           bounds.x = entity.x;
           bounds.y = entity.y;
-          bounds.width = config.size;
-          bounds.height = config.size;
+          bounds.width = config.cell.size;
+          bounds.height = config.cell.size;
         }
-        entity.sleep = ! EntityHelper.intersection(bounds, screen);
+        entity.sleep = ! Collision.intersection(bounds, screen);
       }
     }
   }
 
   resize () {}
 
-  preRender (player) {
-    const targetX = -player.x + this.context.canvas.width / 2;
-    const targetY = -player.y + this.context.canvas.height / 2;
+  newScene() {
+    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+  }
+
+  preRender (entity) {
+    const targetX = -entity.x + this.context.canvas.width / 2;
+    const targetY = -entity.y + this.context.canvas.height / 2;
 
     const vectorX = targetX - this.x;
     const vectorY = targetY - this.y;

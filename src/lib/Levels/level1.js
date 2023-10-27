@@ -1,13 +1,20 @@
-// 10 enemies
+/**
+ * Level 1
+ * 
+ * 12 Enemies
+ * 02 Ammo
+ * 02 Health
+ * 02 Stamina
+ */
 export const level1 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W       W                             W',
-  'W   A   W                       H     W',
+  'W   A   W   S     E             H     W',
   'W   E   W                             W',
   'W       W           E     W W W W W W W',
   'W     W W                             W',
   'W                   E                 W',
-  'W         E                     E     W',
+  'W         E               S     E     W',
   'W                                     W',
   'W W W W W W W W W W W W W W           W',
   'W                         W           W',

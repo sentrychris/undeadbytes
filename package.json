@@ -11,7 +11,7 @@
     "lint:fix": "eslint src --ext .js --fix",
     "build:web": "webpack --config webpack.config.js",
     "watch:web": "webpack --config webpack.config.js --watch",
-    "play:web": "http-server dist/",
+    "serve:web": "http-server dist/",
     "linux:exe": "node ./node_modules/electron/cli.js",
     "windows:exe": "node_modules\\electron\\dist\\electron.exe .",
     "build:exe": "electron-builder --dir",
@@ -24,15 +24,13 @@
     "electron": "^27.0.2",
     "electron-builder": "^24.6.4",
     "eslint": "^8.52.0",
-    "html-webpack-plugin": "^5.5.3",
-    "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
-    "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "about-window": "^1.15.2"
+    "about-window": "^1.15.2",
+    "stats.js": "^0.17.0"
   },
   "build": {
     "appId": "com.squareshoot.app",

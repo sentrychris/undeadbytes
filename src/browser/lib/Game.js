@@ -9,6 +9,7 @@ import { AudioFX } from './Audio/AudioFX';
 import { Camera } from './Scene/Camera';
 import { Map } from './Scene/Map';
 import { config } from '../config';
+import Stats from 'stats.js';
 
 export class Game
 {
@@ -34,9 +35,15 @@ export class Game
     onResize();
 
     this.createKeyboardMouseControls();
+
+    this.stats = new Stats();
+    this.stats.showPanel(0); // 0 = fps, 1 = ms,  2 = mb, 3+ = custom
+    document.body.appendChild(this.stats.dom);
   }
 
   loop () {
+    this.stats.begin();
+
     AudioFX.soundtrack();
 
     if (! this.stopped) {
@@ -49,6 +56,8 @@ export class Game
       this.displayGameEnd();
       this.restart();
     }
+
+    this.stats.end();
   
     this.run();
   }
@@ -122,6 +131,10 @@ export class Game
       .createStaminaPickups();
 
     document.querySelector('#current-level').innerHTML = this.currentLevel;
+
+    this.setWeaponHotKey();
+
+    this.onResize(window.innerWidth, window.innerHeight);
 
     if (loop) {
       this.loop();
@@ -306,6 +319,20 @@ export class Game
     }, 500);
   }
 
+  setWeaponHotKey () {
+    const hotkeys = document.querySelectorAll('span.help-hotkey');
+    for (const key of hotkeys) {
+      const { hotkey } = key.dataset;
+      if (hotkey) {
+        if (parseInt(hotkey) !== (this.selectedWeaponIndex+1)) {
+          key.classList.remove('help-hotkey__active');
+        } else {
+          key.classList.add('help-hotkey__active');
+        }
+      }
+    }
+  }
+
   createKeyboardMouseControls () {
     window.addEventListener('keydown', async (e) => {
       if (e.key === 'p') await this.pause();
@@ -317,11 +344,26 @@ export class Game
       case 's': this.keyboard.down = true; break;
       case 'a': this.keyboard.left = true; break;
       case 'd': this.keyboard.right = true; break;
-      case '1': this.selectedWeaponIndex = 0; break;
-      case '2': this.selectedWeaponIndex = 1; break;
-      case '3': this.selectedWeaponIndex = 2; break;
-      case '4': this.selectedWeaponIndex = 3; break;
-      case '5': this.selectedWeaponIndex = 4; break;
+      case '1':
+        this.selectedWeaponIndex = 0;
+        this.setWeaponHotKey();
+        break;
+      case '2':
+        this.selectedWeaponIndex = 1;
+        this.setWeaponHotKey();
+        break;
+      case '3':
+        this.selectedWeaponIndex = 2;
+        this.setWeaponHotKey();
+        break;
+      case '4':
+        this.selectedWeaponIndex = 3;
+        this.setWeaponHotKey();
+        break;
+      case '5':
+        this.selectedWeaponIndex = 4;
+        this.setWeaponHotKey();
+        break;
       }
     });
     

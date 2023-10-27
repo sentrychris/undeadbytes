@@ -1,14 +1,14 @@
-import { mappings } from '../Levels/mappings';
+import { levels } from '../Levels/mappings';
 
 export class Map
 {
   constructor () {
-    this.levels = mappings;
+    this.levels = levels;
     this.newMapConfiguration();
   }
 
   generate (levelIndex = 1) {
-    const level = mappings[levelIndex];
+    const level = levels[levelIndex];
     for (let y = 0; y < level.length; y++) {
       const row = level[y];
 

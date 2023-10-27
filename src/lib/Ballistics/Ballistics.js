@@ -1,7 +1,7 @@
-import { AudioFX } from '../AudioFX';
+import { AudioFX } from '../Audio/AudioFX';
 import { Bullet } from './Bullet';
 import { Grenade } from './Grenade';
-import { mappings } from './mappings';
+import { weapons } from './mappings';
 
 export class Ballistics
 {
@@ -14,7 +14,7 @@ export class Ballistics
   }
 
   update (game) {
-    this.weapon = mappings[game.selectedWeaponIndex];
+    this.weapon = weapons[game.selectedWeaponIndex];
     this.setEquippedWeaponDisplayInformation();
 
     if (this.weapon && this.trigger && ! game.player.dead) {

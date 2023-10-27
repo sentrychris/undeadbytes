@@ -1,6 +1,6 @@
 import { Collision } from '../../Collision';
 import { Renderer } from '../../Renderer';
-import { AudioFX } from '../../AudioFX';
+import { AudioFX } from '../../Audio/AudioFX';
 import { config } from '../../../config';
 
 export class Health
@@ -42,7 +42,7 @@ export class Health
   }
 
   pickup () {
-    AudioFX.snippet({ name: 'pickup' });
+    AudioFX.snippet({ name: 'inject' });
     this.markToDelete = true;
   }
 }

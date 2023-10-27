@@ -3,7 +3,7 @@
  * 
  * Weapons are mapped by array index to hotkey.
  */
-export const mappings = [
+export const weapons = [
   {
     name: 'Pistol',
     type: 'gun',

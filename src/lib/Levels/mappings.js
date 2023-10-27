@@ -5,7 +5,7 @@ import { level3 } from './level3';
 import { level4 } from './level4';
 import { level5 } from './level5';
 
-export const mappings = [
+export const levels = [
   level0,
   level1,
   level2,

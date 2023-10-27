@@ -1,7 +1,7 @@
 
 import { Collision } from '../Collision';
 import { Renderer } from '../Renderer';
-import { AudioFX } from '../AudioFX';
+import { AudioFX } from '../Audio/AudioFX';
 import { config } from '../../config';
 
 export class Player

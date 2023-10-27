@@ -7,7 +7,7 @@ import { Stamina } from './Entity/Pickup/Stamina';
 import { Ballistics } from './Ballistics/Ballistics';
 import { Map } from './Scene/Map';
 import { Camera } from './Scene/Camera';
-import { AudioFX } from './AudioFX';
+import { AudioFX } from './Audio/AudioFX';
 import { config } from '../config';
 
 export class Game

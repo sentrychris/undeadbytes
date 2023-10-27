@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: [
-    './src/index.js',
+    './src/browser/index.js',
   ],
   output: {
     filename: '[name].js',
@@ -26,8 +26,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-          { from: './src/assets' },
-          { from: './src/views'}
+          { from: './src/browser/assets' },
+          { from: './src/browser/views'}
       ]
     })
   ]

@@ -9,9 +9,9 @@ If you would like to contribute a map, please feel free to build one and submit 
     ```
     git checkout -b level/level5
     ```
-3. Create a new level in `src/lib/Levels/`, increment it from the last available level, e.g.:
+3. Create a new level in `src/browser/lib/Levels/`, increment it from the last available level, e.g.:
     ```
-    touch src/lib/Levels/level5.js
+    touch src/browser/lib/Levels/level5.js
     ```
 4. Create your map in the same format as the example above, don't forget to change the export const name to the same name as the level e.g:
     ```js
@@ -21,7 +21,7 @@ If you would like to contribute a map, please feel free to build one and submit 
 
 ## Map Structure
 
-Maps are incredibly straightforward, here is the map for level 1, located at `src/lib/Levels/level1.js`:
+Maps are incredibly straightforward, here is the map for level 1, located at `src/browser/lib/Levels/level1.js`:
 
 ```js
 export const level1 = [

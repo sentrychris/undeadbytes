@@ -15,10 +15,5 @@ game.setup({ level: 0 }, true);
 // Track WASD for UI
 trackWASD();
 
-// Pause / unpause
-window.addEventListener('keydown', async (e) => {
-  if (e.key === 'p') await game.pause();
-});
-
 // Track game state in the console
 logGameStateToConsole(game, 10000);

@@ -33,7 +33,7 @@ export class _AudioFX
     this.fx = {
       weapon: null,
       snippet: null
-    }
+    };
   }
 
   /**
@@ -162,7 +162,7 @@ export class _AudioFX
 
         ++this.trackIndex;
         if (this.trackIndex >= this.soundtracks.length) {
-          this.trackIndex = 0 
+          this.trackIndex = 0; 
         }
 
         console.log(`changed track index to ${this.trackIndex}`);

@@ -26,7 +26,7 @@ export class Ammo
     this.image = new Image();
     this.image.src = 'img/magazine.png';
     this.glow = 40;
-    this.color = '#F8CA00'
+    this.color = '#F8CA00';
 
     this.markToDelete = false;
   }

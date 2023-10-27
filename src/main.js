@@ -1,6 +1,7 @@
 const { app, BrowserWindow, nativeTheme: { shouldUseDarkColors }, shell} = require('electron');
 const path = require('path');
 const IPC = require('./app/ipc');
+const Menu = require('./app/menu');
 
 let context;
 function main() {
@@ -18,6 +19,9 @@ function main() {
 
   const ipc = new IPC(context, null);
   ipc.register();
+
+  const menu = new Menu(context);
+  menu.register();
 
   context.webContents.on('did-finish-load', () => {
     console.log('finished loading');

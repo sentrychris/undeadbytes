@@ -84,7 +84,7 @@ export class Game
     }
   }
 
-  async pause() {
+  async pause () {
     if (! this.stopped) {
       this.stopped = true;
       cancelAnimationFrame(this.frame);
@@ -313,24 +313,24 @@ export class Game
 
     document.addEventListener('keydown', (event) => {
       switch (event.key) {
-        case 'w': this.keyboard.up = true; break;
-        case 's': this.keyboard.down = true; break;
-        case 'a': this.keyboard.left = true; break;
-        case 'd': this.keyboard.right = true; break;
-        case '1': this.selectedWeaponIndex = 0; break;
-        case '2': this.selectedWeaponIndex = 1; break;
-        case '3': this.selectedWeaponIndex = 2; break;
-        case '4': this.selectedWeaponIndex = 3; break;
-        case '5': this.selectedWeaponIndex = 4; break;
+      case 'w': this.keyboard.up = true; break;
+      case 's': this.keyboard.down = true; break;
+      case 'a': this.keyboard.left = true; break;
+      case 'd': this.keyboard.right = true; break;
+      case '1': this.selectedWeaponIndex = 0; break;
+      case '2': this.selectedWeaponIndex = 1; break;
+      case '3': this.selectedWeaponIndex = 2; break;
+      case '4': this.selectedWeaponIndex = 3; break;
+      case '5': this.selectedWeaponIndex = 4; break;
       }
     });
     
     document.addEventListener('keyup', (event) => {
       switch (event.key) {
-        case 'w': this.keyboard.up = false; break;
-        case 's': this.keyboard.down = false; break;
-        case 'a': this.keyboard.left = false; break;
-        case 'd': this.keyboard.right = false; break;
+      case 'w': this.keyboard.up = false; break;
+      case 's': this.keyboard.down = false; break;
+      case 'a': this.keyboard.left = false; break;
+      case 'd': this.keyboard.right = false; break;
       }
     });
     

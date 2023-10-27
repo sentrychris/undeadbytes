@@ -47,7 +47,7 @@ export class Camera
 
   resize () {}
 
-  newScene() {
+  newScene () {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
   }
 

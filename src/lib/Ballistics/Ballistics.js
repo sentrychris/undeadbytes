@@ -43,10 +43,11 @@ export class Ballistics
   }
 
   handleFire (context, player) {
-    --this.weapon.clip.current;
     if (this.shouldReloadWeaponAmmoClip()) {
       return;
     }
+
+    --this.weapon.clip.current;
 
     AudioFX.weapon({
       equippedWeapon: this.weapon
@@ -82,7 +83,13 @@ export class Ballistics
   }
 
   refillWeaponAmmoClip () {
-    this.weapon.clip.current = this.weapon.clip.capacity;
+    if (this.weapon.clip.current === this.weapon.clip.capacity) {
+      if (this.weapon.magazines.current < this.weapon.magazines.capacity) {
+        ++this.weapon.magazines.current;
+      }
+    } else {
+      this.weapon.clip.current = this.weapon.clip.capacity;
+    }
   }
 
   registerProjectiles (context, player) {

@@ -1,3 +1,4 @@
+import { config } from '../../config';
 import { weapons } from '../Ballistics/mappings';
 import { snippets, soundtrack } from './mappings';
 
@@ -34,6 +35,8 @@ export class _AudioFX
       weapon: null,
       snippet: null
     };
+
+    this.volumes = config.volumes;
   }
 
   /**
@@ -87,21 +90,23 @@ export class _AudioFX
 
   async volume (key, level) {
     if (key === 'soundtrack') {
+      this.volumes.soundtrack = level;
       if (this.currentTrack && ! this.currentTrack.playback.paused) {
-        this.currentTrack.playback.volume = level;
-        // TODO set persisted volume property for next track
+        this.currentTrack.playback.volume = this.volumes.soundtrack;
       }
     }
 
-    if (key === 'fx') {
+    if (key === 'weapon') {
+      this.volumes.fx.weapon = level;
       if (this.fx.weapon && ! this.fx.weapon.playback.paused) {
-        this.fx.weapon.playback.volume = level;
-        // TODO set persisted volume property for next weapon fx
+        this.fx.weapon.playback.volume = this.volumes.fx.weapon;
       }
+    }
 
+    if (key === 'snippet') {
+      this.volumes.fx.snippet = level;
       if (this.fx.snippet && ! this.fx.snippet.playback.paused) {
-        this.fx.snippet.playback.volume = level;
-        // TODO set persisted volume property for next snippet fx
+        this.fx.snippet.playback.volume = this.volumes.fx.snippet;
       }
     }
   }
@@ -130,11 +135,11 @@ export class _AudioFX
       return;
     }
 
-    this.fx.weapon.volume = 0.3;
     if (weapon.audio.type !== 'repeat') {
       this.stop('weapon');
     }
-    
+
+    this.fx.weapon.volume = this.volumes.fx.weapon;
     this.fx.weapon.playbackRate = playbackRate;
     this.fx.weapon.play();
   }
@@ -142,7 +147,7 @@ export class _AudioFX
   /**
    * Snippet audio FX handler
    */
-  snippet ({name = null, random = false}) {
+  snippet ({name = null, random = false}, playbackRate = 1) {
     if (! this.loaded) {
       return;
     }
@@ -158,6 +163,8 @@ export class _AudioFX
         ? this.audio.snippets[snippet.name].playback
         : snippet.playback;
       
+      this.fx.snippet.volume = this.volumes.fx.snippet;
+      this.fx.weapon.playbackRate = playbackRate;
       this.fx.snippet.play();
     }
   }
@@ -174,7 +181,7 @@ export class _AudioFX
       && (this.currentTrack.playback.paused || this.currentTrack.playback.currentTime === 0)
     ) {
       console.log(`now playing ${this.currentTrack.name}`);
-      this.currentTrack.playback.volume = 0.2;
+      this.currentTrack.playback.volume = this.volumes.soundtrack;
       this.currentTrack.playback.play();
     } else {
       if (this.nextTrackReady) {

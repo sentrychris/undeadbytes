@@ -25,5 +25,12 @@ export const config = {
       y: 0,
       pressed: false
     }
-  }
+  },
+  volumes: {
+    fx: {
+      weapon: 0.5,
+      snippet: 0.5,
+    },
+    soundtrack: 0.5
+  },
 };

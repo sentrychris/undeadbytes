@@ -17,7 +17,7 @@ If you would like to contribute a map, please feel free to build one and submit 
     ```js
     export const level5 = [...]
     ```
-5. Open a PR to merge your branch into the Squareshoot `main` branch.
+5. Open a PR to merge your branch into the Undead Bytes `main` branch.
 
 ## Map Structure
 

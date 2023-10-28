@@ -35,6 +35,7 @@ export class Game
     onResize();
 
     this.createKeyboardMouseControls();
+    this.createVolumeControls();
 
     this.stats = new Stats();
   }
@@ -76,7 +77,7 @@ export class Game
 
   async start (stopped, nextLevel = false) {
     if (stopped && ! this.frame) {
-      const gameover = document.querySelector('.game-ended-wrapper');
+      const gameover = document.querySelector('.game-ended');
 
       if (nextLevel) {
         ++this.currentLevel;
@@ -94,17 +95,15 @@ export class Game
   async pause () {
     const hotkey =document.querySelector('span[data-hotkey="P"]');
     const state = document.querySelector('#game-pause-state');
-    const overlay = document.querySelector('.pause-overlay');
+    const cssclass = 'help-block__hotkey--active';
     if (! this.stopped) {
       this.stopped = true;
       cancelAnimationFrame(this.frame);
-      hotkey.classList.add('help-hotkey__active');
+      hotkey.classList.add(cssclass);
       state.innerHTML = 'Game Paused';
-      overlay.style.display = 'block';
     } else {
-      hotkey.classList.remove('help-hotkey__active');
+      hotkey.classList.remove(cssclass);
       state.innerHTML = 'Pause Game';
-      overlay.style.display = 'none';
       this.stopped = false;
       this.frame = requestAnimationFrame(this.loop.bind(this));
     }
@@ -311,30 +310,31 @@ export class Game
   }
 
   displayGameEnd () {
-    const gameover = document.querySelector('.game-ended-wrapper');
+    const gameover = document.querySelector('.game-ended');
     setTimeout(() => {
       if (this.levelPassed) {
         gameover.querySelector('h1').innerHTML = 'You Win!';
-        gameover.classList.add('level-passed');
-        gameover.classList.remove('level-failed');
+        gameover.classList.add('pass');
+        gameover.classList.remove('fail');
       } else {
         gameover.querySelector('h1').innerHTML = 'You Died!';
-        gameover.classList.remove('level-passed');
-        gameover.classList.add('level-failed');
+        gameover.classList.remove('pass');
+        gameover.classList.add('fail');
       }
       gameover.style.display = 'flex';
     }, 500);
   }
 
   setWeaponHotKey () {
-    const hotkeys = document.querySelectorAll('span.help-hotkey');
+    const hotkeys = document.querySelectorAll('span.help-block__hotkey');
+    const cssclass = 'help-block__hotkey--active';
     for (const key of hotkeys) {
       const { hotkey } = key.dataset;
       if (hotkey) {
         if (parseInt(hotkey) !== (this.selectedWeaponIndex+1)) {
-          key.classList.remove('help-hotkey__active');
+          key.classList.remove(cssclass);
         } else {
-          key.classList.add('help-hotkey__active');
+          key.classList.add(cssclass);
         }
       }
     }
@@ -400,6 +400,19 @@ export class Game
     });
   }
 
+  createVolumeControls () {
+    document.querySelector('#soundtrack-volume').addEventListener('input', (e) => {
+      const { target } = e;
+      const value = (target.value - target.min) / (target.max - target.min);
+      const percent = Math.round(value * 100);
+      
+      target.style.background = 'linear-gradient(to right, #8fce00 0%, #8fce00 ' +
+        percent + '%, #fff ' + percent + '%, white 100%)';
+    
+      AudioFX.volume('soundtrack', value);
+    });
+  }
+
   toggleStats (panel = 0) {
     this.stats.showPanel(panel); // 0 = fps, 1 = ms,  2 = mb, 3+ = custom
 
@@ -411,7 +424,7 @@ export class Game
       this.statsShown = false;
     }
 
-    const stats = document.querySelector('.stats-wrapper');
+    const stats = document.querySelector('.stats');
     if (stats) {
       stats.appendChild(this.stats.dom);
     }

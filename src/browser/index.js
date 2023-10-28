@@ -1,15 +1,15 @@
 import { Game } from './lib/Game';
-import { trackWASD, logGameStateToConsole } from './util';
+import { trackWASD, logGameStateToConsole, isActiveElement } from './util';
 
 // Styles
 import './css/main.css';
 
-const splash = document.querySelector('.splash-wrapper');
-const wrapper = document.querySelector('#game-wrapper');
-const canvas = document.querySelector('#game');
+const viewport = document.querySelector('#undead-bytes');
+const splash = document.querySelector('.splash');
+const canvas = document.querySelector('canvas#game');
 
 function main () {
-  if (! wrapper.classList.contains('inactive') && canvas) {
+  if (isActiveElement(viewport) && canvas) {
     // Create a new game
     const game = new Game(canvas.getContext('2d'));
     // Setup the level and start the game loop
@@ -23,9 +23,9 @@ function main () {
 
 document.querySelector('#play-now').addEventListener('click', () => {
   if (splash) {
-    document.body.style.background = '#000000';
+    document.body.classList.remove('body-splash');
     splash.style.display = 'none';
-    wrapper.classList.remove('inactive');
+    viewport.classList.remove('inactive');
   }
 
   main();

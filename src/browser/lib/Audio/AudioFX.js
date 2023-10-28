@@ -85,6 +85,27 @@ export class _AudioFX
     }
   }
 
+  async volume (key, level) {
+    if (key === 'soundtrack') {
+      if (this.currentTrack && ! this.currentTrack.playback.paused) {
+        this.currentTrack.playback.volume = level;
+        // TODO set persisted volume property for next track
+      }
+    }
+
+    if (key === 'fx') {
+      if (this.fx.weapon && ! this.fx.weapon.playback.paused) {
+        this.fx.weapon.playback.volume = level;
+        // TODO set persisted volume property for next weapon fx
+      }
+
+      if (this.fx.snippet && ! this.fx.snippet.playback.paused) {
+        this.fx.snippet.playback.volume = level;
+        // TODO set persisted volume property for next snippet fx
+      }
+    }
+  }
+
   /**
    * Weapon audio FX handler 
    */

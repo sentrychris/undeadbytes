@@ -35,6 +35,7 @@ export class Game
     onResize();
 
     this.createKeyboardMouseControls();
+    this.createVolumeControls();
 
     this.stats = new Stats();
   }
@@ -94,18 +95,15 @@ export class Game
   async pause () {
     const hotkey =document.querySelector('span[data-hotkey="P"]');
     const state = document.querySelector('#game-pause-state');
-    const overlay = document.querySelector('.overlay');
     const cssclass = 'help-block__hotkey--active';
     if (! this.stopped) {
       this.stopped = true;
       cancelAnimationFrame(this.frame);
       hotkey.classList.add(cssclass);
       state.innerHTML = 'Game Paused';
-      overlay.style.display = 'block';
     } else {
       hotkey.classList.remove(cssclass);
       state.innerHTML = 'Pause Game';
-      overlay.style.display = 'none';
       this.stopped = false;
       this.frame = requestAnimationFrame(this.loop.bind(this));
     }
@@ -399,6 +397,19 @@ export class Game
     
     document.addEventListener('mouseup', () => {
       this.mouse.pressed = false;
+    });
+  }
+
+  createVolumeControls () {
+    document.querySelector('#soundtrack-volume').addEventListener('input', (e) => {
+      const { target } = e;
+      const value = (target.value - target.min) / (target.max - target.min);
+      const percent = Math.round(value * 100);
+      
+      target.style.background = 'linear-gradient(to right, #8fce00 0%, #8fce00 ' +
+        percent + '%, #fff ' + percent + '%, white 100%)';
+    
+      AudioFX.volume('soundtrack', value);
     });
   }
 

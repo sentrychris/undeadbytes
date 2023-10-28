@@ -4,12 +4,12 @@ import { trackWASD, logGameStateToConsole, isActiveElement } from './util';
 // Styles
 import './css/main.css';
 
-const game = document.querySelector('#undead-byters');
+const viewport = document.querySelector('#undead-byters');
 const splash = document.querySelector('.splash');
-const canvas = document.querySelector('#game');
+const canvas = document.querySelector('canvas#game');
 
 function main () {
-  if (isActiveElement(game) && canvas) {
+  if (isActiveElement(viewport) && canvas) {
     // Create a new game
     const game = new Game(canvas.getContext('2d'));
     // Setup the level and start the game loop
@@ -25,7 +25,7 @@ document.querySelector('#play-now').addEventListener('click', () => {
   if (splash) {
     document.body.classList.remove('body-splash');
     splash.style.display = 'none';
-    game.classList.remove('inactive');
+    viewport.classList.remove('inactive');
   }
 
   main();

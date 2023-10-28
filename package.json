@@ -1,8 +1,8 @@
 {
-  "name": "squareshoot",
-  "productName": "Squareshoot",
-  "version": "0.4.0",
-  "description": "Shoot zombies and work your way through low-poly dungeons.",
+  "name": "undeadbytes",
+  "productName": "Undead Bytes",
+  "version": "0.4.3",
+  "description": "Shoot zombies and work your way through low-poly dungeons!",
   "author": "Chris Rowles <crowles.sdx@gmail.com>",
   "license": "MIT",
   "main": "src/main.js",
@@ -33,7 +33,7 @@
     "stats.js": "^0.17.0"
   },
   "build": {
-    "appId": "com.squareshoot.app",
+    "appId": "com.undeadbytes.app",
     "directories": {
       "output": "releases/${platform}/${arch}"
     },

@@ -33,11 +33,11 @@ module.exports = class AppMenu {
             click: () => {
               openAboutWindow({
                 icon_path: path.join(__dirname, '../shared/assets/logo.ico'),
-                product_name: 'Squareshoot',
+                product_name: 'Undead Bytes',
                 copyright: '© 2023 - ' + new Date().getFullYear() + ' Chris Rowles. All rights reserved.',
                 package_json_dir: path.join(__dirname, '../../'),
                 use_version_info: true,
-                bug_report_url: 'https://github.com/sentrychris/squareshoot.git'
+                bug_report_url: 'https://github.com/sentrychris/undeadbytes.git'
               });
             }
           }

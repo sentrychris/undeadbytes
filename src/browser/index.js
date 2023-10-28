@@ -4,7 +4,7 @@ import { trackWASD, logGameStateToConsole, isActiveElement } from './util';
 // Styles
 import './css/main.css';
 
-const viewport = document.querySelector('#undead-byters');
+const viewport = document.querySelector('#undead-bytes');
 const splash = document.querySelector('.splash');
 const canvas = document.querySelector('canvas#game');
 

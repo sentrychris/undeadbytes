@@ -17,8 +17,12 @@ body {
   font-family: 'VT323', monospace;
 }
 
+canvas {
+  cursor: crosshair;
+}
+
 #current-level {
-  color: #74f074;
+  color: #50ffb0;
 }
 
 #equipped-weapon {
@@ -30,8 +34,8 @@ body {
 }
 
 #soundtrack-volume {
-  background: linear-gradient(to right, #8fce00 0%, #8fce00 50%, #fff 50%, #fff 100%);
-  border: solid 1px #8fce00;
+  background: linear-gradient(to right, #50ffb0 0%, #50ffb0 50%, #fff 50%, #fff 100%);
+  border: solid 1px #50ffb0;
   border-radius: 8px;
   height: 7px;
   outline: none;
@@ -50,7 +54,8 @@ body {
   align-items: center;
   flex-direction: column;
   background-color: #fff;
-  background-image: url("./img/splash.webp");
+  background-image: url("./img/splash4.png");
+  /* background-position: center; */
   background-position-x: 0px;
   background-position-y: 0px;
   background-size: cover;
@@ -64,7 +69,7 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.8);
   display:flex;
   align-items: center;
 }
@@ -81,10 +86,8 @@ body {
   font-size: 12rem;
   text-transform: uppercase;
   font-weight: bold;
-  letter-spacing: 5px;
-  display: block;
-  text-shadow: 0 0 100px rgb(255 0 0 / 45%);
-  background: url(./img/text-fill.webp) repeat-y;
+  text-shadow: 0 0 100px rgb(240 241 241 / 74%);
+  background: -webkit-linear-gradient(#09CF8D, #222222);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -106,7 +109,8 @@ body {
 }
 
 .splash__button {
-  margin-top: 20px;
+  display: block;
+  margin: 0 auto;
   height: 70pt;
   width: calc(30pt * 10);
   cursor: pointer;
@@ -128,12 +132,12 @@ body {
   justify-content: center;
   align-items: center;
   color: #eeeeee;
-  text-shadow: 0 0 30px rgb(255 0 0 / 95%);
+  text-shadow: 0 0 15px #50ffb0;
 }
 
 .splash__button:hover .splash__button__text {
   color: #f5d95c;
-  text-shadow: 0 0 10px rgb(255 0 0 / 75%);
+  text-shadow: 0 0 30px #50ffb0;
 }
 
 
@@ -148,8 +152,9 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.2rem;
   color: white;
-  background: rgba(34, 34, 34, 0.75);
-  border: 1px solid rgb(34, 34, 34);
+  background: rgba(34, 34, 34, 0.7);
+  box-shadow: 0 0 15px #50ffb0;
+  border: 1px solid #50ffb0;
   border-radius: 5px;
   padding: 15px;
 }
@@ -285,8 +290,8 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #353943;
-  border: 1px solid #8fce00;
-  box-shadow: 3px 3px #d9ff82;
+  border: 1px solid #50ffb0;
+  box-shadow: 3px 3px #50ffb0;
   border-radius: 5px;
   color: #ffffff;
   width: 60px;

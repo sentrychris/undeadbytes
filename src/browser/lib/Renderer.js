@@ -324,7 +324,7 @@ export class Renderer
     } else if (health <= 75) {
       color = 'orange';
     } else {
-      color = 'lime';
+      color = '#50ffb0';
     }
 
     context.beginPath();

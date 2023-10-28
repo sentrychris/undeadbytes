@@ -406,8 +406,8 @@ export class Game
       const value = (target.value - target.min) / (target.max - target.min);
       const percent = Math.round(value * 100);
       
-      target.style.background = 'linear-gradient(to right, #8fce00 0%, #8fce00 ' +
-        percent + '%, #fff ' + percent + '%, white 100%)';
+      target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
+        percent + '%, #fff ' + percent + '%, #fff 100%)';
     
       AudioFX.volume('soundtrack', value);
     });

@@ -44,10 +44,10 @@ export const snippets = [
 ];
 
 export const soundtrack = [
-  // './soundtrack/track0.mp3',
-  // './soundtrack/track1.mp3',
-  // './soundtrack/track2.mp3',
-  // './soundtrack/track3.mp3',
-  // './soundtrack/track4.mp3',
+  './soundtrack/track0.mp3',
+  './soundtrack/track1.mp3',
+  './soundtrack/track2.mp3',
+  './soundtrack/track3.mp3',
+  './soundtrack/track4.mp3',
   './soundtrack/track5.mp3',
 ];

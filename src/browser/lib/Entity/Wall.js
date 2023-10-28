@@ -14,7 +14,7 @@ export class Wall
     if (this.textured) {
       this.textured = true;
       this.image = new Image();
-      this.image.src = 'img/wall.png';
+      this.image.src = 'img/wall.webp';
       this.image.width = config.cell.size;
       this.image.height = config.cell.size;
     }

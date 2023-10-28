@@ -50,7 +50,7 @@ body {
   align-items: center;
   flex-direction: column;
   background-color: #fff;
-  background-image: url("./img/splash.jpeg");
+  background-image: url("./img/splash.webp");
   background-position-x: 0px;
   background-position-y: 0px;
   background-size: cover;
@@ -84,7 +84,7 @@ body {
   letter-spacing: 5px;
   display: block;
   text-shadow: 0 0 100px rgb(255 0 0 / 45%);
-  background: url(./img/text-fill.jpeg) repeat-y;
+  background: url(./img/text-fill.webp) repeat-y;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

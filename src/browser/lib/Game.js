@@ -37,10 +37,6 @@ export class Game
     this.createKeyboardMouseControls();
 
     this.stats = new Stats();
-    this.stats.showPanel(0); // 0 = fps, 1 = ms,  2 = mb, 3+ = custom
-    this.stats.domElement.style.cssText = 'position:absolute;top:0px;right:0px;';
-    const stats = document.querySelector('.stats-wrapper');
-    if (stats) stats.appendChild(this.stats.dom);
   }
 
   loop () {
@@ -375,6 +371,9 @@ export class Game
         this.selectedWeaponIndex = 4;
         this.setWeaponHotKey();
         break;
+      case '*':
+        this.toggleStats();
+        break;
       }
     });
     
@@ -399,5 +398,22 @@ export class Game
     document.addEventListener('mouseup', () => {
       this.mouse.pressed = false;
     });
+  }
+
+  toggleStats (panel = 0) {
+    this.stats.showPanel(panel); // 0 = fps, 1 = ms,  2 = mb, 3+ = custom
+
+    if (! this.statsShown) {
+      this.stats.domElement.style.cssText = 'position:absolute;top:0px;right:0px;';
+      this.statsShown = true;
+    } else {
+      this.stats.domElement.style.cssText = 'display:none;';
+      this.statsShown = false;
+    }
+
+    const stats = document.querySelector('.stats-wrapper');
+    if (stats) {
+      stats.appendChild(this.stats.dom);
+    }
   }
 }

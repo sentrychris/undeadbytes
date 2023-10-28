@@ -1,8 +1,8 @@
-# SquareShoot: Low-Poly Zombie Shooter
+# Undead Byters: Low-Poly Zombie Shooter
 
-![squareshoot](./docs/img//squareshoot.png)
+![Undead Byters](./docs/img//squareshoot.png)
 
-Welcome to SquareShoot, a fun little low-poly shooter game written in vanilla JavaScript and powered by HTML5 canvas. Gear up, survive waves of zombies, and strategically use your weapons to navigate through each level. Are you ready to face the undead?
+Welcome to Undead Byters, a fun little low-poly shooter game written in vanilla JavaScript and powered by HTML5 canvas. Gear up, survive waves of zombies, and strategically use your weapons to navigate through each level. Are you ready to face the undead?
 
 Want to contribute a map? Find out [how to here](./docs/CONTRIBUTE-MAPS.MD)!
 
@@ -18,7 +18,7 @@ Want to contribute a map? Find out [how to here](./docs/CONTRIBUTE-MAPS.MD)!
 
 ## Introduction
 
-SquareShoot is an immersive low-poly game where players engage in strategic zombie battles. With careful planning and strategic use of weapons, players must navigate through levels, conserving ammo and choosing the right tools for the job.
+Undead Byters is a fun low-poly game where players engage in strategic zombie battles. With careful planning and strategic use of weapons, players must navigate through levels, conserving ammo and choosing the right tools for the job.
 
 ## Features
 
@@ -61,4 +61,4 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 ---
 
-Dive into the world of SquareShoot and see if you have what it takes to survive the low-poly undead onslaught. Happy gaming! 🧟‍♂️🔫
+Dive into the world of Undead Byters and see if you have what it takes to survive the low-poly undead onslaught. Happy gaming! 🧟‍♂️🔫

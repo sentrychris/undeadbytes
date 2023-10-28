@@ -1,27 +1,52 @@
 {
-  "name": "squareshoot",
-  "version": "0.2.0",
-  "description": "",
-  "main": "index.js",
+  "name": "undeadbytes",
+  "productName": "Undead Bytes",
+  "version": "0.4.3",
+  "description": "Shoot zombies and work your way through low-poly dungeons!",
+  "author": "Chris Rowles <crowles.sdx@gmail.com>",
+  "license": "MIT",
+  "main": "src/main.js",
   "scripts": {
-    "docs": "cp -r dist/* docs/",
-    "build": "webpack --config webpack.config.js && npm run docs",
-    "watch": "webpack --config webpack.config.js --watch",
-    "play": "http-server dist/",
     "lint": "eslint src --ext .js",
-    "lint:fix": "eslint src --ext .js --fix"
+    "lint:fix": "eslint src --ext .js --fix",
+    "build:web": "webpack --config webpack.config.js",
+    "watch:web": "webpack --config webpack.config.js --watch",
+    "serve:web": "http-server dist/",
+    "linux:exe": "node ./node_modules/electron/cli.js",
+    "windows:exe": "node_modules\\electron\\dist\\electron.exe .",
+    "build:exe": "electron-builder --dir",
+    "build:installer": "electron-builder"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
+    "@electron/asar": "^3.2.7",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
+    "electron": "^27.0.2",
+    "electron-builder": "^24.6.4",
     "eslint": "^8.52.0",
-    "html-webpack-plugin": "^5.5.3",
-    "mini-css-extract-plugin": "^2.7.6",
     "style-loader": "^3.3.3",
-    "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "about-window": "^1.15.2",
+    "stats.js": "^0.17.0"
+  },
+  "build": {
+    "appId": "com.undeadbytes.app",
+    "directories": {
+      "output": "releases/${platform}/${arch}"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "installerIcon": "build/resources/icon.ico",
+      "license": "build/resources/license.txt"
+    }
   }
 }

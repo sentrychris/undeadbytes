@@ -1,4 +1,4 @@
-const { app, BrowserWindow, nativeTheme: { shouldUseDarkColors }, shell} = require('electron');
+const { app, BrowserWindow, shell} = require('electron');
 const path = require('path');
 const IPC = require('./app/ipc');
 const Menu = require('./app/menu');
@@ -19,6 +19,7 @@ let context;
 function main() {
   context = new BrowserWindow({
     show: false,
+    icon: path.join(__dirname, 'shared/assets/logo.ico'),
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -35,6 +36,13 @@ function main() {
 
   const menu = new Menu(context);
   menu.register();
+
+  context.webContents.setWindowOpenHandler(({ url }) => {
+    shell.openExternal(url);
+    return {
+      action: 'deny'
+    };
+  });
 
   context.webContents.on('did-finish-load', () => {
     console.log('finished loading');

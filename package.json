@@ -37,8 +37,18 @@
     "directories": {
       "output": "releases/${platform}/${arch}"
     },
+    "linux": {
+      "target": "deb",
+      "icon": "build/resources/icon256x256.png",
+      "category": "Game"
+    },
+    "mac": {
+      "target": "pkg",
+      "icon": "build/resources/icon512x512.png"
+    },
     "win": {
-      "target": "nsis"
+      "target": "nsis",
+      "icon": "build/resources/icon.ico"
     },
     "nsis": {
       "oneClick": false,
@@ -46,6 +56,14 @@
       "allowToChangeInstallationDirectory": true,
       "deleteAppDataOnUninstall": true,
       "installerIcon": "build/resources/icon.ico",
+      "license": "build/resources/license.txt"
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": true,
+      "runAfterFinish": true
+    },
+    "pkg": {
       "license": "build/resources/license.txt"
     }
   }

@@ -62,3 +62,15 @@ This project is licensed under the [MIT License](LICENSE.md).
 ---
 
 Dive into the world of Undead Bytes and see if you have what it takes to survive the low-poly undead onslaught. Happy gaming! 🧟‍♂️🔫
+
+## Credits
+
+Credit to the kind and talented users on [Flaticon](https://www.flaticon.com/s) responsible for the following icons:
+
+- <a href="https://www.flaticon.com/free-icons/ammo" title="ammo icons">Ammo icons created by Smashicons - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/ammunition" title="ammunition icons">Ammunition icons created by Freepik - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/first-aid-kit" title="first aid kit icons">First aid kit icons created by Freepik - Flaticon</a>
+- <a href="https://www.flaticon.com/free-icons/stamina" title="stamina icons">Stamina icons created by Eucalyp - Flaticon</a>
+
+Credit to the kind and talented users on [Pixabay](https://pixabay.com/id/service/license-summary/) for providing royalty-free sound clips.
+

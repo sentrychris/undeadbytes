@@ -6,7 +6,9 @@ module.exports = class AppMenu {
   constructor(context, register = false) {
     this.context = context;
 
-    if (register) {}
+    if (register) {
+      this.register();
+    }
   }
 
   register () {

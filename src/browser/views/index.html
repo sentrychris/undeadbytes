@@ -10,78 +10,90 @@
   <meta property="og:image" content="https://sentrychris.github.io/squareshoot/img/squareshoot.png" />
   <title>A simple zombie shooter in vanilla JS.</title>
 </head>
-<body>
-  <canvas id="main"></canvas>
-  
-  <div class="help">
-    <p>Current Level: <strong id="current-level"></strong></p>
-    <hr />
-
-    <p>P - pause game</p>
-    <p>WASD - movement</p>
-    <p>Mouse - direction/shooting</p>
-    <hr />
-
-    <p>Enemies:</p>
-    <div class="help-section">
-      <img src="./img/zombie.png" class="help-section--img">
-      <strong id="enemies-remaining"></strong>
-    </div>
-    <hr />
-
-    <p>Weapon: <strong id="equipped-weapon"></strong></p>
-    <div class="help-section">
-      <img src="./img/ammunition.png" class="help-section--img">
-      <strong id="gun-ammo"><span id="ammo-remaining"></span> / <span id="ammo-capacity"></span></strong>
-    </div>
-    <div class="help-section">
-      <img src="./img/magazine.png" class="help-section--img">
-      <strong id="gun-magazines"><span id="magazines-remaining"></span> / <span id="magazines-total"></span></strong>
-    </div>
-    <p><strong id="out-of-ammo" class="out-of-ammo"><span>OUT OF AMMO</span></strong></p>
-    <hr />
-
-
-    <div style="display:flex;flex-wrap: wrap;gap:15px;font-size:.75rem;">
-      <p><span data-hotkey="1" class="help-hotkey">1</span> Pistol</p>
-      <p><span data-hotkey="2" class="help-hotkey">2</span> Shotgun</p>
-      <p><span data-hotkey="3" class="help-hotkey">3</span> Machine</p>
-      <p><span data-hotkey="4" class="help-hotkey">4</span> Flame</p>
-    </div>
-    <hr />
-
-
-    <div class="keyboard">
-      <div class="top-row">
-        <div data-key="w" class="keyboard-key">
-          <p>W</p>
+<body class="splash-body">
+  <div class="pause-overlay"></div>
+  <div id="game-wrapper" class="inactive">
+    <canvas id="game"></canvas>
+    <div class="help">
+      <p>Current Level: <strong id="current-level"></strong></p>
+      <hr />
+      
+      <p class="help-section" style="gap: 6px;">
+        <span data-hotkey="P" class="help-hotkey">P</span>
+        <span id="game-pause-state">Pause Game</span>
+      </p>
+      <hr />
+      
+      <p>Enemies:</p>
+      <div class="help-section">
+        <img src="./img/zombie.png" class="help-section--img">
+        <strong id="enemies-remaining"></strong>
+      </div>
+      <hr />
+      
+      <p>Weapon: <strong id="equipped-weapon"></strong></p>
+      <div class="help-section">
+        <img src="./img/ammunition.png" class="help-section--img">
+        <strong id="gun-ammo"><span id="ammo-remaining"></span> / <span id="ammo-capacity"></span></strong>
+      </div>
+      <div class="help-section">
+        <img src="./img/magazine.png" class="help-section--img">
+        <strong id="gun-magazines"><span id="magazines-remaining"></span> / <span id="magazines-total"></span></strong>
+      </div>
+      <p><strong id="out-of-ammo" class="out-of-ammo"><span>OUT OF AMMO</span></strong></p>
+      <hr />
+      
+      
+      <div style="display:flex;flex-wrap: wrap;gap:15px;font-size:.75rem;">
+        <p><span data-hotkey="1" class="help-hotkey">1</span> Pistol</p>
+        <p><span data-hotkey="2" class="help-hotkey">2</span> Shotgun</p>
+        <p><span data-hotkey="3" class="help-hotkey">3</span> Machine</p>
+        <p><span data-hotkey="4" class="help-hotkey">4</span> Flame</p>
+        <p><span data-hotkey="5" class="help-hotkey">5</span> Grenade</p>
+      </div>
+      <hr />
+      
+      
+      <div class="keyboard">
+        <div class="top-row">
+          <div data-key="w" class="keyboard-key">
+            <p>W</p>
+          </div>
+        </div>
+        <div class="bottom-row">
+          <div data-key="a" class="keyboard-key">
+            <p>A</p>
+          </div>
+          <div data-key="s" class="keyboard-key">
+            <p>S</p>
+          </div>
+          <div data-key="d" class="keyboard-key">
+            <p>D</p>
+          </div>
         </div>
       </div>
-      <div class="bottom-row">
-        <div data-key="a" class="keyboard-key">
-          <p>A</p>
-        </div>
-        <div data-key="s" class="keyboard-key">
-          <p>S</p>
-        </div>
-        <div data-key="d" class="keyboard-key">
-          <p>D</p>
-        </div>
+      <hr />
+      
+      
+      <p class="help-section--subtext">
+        <strong>ATTENTION</strong>:<br />Enable sound through your browser's site settings for the best experience.
+      </p>
+    </div>
+    <div class="game-ended-wrapper">
+      <div class="game-ended">
+        <h1>Game Over</h1>
       </div>
     </div>
-    <hr />
-
-
-    <p class="help-section--subtext">
-      <strong>ATTENTION</strong>:<br />Enable sound through your browser's site settings<br />
-      for the best experience.
-    </p>
+    <div class="stats-wrapper"></div>
   </div>
-  
 
-  <div class="game-ended-wrapper">
-    <div class="game-ended">
-      <h1>Game Over</h1>
+
+  <div class="splash-wrapper">
+    <div class="splash-text">
+      <h1>Undead Byters</h1>
+      <button class="play-now--button" id="play-now">
+        <span class="play-now--button__text">New Game >></span>
+      </button>
     </div>
   </div>
 

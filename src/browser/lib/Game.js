@@ -38,7 +38,9 @@ export class Game
 
     this.stats = new Stats();
     this.stats.showPanel(0); // 0 = fps, 1 = ms,  2 = mb, 3+ = custom
-    document.body.appendChild(this.stats.dom);
+    this.stats.domElement.style.cssText = 'position:absolute;top:0px;right:0px;';
+    const stats = document.querySelector('.stats-wrapper');
+    if (stats) stats.appendChild(this.stats.dom);
   }
 
   loop () {
@@ -94,10 +96,19 @@ export class Game
   }
 
   async pause () {
+    const hotkey =document.querySelector('span[data-hotkey="P"]');
+    const state = document.querySelector('#game-pause-state');
+    const overlay = document.querySelector('.pause-overlay');
     if (! this.stopped) {
       this.stopped = true;
       cancelAnimationFrame(this.frame);
+      hotkey.classList.add('help-hotkey__active');
+      state.innerHTML = 'Game Paused';
+      overlay.style.display = 'block';
     } else {
+      hotkey.classList.remove('help-hotkey__active');
+      state.innerHTML = 'Pause Game';
+      overlay.style.display = 'none';
       this.stopped = false;
       this.frame = requestAnimationFrame(this.loop.bind(this));
     }

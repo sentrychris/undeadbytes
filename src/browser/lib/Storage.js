@@ -135,7 +135,7 @@ export class Storage
         .slice(0, 19)
         .replace('T', '');
 
-      const key = `undeadbytes-save-${date.replace(/[:-]/g, '')}`;
+      const key = `undeadbytes-save-level-${save.level}-${date.replace(/[:-]/g, '')}`;
       localStorage.setItem(key, JSON.stringify(save));
     }
   }

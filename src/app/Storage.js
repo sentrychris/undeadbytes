@@ -113,7 +113,7 @@ module.exports = class Storage
         .slice(0, 19)
         .replace('T', '');
 
-      const file = `undeadbytes-save-${date.replace(/[:-]/g, '')}.json`;
+      const file = `undeadbytes-save-level-${save.level}-${date.replace(/[:-]/g, '')}.json`;
       const path = this.savedGamesDir + file;
 
       fs.writeFileSync(path, JSON.stringify(save, null, 4), {

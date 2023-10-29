@@ -1,5 +1,6 @@
 import { Game } from './lib/Game';
 import { Storage } from './lib/Storage';
+import { GameDispatcher } from './lib/Events/GameDispatcher';
 import {
   isActiveElement,
   getExecutionBridge,
@@ -17,8 +18,11 @@ const canvas = document.querySelector('canvas#game');
 // Determines whether or not game is running within browser or electron app
 const bridge = getExecutionBridge();
 
+// Create a game dispatcher for dispatching handler events
+const dispatcher = new GameDispatcher();
+
 // Load storage (settings, saved games etc.)
-const storage = new Storage(bridge, {
+const storage = new Storage(bridge, dispatcher, {
   register: true
 });
 
@@ -26,7 +30,7 @@ const storage = new Storage(bridge, {
 function main () {
   if (isActiveElement(viewport) && canvas) {
     // Create a new managed game instance
-    const game = new Game(bridge, canvas.getContext('2d'));
+    const game = new Game(bridge, dispatcher, canvas.getContext('2d'));
 
     // Attach storage to the game instance
     game.attach('storage', storage);

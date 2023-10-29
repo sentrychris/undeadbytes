@@ -13,8 +13,9 @@ import Stats from 'stats.js';
 
 export class Game
 {
-  constructor (bridge, context) {
+  constructor (bridge, dispatcher, context) {
     this.bridge = bridge;
+    this.dispatcher = dispatcher;
 
     this.frame = null;
     this.stopped = false;
@@ -38,8 +39,12 @@ export class Game
     window.addEventListener('resize', onResize);
     onResize();
 
+    this.onDispatch();
+
     this.createKeyboardMouseControls();
     this.createVolumeControls();
+
+    this.overlay = document.querySelector('.game-overlay');
 
     this.stats = new Stats();
   }
@@ -83,16 +88,20 @@ export class Game
     }
   }
 
-  async start (stopped, nextLevel = false) {
+  async start (stopped, nextLevel = false, savedLevel = null) {
     if (stopped && ! this.frame) {
-      const gameover = document.querySelector('.game-ended');
+      this.overlay.querySelector('h1').innerHTML = '';
 
       if (nextLevel) {
         ++this.currentLevel;
       }
 
+      if (savedLevel) {
+        this.currentLevel = savedLevel;
+      }
+
       setTimeout(() => {
-        gameover.style.display = 'none';
+        this.overlay.style.display = 'none';
         this.setup({
           level: this.currentLevel
         }, true);
@@ -125,10 +134,6 @@ export class Game
     cancelAnimationFrame(this.loop.bind(this));
 
     return this.stopped;
-  }
-
-  load (save) {
-    console.log(save);
   }
 
   setup ({ level = 1 }, loop = false) {
@@ -213,6 +218,16 @@ export class Game
     }
 
     this.camera.postRender();
+  }
+
+  onDispatch () {
+    this.dispatcher.addEventListener('game:load', ({ save }) => {
+      this.overlay.style.display = 'flex';
+      this.overlay.querySelector('h1').innerHTML = 'Loading game...';
+      this.stop().then(async (stopped) => {
+        await this.start(stopped, false, save.level);
+      });
+    });
   }
 
   onResize (width, height) {
@@ -307,18 +322,18 @@ export class Game
   }
 
   displayGameEnd () {
-    const gameover = document.querySelector('.game-ended');
+    const overlay = this.overlay;
     setTimeout(() => {
       if (this.levelPassed) {
-        gameover.querySelector('h1').innerHTML = 'You Win!';
-        gameover.classList.add('pass');
-        gameover.classList.remove('fail');
+        overlay.querySelector('h1').innerHTML = 'You Win!';
+        overlay.classList.add('pass');
+        overlay.classList.remove('fail');
       } else {
-        gameover.querySelector('h1').innerHTML = 'You Died!';
-        gameover.classList.remove('pass');
-        gameover.classList.add('fail');
+        overlay.querySelector('h1').innerHTML = 'You Died!';
+        overlay.classList.remove('pass');
+        overlay.classList.add('fail');
       }
-      gameover.style.display = 'flex';
+      overlay.style.display = 'flex';
     }, 500);
   }
 

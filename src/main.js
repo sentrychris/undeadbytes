@@ -20,6 +20,8 @@ let context;
 function main() {
   context = new BrowserWindow({
     show: false,
+    height: 1000,
+    width: 1440,
     icon: path.join(__dirname, 'shared/assets/logo.ico'),
     webPreferences: {
       nodeIntegration: false,
@@ -85,7 +87,6 @@ function main() {
     context = null;
   });
 
-  context.maximize();
   context.show();
 }
 

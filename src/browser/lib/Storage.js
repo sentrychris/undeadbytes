@@ -3,7 +3,7 @@ import { config } from '../config';
 
 export class Storage
 {
-  constructor (bridge, { register = false }) {
+  constructor (bridge, dispatcher, { register = false }) {
     this.localStorageSettingsKey = 'undeadbytes-game';
 
     // Default settings
@@ -14,6 +14,7 @@ export class Storage
     };
 
     this.bridge = bridge;
+    this.dispatcher = dispatcher;
 
     if (this.bridge === 'web') {
       this.configureLocalStorage();
@@ -99,7 +100,7 @@ export class Storage
   receiveLoadGameSavesFromBridge () {
     this.bridge.receive('from:game:save', (save) => {
       console.log('received saved game', save);
-      // use a dispatcher to dispatch saved game info to game manager
+      this.dispatcher.loadGame({ save });
     });
   }
 

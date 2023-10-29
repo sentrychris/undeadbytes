@@ -38,6 +38,8 @@ export const level1 = [
 ];
 ```
 
+You can view all levels [here](https://github.com/sentrychris/undeadbytes/tree/main/src/browser/lib/Levels).
+
 ### Map entities
 
 The map is made up of characters which represent where the following entities will be placed when the map is generated:

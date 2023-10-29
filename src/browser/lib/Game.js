@@ -19,7 +19,7 @@ export class Game
     this.frame = null;
     this.stopped = false;
 
-    this.handlers = { settings: null };
+    this.handlers = { storage: null };
     
     this.context = context;
     this.camera = new Camera(this.context);
@@ -367,6 +367,9 @@ export class Game
         this.selectedWeaponIndex = 4;
         this.setWeaponHotKey();
         break;
+      case '.':
+        this.handlers.storage.saveFileStorageGame(this);
+        break;
       case '*':
         this.toggleStats();
         break;
@@ -411,11 +414,11 @@ export class Game
       
         AudioFX.volume(target.dataset.control, value);
 
-        if (this.handlers.settings) {
+        if (this.handlers.storage) {
           // Set a timeout so you don't absolutely blitz calls to the fs api
           // no that it should it matter too much anyway
           setTimeout(() => {
-            this.handlers.settings.setSetting('volumes', AudioFX.volumes, true);
+            this.handlers.storage.setSetting('volumes', AudioFX.volumes, true);
           }, 1000);
         }
       });

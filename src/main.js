@@ -2,7 +2,7 @@ const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 const IPC = require('./app/IPC');
 const Menu = require('./app/Menu');
-const Settings = require('./app/Settings');
+const Storage = require('./app/Storage');
 
 // Rendering Modes
 
@@ -32,9 +32,9 @@ function main() {
   context.loadFile(path.join(__dirname, '../dist/index.html'));
   context.webContents.setFrameRate(60);
 
-  const settings = new Settings(context);
+  const storage = new Storage(context);
 
-  new IPC(context, { settings }, {
+  new IPC(context, { storage }, {
     register: true
   });
 
@@ -76,7 +76,7 @@ function main() {
     // file and sent to the renderer context
     context.webContents.send(
       'from:settings:set',
-      settings.loadFromFile()
+      storage.loadSettingsFromFile()
     );
   });
 

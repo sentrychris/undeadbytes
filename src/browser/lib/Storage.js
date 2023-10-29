@@ -1,7 +1,7 @@
 import { AudioFX } from './Audio/AudioFX';
 import { config } from '../config';
 
-export class Settings
+export class Storage
 {
   constructor (bridge, { register = false }) {
     this.localStorageSettingsKey = 'undeadbytes-game';
@@ -92,6 +92,23 @@ export class Settings
   saveFileSettings () {
     this.bridge.send('to:settings:save', {
       settings: this.settings
+    });
+  }
+
+  saveLocalStorageGame () {}
+
+  saveFileStorageGame (game) {
+    const save = {
+      level: game.currentLevel,
+      player: {
+        pickups: {
+          health: game.player.pickups.health
+        }
+      }
+    };
+
+    this.bridge.send('to:game:save', {
+      save
     });
   }
 

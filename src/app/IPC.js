@@ -3,7 +3,7 @@ const { ipcMain } = require('electron');
 
 module.exports = class IPC
 {
-  constructor(context, handlers = { settings: null }, { register = false}) {
+  constructor(context, handlers = { storage: null }, { register = false}) {
     this.context = context;
     this.contextWindowTitle = 'Undead Bytes';
 
@@ -24,8 +24,11 @@ module.exports = class IPC
     });
 
     ipcMain.on('to:settings:save', (event, { settings }) => {
-      // call method belonging to app context Settings handler
-      this.handlers.settings.saveToFile(settings);
+      this.handlers.storage.saveSettingsToFile(settings);
+    });
+
+    ipcMain.on('to:game:save', (event, { save }) => {
+      this.handlers.storage.saveGameToFile(save);
     });
   }
 }

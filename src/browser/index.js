@@ -1,5 +1,5 @@
 import { Game } from './lib/Game';
-import { Settings } from './lib/Settings';
+import { Storage } from './lib/Storage';
 import {
   isActiveElement,
   getExecutionBridge,
@@ -17,8 +17,8 @@ const canvas = document.querySelector('canvas#game');
 // Determines whether or not game is running within browser or electron app
 const bridge = getExecutionBridge();
 
-// Load game settings
-const settings = new Settings(bridge, {
+// Load storage (settings, saved games etc.)
+const storage = new Storage(bridge, {
   register: true
 });
 
@@ -28,8 +28,8 @@ function main () {
     // Create a new managed game instance
     const game = new Game(bridge, canvas.getContext('2d'));
 
-    // Attach settings to the game instance
-    game.attach('settings', settings);
+    // Attach storage to the game instance
+    game.attach('storage', storage);
     
     // Setup the level and start the game loop
     game.setup({ level: 1 }, true);

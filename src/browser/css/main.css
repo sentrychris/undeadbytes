@@ -331,7 +331,7 @@ canvas {
 
 
 /***************************|
- | Stats UI                 |
+ | Stats UI and Build       |
  ***************************/
 .stats {
   position: absolute;
@@ -339,6 +339,14 @@ canvas {
   right: 0px;
 }
 
+.build-version {
+  color: #757575;
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  font-family: sans-serif;
+  font-size: .85rem;
+}
 
 /***************************|
  | Utility classes          |

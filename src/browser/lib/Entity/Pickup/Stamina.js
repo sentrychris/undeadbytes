@@ -27,6 +27,7 @@ export class Stamina
     this.image.src = 'img/stamina.png';
     this.glow = 40;
     this.color = '#F5F5F5';
+    this.distance = 100;
 
     this.markToDelete = false;
   }
@@ -37,12 +38,13 @@ export class Stamina
 
   update (game) {
     Collision.entityToPlayer(this, game, () => {
-      this.pickup();
+      this.pickup(game);
     });
   }
 
-  pickup () {
+  pickup (game) {
     AudioFX.snippet({ name: 'inject' });
+    game.player.boostSpeed(this.value);
     this.markToDelete = true;
   }
 }

@@ -1,11 +1,10 @@
 /**
  * Level 3
  * 
- * 
  * 16 Enemies
- * 4 Ammo
- * 2 Health
- * 2 Stamina
+ * 04 Ammo
+ * 02 Health
+ * 02 Stamina
  */
 export const level3 = [
   'W W W W W W W W W W W W W W W W W W W W',

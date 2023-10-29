@@ -1,7 +1,8 @@
-const { app, BrowserWindow, shell} = require('electron');
+const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
-const IPC = require('./app/ipc');
-const Menu = require('./app/menu');
+const IPC = require('./app/IPC');
+const Menu = require('./app/Menu');
+const Storage = require('./app/Storage');
 
 // Rendering Modes
 
@@ -19,6 +20,8 @@ let context;
 function main() {
   context = new BrowserWindow({
     show: false,
+    height: 1000,
+    width: 1440,
     icon: path.join(__dirname, 'shared/assets/logo.ico'),
     webPreferences: {
       nodeIntegration: false,
@@ -31,11 +34,16 @@ function main() {
   context.loadFile(path.join(__dirname, '../dist/index.html'));
   context.webContents.setFrameRate(60);
 
-  const ipc = new IPC(context, null);
-  ipc.register();
+  const storage = new Storage(context);
 
-  const menu = new Menu(context);
-  menu.register();
+  new IPC(context, { storage }, {
+    register: true
+  });
+
+  new Menu(context, {
+    handlers: { storage },
+    register: true
+  });
 
   context.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
@@ -44,15 +52,34 @@ function main() {
     };
   });
 
+  context.webContents.setZoomFactor(1.0);
+
+  context.webContents.on('zoom-changed', (event, direction) => {
+    const curr = context.webContents.getZoomFactor();
+
+    let factor;
+    if (direction === 'in') factor = (curr + 0.1);
+    if (direction === 'out') factor = (curr - 0.1);
+
+    if (factor < 0.1) factor = 0.1;
+    if (factor > 1.0) factor = 1.0;
+
+    context.webContents.zoomFactor = factor;
+  });
+
   context.webContents.on('did-finish-load', () => {
-    console.log('finished loading');
+    // When the app is loaded, settings are fetched from the
+    // file and sent to the renderer context
+    context.webContents.send(
+      'from:settings:set',
+      storage.loadSettingsFromFile()
+    );
   });
 
   context.on('closed', () => {
     context = null;
   });
 
-  context.maximize();
   context.show();
 }
 

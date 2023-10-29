@@ -34,9 +34,9 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-          { from: './src/browser/assets' },
+          { from: './src/shared/assets' },
           {
-            from: './src/browser/assets/img/favicon.ico',
+            from: './src/shared/assets/img/favicon.ico',
             to: './favicon.ico'
           },
           { from: './src/browser/views'}

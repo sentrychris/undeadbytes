@@ -21,7 +21,7 @@
       
       <hr class="help-section__separator" />
       
-      <p class="help-block" style="gap: 6px;">
+      <p class="help-block gap-10">
         <span data-hotkey="P" class="help-block__hotkey">P</span>
         <span id="game-pause-state">Pause Game</span>
       </p>
@@ -31,7 +31,7 @@
       <p class="help-section__title">
         Enemies:
       </p>
-      <div class="help-block">
+      <div class="help-block gap-10">
         <img src="./img/zombie.png" class="help-block__img">
         <strong id="enemies-remaining"></strong>
       </div>
@@ -41,23 +41,26 @@
       <p class="help-section__title">
         Weapon: <strong id="equipped-weapon"></strong>
       </p>
-      <div class="help-block">
-        <img src="./img/ammunition.png" class="help-block__img">
-        <strong id="gun-ammo">
+      <div class="help-block gap-40">
+        <div class="flex-align-gap">
+          <img src="./img/ammunition.png" class="help-block__img">
           <span id="ammo-remaining"></span> / <span id="ammo-capacity"></span>
-        </strong>
-      </div>
-      <div class="help-block">
-        <img src="./img/magazine.png" class="help-block__img">
-        <strong id="gun-magazines">
+        </div>
+        <div class="flex-align-gap">
+          <img src="./img/magazine.png" class="help-block__img">
           <span id="magazines-remaining"></span> / <span id="magazines-total"></span>
-        </strong>
+        </div>
       </div>
       <p>
         <strong id="out-of-ammo">
           <span>OUT OF AMMO</span>
         </strong>
       </p>
+
+      <div class="help-block gap-10">
+        <img src="./img/first-aid-box.png" class="help-block__img">
+        <strong id="medkits-available">0</strong>
+      </div>
       
       <hr class="help-section__separator" />
       
@@ -92,17 +95,25 @@
       <hr />
       
       <div class="help-block--wrap">
-        <p>Volume</p>
-        <input type="range" class="grow" id="soundtrack-volume" step="0.01" min="0" max="1" value="0.5">
+        <p>Soundtrack</p>
+        <input type="range" class="grow volume-slider" data-control="soundtrack"
+          step="0.01" min="0" max="1" value="0.5">
       </div>
-      <div class="help-block__text--muted">
-        <strong>ATTENTION</strong>:<br />Enable sound through your browser's site settings for the best experience.
+      <div class="help-block--wrap">
+        <p>Weapon FX</p>
+        <input type="range" class="grow volume-slider" data-control="weapon"
+          step="0.01" min="0" max="1" value="0.5">
+      </div>
+      <div class="help-block--wrap">
+        <p>Other FX</p>
+        <input type="range" class="grow volume-slider" data-control="snippet"
+          step="0.01" min="0" max="1" value="0.5">
       </div>
     </div>
 
-    <div class="game-ended">
-      <div class="game-ended__text">
-        <h1 class="game-ended__text--big">Game Over</h1>
+    <div class="game-overlay">
+      <div class="game-overlay__text">
+        <h1 class="game-overlay__text--big">Game Over</h1>
       </div>
     </div>
 
@@ -122,12 +133,16 @@
           <span class="splash__button__text">Load Game >></span>
         </button>
       </div>
+
+      <div id="load-game-web">
+      </div>
     </div>
   </div>
 
   <div class="overlay"></div>
 
-  <iframe src="./soundtrack/silence.mp3" type="audio/mp3" allow="autoplay" id="audio" style="display:none"></iframe> 
+  <iframe src="./soundtrack/silence.mp3" type="audio/mp3" allow="autoplay"
+    id="audio" style="display:none"></iframe> 
   <script src="./main.js"></script>
 </body>
 </html>

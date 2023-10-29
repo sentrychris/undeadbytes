@@ -13,9 +13,14 @@ import Stats from 'stats.js';
 
 export class Game
 {
-  constructor (context) {
+  constructor (bridge, dispatcher, context) {
+    this.bridge = bridge;
+    this.dispatcher = dispatcher;
+
     this.frame = null;
     this.stopped = false;
+
+    this.handlers = { storage: null };
     
     this.context = context;
     this.camera = new Camera(this.context);
@@ -34,10 +39,23 @@ export class Game
     window.addEventListener('resize', onResize);
     onResize();
 
+    this.onDispatch();
+
     this.createKeyboardMouseControls();
     this.createVolumeControls();
 
+    this.overlay = document.querySelector('.game-overlay');
+
     this.stats = new Stats();
+  }
+
+  attach (handler, instance) {
+    this.handlers[handler] = instance;
+
+    if (handler === 'storage') {
+      // Signal to storage that an attached game instance exists
+      this.handlers.storage.setGameInstanceAttached(true);
+    }
   }
 
   loop () {
@@ -75,16 +93,20 @@ export class Game
     }
   }
 
-  async start (stopped, nextLevel = false) {
+  async start (stopped, nextLevel = false, savedLevel = null) {
     if (stopped && ! this.frame) {
-      const gameover = document.querySelector('.game-ended');
+      this.overlay.querySelector('h1').innerHTML = '';
 
       if (nextLevel) {
         ++this.currentLevel;
       }
 
+      if (savedLevel) {
+        this.currentLevel = savedLevel;
+      }
+
       setTimeout(() => {
-        gameover.style.display = 'none';
+        this.overlay.style.display = 'none';
         this.setup({
           level: this.currentLevel
         }, true);
@@ -182,23 +204,8 @@ export class Game
         }
       }
 
-      if (this.entities[i].type === 'pickup') {
-        if (this.entities[i].markToDelete) {
-          if (this.entities[i].item === 'ammo') {
-            this.ballistics.refillWeaponAmmoClip();
-          }
-
-          if (this.entities[i].item === 'health') {
-            this.player.refillHealth(this.entities[i].value);
-          }
-
-          if (this.entities[i].item === 'stamina') {
-            this.player.boostSpeed(this.entities[i].value);
-          }
-
-          // Remove picked up entities
-          this.entities.splice(i, 1);
-        }
+      if (this.entities[i].type === 'pickup' && this.entities[i].markToDelete) {
+        this.entities.splice(i, 1);
       }
     }
 
@@ -216,6 +223,16 @@ export class Game
     }
 
     this.camera.postRender();
+  }
+
+  onDispatch () {
+    this.dispatcher.addEventListener('game:load', ({ save }) => {
+      this.overlay.style.display = 'flex';
+      this.overlay.querySelector('h1').innerHTML = 'Loading game...';
+      this.stop().then(async (stopped) => {
+        await this.start(stopped, false, save.level);
+      });
+    });
   }
 
   onResize (width, height) {
@@ -310,18 +327,18 @@ export class Game
   }
 
   displayGameEnd () {
-    const gameover = document.querySelector('.game-ended');
+    const overlay = this.overlay;
     setTimeout(() => {
       if (this.levelPassed) {
-        gameover.querySelector('h1').innerHTML = 'You Win!';
-        gameover.classList.add('pass');
-        gameover.classList.remove('fail');
+        overlay.querySelector('h1').innerHTML = 'You Win!';
+        overlay.classList.add('pass');
+        overlay.classList.remove('fail');
       } else {
-        gameover.querySelector('h1').innerHTML = 'You Died!';
-        gameover.classList.remove('pass');
-        gameover.classList.add('fail');
+        overlay.querySelector('h1').innerHTML = 'You Died!';
+        overlay.classList.remove('pass');
+        overlay.classList.add('fail');
       }
-      gameover.style.display = 'flex';
+      overlay.style.display = 'flex';
     }, 500);
   }
 
@@ -351,6 +368,9 @@ export class Game
       case 's': this.keyboard.down = true; break;
       case 'a': this.keyboard.left = true; break;
       case 'd': this.keyboard.right = true; break;
+      case 'h':
+        this.player.refillHealth(config.pickups.health, false);
+        break;
       case '1':
         this.selectedWeaponIndex = 0;
         this.setWeaponHotKey();
@@ -370,6 +390,9 @@ export class Game
       case '5':
         this.selectedWeaponIndex = 4;
         this.setWeaponHotKey();
+        break;
+      case '.':
+        this.handlers.storage.saveGame(this);
         break;
       case '*':
         this.toggleStats();
@@ -401,16 +424,25 @@ export class Game
   }
 
   createVolumeControls () {
-    document.querySelector('#soundtrack-volume').addEventListener('input', (e) => {
-      const { target } = e;
-      const value = (target.value - target.min) / (target.max - target.min);
-      const percent = Math.round(value * 100);
+    const sliders = document.querySelectorAll('.volume-slider');
+    for (const slider of sliders) {
+      slider.addEventListener('input', (e) => {
+        const { target } = e;
+        const value = (target.value - target.min) / (target.max - target.min);
+        const percent = Math.round(value * 100);
+        
+        target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
+          percent + '%, #fff ' + percent + '%, #fff 100%)';
       
-      target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
-        percent + '%, #fff ' + percent + '%, #fff 100%)';
-    
-      AudioFX.volume('soundtrack', value);
-    });
+        AudioFX.volume(target.dataset.control, value);
+
+        if (this.handlers.storage) {
+          setTimeout(() => {
+            this.handlers.storage.setSetting('volumes', AudioFX.volumes, true);
+          }, 1000);
+        }
+      });
+    }
   }
 
   toggleStats (panel = 0) {

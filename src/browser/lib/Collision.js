@@ -142,7 +142,7 @@ export class Collision
     const distance = Collision.distance(vectorX, vectorY);
 
     if (entity.type === 'pickup') {
-      if (callback && distance <= 95) {
+      if (callback && distance <= entity.distance) {
         callback();
       }
     }

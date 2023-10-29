@@ -44,12 +44,12 @@ export function trackWASDKeyboard () {
 }
 
 export function logGameStateToConsole (game, interval = 2000) {
-  console.log(
+  console.debug(
     '%c Logging game data to console',
     'background: #222; color: yellow'
   );
 
-  console.log(
+  console.debug(
     `%c Refreshes every ${((interval % 60000) / 1000).toFixed(2)} seconds`,
     'background: #222; color: yellow'
   );
@@ -64,18 +64,24 @@ export function logGameStateToConsole (game, interval = 2000) {
   }
   
   setInterval(() => {
-    const entities = `W: ${game.walls.length} | E: ${game.enemies.length} | A: ${game.ammoPickups.length} | H: ${game.healthPickups.length}`;
+    const walls   = `W: ${game.walls.length} | `;
+    const enemies = `E: ${game.enemies.length} | `;
+    const ammo    = `A: ${game.ammoPickups.length} | `;
+    const health  = `H: ${game.healthPickups.length} | `;
+    const stamina = `S: ${game.staminaPickups.length}`;
 
-    console.log(`%c Player Health: ${game.player.health}`, 'background: #222; color: #bfff00');
-    console.log(`%c Enemies Alive: ${game.enemies.length}`, 'background: #222; color: #FF033E');
-    console.log(`%c Gameover State: ${game.gameover}`, 'background: #222; color: #00ffff');
+    const entities = walls + enemies + ammo + health + stamina;
+
+    console.debug(`%c Player Health: ${game.player.health}`, 'background: #222; color: #bfff00');
+    console.debug(`%c Enemies Alive: ${game.enemies.length}`, 'background: #222; color: #FF033E');
+    console.debug(`%c Gameover State: ${game.gameover}`, 'background: #222; color: #00ffff');
     
-    console.log('%c Entity Data:', 'background: #222; color: #ffffff');
-    console.log(
+    console.debug('%c Entity Data:', 'background: #222; color: #ffffff');
+    console.debug(
       `%c Total: ${game.entities.length} | Curr: ${calculate(game)}`,
       'background: #222; color: #ffffff'
     );
-    console.log(
+    console.debug(
       `%c ${entities}\n\n`,
       'background: #222; color: #ffffff'
     );

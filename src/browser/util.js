@@ -6,7 +6,16 @@ export function isActiveElement (elem) {
   return ! elem.classList.contains('inactive');
 }
 
-export function trackWASD () {
+export function getExecutionBridge () {
+  if (Object.prototype.hasOwnProperty.call(window, 'executionBridge')
+  && window.executionBridge !== null) {
+    return window.executionBridge;
+  }
+
+  return 'web';
+}
+
+export function trackWASDKeyboard () {
   function wasd (e) {
     const key = document.querySelector(`[data-key="${e.key}"]`);
     if (

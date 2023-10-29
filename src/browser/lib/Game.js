@@ -13,11 +13,13 @@ import Stats from 'stats.js';
 
 export class Game
 {
-  constructor (context) {
+  constructor (bridge, context) {
+    this.bridge = bridge;
+
     this.frame = null;
     this.stopped = false;
 
-    this.handlers = { ipc: null, settings: null };
+    this.handlers = { settings: null };
     
     this.context = context;
     this.camera = new Camera(this.context);

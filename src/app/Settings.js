@@ -35,19 +35,23 @@ module.exports = class Settings
         ...settings
       };
 
-      this.saveSettingsToFile(settings);
+      this.saveToFile(settings);
     }
   }
 
-  loadSettingsFile () {
-    const file = fs.readFileSync(this.file, {
+  loadFromFile () {
+    const settings = JSON.parse(fs.readFileSync(this.file, {
       encoding: 'utf-8'
-    });
+    }));
 
-    return JSON.parse(file);
+    if (settings) {
+      this.settings = settings;
+    }
+
+    return this.settings;
   }
 
-  saveSettingsToFile (settings) {
+  saveToFile (settings) {
     try {
       fs.writeFileSync(this.file, JSON.stringify(settings, null, 4), {
         encoding: 'utf-8'

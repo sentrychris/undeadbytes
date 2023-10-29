@@ -34,11 +34,13 @@ function main() {
 
   const settings = new Settings(context);
 
-  const ipc = new IPC(context, { settings });
-  ipc.register();
+  new IPC(context, { settings }, {
+    register: true
+  });
 
-  const menu = new Menu(context);
-  menu.register();
+  new Menu(context, {
+    register: true
+  });
 
   context.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
@@ -48,7 +50,12 @@ function main() {
   });
 
   context.webContents.on('did-finish-load', () => {
-    context.webContents.send('from:settings:set', settings.loadSettingsFile());
+    // When the app is loaded, settings are fetched from the
+    // file and sent to the renderer context
+    context.webContents.send(
+      'from:settings:set',
+      settings.loadFromFile()
+    );
   });
 
   context.on('closed', () => {

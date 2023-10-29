@@ -4,7 +4,7 @@ const openAboutWindow = require('about-window').default;
 
 
 module.exports = class AppMenu {
-  constructor(context, register = false) {
+  constructor(context, { register = false }) {
     this.context = context;
 
     if (register) {

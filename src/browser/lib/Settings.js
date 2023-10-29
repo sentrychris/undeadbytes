@@ -15,10 +15,10 @@ export class Settings
 
     this.bridge = bridge;
 
-    if (this.bridge !== 'web') {
-      this.configureFileStorage();
-    } else {
+    if (this.bridge === 'web') {
       this.configureLocalStorage();
+    } else {
+      this.configureFileStorage();
     }
 
     if (register) {
@@ -30,12 +30,21 @@ export class Settings
     this.setVolumeSettings();
   }
 
+  setBridge (bridge) {
+    this.bridge = bridge;
+  }
+
   setSettings (settings) {
     this.settings = settings;
   }
 
   configureFileStorage () {
-    // IPC handler to get settings here
+    this.bridge.receive('from:settings:set', (settings) => {
+      if (settings) {
+        this.setSettings(settings);
+        this.register();
+      }
+    });
   }
 
   configureLocalStorage () {
@@ -50,10 +59,10 @@ export class Settings
         this.localStorageSettingsKey,
         JSON.stringify(this.settings)
       );
+    } else {
+      // Update tracked settings
+      this.setSettings(settings);
     }
-
-    // Update tracked settings
-    this.setSettings(settings);
   }
 
   saveLocalStorageSettings () {
@@ -61,6 +70,12 @@ export class Settings
       this.localStorageSettingsKey,
       JSON.stringify(this.settings)
     );
+  }
+
+  saveFileSettings (settings) {
+    this.bridge.send('to:settings:save', {
+      settings
+    });
   }
 
   setVolumeSettings (volume = null) {
@@ -94,9 +109,13 @@ export class Settings
     this.setUIState('volume');
   }
 
-  setDifficultySettings () {}
+  setDifficultySettings (difficulty) {
+    this.difficulty = difficulty;
+  }
 
-  setGodModeSettings () {}
+  setGodModeSettings (godmode) {
+    this.godmode = godmode;
+  }
 
   setUIState (key) {
     if (key === 'volume') {

@@ -33,7 +33,7 @@ canvas {
   color: #ff4040;
 }
 
-#soundtrack-volume {
+.volume-slider {
   background: linear-gradient(to right, #50ffb0 0%, #50ffb0 50%, #fff 50%, #fff 100%);
   border: solid 1px #50ffb0;
   border-radius: 8px;
@@ -161,7 +161,7 @@ canvas {
 
 .help-section__title {
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .help-section__separator {
@@ -185,7 +185,7 @@ canvas {
 
 .help-block__img {
   width: 40px;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
 .help-block__text--muted {
@@ -339,6 +339,28 @@ canvas {
 
 .grow {
   flex-grow: 1
+}
+
+.flex-align-gap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.gap-10 {
+  gap: 10px;
+}
+
+.gap-20 {
+  gap: 20px;
+}
+
+.gap-40 {
+  gap: 40px;
 }
 
 .inactive {

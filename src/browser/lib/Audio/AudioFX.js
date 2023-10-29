@@ -98,15 +98,16 @@ export class _AudioFX
 
     if (key === 'weapon') {
       this.volumes.fx.weapon = level;
-      if (this.fx.weapon && ! this.fx.weapon.playback.paused) {
-        this.fx.weapon.playback.volume = this.volumes.fx.weapon;
+      console.log(this.fx.weapon);
+      if (this.fx.weapon && ! this.fx.weapon.paused) {
+        this.fx.weapon.volume = this.volumes.fx.weapon;
       }
     }
 
     if (key === 'snippet') {
       this.volumes.fx.snippet = level;
-      if (this.fx.snippet && ! this.fx.snippet.playback.paused) {
-        this.fx.snippet.playback.volume = this.volumes.fx.snippet;
+      if (this.fx.snippet && ! this.fx.snippet.paused) {
+        this.fx.snippet.volume = this.volumes.fx.snippet;
       }
     }
   }

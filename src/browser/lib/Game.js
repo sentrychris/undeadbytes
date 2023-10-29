@@ -401,16 +401,22 @@ export class Game
   }
 
   createVolumeControls () {
-    document.querySelector('#soundtrack-volume').addEventListener('input', (e) => {
-      const { target } = e;
-      const value = (target.value - target.min) / (target.max - target.min);
-      const percent = Math.round(value * 100);
+
+    const sliders = document.querySelectorAll('.volume-slider');
+    for (const slider of sliders) {
+      slider.addEventListener('input', (e) => {
+        const { target } = e;
+        const value = (target.value - target.min) / (target.max - target.min);
+        const percent = Math.round(value * 100);
+        
+        target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
+          percent + '%, #fff ' + percent + '%, #fff 100%)';
+
+        console.log(target.dataset);
       
-      target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
-        percent + '%, #fff ' + percent + '%, #fff 100%)';
-    
-      AudioFX.volume('soundtrack', value);
-    });
+        AudioFX.volume(target.dataset.control, value);
+      });
+    }
   }
 
   toggleStats (panel = 0) {

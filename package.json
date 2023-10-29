@@ -9,11 +9,11 @@
   "scripts": {
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint src --ext .js --fix",
-    "build:web": "webpack --config webpack.config.js",
-    "watch:web": "webpack --config webpack.config.js --watch",
-    "serve:web": "http-server dist/",
-    "linux:exe": "node ./node_modules/electron/cli.js",
-    "windows:exe": "node_modules\\electron\\dist\\electron.exe .",
+    "build:game": "webpack --config webpack.config.js",
+    "watch:game": "webpack --config webpack.config.js --watch",
+    "web": "http-server dist/",
+    "linux": "node ./node_modules/electron/cli.js",
+    "windows": "node_modules\\electron\\dist\\electron.exe .",
     "build:exe": "electron-builder --dir",
     "build:installer": "electron-builder"
   },

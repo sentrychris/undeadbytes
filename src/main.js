@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell} = require('electron');
+const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 const IPC = require('./app/IPC');
 const Menu = require('./app/Menu');
@@ -47,6 +47,32 @@ function main() {
     return {
       action: 'deny'
     };
+  });
+  
+
+  context.webContents.setVisualZoomLevelLimits(1.0, 2.5)
+    .catch((err) => console.log(err));
+
+  context.webContents.setZoomFactor(1.0);
+  console.log(`zoom: ${context.webContents.getZoomFactor()}`);
+
+  context.webContents.on('zoom-changed', (event, direction) => {
+    const curr = context.webContents.getZoomFactor();
+    console.log(`zoom: ${curr}`);
+
+    let factor;
+    if (direction === 'in') factor = (curr + 0.1);
+    if (direction === 'out') factor = (curr - 0.1);
+
+    if (factor < 0.1) factor = 0.1;
+    if (factor > 1.5) factor = 1.5;
+
+    context.webContents.zoomFactor = factor;
+
+    console.log(
+      `Zoom ${direction} to: `,
+      context.webContents.zoomFactor * 100, "%"
+    );
   });
 
   context.webContents.on('did-finish-load', () => {

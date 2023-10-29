@@ -33,33 +33,6 @@ canvas {
   color: #ff4040;
 }
 
-#load-game-web {
-  color: #ffffff;
-  font-size: 1.3rem;
-}
-
-.load-game__item {
-  color: #cccccc;
-}
-
-.load-game__item:hover {
-  cursor: pointer;
-  color: #f5d95c;
-  text-shadow: 0 0 30px #50ffb0;
-  text-decoration: underline;
-}
-
-.volume-slider {
-  background: linear-gradient(to right, #50ffb0 0%, #50ffb0 50%, #fff 50%, #fff 100%);
-  border: solid 1px #50ffb0;
-  border-radius: 8px;
-  height: 7px;
-  outline: none;
-  transition: background 450ms ease-in;
-  appearance: none;
-  -webkit-appearance: none;
-}
-
 /***************************|
  | Splash screen            |
  ***************************/
@@ -71,7 +44,6 @@ canvas {
   flex-direction: column;
   background-color: #fff;
   background-image: url("./img/splash.webp");
-  /* background-position: center; */
   background-position-x: 0px;
   background-position-y: 0px;
   background-size: cover;
@@ -152,10 +124,28 @@ canvas {
 }
 
 .splash__button:hover .splash__button__text {
-  color: #f5d95c;
+  color: #4FAF8F;
   text-shadow: 0 0 30px #50ffb0;
 }
 
+/***************************|
+ | Load game list           |
+ ***************************/
+.load-game {
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.load-game__item {
+  color: #cccccc;
+}
+
+.load-game__item:hover {
+  cursor: pointer;
+  color: #4FAF8F;
+  text-shadow: 0 0 30px #50ffb0;
+  text-decoration: underline;
+}
 
 /***************************|
  | Help and controls        |
@@ -223,6 +213,17 @@ canvas {
   box-shadow: 3px 3px #7e7e7d;
 }
 
+.volume-slider {
+  background: linear-gradient(to right, #50ffb0 0%, #50ffb0 50%, #fff 50%, #fff 100%);
+  border: solid 1px #50ffb0;
+  border-radius: 8px;
+  height: 7px;
+  outline: none;
+  transition: background 450ms ease-in;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
 /***************************|
  | Game ended display       |
  ***************************/
@@ -251,7 +252,6 @@ canvas {
   font-size: 6rem;
   text-transform: uppercase;
 }
-
 
 /***************************|
  | Out of ammo display      |
@@ -282,7 +282,6 @@ canvas {
     text-stroke: 2px rgba(255, 255, 255, 0.05);
   }
 }
-
 
 /***************************|
  | WSAD Map                 |
@@ -328,7 +327,6 @@ canvas {
   color: #000000;
   box-shadow: 3px 3px #7e7e7d;
 }
-
 
 /***************************|
  | Stats UI and Build       |

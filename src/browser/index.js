@@ -1,6 +1,7 @@
 import { Game } from './lib/Game';
 import { Storage } from './lib/Storage';
 import { GameDispatcher } from './lib/Events/GameDispatcher';
+import { config } from './config';
 import {
   isActiveElement,
   getExecutionBridge,
@@ -10,7 +11,6 @@ import {
 
 // Styles
 import './css/main.css';
-import { config } from './config';
 
 const viewport = document.querySelector('#undead-bytes');
 const splash = document.querySelector('.splash');
@@ -26,6 +26,9 @@ const dispatcher = new GameDispatcher();
 const storage = new Storage(bridge, dispatcher, {
   register: true
 });
+
+// Set the build version
+document.querySelector('.build-version span').innerHTML = config.version;
 
 // Game setup
 function main (level = 1) {

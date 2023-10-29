@@ -13,9 +13,13 @@ import Stats from 'stats.js';
 
 export class Game
 {
-  constructor (context) {
+  constructor (bridge, context) {
+    this.bridge = bridge;
+
     this.frame = null;
     this.stopped = false;
+
+    this.handlers = { settings: null };
     
     this.context = context;
     this.camera = new Camera(this.context);
@@ -38,6 +42,10 @@ export class Game
     this.createVolumeControls();
 
     this.stats = new Stats();
+  }
+
+  attach (handler, instance) {
+    this.handlers[handler] = instance; 
   }
 
   loop () {
@@ -401,7 +409,6 @@ export class Game
   }
 
   createVolumeControls () {
-
     const sliders = document.querySelectorAll('.volume-slider');
     for (const slider of sliders) {
       slider.addEventListener('input', (e) => {
@@ -415,6 +422,14 @@ export class Game
         console.log(target.dataset);
       
         AudioFX.volume(target.dataset.control, value);
+
+        if (this.handlers.settings) {
+          // Set a timeout so you don't absolutely blitz calls to the fs api
+          // no that it should it matter too much anyway
+          setTimeout(() => {
+            this.handlers.settings.setSetting('volumes', AudioFX.volumes, true);
+          }, 1000);
+        }
       });
     }
   }

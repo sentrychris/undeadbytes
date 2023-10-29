@@ -98,7 +98,6 @@ export class _AudioFX
 
     if (key === 'weapon') {
       this.volumes.fx.weapon = level;
-      console.log(this.fx.weapon);
       if (this.fx.weapon && ! this.fx.weapon.paused) {
         this.fx.weapon.volume = this.volumes.fx.weapon;
       }

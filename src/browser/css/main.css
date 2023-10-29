@@ -210,7 +210,7 @@ canvas {
 /***************************|
  | Game ended display       |
  ***************************/
-.game-ended {
+.game-overlay {
   display: none;
   width: 100%;
   height: 100%;
@@ -220,7 +220,7 @@ canvas {
   text-align: center;
 }
 
-.game-ended__text {
+.game-overlay__text {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -231,7 +231,7 @@ canvas {
   color: white;
 }
 
-.game-ended__text--big {
+.game-overlay__text--big {
   font-size: 6rem;
   text-transform: uppercase;
 }

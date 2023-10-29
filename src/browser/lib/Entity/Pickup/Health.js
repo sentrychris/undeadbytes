@@ -27,6 +27,7 @@ export class Health
     this.image.src = 'img/first-aid-box.png';
     this.glow = 40;
     this.color = '#6C95C2';
+    this.distance = 100; // depending on the size of the image asset, the distance-to-pickup might need to be tweaked
 
     this.markToDelete = false;
   }

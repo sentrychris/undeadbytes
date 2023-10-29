@@ -27,6 +27,7 @@ export class Ammo
     this.image.src = 'img/magazine.png';
     this.glow = 40;
     this.color = '#F8CA00';
+    this.distance = 95;
 
     this.markToDelete = false;
   }

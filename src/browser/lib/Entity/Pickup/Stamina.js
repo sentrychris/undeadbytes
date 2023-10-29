@@ -27,6 +27,7 @@ export class Stamina
     this.image.src = 'img/stamina.png';
     this.glow = 40;
     this.color = '#F5F5F5';
+    this.distance = 100;
 
     this.markToDelete = false;
   }

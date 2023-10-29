@@ -1,38 +1,27 @@
 # Contribute a map!
 
-If you would like to contribute a map, please feel free to build one and submit a pull request for review and potential inclusion in the next release!
-
-## How to submit a map
-
-1. Fork the repository
-2. Create a new branch named `level/level<number>`, e.g.:
-    ```
-    git checkout -b level/level5
-    ```
-3. Create a new level in `src/browser/lib/Levels/`, increment it from the last available level, e.g.:
-    ```
-    touch src/browser/lib/Levels/level5.js
-    ```
-4. Create your map in the same format as the example above, don't forget to change the export const name to the same name as the level e.g:
-    ```js
-    export const level5 = [...]
-    ```
-5. Open a PR to merge your branch into the Undead Bytes `main` branch.
-
 ## Map Structure
 
 Maps are incredibly straightforward, here is the map for level 1, located at `src/browser/lib/Levels/level1.js`:
 
 ```js
+/**
+ * Level 1
+ * 
+ * 12 Enemies
+ * 02 Ammo
+ * 02 Health
+ * 02 Stamina
+ */
 export const level1 = [
   'W W W W W W W W W W W W W W W W W W W W',
   'W       W                             W',
-  'W   A   W                       H     W',
+  'W   A   W   S     E             H     W',
   'W   E   W                             W',
   'W       W           E     W W W W W W W',
   'W     W W                             W',
   'W                   E                 W',
-  'W         E                     E     W',
+  'W         E               S     E     W',
   'W                                     W',
   'W W W W W W W W W W W W W W           W',
   'W                         W           W',
@@ -49,6 +38,8 @@ export const level1 = [
 ];
 ```
 
+You can view all levels [here](https://github.com/sentrychris/undeadbytes/tree/main/src/browser/lib/Levels).
+
 ### Map entities
 
 The map is made up of characters which represent where the following entities will be placed when the map is generated:
@@ -56,6 +47,7 @@ The map is made up of characters which represent where the following entities wi
 - **W**: Denotes where walls will be placed.
 - **A**: Denotes where ammo pick-ups will be placed.
 - **H**: Denotes where health pick-ups will be placed.
+- **S**: Denotes where stamina pick-ups will be placed.
 - **E**: Denotes where enemies will spawn.
 - **P**: Denotes where the player will spawn.
 
@@ -90,5 +82,24 @@ Think carefully about enemy placement and the weapons the player has available t
 - Single blocks in spaces and corriders will provide players with both extra cover and extra obstacles to work around
 
 All of these things and more should be taken into consideration when designing a level.
+
+If you would like to contribute a map, please feel free to build one and submit a pull request for review and potential inclusion in the next release!
+
+## How to submit a map
+
+1. Fork the repository
+2. Create a new branch named `level/level<number>`, e.g.:
+    ```
+    git checkout -b level/level5
+    ```
+3. Create a new level in `src/browser/lib/Levels/`, increment it from the last available level, e.g.:
+    ```
+    touch src/browser/lib/Levels/level5.js
+    ```
+4. Create your map in the same format as the example above, don't forget to change the export const name to the same name as the level e.g:
+    ```js
+    export const level5 = [...]
+    ```
+5. Open a PR to merge your branch into the Undead Bytes `main` branch.
 
 Happy building! :)

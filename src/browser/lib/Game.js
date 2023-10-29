@@ -344,6 +344,9 @@ export class Game
       case 's': this.keyboard.down = true; break;
       case 'a': this.keyboard.left = true; break;
       case 'd': this.keyboard.right = true; break;
+      case 'h':
+        this.player.refillHealth(config.pickups.health, false);
+        break;
       case '1':
         this.selectedWeaponIndex = 0;
         this.setWeaponHotKey();

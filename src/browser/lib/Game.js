@@ -50,7 +50,12 @@ export class Game
   }
 
   attach (handler, instance) {
-    this.handlers[handler] = instance; 
+    this.handlers[handler] = instance;
+
+    if (handler === 'storage') {
+      // Signal to storage that an attached game instance exists
+      this.handlers.storage.setGameInstanceAttached(true);
+    }
   }
 
   loop () {
@@ -387,7 +392,7 @@ export class Game
         this.setWeaponHotKey();
         break;
       case '.':
-        this.handlers.storage.saveFileStorageGame(this);
+        this.handlers.storage.saveGame(this);
         break;
       case '*':
         this.toggleStats();

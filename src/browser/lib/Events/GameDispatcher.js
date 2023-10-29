@@ -8,10 +8,12 @@ export class GameDispatcher extends Dispatcher {
     });
   }
   
-  loadGame ({ save }) {
+  loadGame ({ save, instantiate = false }) {
+    const type = instantiate ? 'game:load:instance' : 'game:load';
     this.dispatchEvent({
-      type: 'game:load',
-      save
+      type,
+      save,
+      instantiate
     });
   }
 }

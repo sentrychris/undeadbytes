@@ -16,6 +16,8 @@ export class Storage
     this.bridge = bridge;
     this.dispatcher = dispatcher;
 
+    this.gameInstanceAttached = false;
+
     if (this.bridge === 'web') {
       this.configureLocalStorage();
     } else {
@@ -34,6 +36,10 @@ export class Storage
 
   setBridge (bridge) {
     this.bridge = bridge;
+  }
+
+  setGameInstanceAttached (isCreated = false) {
+    this.gameInstanceAttached = isCreated;
   }
 
   setSettings (settings, persist = false) {
@@ -99,13 +105,18 @@ export class Storage
 
   receiveLoadGameSavesFromBridge () {
     this.bridge.receive('from:game:save', (save) => {
-      this.dispatcher.loadGame({ save });
+      if (this.gameInstanceAttached) {
+        this.dispatcher.loadGame({ save });
+      } else {
+        this.dispatcher.loadGame({
+          save,
+          instantiate: true
+        });
+      }
     });
   }
 
-  saveLocalStorageGame () {}
-
-  saveFileStorageGame (game) {
+  saveGame (game) {
     const save = {
       level: game.currentLevel,
       player: {
@@ -115,9 +126,18 @@ export class Storage
       }
     };
 
-    this.bridge.send('to:game:save', {
-      save
-    });
+    if (this.bridge !== 'web') {
+      this.bridge.send('to:game:save', {
+        save
+      });
+    } else {
+      const date = (new Date()).toISOString()
+        .slice(0, 19)
+        .replace('T', '');
+
+      const key = `undeadbytes-save-${date.replace(/[:-]/g, '')}`;
+      localStorage.setItem(key, JSON.stringify(save));
+    }
   }
 
   setVolumeSettings (volume = null) {

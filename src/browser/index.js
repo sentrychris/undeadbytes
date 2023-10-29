@@ -27,7 +27,7 @@ const storage = new Storage(bridge, dispatcher, {
 });
 
 // Game setup
-function main () {
+function main (level = 1) {
   if (isActiveElement(viewport) && canvas) {
     // Create a new managed game instance
     const game = new Game(bridge, dispatcher, canvas.getContext('2d'));
@@ -36,7 +36,7 @@ function main () {
     game.attach('storage', storage);
     
     // Setup the level and start the game loop
-    game.setup({ level: 1 }, true);
+    game.setup({ level }, true);
 
     // Track WASD for UI
     trackWASDKeyboard();
@@ -46,19 +46,32 @@ function main () {
   }
 }
 
-// Spash screen play trigger
-document.querySelector('#play-now').addEventListener('click', () => {
+function play (level = 1) {
   if (splash) {
     document.body.classList.remove('body-splash');
     splash.style.display = 'none';
     viewport.classList.remove('inactive');
   }
 
-  main();
+  main(level);
+}
+
+// Spash screen play trigger
+document.querySelector('#play-now').addEventListener('click', () => {
+  play();
 });
 
+// Load game play trigger
 document.querySelector('#load-game').addEventListener('click', () => {
   if (bridge !== 'web') {
     bridge.send('to:game:load');
+  }
+});
+
+// Event listener to instantiate a new game
+dispatcher.addEventListener('game:load:instance', (event) => {
+  const { save } = event;
+  if (save) {
+    play(save.level);
   }
 });

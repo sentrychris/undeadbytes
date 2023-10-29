@@ -106,8 +106,6 @@ module.exports = class Storage
 
   saveGameToFile (save) {    
     try {
-      console.log('Saving game - ', save);
-
       const date = (new Date()).toISOString()
         .slice(0, 19)
         .replace('T', '');

@@ -53,11 +53,9 @@ function main() {
   });
 
   context.webContents.setZoomFactor(1.0);
-  console.log(`zoom: ${context.webContents.getZoomFactor()}`);
 
   context.webContents.on('zoom-changed', (event, direction) => {
     const curr = context.webContents.getZoomFactor();
-    console.log(`zoom: ${curr}`);
 
     let factor;
     if (direction === 'in') factor = (curr + 0.1);
@@ -67,11 +65,6 @@ function main() {
     if (factor > 1.0) factor = 1.0;
 
     context.webContents.zoomFactor = factor;
-
-    console.log(
-      `Zoom ${direction} to: `,
-      context.webContents.zoomFactor * 100, "%"
-    );
   });
 
   context.webContents.on('did-finish-load', () => {

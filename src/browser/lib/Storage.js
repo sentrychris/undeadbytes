@@ -99,7 +99,6 @@ export class Storage
 
   receiveLoadGameSavesFromBridge () {
     this.bridge.receive('from:game:save', (save) => {
-      console.log('received saved game', save);
       this.dispatcher.loadGame({ save });
     });
   }

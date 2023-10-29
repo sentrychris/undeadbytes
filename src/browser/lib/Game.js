@@ -428,14 +428,10 @@ export class Game
         
         target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
           percent + '%, #fff ' + percent + '%, #fff 100%)';
-
-        console.log(target.dataset);
       
         AudioFX.volume(target.dataset.control, value);
 
         if (this.handlers.storage) {
-          // Set a timeout so you don't absolutely blitz calls to the fs api
-          // no that it should it matter too much anyway
           setTimeout(() => {
             this.handlers.storage.setSetting('volumes', AudioFX.volumes, true);
           }, 1000);

@@ -9,7 +9,6 @@ export class GameDispatcher extends Dispatcher {
   }
   
   loadGame ({ save }) {
-    console.log('dispatching load game event');
     this.dispatchEvent({
       type: 'game:load',
       save

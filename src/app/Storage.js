@@ -78,21 +78,44 @@ module.exports = class Storage
     } catch (err) {
       console.log(err)
     }
+
+    // try {
+    //   const file = `undeadbytes-save-${timestamp}.json`;
+    //   const path = this.savedGamesDir + file;
+      
+    //   const game = JSON.parse(fs.readFileSync(path, {
+    //     encoding: 'utf-8'
+    //   }));
+
+    //   return game;
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   async loadGameFromFile (timestamp) { // TODO select timestamp
-    try {
-      const file = `undeadbytes-save-${timestamp}.json`;
-      const path = this.savedGamesDir + file;
-      
-      const game = JSON.parse(fs.readFileSync(path, {
-        encoding: 'utf-8'
-      }));
+    return new Promise((resolve) => {
+      dialog.showOpenDialog({
+        defaultPath: this.savedGamesDir,
+        filters: [
+          { name: 'JSON Files', extensions: ['json'] }
+        ],
+        properties: ['openFile']
+      }).then(({ filePaths }) => {
+        if (filePaths.length === 0) {
+          throw new Error('noselection');
+        }
 
-      return game;
-    } catch (err) {
-      console.log(err);
-    }
+        const game = JSON.parse(fs.readFileSync(filePaths[0], {
+          encoding: 'utf-8'
+        }));
+  
+
+        return resolve(game);
+      }).catch((err) => {
+        console.log(err);
+      })
+    })
   }
 
   saveGameToFile (save) {    

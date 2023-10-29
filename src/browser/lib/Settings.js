@@ -34,8 +34,28 @@ export class Settings
     this.bridge = bridge;
   }
 
-  setSettings (settings) {
+  setSettings (settings, persist = false) {
     this.settings = settings;
+
+    if (persist) {
+      if (this.bridge === 'web') {
+        this.saveLocalStorageSettings();
+      } else {
+        this.saveFileSettings();
+      }
+    }
+  }
+
+  setSetting (key, value, persist = false) {
+    this.settings[key] = value;
+
+    if (persist) {
+      if (this.bridge === 'web') {
+        this.saveLocalStorageSettings();
+      } else {
+        this.saveFileSettings();
+      }
+    }
   }
 
   configureFileStorage () {
@@ -55,10 +75,7 @@ export class Settings
 
     if (! settings) {
       // Set defaults if there are no stored settings
-      localStorage.setItem(
-        this.localStorageSettingsKey,
-        JSON.stringify(this.settings)
-      );
+      this.saveLocalStorageSettings();
     } else {
       // Update tracked settings
       this.setSettings(settings);
@@ -72,9 +89,9 @@ export class Settings
     );
   }
 
-  saveFileSettings (settings) {
+  saveFileSettings () {
     this.bridge.send('to:settings:save', {
-      settings
+      settings: this.settings
     });
   }
 

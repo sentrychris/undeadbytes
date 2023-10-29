@@ -74,7 +74,6 @@ module.exports = class Storage
       fs.readdirSync(this.savedGamesDir).forEach((file) => {
         this.savedGames.push(file);
       });
-      console.log(this.savedGames);
     } catch (err) {
       console.log(err)
     }
@@ -85,7 +84,7 @@ module.exports = class Storage
       dialog.showOpenDialog({
         defaultPath: this.savedGamesDir,
         filters: [
-          { name: 'JSON Files', extensions: ['json'] }
+          { name: 'Undead Bytes Saves', extensions: ['json'] }
         ],
         properties: ['openFile']
       }).then(({ filePaths }) => {

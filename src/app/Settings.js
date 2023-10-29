@@ -13,8 +13,10 @@ module.exports = class Settings
 
     this.settings = {
       volumes: {
-        weapon: 0.5,
-        snippets: 0.5,
+        fx: {
+          weapon: 0.5,
+          snippet: 0.5,
+        },
         soundtrack: 0.5
       }
     }

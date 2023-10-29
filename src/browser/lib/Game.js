@@ -16,6 +16,8 @@ export class Game
   constructor (context) {
     this.frame = null;
     this.stopped = false;
+
+    this.handlers = { ipc: null, settings: null };
     
     this.context = context;
     this.camera = new Camera(this.context);
@@ -38,6 +40,10 @@ export class Game
     this.createVolumeControls();
 
     this.stats = new Stats();
+  }
+
+  attach (handler, instance) {
+    this.handlers[handler] = instance; 
   }
 
   loop () {

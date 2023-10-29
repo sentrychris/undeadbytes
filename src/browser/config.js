@@ -3,6 +3,9 @@ export const config = {
     radius: 60,
     size: 150,
   },
+  game: {
+    savesLocalStorageKey: 'undeadbytes-saves'
+  },
   player: {
     health: 100,
     speed: 5,

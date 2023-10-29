@@ -33,6 +33,22 @@ canvas {
   color: #ff4040;
 }
 
+#load-game-web {
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.load-game__item {
+  color: #cccccc;
+}
+
+.load-game__item:hover {
+  cursor: pointer;
+  color: #f5d95c;
+  text-shadow: 0 0 30px #50ffb0;
+  text-decoration: underline;
+}
+
 .volume-slider {
   background: linear-gradient(to right, #50ffb0 0%, #50ffb0 50%, #fff 50%, #fff 100%);
   border: solid 1px #50ffb0;

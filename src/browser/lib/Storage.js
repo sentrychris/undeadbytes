@@ -1,5 +1,6 @@
 import { AudioFX } from './Audio/AudioFX';
 import { config } from '../config';
+import { timestamp } from '../util';
 
 export class Storage
 {
@@ -118,6 +119,8 @@ export class Storage
 
   saveGame (game) {
     const save = {
+      name: timestamp(true),
+      date: timestamp(),
       level: game.currentLevel,
       player: {
         pickups: {
@@ -131,12 +134,17 @@ export class Storage
         save
       });
     } else {
-      const date = (new Date()).toISOString()
-        .slice(0, 19)
-        .replace('T', '');
+      let storage = JSON.parse(localStorage.getItem(config.game.savesLocalStorageKey));
+      if (storage && storage.saves) {
+        storage = storage.saves;
+      } else {
+        storage = [];
+      }
 
-      const key = `undeadbytes-save-level-${save.level}-${date.replace(/[:-]/g, '')}`;
-      localStorage.setItem(key, JSON.stringify(save));
+      storage.push(save);
+      localStorage.setItem(config.game.savesLocalStorageKey, JSON.stringify({
+        saves: storage
+      }));
     }
   }
 

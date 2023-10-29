@@ -56,6 +56,11 @@
           <span>OUT OF AMMO</span>
         </strong>
       </p>
+
+      <div class="help-block gap-10">
+        <img src="./img/first-aid-box.png" class="help-block__img">
+        <strong id="medkits-available">0</strong>
+      </div>
       
       <hr class="help-section__separator" />
       
@@ -104,14 +109,11 @@
         <input type="range" class="grow volume-slider" data-control="snippet"
           step="0.01" min="0" max="1" value="0.5">
       </div>
-      <div class="help-block__text--muted">
-        <strong>ATTENTION</strong>:<br />Enable sound through your browser's site settings for the best experience.
-      </div>
     </div>
 
-    <div class="game-ended">
-      <div class="game-ended__text">
-        <h1 class="game-ended__text--big">Game Over</h1>
+    <div class="game-overlay">
+      <div class="game-overlay__text">
+        <h1 class="game-overlay__text--big">Game Over</h1>
       </div>
     </div>
 
@@ -130,6 +132,9 @@
         <button class="splash__button" id="load-game">
           <span class="splash__button__text">Load Game >></span>
         </button>
+      </div>
+
+      <div id="load-game-web">
       </div>
     </div>
   </div>

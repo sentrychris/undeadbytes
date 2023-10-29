@@ -10,6 +10,7 @@ import {
 
 // Styles
 import './css/main.css';
+import { config } from './config';
 
 const viewport = document.querySelector('#undead-bytes');
 const splash = document.querySelector('.splash');
@@ -65,6 +66,38 @@ document.querySelector('#play-now').addEventListener('click', () => {
 document.querySelector('#load-game').addEventListener('click', () => {
   if (bridge !== 'web') {
     bridge.send('to:game:load');
+  } else {
+    const loader = document.querySelector('#load-game-web');
+    if (loader) {
+      loader.style.display = 'block';
+      const storage = JSON.parse(localStorage.getItem(config.game.savesLocalStorageKey));
+
+      if (storage && storage.saves) {
+        const createSavedGameItem = (save) => {
+          const node = document.createElement('p');
+          node.classList.add('load-game__item');
+          node.innerHTML = `[${save.date}] - Level ${save.level} | Medkits - ${save.player.pickups.health} | Load Game...`;
+          node.dataset.save = save.name;
+          
+          return node;
+        };
+
+        const lastFourSaves = storage.saves.slice(Math.max(storage.saves.length - 4, 1));
+        for (const save of lastFourSaves) {
+          const node = createSavedGameItem(save);
+          
+          node.onclick = (e) => {
+            const save = storage.saves.find((s) => s.name === e.target.dataset.save);
+            dispatcher.loadGame({
+              save,
+              instantiate: true
+            });
+          };
+
+          loader.appendChild(node);
+        }
+      }
+    }
   }
 });
 

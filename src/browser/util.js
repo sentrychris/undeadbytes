@@ -2,6 +2,14 @@ export function randomNumber (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+export function timestamp (replace = false) {
+  const date = (new Date()).toISOString()
+    .slice(0, 19)
+    .replace('T', replace ? '' : ' ');
+
+  return replace ? date.replace(/[:-]/g, '') : date;
+}
+
 export function isActiveElement (elem) {
   return ! elem.classList.contains('inactive');
 }

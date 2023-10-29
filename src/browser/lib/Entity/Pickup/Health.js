@@ -43,7 +43,7 @@ export class Health
 
   pickup (game) {
     AudioFX.snippet({ name: 'inject' });
-    game.player.refillHealth(this.value);
+    game.player.refillHealth(this.value, true);
     this.markToDelete = true;
   }
 }

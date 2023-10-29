@@ -407,7 +407,6 @@ export class Game
   }
 
   createVolumeControls () {
-
     const sliders = document.querySelectorAll('.volume-slider');
     for (const slider of sliders) {
       slider.addEventListener('input', (e) => {

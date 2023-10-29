@@ -1,7 +1,6 @@
 export class IPC
 {
-  constructor (game, bridge, register = false) {
-    this.game = game;
+  constructor (bridge, { register = false }) {
     this.bridge = bridge;
     
     this.handlers = {};

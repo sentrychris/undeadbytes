@@ -15,15 +15,38 @@ function hasExecutionBridge () {
     && window.executionBridge !== null;
 }
 
+function createIPCHandler (game) {
+  // The bi-directional bridge to the main execution context
+  // exposed on the window object through the pre-loader
+  const bridge = window.executionBridge;
+
+  // Create a new IPC handler for the web execution context
+  // with a bridge to the main execution context
+  const ipc = new IPC(bridge, {
+    register: true
+  });
+
+  if (game.handlers.settings) {
+    // If the game has an instantiated settings handler
+    // then attach it to the IPC handler
+    ipc.attach('settings', game.handlers.settings);
+  }
+
+  return ipc;
+}
+
 function main () {
+  // Check which context the game is running in
+  const bridge = hasExecutionBridge() ? 'node' : 'web';
+
   if (isActiveElement(viewport) && canvas) {
-    // Create a new game
+    // Create a new managed game
     const game = new Game(canvas.getContext('2d'));
 
-    const bridge = hasExecutionBridge() ? 'node' : 'web';
-    game.attach('settings', new Settings(bridge, game, {
+    // Attach a new settings handler to the managed game
+    game.attach('settings', new Settings(bridge, {
       settings: null,
-      register: false
+      register: true
     }));
     
     // Setup the level and start the game loop
@@ -38,16 +61,7 @@ function main () {
     // If running within electron app, register IPC for communication
     // between the main and renderer execution contexts.
     if (hasExecutionBridge()) {
-      // The bi-directional bridge to the main execution context
-      // exposed on the window object through the pre-loader
-      const bridge = window.executionBridge;
-
-      // Create a new IPC handler for the web execution context
-      // with a bridge to the main execution context
-      const ipc = new IPC(game, bridge, true);
-
-      // Attach web settings handler to the IPC handler
-      ipc.attach('settings', /* settings handler */);
+      const ipc = createIPCHandler(game);
 
       // Attach IPC handler to the managed game.
       game.attach('ipc', ipc);
@@ -55,6 +69,9 @@ function main () {
   }
 }
 
+/**
+ * Spash screen play trigger
+ */
 document.querySelector('#play-now').addEventListener('click', () => {
   if (splash) {
     document.body.classList.remove('body-splash');

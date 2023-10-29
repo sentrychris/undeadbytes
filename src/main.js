@@ -48,10 +48,6 @@ function main() {
       action: 'deny'
     };
   });
-  
-
-  context.webContents.setVisualZoomLevelLimits(1.0, 2.5)
-    .catch((err) => console.log(err));
 
   context.webContents.setZoomFactor(1.0);
   console.log(`zoom: ${context.webContents.getZoomFactor()}`);
@@ -65,7 +61,7 @@ function main() {
     if (direction === 'out') factor = (curr - 0.1);
 
     if (factor < 0.1) factor = 0.1;
-    if (factor > 1.5) factor = 1.5;
+    if (factor > 1.0) factor = 1.0;
 
     context.webContents.zoomFactor = factor;
 

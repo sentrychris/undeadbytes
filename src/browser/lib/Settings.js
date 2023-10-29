@@ -3,9 +3,10 @@ import { config } from '../config';
 
 export class Settings
 {
-  constructor (bridge, { fileBasedSettings = null, register = false }) {
+  constructor (bridge, { register = false }) {
     this.localStorageSettingsKey = 'undeadbytes-game';
 
+    // Default settings
     this.settings = {
       godmode: false,
       difficulty: 'medium',
@@ -15,7 +16,7 @@ export class Settings
     this.bridge = bridge;
 
     if (this.bridge !== 'web') {
-      this.setSettings(fileBasedSettings);
+      this.configureFileStorage();
     } else {
       this.configureLocalStorage();
     }
@@ -31,6 +32,10 @@ export class Settings
 
   setSettings (settings) {
     this.settings = settings;
+  }
+
+  configureFileStorage () {
+    // IPC handler to get settings here
   }
 
   configureLocalStorage () {

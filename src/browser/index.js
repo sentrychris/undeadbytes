@@ -1,5 +1,6 @@
 import { Game } from './lib/Game';
-import { Settings } from './lib/Settings';
+import { Storage } from './lib/Storage';
+import { GameDispatcher } from './lib/Events/GameDispatcher';
 import {
   isActiveElement,
   getExecutionBridge,
@@ -17,22 +18,25 @@ const canvas = document.querySelector('canvas#game');
 // Determines whether or not game is running within browser or electron app
 const bridge = getExecutionBridge();
 
-// Load game settings
-const settings = new Settings(bridge, {
+// Create a game dispatcher for dispatching handler events
+const dispatcher = new GameDispatcher();
+
+// Load storage (settings, saved games etc.)
+const storage = new Storage(bridge, dispatcher, {
   register: true
 });
 
 // Game setup
-function main () {
+function main (level = 1) {
   if (isActiveElement(viewport) && canvas) {
     // Create a new managed game instance
-    const game = new Game(bridge, canvas.getContext('2d'));
+    const game = new Game(bridge, dispatcher, canvas.getContext('2d'));
 
-    // Attach settings to the game instance
-    game.attach('settings', settings);
+    // Attach storage to the game instance
+    game.attach('storage', storage);
     
     // Setup the level and start the game loop
-    game.setup({ level: 1 }, true);
+    game.setup({ level }, true);
 
     // Track WASD for UI
     trackWASDKeyboard();
@@ -42,13 +46,32 @@ function main () {
   }
 }
 
-// Spash screen play trigger
-document.querySelector('#play-now').addEventListener('click', () => {
+function play (level = 1) {
   if (splash) {
     document.body.classList.remove('body-splash');
     splash.style.display = 'none';
     viewport.classList.remove('inactive');
   }
 
-  main();
+  main(level);
+}
+
+// Spash screen play trigger
+document.querySelector('#play-now').addEventListener('click', () => {
+  play();
+});
+
+// Load game play trigger
+document.querySelector('#load-game').addEventListener('click', () => {
+  if (bridge !== 'web') {
+    bridge.send('to:game:load');
+  }
+});
+
+// Event listener to instantiate a new game
+dispatcher.addEventListener('game:load:instance', (event) => {
+  const { save } = event;
+  if (save) {
+    play(save.level);
+  }
 });

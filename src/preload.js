@@ -2,11 +2,14 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 const senderWhitelist = [
   'to:title:set',
-  'to:settings:save'
+  'to:settings:save',
+  'to:game:save',
+  'to:game:load'
 ];
 
 const receiverWhitelist = [
-  'from:settings:set'
+  'from:settings:set',
+  'from:game:save'
 ];
 
 const contextBridgeChannel = () => {

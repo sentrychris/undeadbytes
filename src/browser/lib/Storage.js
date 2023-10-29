@@ -1,9 +1,9 @@
 import { AudioFX } from './Audio/AudioFX';
 import { config } from '../config';
 
-export class Settings
+export class Storage
 {
-  constructor (bridge, { register = false }) {
+  constructor (bridge, dispatcher, { register = false }) {
     this.localStorageSettingsKey = 'undeadbytes-game';
 
     // Default settings
@@ -14,11 +14,15 @@ export class Settings
     };
 
     this.bridge = bridge;
+    this.dispatcher = dispatcher;
+
+    this.gameInstanceAttached = false;
 
     if (this.bridge === 'web') {
       this.configureLocalStorage();
     } else {
       this.configureFileStorage();
+      this.receiveLoadGameSavesFromBridge();
     }
 
     if (register) {
@@ -32,6 +36,10 @@ export class Settings
 
   setBridge (bridge) {
     this.bridge = bridge;
+  }
+
+  setGameInstanceAttached (isCreated = false) {
+    this.gameInstanceAttached = isCreated;
   }
 
   setSettings (settings, persist = false) {
@@ -93,6 +101,43 @@ export class Settings
     this.bridge.send('to:settings:save', {
       settings: this.settings
     });
+  }
+
+  receiveLoadGameSavesFromBridge () {
+    this.bridge.receive('from:game:save', (save) => {
+      if (this.gameInstanceAttached) {
+        this.dispatcher.loadGame({ save });
+      } else {
+        this.dispatcher.loadGame({
+          save,
+          instantiate: true
+        });
+      }
+    });
+  }
+
+  saveGame (game) {
+    const save = {
+      level: game.currentLevel,
+      player: {
+        pickups: {
+          health: game.player.pickups.health
+        }
+      }
+    };
+
+    if (this.bridge !== 'web') {
+      this.bridge.send('to:game:save', {
+        save
+      });
+    } else {
+      const date = (new Date()).toISOString()
+        .slice(0, 19)
+        .replace('T', '');
+
+      const key = `undeadbytes-save-level-${save.level}-${date.replace(/[:-]/g, '')}`;
+      localStorage.setItem(key, JSON.stringify(save));
+    }
   }
 
   setVolumeSettings (volume = null) {

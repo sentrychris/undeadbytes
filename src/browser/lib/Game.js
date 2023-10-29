@@ -13,13 +13,14 @@ import Stats from 'stats.js';
 
 export class Game
 {
-  constructor (bridge, context) {
+  constructor (bridge, dispatcher, context) {
     this.bridge = bridge;
+    this.dispatcher = dispatcher;
 
     this.frame = null;
     this.stopped = false;
 
-    this.handlers = { settings: null };
+    this.handlers = { storage: null };
     
     this.context = context;
     this.camera = new Camera(this.context);
@@ -38,14 +39,23 @@ export class Game
     window.addEventListener('resize', onResize);
     onResize();
 
+    this.onDispatch();
+
     this.createKeyboardMouseControls();
     this.createVolumeControls();
+
+    this.overlay = document.querySelector('.game-overlay');
 
     this.stats = new Stats();
   }
 
   attach (handler, instance) {
-    this.handlers[handler] = instance; 
+    this.handlers[handler] = instance;
+
+    if (handler === 'storage') {
+      // Signal to storage that an attached game instance exists
+      this.handlers.storage.setGameInstanceAttached(true);
+    }
   }
 
   loop () {
@@ -83,16 +93,20 @@ export class Game
     }
   }
 
-  async start (stopped, nextLevel = false) {
+  async start (stopped, nextLevel = false, savedLevel = null) {
     if (stopped && ! this.frame) {
-      const gameover = document.querySelector('.game-ended');
+      this.overlay.querySelector('h1').innerHTML = '';
 
       if (nextLevel) {
         ++this.currentLevel;
       }
 
+      if (savedLevel) {
+        this.currentLevel = savedLevel;
+      }
+
       setTimeout(() => {
-        gameover.style.display = 'none';
+        this.overlay.style.display = 'none';
         this.setup({
           level: this.currentLevel
         }, true);
@@ -211,6 +225,16 @@ export class Game
     this.camera.postRender();
   }
 
+  onDispatch () {
+    this.dispatcher.addEventListener('game:load', ({ save }) => {
+      this.overlay.style.display = 'flex';
+      this.overlay.querySelector('h1').innerHTML = 'Loading game...';
+      this.stop().then(async (stopped) => {
+        await this.start(stopped, false, save.level);
+      });
+    });
+  }
+
   onResize (width, height) {
     this.context.canvas.width = width;
     this.context.canvas.height = height;
@@ -303,18 +327,18 @@ export class Game
   }
 
   displayGameEnd () {
-    const gameover = document.querySelector('.game-ended');
+    const overlay = this.overlay;
     setTimeout(() => {
       if (this.levelPassed) {
-        gameover.querySelector('h1').innerHTML = 'You Win!';
-        gameover.classList.add('pass');
-        gameover.classList.remove('fail');
+        overlay.querySelector('h1').innerHTML = 'You Win!';
+        overlay.classList.add('pass');
+        overlay.classList.remove('fail');
       } else {
-        gameover.querySelector('h1').innerHTML = 'You Died!';
-        gameover.classList.remove('pass');
-        gameover.classList.add('fail');
+        overlay.querySelector('h1').innerHTML = 'You Died!';
+        overlay.classList.remove('pass');
+        overlay.classList.add('fail');
       }
-      gameover.style.display = 'flex';
+      overlay.style.display = 'flex';
     }, 500);
   }
 
@@ -367,6 +391,9 @@ export class Game
         this.selectedWeaponIndex = 4;
         this.setWeaponHotKey();
         break;
+      case '.':
+        this.handlers.storage.saveGame(this);
+        break;
       case '*':
         this.toggleStats();
         break;
@@ -406,16 +433,12 @@ export class Game
         
         target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
           percent + '%, #fff ' + percent + '%, #fff 100%)';
-
-        console.log(target.dataset);
       
         AudioFX.volume(target.dataset.control, value);
 
-        if (this.handlers.settings) {
-          // Set a timeout so you don't absolutely blitz calls to the fs api
-          // no that it should it matter too much anyway
+        if (this.handlers.storage) {
           setTimeout(() => {
-            this.handlers.settings.setSetting('volumes', AudioFX.volumes, true);
+            this.handlers.storage.setSetting('volumes', AudioFX.volumes, true);
           }, 1000);
         }
       });

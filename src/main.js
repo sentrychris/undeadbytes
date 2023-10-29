@@ -2,7 +2,7 @@ const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 const IPC = require('./app/IPC');
 const Menu = require('./app/Menu');
-const Settings = require('./app/Settings');
+const Storage = require('./app/Storage');
 
 // Rendering Modes
 
@@ -20,6 +20,8 @@ let context;
 function main() {
   context = new BrowserWindow({
     show: false,
+    height: 1000,
+    width: 1440,
     icon: path.join(__dirname, 'shared/assets/logo.ico'),
     webPreferences: {
       nodeIntegration: false,
@@ -32,13 +34,14 @@ function main() {
   context.loadFile(path.join(__dirname, '../dist/index.html'));
   context.webContents.setFrameRate(60);
 
-  const settings = new Settings(context);
+  const storage = new Storage(context);
 
-  new IPC(context, { settings }, {
+  new IPC(context, { storage }, {
     register: true
   });
 
   new Menu(context, {
+    handlers: { storage },
     register: true
   });
 
@@ -50,11 +53,9 @@ function main() {
   });
 
   context.webContents.setZoomFactor(1.0);
-  console.log(`zoom: ${context.webContents.getZoomFactor()}`);
 
   context.webContents.on('zoom-changed', (event, direction) => {
     const curr = context.webContents.getZoomFactor();
-    console.log(`zoom: ${curr}`);
 
     let factor;
     if (direction === 'in') factor = (curr + 0.1);
@@ -64,11 +65,6 @@ function main() {
     if (factor > 1.0) factor = 1.0;
 
     context.webContents.zoomFactor = factor;
-
-    console.log(
-      `Zoom ${direction} to: `,
-      context.webContents.zoomFactor * 100, "%"
-    );
   });
 
   context.webContents.on('did-finish-load', () => {
@@ -76,7 +72,7 @@ function main() {
     // file and sent to the renderer context
     context.webContents.send(
       'from:settings:set',
-      settings.loadFromFile()
+      storage.loadSettingsFromFile()
     );
   });
 
@@ -84,7 +80,6 @@ function main() {
     context = null;
   });
 
-  context.maximize();
   context.show();
 }
 

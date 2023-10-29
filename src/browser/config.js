@@ -1,4 +1,7 @@
+import { APP_VERSION } from '../shared/version.js';
+
 export const config = {
+  version: APP_VERSION,
   cell: {
     radius: 60,
     size: 150,

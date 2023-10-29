@@ -37,12 +37,13 @@ export class Health
 
   update (game) {
     Collision.entityToPlayer(this, game, () => {
-      this.pickup();
+      this.pickup(game);
     });
   }
 
-  pickup () {
+  pickup (game) {
     AudioFX.snippet({ name: 'inject' });
+    game.player.refillHealth(this.value);
     this.markToDelete = true;
   }
 }

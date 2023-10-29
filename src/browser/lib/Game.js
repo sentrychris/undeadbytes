@@ -190,23 +190,8 @@ export class Game
         }
       }
 
-      if (this.entities[i].type === 'pickup') {
-        if (this.entities[i].markToDelete) {
-          if (this.entities[i].item === 'ammo') {
-            this.ballistics.refillWeaponAmmoClip();
-          }
-
-          if (this.entities[i].item === 'health') {
-            this.player.refillHealth(this.entities[i].value);
-          }
-
-          if (this.entities[i].item === 'stamina') {
-            this.player.boostSpeed(this.entities[i].value);
-          }
-
-          // Remove picked up entities
-          this.entities.splice(i, 1);
-        }
+      if (this.entities[i].type === 'pickup' && this.entities[i].markToDelete) {
+        this.entities.splice(i, 1);
       }
     }
 

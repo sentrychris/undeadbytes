@@ -119,8 +119,6 @@ export class Settings
 
     if (this.bridge === 'web') {
       this.saveLocalStorageSettings();
-    } else {
-      // ipc channel
     }
 
     this.setUIState('volume');

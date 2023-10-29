@@ -18,8 +18,14 @@ export class IPC
   register () {
     // To be received throughg IPC channel from main context
     // TODO whitelist the channel
-    this.bridge.receive('from:settigs:set', (settings) => {
-      // this.handlers.settings.load
+    this.bridge.receive('from:settings:set', (settings) => {
+      console.log(settings);
+    });
+  }
+
+  saveSettingsToFile (settings) {
+    this.bridge.send('to:settings:save', {
+      settings
     });
   }
 }

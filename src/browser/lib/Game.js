@@ -190,23 +190,8 @@ export class Game
         }
       }
 
-      if (this.entities[i].type === 'pickup') {
-        if (this.entities[i].markToDelete) {
-          if (this.entities[i].item === 'ammo') {
-            this.ballistics.refillWeaponAmmoClip();
-          }
-
-          if (this.entities[i].item === 'health') {
-            this.player.refillHealth(this.entities[i].value);
-          }
-
-          if (this.entities[i].item === 'stamina') {
-            this.player.boostSpeed(this.entities[i].value);
-          }
-
-          // Remove picked up entities
-          this.entities.splice(i, 1);
-        }
+      if (this.entities[i].type === 'pickup' && this.entities[i].markToDelete) {
+        this.entities.splice(i, 1);
       }
     }
 
@@ -359,6 +344,9 @@ export class Game
       case 's': this.keyboard.down = true; break;
       case 'a': this.keyboard.left = true; break;
       case 'd': this.keyboard.right = true; break;
+      case 'h':
+        this.player.refillHealth(config.pickups.health, false);
+        break;
       case '1':
         this.selectedWeaponIndex = 0;
         this.setWeaponHotKey();

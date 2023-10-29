@@ -23,6 +23,11 @@ export class Player
     
     this.invincible = false;
     this.health = 100;
+
+    this.pickups = {
+      health: 0,
+      stamina: 0
+    };
     
     this.damage = {
       x: 0,
@@ -132,10 +137,29 @@ export class Player
     }, 3000);
   }
 
-  refillHealth (amount) {
+  refillHealth (amount, pickup = false) {
+    const refill = (health) => {
+      const increase = this.health + health;
+      if (increase <= 100) {
+        this.health = increase;
+      }
+    };
+
     if (this.health < 100) {
-      const increase = this.health + amount;
-      if (increase <= 100) this.health = increase;
+      if (! pickup) {
+        if (this.pickups.health <= 0) {
+          this.pickups.health = 0;
+        } else {
+          refill(amount);
+          --this.pickups.health;
+        }
+      } else {
+        refill(amount);
+      }
+    } else if (pickup) {
+      ++this.pickups.health;
     }
+
+    document.querySelector('#medkits-available').innerHTML = this.pickups.health;
   }
 }

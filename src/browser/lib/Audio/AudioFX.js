@@ -164,7 +164,7 @@ export class _AudioFX
         : snippet.playback;
       
       this.fx.snippet.volume = this.volumes.fx.snippet;
-      this.fx.weapon.playbackRate = playbackRate;
+      this.fx.snippet.playbackRate = playbackRate;
       this.fx.snippet.play();
     }
   }

@@ -7,7 +7,8 @@ const senderWhitelist = [
 ];
 
 const receiverWhitelist = [
-  'from:settings:set'
+  'from:settings:set',
+  'from:game:save'
 ];
 
 const contextBridgeChannel = () => {

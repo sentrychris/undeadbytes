@@ -4,16 +4,40 @@ const openAboutWindow = require('about-window').default;
 
 
 module.exports = class AppMenu {
-  constructor(context, { register = false }) {
+  constructor(context, { register = false, handlers = { storage: null } }) {
     this.context = context;
+    this.handlers = handlers;
 
     if (register) {
       this.register();
     }
   }
 
+  attach (handler, instance) {
+    this.handlers[handler] = instance;
+  }
+
   register () {
     app.applicationMenu = Menu.buildFromTemplate([
+      {
+        label: 'Game',
+        submenu: [
+          {
+            label: 'Load Game...',
+            click: () => {
+              this.handlers.storage.loadGameFromFile('20231029162414')
+                .then((save) => {
+                  this.context.webContents.send('from:game:save', save);
+                });
+            },
+            accelerator: 'Ctrl+L'
+          },
+          {
+            label: 'Save Game',
+            accelerator: 'Ctrl+S'
+          }
+        ]
+      },
       {
         label: 'View',
         submenu: [

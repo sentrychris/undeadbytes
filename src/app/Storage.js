@@ -1,6 +1,7 @@
 const os = require('os');
 const fs = require('fs');
 const path = require('path');
+const { dialog } = require('electron');
 
 module.exports = class Storage 
 {
@@ -76,6 +77,21 @@ module.exports = class Storage
       console.log(this.savedGames);
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  async loadGameFromFile (timestamp) { // TODO select timestamp
+    try {
+      const file = `undeadbytes-save-${timestamp}.json`;
+      const path = this.savedGamesDir + file;
+      
+      const game = JSON.parse(fs.readFileSync(path, {
+        encoding: 'utf-8'
+      }));
+
+      return game;
+    } catch (err) {
+      console.log(err);
     }
   }
 

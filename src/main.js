@@ -39,6 +39,7 @@ function main() {
   });
 
   new Menu(context, {
+    handlers: { storage },
     register: true
   });
 

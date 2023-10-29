@@ -127,6 +127,10 @@ export class Game
     return this.stopped;
   }
 
+  load (save) {
+    console.log(save);
+  }
+
   setup ({ level = 1 }, loop = false) {
     this.frame = null;
     this.stopped = false;

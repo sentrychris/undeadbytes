@@ -19,6 +19,7 @@ export class Storage
       this.configureLocalStorage();
     } else {
       this.configureFileStorage();
+      this.receiveLoadGameSavesFromBridge();
     }
 
     if (register) {
@@ -92,6 +93,13 @@ export class Storage
   saveFileSettings () {
     this.bridge.send('to:settings:save', {
       settings: this.settings
+    });
+  }
+
+  receiveLoadGameSavesFromBridge () {
+    this.bridge.receive('from:game:save', (save) => {
+      console.log('received saved game', save);
+      // use a dispatcher to dispatch saved game info to game manager
     });
   }
 

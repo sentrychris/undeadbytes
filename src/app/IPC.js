@@ -30,5 +30,12 @@ module.exports = class IPC
     ipcMain.on('to:game:save', (event, { save }) => {
       this.handlers.storage.saveGameToFile(save);
     });
+
+    ipcMain.on('to:game:load', (event) => {
+      this.handlers.storage.loadGameFromFile()
+        .then((save) => {
+          this.context.webContents.send('from:game:save', save);
+        });
+    });
   }
 }

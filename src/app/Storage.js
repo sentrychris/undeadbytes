@@ -78,22 +78,9 @@ module.exports = class Storage
     } catch (err) {
       console.log(err)
     }
-
-    // try {
-    //   const file = `undeadbytes-save-${timestamp}.json`;
-    //   const path = this.savedGamesDir + file;
-      
-    //   const game = JSON.parse(fs.readFileSync(path, {
-    //     encoding: 'utf-8'
-    //   }));
-
-    //   return game;
-    // } catch (err) {
-    //   console.log(err);
-    // }
   }
 
-  async loadGameFromFile (timestamp) { // TODO select timestamp
+  async loadGameFromFile () {
     return new Promise((resolve) => {
       dialog.showOpenDialog({
         defaultPath: this.savedGamesDir,

@@ -25,7 +25,7 @@ module.exports = class AppMenu {
           {
             label: 'Load Game...',
             click: () => {
-              this.handlers.storage.loadGameFromFile('20231029162414')
+              this.handlers.storage.loadGameFromFile()
                 .then((save) => {
                   this.context.webContents.send('from:game:save', save);
                 });
@@ -34,6 +34,9 @@ module.exports = class AppMenu {
           },
           {
             label: 'Save Game',
+            click: () => {
+              // will need to make a round trip into the web context to get the settings values
+            },
             accelerator: 'Ctrl+S'
           }
         ]

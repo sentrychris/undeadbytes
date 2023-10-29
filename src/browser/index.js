@@ -52,3 +52,9 @@ document.querySelector('#play-now').addEventListener('click', () => {
 
   main();
 });
+
+document.querySelector('#load-game').addEventListener('click', () => {
+  if (bridge !== 'web') {
+    bridge.send('to:game:load');
+  }
+});

@@ -4,6 +4,9 @@ import { Renderer } from '../Renderer';
 import { AudioFX } from '../Audio/AudioFX';
 import { config } from '../../config';
 
+/**
+ * Player entity.
+ */
 export class Player
 {
   constructor (spawn) {

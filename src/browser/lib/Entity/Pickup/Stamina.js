@@ -3,8 +3,17 @@ import { Renderer } from '../../Renderer';
 import { AudioFX } from '../../Audio/AudioFX';
 import { config } from '../../../config';
 
+/**
+ * Stamina pickup item entity
+ * @typedef {import('../../Game').Game} Game
+ */
 export class Stamina
 {
+  /**
+   * Create a new stamina pickup entity.
+   * @param {number} x 
+   * @param {number} y 
+   */
   constructor (x, y) {
     this.type = 'pickup';
     this.item = 'stamina';
@@ -32,16 +41,28 @@ export class Stamina
     this.markToDelete = false;
   }
 
+  /**
+   * Render the stamina pickup entity on the canvas.
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   */
   render (context) {
     Renderer.render(this, context);
   }
 
+  /**
+   * Update the stamina pickup entity for rendering, collision and behaviour.
+   * @param {Game} game - the managed game instance
+   */
   update (game) {
     Collision.entityToPlayer(this, game, () => {
       this.pickup(game);
     });
   }
 
+  /**
+   * Defines the behaviour when health entity is picked up.
+   * @param {Game} game - the managed game instance
+   */
   pickup (game) {
     AudioFX.snippet({ name: 'inject' });
     game.player.boostSpeed(this.value);

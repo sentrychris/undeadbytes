@@ -1,8 +1,19 @@
 import { Collision } from '../Collision';
 import { config } from '../../config';
 
+/**
+ * Grenade projectile handler.
+ * @typedef {import('../Entity/Player').Player} Player
+ * @typedef {import('../Entity/Wall').Wall} Wall
+ */
 export class Grenade
 {
+  /**
+   * Create new grenade projectile.
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * @param {Player} player - the player entity
+   * @param {number} i - grenade projectile spread index
+   */
   constructor (context, player, i) {
     this.vectorX = Math.cos(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
     this.vectorY = Math.sin(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
@@ -23,7 +34,12 @@ export class Grenade
     this.frames = 0;
     this.markToDelete = false;
   }
-
+  
+  /**
+   * Update the projectile data for bounds tracking, collision and cleanup.
+   * @param {Wall[]} walls - the rendered walls
+   * @param {number} dropoff - the projectile dropoff rate
+   */
   update (walls, dropoff = 25) {
     this.x += this.vectorX * dropoff;
     this.y += this.vectorY * dropoff;
@@ -46,6 +62,10 @@ export class Grenade
 
   }
 
+  /**
+   * Render the grenade projectile on the canvas.
+   * @param {array|string} color - the color of the projectile.
+   */
   render (color) {
     if (Array.isArray(color)) {
       color = color[Math.floor(Math.random() * color.length)];

@@ -2,10 +2,14 @@ import { config } from '../../config';
 import { weapons } from '../Ballistics/mappings';
 import { snippets, soundtrack } from './mappings';
 
+/**
+ * Audio FX Handler.
+ */
 export class _AudioFX
 {
   /**
-   * Audio FX
+   * Create a new Audio FX handler.
+   * @param {boolean} eagerLoad  - Whether or not to eager-load audio objects
    */
   constructor (eagerLoad = true)
   {  
@@ -40,9 +44,8 @@ export class _AudioFX
   }
 
   /**
-   * Load audio objects
-   * 
-   * @param {*} keys 
+   * Load audio FX objects.
+   * @param {array} keys - the audio to load e.g. "soundtrack", "weapons", "snippets"
    */
   load (keys = []) {
     if (keys.includes('weapons')) {
@@ -77,17 +80,24 @@ export class _AudioFX
     this.loaded = true;
   }
 
+
   /**
-   * Stop audio FX
+   * Stop the selected audio FX.
+   * @param {string} key - the audio key e.g. "weapon", "snippet"
    */
-  stop (audio) {
-    const fx = this.fx[audio];
+  stop (key) {
+    const fx = this.fx[key];
     if (fx && ! fx.paused) {
       fx.pause();
       fx.currentTime = 0;
     }
   }
 
+  /**
+   * Set the volume for the selected audio object.
+   * @param {string} key - the audio key e.g. "soundtrack", "weapon", "snippet"
+   * @param {number} level - the volume level
+   */
   async volume (key, level) {
     if (key === 'soundtrack') {
       this.volumes.soundtrack = level;
@@ -112,7 +122,13 @@ export class _AudioFX
   }
 
   /**
-   * Weapon audio FX handler 
+   * Handle weapon audio FX.
+   * @param {Object} params 
+   * @param {number|null} params.weaponIndex - The selected weapon index
+   * @param {string|null} params.equippedWeapon - The selected weapon object if no index is passed
+   * @param {string} action - the weapon audio action to play e.g. "fire" or "reload"
+   * @param {number} playbackRate - the weapon audio playback rate
+   * @returns 
    */
   weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
     if (! this.loaded) {
@@ -145,7 +161,9 @@ export class _AudioFX
   }
 
   /**
-   * Snippet audio FX handler
+   * Handle audio FX snippet.
+   * @param {string|null} params.name - The name of the audio FX snippet to play
+   * @param {boolean} params.random - If name is null and this is set to true, plays a random snippet
    */
   snippet ({name = null, random = false}, playbackRate = 1) {
     if (! this.loaded) {
@@ -169,8 +187,10 @@ export class _AudioFX
     }
   }
 
+
   /**
-   * Game soundtrack
+   * Handle the game soundtrack.
+   * @returns 
    */
   soundtrack () {
     if (! this.loaded) {
@@ -210,4 +230,9 @@ export class _AudioFX
   }
 }
 
+/**
+ * @constant
+ * @type {_AudioFX}
+ * @default
+ */
 export const AudioFX = new _AudioFX();

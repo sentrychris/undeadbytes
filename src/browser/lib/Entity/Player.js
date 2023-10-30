@@ -5,10 +5,18 @@ import { AudioFX } from '../Audio/AudioFX';
 import { config } from '../../config';
 
 /**
- * Player entity.
+ * Player entity
+ * @typedef {import('../Game').Game} Game
+ * @typedef {import('./Enemy').Enemy} Enemy
  */
 export class Player
 {
+  /**
+   * Create a new player entity.
+   * @param {Object} spawn - the player spawn coordinates
+   * @param {number} spawn.x - the player spawn x-coordinate
+   * @param {number} spawn.y - the player spawn y-coordinate
+   */
   constructor (spawn) {
     this.type = 'player';
     this.bounding = 'arc';
@@ -39,10 +47,19 @@ export class Player
     this.dead = false;
   }
 
+  /**
+   * Render the player entity on the canvas.
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   */
   render (context) {
     Renderer.render(this, context);
   }
 
+  /**
+   * Update the player entity for rendering, collision and behaviour.
+   * @param {Game} game - the managed game instance
+   * @returns 
+   */
   update (game) {
     if (this.sleep || this.dead) {
       return;
@@ -110,6 +127,10 @@ export class Player
     this.position = Math.sin(this.incrementer * Math.PI / 180);
   }
 
+  /**
+   * Handle damage from colliding enemies.
+   * @param {Enemy} enemy the enemy entity
+   */
   takeDamage (enemy) {
     if (! this.invincible) {
       const vectorX = this.x - enemy.x;
@@ -133,6 +154,10 @@ export class Player
     }
   }
 
+  /**
+   * Boost player speed when stamina entity is picked up
+   * @param {number} amount - the amount of speed to boost by
+   */
   boostSpeed (amount) {
     this.speed = amount;
     setTimeout(() => {
@@ -140,6 +165,11 @@ export class Player
     }, 3000);
   }
 
+  /**
+   * Refill player health when health entity is picked up or used
+   * @param {number} amount - the amount of health to restore
+   * @param {boolean} pickup - if false, then player is using a stored item
+   */
   refillHealth (amount, pickup = false) {
     const refill = (health) => {
       const increase = this.health + health;

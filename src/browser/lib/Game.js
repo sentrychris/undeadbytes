@@ -272,9 +272,7 @@ export class Game
 
   createWalls () {
     for (let i = 0; i < this.map.getWallPositions().length; i++) {
-      const wallPosition = this.map.getWallPositions()[i];
-      const wall = new Wall(wallPosition.x, wallPosition.y, true);
-      
+      const wall = new Wall(this.map.getWallPositions()[i], true);
       this.entities.push(wall);
       this.walls.push(wall);
     }
@@ -284,9 +282,7 @@ export class Game
 
   createAmmoPickups () {
     for (let i = 0; i < this.map.getAmmoPickupPositions().length; i++) {
-      const ammoPickupPosition = this.map.getAmmoPickupPositions()[i];
-      const ammoPickup = new Ammo(ammoPickupPosition.x, ammoPickupPosition.y);
-      
+      const ammoPickup = new Ammo(this.map.getAmmoPickupPositions()[i]);
       this.entities.push(ammoPickup);
       this.ammoPickups.push(ammoPickup);
     }
@@ -296,9 +292,7 @@ export class Game
 
   createHealthPickups () {
     for (let i = 0; i < this.map.getHealthPickupPositions().length; i++) {
-      const healthPickupPosition = this.map.getHealthPickupPositions()[i];
-      const healthPickup = new Health(healthPickupPosition.x, healthPickupPosition.y);
-      
+      const healthPickup = new Health(this.map.getHealthPickupPositions()[i]);
       this.entities.push(healthPickup);
       this.healthPickups.push(healthPickup);
     }
@@ -308,9 +302,7 @@ export class Game
 
   createStaminaPickups () {
     for (let i = 0; i < this.map.getStaminaPickupPositions().length; i++) {
-      const staminaPickupPosition = this.map.getStaminaPickupPositions()[i];
-      const staminaPickup = new Stamina(staminaPickupPosition.x, staminaPickupPosition.y);
-      
+      const staminaPickup = new Stamina(this.map.getStaminaPickupPositions()[i]);
       this.entities.push(staminaPickup);
       this.staminaPickups.push(staminaPickup);
     }

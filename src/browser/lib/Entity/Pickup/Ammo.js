@@ -11,17 +11,18 @@ export class Ammo
 {
   /**
    * Create a new ammo pickup entity.
-   * @param {number} x 
-   * @param {number} y 
+   * @param {Object} spawn - the ammo pickup item spawn coordinates
+   * @param {number} spawn.x - the ammo pickup item spawn x-coordinate
+   * @param {number} spawn.y - the ammo pickup item spawn y-coordinate
    */
-  constructor (x, y) {
+  constructor (spawn) {
     this.type = 'pickup';
     this.item = 'ammo';
     this.value = config.pickups.ammo;
 
     this.bounding = 'arc';
-    this.x = x * config.cell.size;
-    this.y = y * config.cell.size;
+    this.x = spawn.x * config.cell.size;
+    this.y = spawn.y * config.cell.size;
     
     this.bounds = {
       x: this.x,

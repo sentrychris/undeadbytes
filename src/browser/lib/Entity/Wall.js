@@ -1,12 +1,22 @@
 import { config } from '../../config';
 
+/**
+ * Wall entity
+ */
 export class Wall
 {
-  constructor (x, y, textured = false) {
+  /**
+   * Create a new wall entity.
+   * @param {Object} spawn - the wall spawn coordinates 
+   * @param {number} spawn.x - the wall spawn x-coordinate
+   * @param {number} spawn.y - the wall spawn y-coordinate
+   * @param {boolean} textured - whether or not to use texture
+   */
+  constructor (spawn, textured = false) {
     this.type = 'wall';
     this.bounding = 'box';
-    this.x = x * config.cell.size;
-    this.y = y * config.cell.size;
+    this.x = spawn.x * config.cell.size;
+    this.y = spawn.y * config.cell.size;
     this.sleep = true;
 
     this.textured = textured;
@@ -27,6 +37,10 @@ export class Wall
     };
   }
 
+  /**
+   * Render the wall entity on the canvas.
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   */
   render (context) {
     if (this.sleep) {
       return;

@@ -3,8 +3,18 @@ import { Renderer } from '../Renderer';
 import { AudioFX } from '../Audio/AudioFX';
 import { config } from '../../config';
 
+/**
+ * Enemy entity
+ * @typedef {import('../../Game').Game} Game
+ */
 export class Enemy
 {
+  /**
+   * Create a new enemy entity.
+   * @param {Object} spawn - the enemy spawn coordinates
+   * @param {number} spawn.x - the enemy spawn x-coordinate
+   * @param {number} spawn.y - the enemy spawn y-coordinate
+   */
   constructor (spawn) {
     this.type = 'enemy';
     this.bounding = 'arc';
@@ -21,11 +31,11 @@ export class Enemy
       x: 0,
       y: 0
     };
-    this.pushProjectileVelocity = {
+    this.projectileHitVelocity = {
       x: 0,
       y: 0
     };
-    this.canBePushedByProjectile = true;
+    this.canBeHitByProjectile = true;
     this.lastVectorX = 0;
     this.lastVectorY = 0;
 
@@ -34,10 +44,19 @@ export class Enemy
     this.allEnemiesDead = false;
   }
 
+  /**
+   * Render the enemy entity on the canvas.
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   */
   render (context) {
     Renderer.render(this, context);
   }
 
+  /**
+   * Update the enemy entity for rendering, collision and behaviour.
+   * @param {Game} game - the managed game instance
+   * @returns 
+   */
   update (game) {
     if (this.sleep || this.dead) {
       return;
@@ -87,33 +106,44 @@ export class Enemy
 
       if (Collision.intersection(bounds, projectile.bounds)) {
         projectile.markToDelete = true;
-        this.pushByProjectile(projectile, game.ballistics.weapon.projectile.dps, game.enemies);
+        this.hitByProjectile(projectile, game.ballistics.weapon.projectile.dps, game.enemies);
       }
     }
 
-    this.pushProjectileVelocity.x *= 0.9;
-    this.pushProjectileVelocity.y *= 0.9;
+    this.projectileHitVelocity.x *= 0.9;
+    this.projectileHitVelocity.y *= 0.9;
     
-    this.x += this.pushProjectileVelocity.x;
-    this.y += this.pushProjectileVelocity.y;
+    this.x += this.projectileHitVelocity.x;
+    this.y += this.projectileHitVelocity.y;
 
-    if (Math.abs(this.pushProjectileVelocity.x) < 0.5 && Math.abs(this.pushProjectileVelocity.y) < 0.5) {
-      this.canBePushedByProjectile = true;
-      this.pushProjectileVelocity.x = 0;
-      this.pushProjectileVelocity.y = 0;
+    if (Math.abs(this.projectileHitVelocity.x) < 0.5 && Math.abs(this.projectileHitVelocity.y) < 0.5) {
+      this.canBeHitByProjectile = true;
+      this.projectileHitVelocity.x = 0;
+      this.projectileHitVelocity.y = 0;
     }
   }
 
+  /**
+   * Set the push velocity to push enemies when bumped by entities.
+   * @param {number} vectorX 
+   * @param {number} vectorY 
+   */
   pushAlong (vectorX, vectorY) {
     this.pushAlongVelocity.x = vectorX * 10;
     this.pushAlongVelocity.y = vectorY * 10;
   }
 
-  pushByProjectile (projectile, dps, enemies) {
-    if (this.canBePushedByProjectile) {
-      this.pushProjectileVelocity.x = projectile.vectorX * 15;
-      this.pushProjectileVelocity.y = projectile.vectorY * 15;
-      this.canBePushedByProjectile = false;
+  /**
+   * Set the enemy velocity and handle DPS when enemies are hit by projectiles.
+   * @param {*} projectile 
+   * @param {number} dps 
+   * @param {array} enemies 
+   */
+  hitByProjectile (projectile, dps, enemies) {
+    if (this.canBeHitByProjectile) {
+      this.projectileHitVelocity.x = projectile.vectorX * 15;
+      this.projectileHitVelocity.y = projectile.vectorY * 15;
+      this.canBeHitByProjectile = false;
   
       this.health -= dps;
       this.health = this.health < 0 ? 0 : this.health;

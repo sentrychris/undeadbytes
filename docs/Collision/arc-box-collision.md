@@ -4,7 +4,6 @@ The `arcBoxCollision` method is a specialized function within the `Collision` cl
 
 ### Parameters:
 
-- **`params`** (Object): An object containing properties necessary for the collision check.
 - **`arcX`** (number): The x-coordinate of the arc entity.
 - **`arcY`** (number): The y-coordinate of the arc entity.
 - **`rectX`** (number): The x-coordinate of the box entity.

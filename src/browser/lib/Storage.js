@@ -130,8 +130,7 @@ export class Storage
         return node;
       };
 
-      const lastFourSaves = storage.saves.slice(Math.max(storage.saves.length - 4, 1));
-      for (const save of lastFourSaves) {
+      for (const save of storage.saves) {
         const node = createSavedGameItem(save);
         
         node.onclick = (e) => {

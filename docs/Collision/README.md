@@ -1,4 +1,4 @@
-# The `Collision` Class
+# Collision
 
 The `Collision` class provides methods for detecting collision between entities in the game environment and handling behaviour.
 
@@ -33,15 +33,15 @@ static distance (e1, e2, vectors = true) {
 
 The `distance` method calculates the Euclidean distance between two points in space. It's versatile, accepting either entity objects or numerical values as parameters. When `vectors` is set to `true`, the method considers the parameters as vector components, determining the distance between the points they represent. This is foundational for measuring the spatial separation between entities, a key factor in collision detection.
 
-## `arcWallVector(params)`
+## `arcBoxCollision(params)`
 
-This method is specifically tailored for collision detection between an arc-shaped entity (possibly the player) and a wall. By leveraging geometric calculations, it checks if the arc is within a certain distance from the wall.
+This method is specifically tailored for collision detection between an arc-shaped entity (possibly the player) and a box-shaped entity (possibly a wall). By leveraging geometric calculations, it checks if the arc is within a certain distance from the box.
 
-View [here](arc-wall-vector.md) for more details.
+View [here](arc-box-collision.md) for more details.
 
 ## `entityToWalls(entity, walls)`
 
-`entityToWalls` is responsible for detecting collisions between a given entity and an array of wall entities. It iterates through the array, employing [`arcWallVector`](arc-wall-vector.md) for each wall. By accumulating collision vectors, it provides a result that adjusts the entity's position, preventing it from passing through walls. This method is crucial for maintaining the integrity of the game environment and ensuring entities interact appropriately with obstacles.
+`entityToWalls` is responsible for detecting collisions between a given entity and an array of wall entities. It iterates through the array, employing [`arcBoxCollision`](arc-box-collision.md) for each wall. By accumulating collision vectors, it provides a result that adjusts the entity's position, preventing it from passing through walls. This method is crucial for maintaining the integrity of the game environment and ensuring entities interact appropriately with obstacles.
 
 View [here](entity-to-walls.md) for more details.
 

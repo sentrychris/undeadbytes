@@ -23,7 +23,7 @@ export class Storage
       this.configureLocalStorage();
     } else {
       this.configureFileStorage();
-      this.receiveLoadGameSavesFromBridge();
+      this.loadGameSavesFromBridge();
     }
 
     if (register) {
@@ -104,7 +104,7 @@ export class Storage
     });
   }
 
-  receiveLoadGameSavesFromBridge () {
+  loadGameSavesFromBridge () {
     this.bridge.receive('from:game:save', (save) => {
       if (this.gameInstanceAttached) {
         this.dispatcher.loadGame({ save });
@@ -115,6 +115,36 @@ export class Storage
         });
       }
     });
+  }
+
+  loadGameSavesFromLocalStorage (loader) {
+    const storage = JSON.parse(localStorage.getItem(config.game.savesLocalStorageKey));
+
+    if (storage && storage.saves) {
+      const createSavedGameItem = (save) => {
+        const node = document.createElement('p');
+        node.classList.add('load-game__item');
+        node.innerHTML = `[${save.date}] - Level ${save.level} | Medkits - ${save.player.pickups.health} | Load Game...`;
+        node.dataset.save = save.name;
+        
+        return node;
+      };
+
+      const lastFourSaves = storage.saves.slice(Math.max(storage.saves.length - 4, 1));
+      for (const save of lastFourSaves) {
+        const node = createSavedGameItem(save);
+        
+        node.onclick = (e) => {
+          const save = storage.saves.find((s) => s.name === e.target.dataset.save);
+          this.dispatcher.loadGame({
+            save,
+            instantiate: true
+          });
+        };
+
+        loader.appendChild(node);
+      }
+    }
   }
 
   saveGame (game) {

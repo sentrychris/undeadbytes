@@ -1,10 +1,12 @@
 import { config } from '../config';
 
+/**
+ * Entity Renderer
+ */
 export class Renderer
 {
   /**
    * Render the entity
-   * 
    * @param {*} context 
    * @param {*} entity 
    */
@@ -44,7 +46,6 @@ export class Renderer
 
   /**
    * Calculate offset and begin rotating entity to given angle at position
-   * 
    * @param {*} context 
    * @param {*} x 
    * @param {*} y 
@@ -59,7 +60,6 @@ export class Renderer
   
   /**
      * Stop rotating entity to given angle at position
-     * 
      * @param {*} context 
      * @param {*} x 
      * @param {*} y 
@@ -74,7 +74,6 @@ export class Renderer
 
   /**
    * Draw player
-   * 
    * @param {*} context 
    * @param {*} position 
    */
@@ -139,7 +138,6 @@ export class Renderer
 
   /**
    * Draw dead player
-   * 
    * @param {*} context 
    */
   static deadPlayer (context) {
@@ -200,7 +198,6 @@ export class Renderer
 
   /**
    * Draw enemy
-   * 
    * @param {*} context 
    * @param {*} position 
    */
@@ -255,7 +252,6 @@ export class Renderer
 
   /**
    * Draw dead enemy
-   * 
    * @param {*} context 
    */
   static deadEnemy (context) {
@@ -306,7 +302,6 @@ export class Renderer
 
   /**
    * Draw health
-   * 
    * @param {*} context 
    * @param {*} health 
    * @param {*} centerX 

@@ -4,9 +4,8 @@ export class Collision
 {
   /**
    * Determine intersection between entities
-   * 
-   * @param {*} r1 
-   * @param {*} r2 
+   * @param {*} r1 - first entity
+   * @param {*} r2 - second entity
    * @returns 
    */
   static intersection (r1, r2) {
@@ -19,7 +18,6 @@ export class Collision
 
   /**
    * Determine distance between two vectors
-   * 
    * @param {*} e1 
    * @param {*} e2 
    * @param {*} vectors 
@@ -38,7 +36,6 @@ export class Collision
 
   /**
    * Caclulate collision beween entity (arc) and wall (box)
-   * 
    * @param {*} param0 
    * @returns 
    */
@@ -64,7 +61,6 @@ export class Collision
 
   /**
    * Entity-to-walls collision
-   * 
    * @param {*} entity
    * @param {*} walls 
    * @returns 
@@ -109,7 +105,6 @@ export class Collision
 
   /**
    * Player-to-entity collision
-   * 
    * @param {*} entity 
    * @param {*} game 
    * @param {*} callback 

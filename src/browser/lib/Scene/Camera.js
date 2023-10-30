@@ -1,8 +1,17 @@
 import { Collision } from '../Collision';
 import { config } from '../../config';
 
+/**
+ * Camera handler
+ * @typedef {import('../Entity/Player').Player} Player
+ */
 export class Camera
 {
+  /**
+   * Create new camera.
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * @param {number} frames - counter to control the frequency of updates
+   */
   constructor (context, frames = 0) {
     this.x = 0;
     this.y = 0;
@@ -18,6 +27,11 @@ export class Camera
     this.screen = null;
   }
 
+  /**
+   * Update the camera and rendering state for entities
+   * @param {Player} player - the player entity
+   * @param {array} entities - array of game entities
+   */
   update (player, entities) {
     this.frames++;
     if (this.frames >= 15) {
@@ -52,10 +66,17 @@ export class Camera
 
   resize () {}
 
+  /**
+   * Clear the rendering context to prepare for a new scene.
+   */
   newScene () {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
   }
 
+  /**
+   * Adjust the camera's position based on the passed entity's position.
+   * @param {*} entity 
+   */
   preRender (entity) {
     const targetX = -entity.x + this.context.canvas.width / 2;
     const targetY = -entity.y + this.context.canvas.height / 2;
@@ -73,6 +94,9 @@ export class Camera
     this.context.translate(this.x, this.y);
   }
 
+  /**
+   * Restore the rendering context state after rendering.
+   */
   postRender () {
     this.context.restore();
   }

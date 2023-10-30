@@ -11,6 +11,11 @@ export class Camera
 
     this.context = context;
     this.frames = frames;
+
+    this.image = new Image();
+    this.image.src = 'img/floor.png';
+
+    this.screen = null;
   }
 
   update (player, entities) {
@@ -18,11 +23,11 @@ export class Camera
     if (this.frames >= 15) {
       this.frames = 0;
 
-      const screen = {
-        x: player.x - this.offsetX - this.context.canvas.width / 2 - this.size,
-        y: player.y - this.offsetY - this.context.canvas.height / 2 - this.size,
-        width: this.context.canvas.width + this.size * 2,
-        height: this.context.canvas.height + this.size * 2
+      this.screen = {
+        x: player.x - this.offsetX - this.context.canvas.width / 2 - config.cell.size,
+        y: player.y - this.offsetY - this.context.canvas.height / 2 - config.cell.size,
+        width: this.context.canvas.width + config.cell.size * 2,
+        height: this.context.canvas.height + config.cell.size * 2
       };
 
       for (let i = 0; i < entities.length; i++) {
@@ -40,7 +45,7 @@ export class Camera
           bounds.width = config.cell.size;
           bounds.height = config.cell.size;
         }
-        entity.sleep = ! Collision.intersection(bounds, screen);
+        entity.sleep = ! Collision.intersection(bounds, this.screen);
       }
     }
   }

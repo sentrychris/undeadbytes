@@ -36,7 +36,7 @@ The `entityToWalls` method is responsible for handling collisions between a give
      size: config.cell.size
    })) {
    ```
-   It checks for collision between the arc-shaped entity and the rectangular wall using the [`arcWallVector`](#arc-wall-vector) method.
+   It checks for collision between the arc-shaped entity and the rectangular wall using the [`arcWallVector`](arc-wall-vector.md) method.
 
 4. **Collision Handling:**
    ```javascript
@@ -71,6 +71,6 @@ The `entityToWalls` method is responsible for handling collisions between a give
 
 ### Purpose:
 
-The primary purpose of the `entityToWalls` method is to handle collisions between an entity and an array of walls in the game environment. It utilizes the [`arcWallVector`](#arc-wall-vector.md) method to check for collisions with each wall individually, and the cumulative collision vectors are then used to adjust the entity's position.
+The primary purpose of the `entityToWalls` method is to handle collisions between an entity and an array of walls in the game environment. It utilizes the [`arcWallVector`](arc-wall-vector.md) method to check for collisions with each wall individually, and the cumulative collision vectors are then used to adjust the entity's position.
 
 This functionality is crucial for ensuring that entities navigate the game world realistically, responding to the presence of walls to prevent phasing through them.

@@ -41,7 +41,7 @@ View [here](arc-wall-vector.md) for more details.
 
 ## `entityToWalls(entity, walls)`
 
-`entityToWalls` is responsible for detecting collisions between a given entity and an array of wall entities. It iterates through the array, employing [`arcWallVector`](#arc-wall-vector.md) for each wall. By accumulating collision vectors, it provides a result that adjusts the entity's position, preventing it from passing through walls. This method is crucial for maintaining the integrity of the game environment and ensuring entities interact appropriately with obstacles.
+`entityToWalls` is responsible for detecting collisions between a given entity and an array of wall entities. It iterates through the array, employing [`arcWallVector`](arc-wall-vector.md) for each wall. By accumulating collision vectors, it provides a result that adjusts the entity's position, preventing it from passing through walls. This method is crucial for maintaining the integrity of the game environment and ensuring entities interact appropriately with obstacles.
 
 View [here](entity-to-walls.md) for more details.
 

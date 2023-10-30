@@ -46,19 +46,11 @@ export class Collision
     const distX = Math.abs(arcX - wallX - size / 2);
     const distY = Math.abs(arcY - wallY - size / 2);
   
-    if (distX > (size / 2 + radius)) {
+    if (distX > (size / 2 + radius) || distY > (size / 2 + radius)) {
       return false;
     }
 
-    if (distY > (size / 2 + radius)) {
-      return false;
-    }
-  
-    if (distX <= (size / 2)) {
-      return true;
-    }
-
-    if (distY <= (size / 2)) {
+    if (distX <= (size / 2) || distY <= (size / 2)) {
       return true;
     }
   

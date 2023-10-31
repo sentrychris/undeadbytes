@@ -45,6 +45,27 @@ module.exports = class AppMenu {
         label: 'View',
         submenu: [
           {
+            label: 'Zoom In',
+            accelerator: (function() {
+              return process.platform === 'darwin' ? 'Command+Plus' : 'Ctrl+Plus'
+            }()),
+            click: () => {
+              const factor = (this.context.webContents.getZoomFactor() + 0.1)
+              this.context.webContents.zoomFactor = factor > 1 ? 1 : factor;
+            }
+          },
+          {
+            label: 'Zoom Out',
+            accelerator: (function() {
+              return process.platform === 'darwin' ? 'Command+-' : 'Ctrl+-'
+            }()),
+            click: () => {
+              const factor = (this.context.webContents.getZoomFactor() - 0.1)
+              this.context.webContents.zoomFactor = factor < 0.1 ? 0.1 : factor;
+            }
+          },
+          { type: 'separator' },
+          {
             label: 'Toggle Developer Tools',
             accelerator: (function () {
               return process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I';

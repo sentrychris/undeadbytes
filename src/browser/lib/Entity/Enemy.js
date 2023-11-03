@@ -5,7 +5,6 @@ import { config } from '../../config';
 
 /**
  * Enemy entity
- * @typedef {import('../Game').Game} Game
  */
 export class Enemy
 {

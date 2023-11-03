@@ -5,8 +5,6 @@ import { weapons } from './mappings';
 
 /**
  * Ballistics handler.
- * @typedef {import('../Entity/Player').Player} Player
- * @typedef {import('../Entity/Wall').Wall} Wall
  */
 export class Ballistics
 {

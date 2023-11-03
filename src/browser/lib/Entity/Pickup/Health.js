@@ -5,7 +5,6 @@ import { config } from '../../../config';
 
 /**
  * Health pickup item entity
- * @typedef {import('../../Game').Game} Game
  */
 export class Health
 {

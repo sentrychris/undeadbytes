@@ -3,7 +3,6 @@ import { config } from '../../config';
 
 /**
  * Camera handler
- * @typedef {import('../Entity/Player').Player} Player
  */
 export class Camera
 {

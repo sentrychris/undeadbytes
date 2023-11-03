@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: _AudioFX</title>
+    <title>JSDoc: Class: Player</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: _AudioFX</h1>
+    <h1 class="page-title">Class: Player</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>_AudioFX<span class="signature">(eagerLoad)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Player<span class="signature">(spawn)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Audio FX Handler.</div>
+            <div class="class-description">Player entity</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="_AudioFX"><span class="type-signature"></span>new _AudioFX<span class="signature">(eagerLoad)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Player"><span class="type-signature"></span>new Player<span class="signature">(spawn)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Create a new Audio FX handler.
+    Create a new player entity.
 </div>
 
 
@@ -79,7 +79,47 @@
         
 
         
-        <th>Default</th>
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>spawn</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the player spawn coordinates
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
         
 
         <th class="last">Description</th>
@@ -91,13 +131,13 @@
 
         <tr>
             
-                <td class="name"><code>eagerLoad</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">boolean</span>
+<span class="param-type">number</span>
 
 
             
@@ -106,14 +146,38 @@
             
 
             
-                <td class="default">
-                
-                    true
-                
-                </td>
+
+            <td class="description last">the player spawn x-coordinate</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
             
 
-            <td class="description last">Whether or not to eager-load audio objects</td>
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the player spawn y-coordinate</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -154,7 +218,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line8">line 8</a>
+        <a href="Entity_Player.js.html">Entity/Player.js</a>, <a href="Entity_Player.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -195,7 +259,7 @@
         <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            <dt><a href="-_AudioFX.html">_AudioFX</a></dt>
+            <dt><a href="Player.html">Player</a></dt>
             <dd></dd>
         </dl>
     
@@ -217,7 +281,7 @@
     
 
     
-    <h4 class="name" id="load"><span class="type-signature"></span>load<span class="signature">(keys)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="boostSpeed"><span class="type-signature"></span>boostSpeed<span class="signature">(amount)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -225,7 +289,7 @@
 
 
 <div class="description">
-    Load audio FX objects.
+    Boost player speed when stamina entity is picked up
 </div>
 
 
@@ -261,13 +325,13 @@
 
         <tr>
             
-                <td class="name"><code>keys</code></td>
+                <td class="name"><code>amount</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">array</span>
+<span class="param-type">number</span>
 
 
             
@@ -277,7 +341,7 @@
 
             
 
-            <td class="description last">the audio to load e.g. "soundtrack", "weapons", "snippets"</td>
+            <td class="description last">the amount of speed to boost by</td>
         </tr>
 
     
@@ -318,7 +382,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line50">line 50</a>
+        <a href="Entity_Player.js.html">Entity/Player.js</a>, <a href="Entity_Player.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -343,6 +407,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -354,7 +436,7 @@
     
 
     
-    <h4 class="name" id="snippet"><span class="type-signature"></span>snippet<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="refillHealth"><span class="type-signature"></span>refillHealth<span class="signature">(amount, pickup)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -362,7 +444,7 @@
 
 
 <div class="description">
-    Handle audio FX snippet.
+    Refill player health when health entity is picked up or used
 </div>
 
 
@@ -388,6 +470,8 @@
         
 
         
+        <th>Default</th>
+        
 
         <th class="last">Description</th>
     </tr>
@@ -398,16 +482,13 @@
 
         <tr>
             
-                <td class="name"><code>params.name</code></td>
+                <td class="name"><code>amount</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
-<span class="param-type">null</span>
+<span class="param-type">number</span>
 
 
             
@@ -416,15 +497,19 @@
             
 
             
+                <td class="default">
+                
+                </td>
+            
 
-            <td class="description last">The name of the audio FX snippet to play</td>
+            <td class="description last">the amount of health to restore</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>params.random</code></td>
+                <td class="name"><code>pickup</code></td>
             
 
             <td class="type">
@@ -439,8 +524,14 @@
             
 
             
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
 
-            <td class="description last">If name is null and this is set to true, plays a random snippet</td>
+            <td class="description last">if false, then player is using a stored item</td>
         </tr>
 
     
@@ -481,7 +572,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line169">line 169</a>
+        <a href="Entity_Player.js.html">Entity/Player.js</a>, <a href="Entity_Player.js.html#line175">line 175</a>
     </li></ul></dd>
     
 
@@ -535,7 +626,7 @@
     
 
     
-    <h4 class="name" id="soundtrack"><span class="type-signature"></span>soundtrack<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(context)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -543,7 +634,7 @@
 
 
 <div class="description">
-    Handle the game soundtrack.
+    Render the player entity on the canvas.
 </div>
 
 
@@ -552,6 +643,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>context</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CanvasRenderingContext2D</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the canvas rendering context</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -587,7 +727,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line196">line 196</a>
+        <a href="Entity_Player.js.html">Entity/Player.js</a>, <a href="Entity_Player.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -641,7 +781,7 @@
     
 
     
-    <h4 class="name" id="stop"><span class="type-signature"></span>stop<span class="signature">(key)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="takeDamage"><span class="type-signature"></span>takeDamage<span class="signature">(enemy)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -649,7 +789,7 @@
 
 
 <div class="description">
-    Stop the selected audio FX.
+    Handle damage from colliding enemies.
 </div>
 
 
@@ -685,13 +825,13 @@
 
         <tr>
             
-                <td class="name"><code>key</code></td>
+                <td class="name"><code>enemy</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type"><a href="Enemy.html">Enemy</a></span>
 
 
             
@@ -701,7 +841,7 @@
 
             
 
-            <td class="description last">the audio key e.g. "weapon", "snippet"</td>
+            <td class="description last">the enemy entity</td>
         </tr>
 
     
@@ -742,7 +882,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line88">line 88</a>
+        <a href="Entity_Player.js.html">Entity/Player.js</a>, <a href="Entity_Player.js.html#line134">line 134</a>
     </li></ul></dd>
     
 
@@ -767,166 +907,24 @@
 
 
 
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="volume"><span class="type-signature">(async) </span>volume<span class="signature">(key, level)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Set the volume for the selected audio object.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
+<h5>Returns:</h5>
 
         
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>key</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
+<span class="param-type">void</span>
 
 
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the audio key e.g. "soundtrack", "weapon", "snippet"</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>level</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the volume level</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line101">line 101</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -938,7 +936,7 @@
     
 
     
-    <h4 class="name" id="weapon"><span class="type-signature"></span>weapon<span class="signature">(params, action, playbackRate)</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(game)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -946,7 +944,7 @@
 
 
 <div class="description">
-    Handle weapon audio FX.
+    Update the player entity for rendering, collision and behaviour.
 </div>
 
 
@@ -982,13 +980,13 @@
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>game</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">Game</span>
 
 
             
@@ -998,131 +996,7 @@
 
             
 
-            <td class="description last">
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>weaponIndex</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-|
-
-<span class="param-type">null</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The selected weapon index</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>equippedWeapon</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">null</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The selected weapon object if no index is passed</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>action</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the weapon audio action to play e.g. "fire" or "reload"</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>playbackRate</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">the weapon audio playback rate</td>
+            <td class="description last">the managed game instance</td>
         </tr>
 
     
@@ -1163,7 +1037,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Audio_AudioFX.js.html">Audio/AudioFX.js</a>, <a href="Audio_AudioFX.js.html#line133">line 133</a>
+        <a href="Entity_Player.js.html">Entity/Player.js</a>, <a href="Entity_Player.js.html#line62">line 62</a>
     </li></ul></dd>
     
 

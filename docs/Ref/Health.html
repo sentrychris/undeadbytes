@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Wall</title>
+    <title>JSDoc: Class: Health</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Wall</h1>
+    <h1 class="page-title">Class: Health</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Wall<span class="signature">(spawn, textured)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Health<span class="signature">(spawn)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Wall entity</div>
+            <div class="class-description">Health pickup item entity</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Wall"><span class="type-signature"></span>new Wall<span class="signature">(spawn, textured)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Health"><span class="type-signature"></span>new Health<span class="signature">(spawn)</span><span class="type-signature"></span></h4>
     
 
     
@@ -53,7 +53,7 @@
 
 
 <div class="description">
-    Create a new wall entity.
+    Create a new health pickup entity.
 </div>
 
 
@@ -105,7 +105,7 @@
 
             
 
-            <td class="description last">the wall spawn coordinates
+            <td class="description last">the health pickup item spawn coordinates
                 <h6>Properties</h6>
                 
 
@@ -147,7 +147,7 @@
 
             
 
-            <td class="description last">the wall spawn x-coordinate</td>
+            <td class="description last">the health pickup item spawn x-coordinate</td>
         </tr>
 
     
@@ -170,7 +170,7 @@
 
             
 
-            <td class="description last">the wall spawn y-coordinate</td>
+            <td class="description last">the health pickup item spawn y-coordinate</td>
         </tr>
 
     
@@ -178,29 +178,6 @@
 </table>
 
             </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>textured</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">boolean</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">whether or not to use texture</td>
         </tr>
 
     
@@ -241,7 +218,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Entity_Wall.js.html">Entity/Wall.js</a>, <a href="Entity_Wall.js.html#line6">line 6</a>
+        <a href="Entity_Pickup_Health.js.html">Entity/Pickup/Health.js</a>, <a href="Entity_Pickup_Health.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -282,7 +259,7 @@
         <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            <dt><a href="Wall.html">Wall</a></dt>
+            <dt><a href="Health.html">Health</a></dt>
             <dd></dd>
         </dl>
     
@@ -304,6 +281,143 @@
     
 
     
+    <h4 class="name" id="pickup"><span class="type-signature"></span>pickup<span class="signature">(game)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Defines the behaviour when health entity is picked up.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>game</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Game</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the managed game instance</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Entity_Pickup_Health.js.html">Entity/Pickup/Health.js</a>, <a href="Entity_Pickup_Health.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="render"><span class="type-signature"></span>render<span class="signature">(context)</span><span class="type-signature"></span></h4>
     
 
@@ -312,7 +426,7 @@
 
 
 <div class="description">
-    Render the wall entity on the canvas.
+    Render the health pickup entity on the canvas.
 </div>
 
 
@@ -405,7 +519,144 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Entity_Wall.js.html">Entity/Wall.js</a>, <a href="Entity_Wall.js.html#line44">line 44</a>
+        <a href="Entity_Pickup_Health.js.html">Entity/Pickup/Health.js</a>, <a href="Entity_Pickup_Health.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="update"><span class="type-signature"></span>update<span class="signature">(game)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Update the health pickup entity for rendering, collision and behaviour.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>game</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Game</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the managed game instance</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Entity_Pickup_Health.js.html">Entity/Pickup/Health.js</a>, <a href="Entity_Pickup_Health.js.html#line56">line 56</a>
     </li></ul></dd>
     
 

@@ -3,8 +3,6 @@ import { config } from '../../config';
 
 /**
  * Grenade projectile handler.
- * @typedef {import('../Entity/Player').Player} Player
- * @typedef {import('../Entity/Wall').Wall} Wall
  */
 export class Grenade
 {

@@ -6,9 +6,13 @@ import { config } from '../config';
 export class Renderer
 {
   /**
-   * Render the entity
-   * @param {*} context 
-   * @param {*} entity 
+   * Render the entity on the canvas.
+   * 
+   * This method is called on every frame/repaint. It checks to see if the entity render state
+   * is active, and checks the entity type to apply specified behaviour and styles.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas context for rendering.
+   * @param {*} entity - the entity to render
    */
   static render (entity, context) {
     if (entity.sleep) {
@@ -40,16 +44,17 @@ export class Renderer
       }
       
       Renderer.endRotationOffset(context, entity.x, entity.y, entity.angle);
-      Renderer.health(context, entity.health, entity.x, entity.y);
+      Renderer.health(context, entity.x, entity.y, entity.health);
     }
   }
 
   /**
-   * Calculate offset and begin rotating entity to given angle at position
-   * @param {*} context 
-   * @param {*} x 
-   * @param {*} y 
-   * @param {*} angle 
+   * Calculate offset and begin rotating entity to given angle at position.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas context for rendering
+   * @param {number} x - the entity x-coordinate
+   * @param {number} y - the entity y-coordinate
+   * @param {number} angle the angle to rotate on the canvas
    */
   static beginRotationOffset (context, x, y, angle) {
     context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
@@ -59,12 +64,13 @@ export class Renderer
   }
   
   /**
-     * Stop rotating entity to given angle at position
-     * @param {*} context 
-     * @param {*} x 
-     * @param {*} y 
-     * @param {*} angle 
-     */
+   * Stop rotating entity to given angle at position.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas context for rendering
+   * @param {number} x - the entity x-coordinate
+   * @param {number} y - the entity y-coordinate
+   * @param {number} angle the angle to rotate on the canvas
+   */
   static endRotationOffset (context, x, y, angle) {
     context.rotate(-angle);
   
@@ -73,9 +79,10 @@ export class Renderer
   }
 
   /**
-   * Draw player
-   * @param {*} context 
-   * @param {*} position 
+   * Draw the player entity.
+   * 
+   * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
+   * @param {number} position - the entity's position for feet animation
    */
   static player (context, position) {
     context.shadowBlur = 5;
@@ -137,8 +144,9 @@ export class Renderer
   }
 
   /**
-   * Draw dead player
-   * @param {*} context 
+   * Draw dead player.
+   * 
+   * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
    */
   static deadPlayer (context) {
     // left foot
@@ -197,9 +205,10 @@ export class Renderer
   }
 
   /**
-   * Draw enemy
-   * @param {*} context 
-   * @param {*} position 
+   * Draw enemy.
+   * 
+   * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
+   * @param {number} position - the entity's position for feet animation
    */
   static enemy (context, position) {
     context.shadowBlur = 10;
@@ -251,8 +260,9 @@ export class Renderer
   }
 
   /**
-   * Draw dead enemy
-   * @param {*} context 
+   * Draw dead enemy.
+   * 
+   * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
    */
   static deadEnemy (context) {
     // left foot
@@ -301,15 +311,16 @@ export class Renderer
   }
 
   /**
-   * Draw health
-   * @param {*} context 
-   * @param {*} health 
-   * @param {*} centerX 
-   * @param {*} centerY 
+   * Draw entity health bar.
+   * 
+   * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
+   * @param {number} x - the entity x-coordinate
+   * @param {number} y - the entity y-coordinate
+   * @param {number} health - the entity's health value
    */
-  static health (context, health, centerX, centerY) {
+  static health (context, x, y, health) {
     context.beginPath();
-    context.rect(centerX - 50, centerY + 60, 100, 5);
+    context.rect(x - 50, y + 60, 100, 5);
     context.strokeStyle = 'black';
     context.stroke();
 
@@ -323,7 +334,7 @@ export class Renderer
     }
 
     context.beginPath();
-    context.rect(centerX - 50, centerY + 60, health, 5);
+    context.rect(x - 50, y + 60, health, 5);
     context.fillStyle = color;
     context.fill();
   }

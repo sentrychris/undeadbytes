@@ -18,42 +18,36 @@ export class Ammo
     /**
      * type - the type of entity.
      * @type {string}
-     * @public
      */
     this.type = 'pickup';
 
     /**
      * item - the entity item.
      * @type {number}
-     * @public
      */
     this.item = 'ammo';
 
     /**
      * value - the entity's in-game value.
      * @type {number}
-     * @public
      */
     this.value = config.pickups.ammo;
 
     /**
      * bounding - the entity's bounding behavior.
      * @type {string}
-     * @public
      */
     this.bounding = 'arc';
 
     /**
      * x - the entity's x coordinate.
      * @type {number}
-     * @public
      */
     this.x = spawn.x * config.cell.size;
 
     /**
      * y - the entity's y coordinate.
      * @type {number}
-     * @public
      */
     this.y = spawn.y * config.cell.size;
     
@@ -61,7 +55,6 @@ export class Ammo
     /**
      * bounds - the entity's bounds for intersection.
      * @type {object}
-     * @public
      */
     this.bounds = {
       x: this.x,
@@ -74,7 +67,6 @@ export class Ammo
     /**
      * sleep - the entity's render state.
      * @type {boolean}
-     * @public
      */
     this.sleep = true;
 
@@ -82,7 +74,6 @@ export class Ammo
     /**
      * image - the entity's render image.
      * @type {Image}
-     * @public
      */
     this.image = new Image();
     this.image.src = 'img/magazine.png';
@@ -90,35 +81,37 @@ export class Ammo
     /**
      * glow - background glow for the entity's render image.
      * @type {number}
-     * @public
      */
     this.glow = 40;
 
     /**
-     * color -background glow color for the entity's render image.
+     * color - background glow color for the entity's render image.
      * @type {string}
-     * @public
      */
     this.color = '#F8CA00';
 
     /**
      * distance - the distance between the player and the entity to trigger behavior.
      * @type {number}
-     * @public
      */
     this.distance = 95;
 
     /**
      * markToDelete - determines whether the entity should be removed from the game.
      * @type {boolean}
-     * @public
      */
     this.markToDelete = false;
   }
 
   /**
    * Render the ammo pickup entity on the canvas.
-   * @param {CanvasRenderingContext2D} context 
+   * 
+   * This is called every frame/repaint to render the entity. Note that this is
+   * a statically-placed entity, therefore the x,y coordinates will not change on
+   * update.
+   * 
+   * @param {CanvasRenderingContext2D} context
+   * @returns {void}
    */
   render (context) {
     Renderer.render(this, context);
@@ -126,7 +119,13 @@ export class Ammo
 
   /**
    * Update the ammo pickup entity on each frame for rendering, collision and behaviour.
+   * 
+   * This is called every frame/repaint, upon which collision vectors are calculated to
+   * determine if the player and the entity intersect, if they do, then the entity's pickup
+   * method is executed as a callback.
+   * 
    * @param {Game} game - the managed game instance
+   * @returns {void}
    */
   update (game) {
     Collision.entityToPlayer(this, game, () => {
@@ -136,7 +135,15 @@ export class Ammo
 
   /**
    * Defines the behaviour to triggger when the player intersects with the entity.
+   * 
+   * When the player intersects with the entity, the "reload" audio snippet will
+   * play through the AudioFX handler, the player's ammo or magazines will be
+   * replenished through the Ballistics handler, and then the entity will be
+   * marked for deletion, upon which it wil be removed from the canvas on the next
+   * frame/repaint.
+   * 
    * @param {Game} game - the managed game instance
+   * @returns {void}
    */
   pickup (game) {
     AudioFX.snippet({ name: 'reload' });

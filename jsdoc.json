@@ -12,5 +12,5 @@
       "link": "https://github.com/sentrychris/undeadbytes"
     }
   },
-  "plugins": ["./docs/plugins/category.js"]
+  "plugins": ["./build/plugins/category.js"]
 }

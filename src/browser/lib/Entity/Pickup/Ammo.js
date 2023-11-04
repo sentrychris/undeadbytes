@@ -135,8 +135,12 @@ export class Ammo
    * @returns {void}
    */
   update (game) {
-    Collision.entityToPlayer(this, game, () => {
-      this.pickup(game);
+    Collision.entityToPlayer(this, game, {
+      on: this.type,
+      onDistance: this.distance,
+      callback: () => {
+        this.pickup(game);
+      }
     });
   }
 

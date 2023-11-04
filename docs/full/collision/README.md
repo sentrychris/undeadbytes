@@ -52,9 +52,9 @@ View [here](arc-box-collision.md) for more details.
 
 View [here](entity-to-walls.md) for more details.
 
-## `entityToPlayer(entity, game, callback)`
+## `entityToPlayer(entity, game, { on, onDistance, callback })`
 
-The `entityToPlayer` method handles collisions between an entity (e.g., enemy or pickup item) and the player. It calculates the vector between the entity and the player. Depending on the entity type, various actions are triggered, such as damaging the player, or invoking a callback for pickup items.
+The `entityToPlayer` method handles collisions between an entity (e.g., enemy or pickup item) and the player. It calculates the vector between the entity and the player. Depending on the entity type, various actions are triggered, such as damaging the player, or invoking a callback.
 
 View [here](entity-to-player.md) for more details.
 

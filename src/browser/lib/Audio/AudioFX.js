@@ -47,7 +47,10 @@ export class AudioFx
 
   /**
    * Load audio FX objects.
+   * 
    * @param {array} keys - the audio to load e.g. "soundtrack", "weapons", "snippets"
+   * 
+   * @returns {void}
    */
   load (keys = []) {
     if (keys.includes('weapons')) {
@@ -85,7 +88,10 @@ export class AudioFx
 
   /**
    * Stop the selected audio FX.
+   * 
    * @param {string} key - the audio key e.g. "weapon", "snippet"
+   * 
+   * @returns {void}
    */
   stop (key) {
     const fx = this.fx[key];
@@ -97,8 +103,11 @@ export class AudioFx
 
   /**
    * Set the volume for the selected audio object.
+   * 
    * @param {string} key - the audio key e.g. "soundtrack", "weapon", "snippet"
    * @param {number} level - the volume level
+   * 
+   * @returns {void}
    */
   async volume (key, level) {
     if (key === 'soundtrack') {
@@ -125,11 +134,13 @@ export class AudioFx
 
   /**
    * Handle weapon audio FX.
+   * 
    * @param {Object} params 
    * @param {number|null} params.weaponIndex - The selected weapon index
    * @param {string|null} params.equippedWeapon - The selected weapon object if no index is passed
    * @param {string} action - the weapon audio action to play e.g. "fire" or "reload"
    * @param {number} playbackRate - the weapon audio playback rate
+   * 
    * @returns {void}
    */
   weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
@@ -164,16 +175,17 @@ export class AudioFx
 
   /**
    * Handle audio FX snippet.
+   * 
+   * @param {Object} params
    * @param {string|null} params.name - The name of the audio FX snippet to play
    * @param {boolean} params.random - If name is null and this is set to true, plays a random snippet
+   * 
    * @returns {void}
    */
   snippet ({name = null, random = false}, playbackRate = 1) {
     if (! this.loaded) {
       return;
     }
-  
-    this.stop('snippet');
 
     const snippet = random
       ? snippets[Math.floor(Math.random() * snippets.length)]
@@ -183,6 +195,10 @@ export class AudioFx
       this.fx.snippet = random
         ? this.audio.snippets[snippet.name].playback
         : snippet.playback;
+
+      if (this.fx.snippet.type !== 'repeat') {
+        this.stop('snippet');
+      }
       
       this.fx.snippet.volume = this.volumes.fx.snippet;
       this.fx.snippet.playbackRate = playbackRate;
@@ -193,6 +209,7 @@ export class AudioFx
 
   /**
    * Handle the game soundtrack.
+   * 
    * @returns {void}
    */
   soundtrack () {

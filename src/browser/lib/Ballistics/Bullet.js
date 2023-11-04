@@ -83,7 +83,7 @@ export class Bullet
    * This is called every frame/repaint to render the bullet. Note that this
    * is an animated entity, therefore the x,y coordinates will change on update.
    * 
-   * @param {array|string} color - the color of the projectile.
+   * @param {array|string} color - the color(s) of the projectile.
    * 
    * @returns {void}
    */

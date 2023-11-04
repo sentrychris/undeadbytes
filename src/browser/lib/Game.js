@@ -286,7 +286,7 @@ export class Game
         this.setup({
           level: this.currentLevel
         }, true);
-      }, 2000);
+      }, 2500);
     }
   }
 
@@ -296,7 +296,7 @@ export class Game
    * @returns {void}
    */
   async pause () {
-    const hotkey =document.querySelector('span[data-hotkey="P"]');
+    const hotkey = document.querySelector('span[data-hotkey="P"]');
     const state = document.querySelector('#game-pause-state');
     const cssclass = 'help-block__hotkey--active';
     if (! this.stopped) {

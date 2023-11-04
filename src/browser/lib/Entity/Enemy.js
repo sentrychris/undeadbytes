@@ -122,7 +122,15 @@ export class Enemy
       return;
     }
     
-    Collision.entityToPlayer(this, game);
+    Collision.entityToPlayer(this, game, {
+      on: this.type,
+      onDistance: 350,
+      callback: () => {
+        if (! this.dead && ! this.allEnemiesDead) {
+          AudioFX.snippet({ name: 'zombiegrowl' });
+        }
+      }
+    });
 
     if (Math.random() <= 0.1) {
       for (let i = 0; i < game.enemies.length; i++) {       
@@ -142,7 +150,6 @@ export class Enemy
         }
         
         if (enemy.dead) {
-          // AudioFX.snippet({ random: true });
           game.enemies.splice(i, 1);
         }
       }
@@ -216,7 +223,6 @@ export class Enemy
   
       if (this.health == 0) {
         this.dead = true;
-
         document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
         setTimeout(() => {
           document.querySelector('body').style.background = 'black';

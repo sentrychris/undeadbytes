@@ -1,3 +1,11 @@
+/**
+ * Desktop app IPC preloader.
+ * 
+ * @category Desktop App
+ * @memberof Desktop
+ * @module preload
+ */
+
 const { contextBridge, ipcRenderer } = require('electron');
 
 const senderWhitelist = [
@@ -12,6 +20,11 @@ const receiverWhitelist = [
   'from:game:save'
 ];
 
+/**
+ * Create a new context bridged sender/receiver for bi-directional communication.
+ * 
+ * @returns {Object}
+ */
 const contextBridgeChannel = () => {
   return {
     send: (channel, data) => {

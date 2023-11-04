@@ -1,13 +1,33 @@
 import { config } from '../config';
 
+/**
+ * Entity Collision
+ * @class
+ * @category Game
+ */
 export class Collision
 {
   /**
-   * Determine intersection between entities
+   * Determine whether or not two entities intersect on the canvas.
    * 
-   * @param {*} r1 
-   * @param {*} r2 
-   * @returns 
+   * This method is a basic collision check that determines if two entities,
+   * defined by their rectangular properties (x, y, width, height), intersect.
+   * The logic is straightforward: if any side of one entity is positioned to the
+   * left, right, above, or below the other, they do not intersect. Otherwise,
+   * they overlap, triggering a collision.
+   * 
+   * @param {Object} r1 - first entity
+   * @param {number} r1.x - first entity x coordinate
+   * @param {number} r1.y - first entity y coordinate
+   * @param {number} r1.width - first entity width
+   * @param {number} r1.height - first entity height
+   * @param {Object} r2 - second entity
+   * @param {number} r2.x - second entity x coordinate
+   * @param {number} r2.y - second entity y coordinate
+   * @param {number} r2.width - second entity width
+   * @param {number} r2.height - second entity height
+   * 
+   * @returns {boolean}
    */
   static intersection (r1, r2) {
     return ! (r1.x + r1.width < r2.x
@@ -18,15 +38,22 @@ export class Collision
   }
 
   /**
-   * Determine distance between two vectors
+   * Determine distance between two vectors or two entities with vectors.
    * 
-   * @param {*} e1 
-   * @param {*} e2 
-   * @param {*} vectors 
-   * @returns 
+   * This method calculates the Euclidean distance between two points.
+   * It's versatile, accepting either entity objects or numerical values
+   * as parameters. When `vectors` is set to `true`, the method considers
+   * the parameters as vector components, determining the distance between
+   * the points they represent.
+   * 
+   * @param {Object|number} e1 - the first entity or vector coordinates
+   * @param {Object|number} e2 - the second entity or vector coordinates
+   * @param {boolean} useVectors - whether or not we're passing entities or vectors
+   * 
+   * @returns {number}
    */
-  static distance (e1, e2, vectors = true) {
-    if (vectors) {
+  static distance (e1, e2, useVectors = true) {
+    if (useVectors) {
       return Math.sqrt(e1*e1 + e2*e2);
     }
 
@@ -37,10 +64,21 @@ export class Collision
   }
 
   /**
-   * Caclulate collision beween entity (arc) and wall (box)
+   * Caclulate collision beween entity (arc) and wall (box).
    * 
-   * @param {*} param0 
-   * @returns 
+   * This method is a specialized function designed for detecting collisions between
+   * an arc-shaped entity (potentially representing the player) and a rectangular
+   * box-shaped entity (potentially representing a wall) on the canvas.
+   * 
+   * @param {Object} params 
+   * @param {number} params.arcX - the arc entity's x-coordinate
+   * @param {number} params.arcY - the arc entity's y-coordinate
+   * @param {number} params.rectX - the box entity's x-coordinate
+   * @param {number} params.rectY - the box entity's y-coordinate
+   * @param {number} params.size - the size of the box entity
+   * @param {number} params.radius - the radius of the arc entity
+   * 
+   * @returns {boolean}
    */
   static arcBoxCollision ({ arcX, arcY, rectX, rectY, size, radius }) {
     const distX = Math.abs(arcX - rectX - size / 2);
@@ -63,11 +101,14 @@ export class Collision
   }
 
   /**
-   * Entity-to-walls collision
+   * Detect and handle collision between entities and walls.
    * 
-   * @param {*} entity
-   * @param {*} walls 
-   * @returns 
+   * @see https://github.com/sentrychris/docs/full/collision/entity-to-walls.md
+   * 
+   * @param {Object} entity - a game entity
+   * @param {array} walls - the walls
+   * 
+   * @returns {Object}
    */
   static entityToWalls (entity, walls) {
     const result = {
@@ -108,11 +149,15 @@ export class Collision
   }
 
   /**
-   * Player-to-entity collision
+   * Player-to-entity collision.
    * 
-   * @param {*} entity 
-   * @param {*} game 
-   * @param {*} callback 
+   * @see https://github.com/sentrychris/docs/full/collision/entity-to-player.md
+   * 
+   * @param {Object} entity - the entity
+   * @param {Game} game - the managed game instance
+   * @param {function} callback - the callback to execute when the player and entity intersect
+   * 
+   * @returns {void}
    */
   static entityToPlayer (entity, game, callback) {
     let vectorX = game.player.x - entity.x;

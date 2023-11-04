@@ -6,6 +6,12 @@ import { level4 } from './level4';
 import { level5 } from './level5';
 import { level6 } from './level6';
 
+/**
+ * Game map levels
+ * @category Game Scene
+ * @subcategory Level
+ * @module levels
+ */
 export const levels = [
   level0,
   level1,

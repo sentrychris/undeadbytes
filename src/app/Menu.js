@@ -2,8 +2,22 @@ const path = require('path');
 const { app, Menu } = require('electron');
 const openAboutWindow = require('about-window').default;
 
-
-module.exports = class AppMenu {
+/**
+ * App Menu.
+ * @class
+ * @category Desktop App
+ */
+class AppMenu
+{
+  /**
+   * Create new desktop app menu.
+   * 
+   * @constructor
+   * @param {BrowserWindow} context - the electron browser window
+   * @param {Object} params
+   * @param {boolean} params.register - immediately register the menu or defer
+   * @param {Object} params.handlers - game handlers to attach e.g. storage
+   */
   constructor(context, { register = false, handlers = { storage: null } }) {
     this.context = context;
     this.handlers = handlers;
@@ -13,10 +27,23 @@ module.exports = class AppMenu {
     }
   }
 
+  /**
+   * Attach handlers for the menu for callback behaviour
+   * 
+   * @param {string} handler - the handler key
+   * @param {Object} instance - the handler instance
+   * 
+   * @returns {void}
+   */
   attach (handler, instance) {
     this.handlers[handler] = instance;
   }
 
+  /**
+   * Register the application menu
+   * 
+   * @returns {void}
+   */
   register () {
     app.applicationMenu = Menu.buildFromTemplate([
       {
@@ -97,3 +124,5 @@ module.exports = class AppMenu {
     ]);
   }
 };
+
+module.exports = AppMenu;

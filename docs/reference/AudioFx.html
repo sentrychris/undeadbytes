@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> AudioFx</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Class</p>
+                    <h1>AudioFx</h1>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>AudioFx<span class="signature">(eagerLoad)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">Audio Game FX Handler.</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="AudioFx">
+        <a class="href-link" href="#AudioFx">#</a>
+        
+        <span class="code-name">
+            
+                new AudioFx<span class="signature">(eagerLoad)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new Audio FX handler.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>eagerLoad</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+
+  
+      <td class="default">
+      
+          true
+      
+      </td>
+  
+
+  <td class="description last">Whether or not to eager-load audio objects</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line10">line 10</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="AudioFx.html">AudioFx</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="load">
+        <a class="href-link" href="#load">#</a>
+        
+        <span class="code-name">
+            
+                load<span class="signature">(keys)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Load audio FX objects.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>keys</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">array</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the audio to load e.g. "soundtrack", "weapons", "snippets"</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line52">line 52</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="snippet">
+        <a class="href-link" href="#snippet">#</a>
+        
+        <span class="code-name">
+            
+                snippet<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handle audio FX snippet.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>params.name</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The name of the audio FX snippet to play</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>params.random</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">If name is null and this is set to true, plays a random snippet</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line171">line 171</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="soundtrack">
+        <a class="href-link" href="#soundtrack">#</a>
+        
+        <span class="code-name">
+            
+                soundtrack<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handle the game soundtrack.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line198">line 198</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="stop">
+        <a class="href-link" href="#stop">#</a>
+        
+        <span class="code-name">
+            
+                stop<span class="signature">(key)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Stop the selected audio FX.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>key</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the audio key e.g. "weapon", "snippet"</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line90">line 90</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="volume">
+        <a class="href-link" href="#volume">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                volume<span class="signature">(key, level)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Set the volume for the selected audio object.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>key</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the audio key e.g. "soundtrack", "weapon", "snippet"</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>level</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the volume level</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line103">line 103</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="weapon">
+        <a class="href-link" href="#weapon">#</a>
+        
+        <span class="code-name">
+            
+                weapon<span class="signature">(params, action, playbackRate)</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handle weapon audio FX.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>params</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>weaponIndex</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The selected weapon index</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>equippedWeapon</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The selected weapon object if no index is passed</td>
+</tr>
+
+  
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>action</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the weapon audio action to play e.g. "fire" or "reload"</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>playbackRate</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the weapon audio playback rate</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Audio_AudioFX.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Audio_AudioFX.js.html">browser/lib/Audio/AudioFX.js</a>, <a href="browser_lib_Audio_AudioFX.js.html#line135">line 135</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

@@ -5,6 +5,10 @@
  * 04 Ammo
  * 02 Health
  * 02 Stamina
+ * @category Game Scene
+ * @subcategory Level
+ * @memberof Level
+ * @module level4
  */
 export const level4 = [
   'W W W W W W W W W W W W W W W W W W W W',

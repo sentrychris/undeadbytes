@@ -1,10 +1,10 @@
 # Undead Bytes: Low-Poly Zombie Shooter
 
-![Undead Bytes](./docs/img/undeadbytes.png)
+![Undead Bytes](https://i.imgur.com/qILV165.png)
 
 Welcome to Undead Bytes, a fun little low-poly shooter game written in vanilla JavaScript and powered by HTML5 canvas. Gear up, survive waves of zombies, and strategically use your weapons to navigate through each level. Are you ready to face the undead?
 
-Want to contribute a map? Find out [how to here](./docs/CONTRIBUTE-MAPS.MD)!
+Want to contribute a map? Find out [how to here](./docs/contribute/maps.md)!
 
 ## Table of Contents
 - [Introduction](#introduction)

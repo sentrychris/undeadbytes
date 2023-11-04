@@ -4,19 +4,21 @@ const IPC = require('./app/IPC');
 const Menu = require('./app/Menu');
 const Storage = require('./app/Storage');
 
-// Rendering Modes
-
-// GPU accelerated
-// GPU accelerated rendering means that the GPU is used for composition. Because of that, the frame
-// has to be copied from the GPU which requires more resources, thus this mode is slower than the
-// Software output device. The benefit of this mode is that WebGL and 3D CSS animations are supported.
-
-// Software output device
-// This mode uses a software output device for rendering in the CPU, so the frame generation is much
-// faster. As a result, this mode is preferred over the GPU accelerated one.
-// app.disableHardwareAcceleration();
+/**
+ * Desktop app entry point.
+ * 
+ * @category Desktop App
+ * @memberof Desktop
+ * @module app
+ */
 
 let context;
+
+/**
+ * Instantiate a new electron app browser window, load the game and register event listeners.
+ * 
+ * @returns {void}
+ */
 function main() {
   context = new BrowserWindow({
     show: false,

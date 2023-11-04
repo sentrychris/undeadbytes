@@ -11,29 +11,115 @@ import { Map } from './Scene/Map';
 import { config } from '../config';
 import Stats from 'stats.js';
 
+/**
+ * Represents the main game class responsible for managing game entities,
+ * controls, and rendering.
+ * @class
+ * @category Game Admin
+ */
 export class Game
 {
+  /**
+   * Create a new game instance.
+   * 
+   * @constructor
+   * @param {Object} bridge - The execution context bridge e.g. "web" or IPC handler.
+   * @param {Object} dispatcher - The dispatcher object for custom game events.
+   * @param {Object} context - The canvas rendering context.
+   */
   constructor (bridge, dispatcher, context) {
+    /**
+     * bridge - the execution context bridge
+     * @type {string|Object}
+     */
     this.bridge = bridge;
+
+    /**
+     * dispatcher - the game custom event dispatcher
+     * @type {Object}
+     */
     this.dispatcher = dispatcher;
 
+    /**
+     * frame - the current game frame ID
+     * @type {number}
+     */
     this.frame = null;
+
+    /**
+     * stopped - Whether or not the game loop is stopped
+     * @type {boolean}
+     */
     this.stopped = false;
 
+    /**
+     * handlers - the game handlers e.g. storage
+     * @type {Object}
+     */
     this.handlers = { storage: null };
     
+    /**
+     * context - the canvas rendering context
+     * @type {CanvasRenderingContext2D}
+     */
     this.context = context;
+
+    /**
+     * camera - the game camera
+     * @type {Camera}
+     */
     this.camera = new Camera(this.context);
+
+    /**
+     * keyboard - the game default keyboard configuration
+     * @type {Objet}
+     */
     this.keyboard = config.device.keyboard;
+
+    /**
+     * mouse - the game default mouse configuration
+     * @type {Objet}
+     */
     this.mouse = config.device.mouse;
 
+    /**
+     * map - the game map generator
+     * @type {Map}
+     */
     this.map = new Map();
-    this.currentLevel = 1;
 
-    this.newGameEntities();
+    /**
+     * currentLevel - the current game level
+     * @type {number}
+     */
+    this.currentLevel = 1;
   
+    /**
+     * gameover - whether or not the current game is over
+     * @type {boolean}
+     */
     this.gameover = false;
+
+    /**
+     * levelPassed - whether or not the current level was passed
+     * @type {Objet}
+     */
     this.levelPassed = false;
+
+    /**
+     * overlay - the game-end overlay
+     * @type {HTMLElement}
+     */
+    this.overlay = document.querySelector('.game-overlay');
+
+    /**
+     * Statistics counter for FPS
+     * @type {Stats}
+     */
+    this.stats = new Stats();
+
+    // Setup new game entities
+    this.newGameEntities();
 
     const onResize = () => this.onResize(window.innerWidth, window.innerHeight);
     window.addEventListener('resize', onResize);
@@ -43,12 +129,77 @@ export class Game
 
     this.createKeyboardMouseControls();
     this.createVolumeControls();
-
-    this.overlay = document.querySelector('.game-overlay');
-
-    this.stats = new Stats();
   }
 
+  /**
+   * Create new game entities and params.
+   * 
+   * @returns {void}
+   */
+  newGameEntities () {
+    /**
+     * player - the entity representing the player
+     * @type {Player}
+     */
+    this.player = null;
+
+    /**
+     * entities - array containing all game entities
+     * @type {array}
+     */
+    this.entities = [];
+
+    /**
+     * walls - array containing all wall entities
+     * @type {array}
+     */
+    this.walls = [];
+
+    /**
+     * enemies - array containing all enemy entities
+     * @type {array}
+     */
+    this.enemies = [];
+
+    /**
+     * ammoPickups - array containing all ammo pickup item entities
+     * @type {array}
+     */
+    this.ammoPickups = [];
+    
+    /**
+     * healthPickups - array containing all health pickup item entities
+     * @type {array}
+     */
+    this.healthPickups = [];
+
+    /**
+     * staminaPickups - array containing all stamina pickup item entities
+     * @type {array}
+     */
+    this.staminaPickups = [];
+
+    /**
+     * selectedWeaponIndex - the current selected mapped weapon index
+     * @type {number}
+     */
+    this.selectedWeaponIndex = 0;
+
+    /**
+     * ballistics - game ballistics handler
+     * @type {Ballistics}
+     */
+    this.ballistics = new Ballistics();
+  }
+
+  /**
+   * Attach a handler to the game, e.g. a storage handler
+   * 
+   * @param {string} handler - the handler key
+   * @param {Object} instance - the handler object
+   * 
+   * @returns {void}
+   */
   attach (handler, instance) {
     this.handlers[handler] = instance;
 
@@ -58,6 +209,11 @@ export class Game
     }
   }
 
+  /**
+   * Start the game loop
+   * 
+   * @returns {void}
+   */
   loop () {
     this.stats.begin();
 
@@ -79,12 +235,23 @@ export class Game
     this.run();
   }
 
+
+  /**
+   * Run the game frames
+   * 
+   * @returns {void}
+   */
   run () {
     if (! this.frame && ! this.stopped) {
       this.frame = requestAnimationFrame(this.loop.bind(this));
     }
   }
 
+  /**
+   * Restart the game
+   * 
+   * @returns {void}
+   */
   restart () {
     if (this.levelPassed) {
       this.stop().then(async (stopped) => await this.start(stopped, true));
@@ -93,6 +260,15 @@ export class Game
     }
   }
 
+  /**
+   * Start the game
+   * 
+   * @param {boolean} stopped - whether or not the game is stopped
+   * @param {boolean} nextLevel - whether or not to start the next level
+   * @param {number|null} savedLevel - whether or not to start from a saved level
+   * 
+   * @returns {void}
+   */
   async start (stopped, nextLevel = false, savedLevel = null) {
     if (stopped && ! this.frame) {
       this.overlay.querySelector('h1').innerHTML = '';
@@ -114,6 +290,11 @@ export class Game
     }
   }
 
+  /**
+   * Pause the game
+   * 
+   * @returns {void}
+   */
   async pause () {
     const hotkey =document.querySelector('span[data-hotkey="P"]');
     const state = document.querySelector('#game-pause-state');
@@ -133,6 +314,12 @@ export class Game
     return this.stopped;
   }
 
+
+  /**
+   * Stop the game
+   * 
+   * @returns {void}
+   */
   async stop () {
     this.stopped = true;
     this.frame = null;
@@ -141,6 +328,15 @@ export class Game
     return this.stopped;
   }
 
+  /**
+   * Setup a new game
+   * 
+   * @param {Object} params
+   * @param {number} params.level - the level to setup
+   * @param {boolean} loop - whether or not to start the game loop immediately
+   * 
+   * @returns {void}
+   */
   setup ({ level = 1 }, loop = false) {
     this.frame = null;
     this.stopped = false;
@@ -169,19 +365,11 @@ export class Game
     }
   }
 
-  newGameEntities () {
-    this.player = null;
-    this.entities = [];
-    this.walls = [];
-    this.enemies = [];
-    this.ammoPickups = [];
-    this.healthPickups = [];
-    this.staminaPickups = [];
-
-    this.selectedWeaponIndex = 0;
-    this.ballistics = new Ballistics();
-  }
-
+  /**
+   * Handle all entity update events during the game loop.
+   * 
+   * @returns {void}
+   */
   onUpdate () {
     this.camera.update(this.player, this.entities);
     this.ballistics.update(this);
@@ -212,6 +400,12 @@ export class Game
     document.querySelector('#enemies-remaining').innerHTML = this.enemies.length;
   }
 
+
+  /**
+   * Handles all entity render events during the game loop.
+   * 
+   * @returns {void}
+   */
   onRender () {
     this.camera.newScene();
     this.camera.preRender(this.player);
@@ -225,6 +419,11 @@ export class Game
     this.camera.postRender();
   }
 
+  /**
+   * Handles all custom dispatcher events during the game loop.
+   * 
+   * @returns {void}
+   */
   onDispatch () {
     this.dispatcher.addEventListener('game:load', ({ save }) => {
       this.overlay.style.display = 'flex';
@@ -235,6 +434,12 @@ export class Game
     });
   }
 
+
+  /**
+   * Handles all resize events during the game loop.
+   * 
+   * @returns {void}
+   */
   onResize (width, height) {
     this.context.canvas.width = width;
     this.context.canvas.height = height;
@@ -242,6 +447,13 @@ export class Game
     this.camera.resize();
   }
 
+  /**
+   * Generate a new map based on the passed level index.
+   * 
+   * @param {number} levelIndex - the level to generate the map for
+   * 
+   * @returns {this}
+   */
   generateMap (levelIndex = 0) {
     this.map.newMapConfiguration();
     this.map.generate(levelIndex);
@@ -249,10 +461,22 @@ export class Game
     return this;
   }
 
+  /**
+   * Determines whether or not the given entity has an update() method implementation.
+   * 
+   * @param {Object} entity 
+   * 
+   * @returns {boolean}
+   */
   canUpdateEntity (entity) {
     return typeof entity !== 'undefined' && typeof entity.update === 'function';
   }
 
+  /**
+   * Create a new player entity.
+   * 
+   * @returns {this}
+   */
   createPlayer () {
     this.player = new Player(this.map.getPlayerPosition());
     this.entities.push(this.player);
@@ -260,6 +484,11 @@ export class Game
     return this;
   }
 
+  /**
+   * Create new enemy entities.
+   * 
+   * @returns {this}
+   */
   createEnemies () {
     for (let i = 0; i < this.map.getEnemyPositions().length; i++) {
       const enemy = new Enemy(this.map.getEnemyPositions()[i]);
@@ -270,11 +499,14 @@ export class Game
     return this;
   }
 
+  /**
+   * Create a new walls for the map.
+   * 
+   * @returns {this}
+   */
   createWalls () {
     for (let i = 0; i < this.map.getWallPositions().length; i++) {
-      const wallPosition = this.map.getWallPositions()[i];
-      const wall = new Wall(wallPosition.x, wallPosition.y, true);
-      
+      const wall = new Wall(this.map.getWallPositions()[i], true);
       this.entities.push(wall);
       this.walls.push(wall);
     }
@@ -282,11 +514,14 @@ export class Game
     return this;
   }
 
+  /**
+   * Create a new ammo pickup items for the map.
+   * 
+   * @returns {this}
+   */
   createAmmoPickups () {
     for (let i = 0; i < this.map.getAmmoPickupPositions().length; i++) {
-      const ammoPickupPosition = this.map.getAmmoPickupPositions()[i];
-      const ammoPickup = new Ammo(ammoPickupPosition.x, ammoPickupPosition.y);
-      
+      const ammoPickup = new Ammo(this.map.getAmmoPickupPositions()[i]);
       this.entities.push(ammoPickup);
       this.ammoPickups.push(ammoPickup);
     }
@@ -294,11 +529,14 @@ export class Game
     return this;
   }
 
+  /**
+   * Create a new health pickup items for the map.
+   * 
+   * @returns {this}
+   */
   createHealthPickups () {
     for (let i = 0; i < this.map.getHealthPickupPositions().length; i++) {
-      const healthPickupPosition = this.map.getHealthPickupPositions()[i];
-      const healthPickup = new Health(healthPickupPosition.x, healthPickupPosition.y);
-      
+      const healthPickup = new Health(this.map.getHealthPickupPositions()[i]);
       this.entities.push(healthPickup);
       this.healthPickups.push(healthPickup);
     }
@@ -306,11 +544,14 @@ export class Game
     return this;
   }
 
+  /**
+   * Create a new stamina pickup items for the map.
+   * 
+   * @returns {this}
+   */
   createStaminaPickups () {
     for (let i = 0; i < this.map.getStaminaPickupPositions().length; i++) {
-      const staminaPickupPosition = this.map.getStaminaPickupPositions()[i];
-      const staminaPickup = new Stamina(staminaPickupPosition.x, staminaPickupPosition.y);
-      
+      const staminaPickup = new Stamina(this.map.getStaminaPickupPositions()[i]);
       this.entities.push(staminaPickup);
       this.staminaPickups.push(staminaPickup);
     }
@@ -318,14 +559,34 @@ export class Game
     return this;
   }
 
+  /**
+   * Determine whether or not the player is dead.
+   * 
+   * @param {Player} entity - the entity representing the player
+   * 
+   * @returns {boolean}
+   */
   isPlayerDead (entity) {
     return entity.type === 'player' && entity.dead;
   }
 
+  /**
+   * Determine whether or not all enemies are dead based on the enemy entity's
+   * allEnemiesDead property.
+   * 
+   * @param {Enemy} entity - the entity representing the enemy
+   * 
+   * @returns {boolean}
+   */
   areAllEnemiesDead (entity) {
     return entity.type === 'enemy' && entity.allEnemiesDead;
   }
 
+  /**
+   * Display the game-end overlay.
+   * 
+   * @returns {void}
+   */
   displayGameEnd () {
     const overlay = this.overlay;
     setTimeout(() => {
@@ -342,6 +603,11 @@ export class Game
     }, 500);
   }
 
+  /**
+   * Set the active weapon hotkey for the UI.
+   * 
+   * @returns {void}
+   */
   setWeaponHotKey () {
     const hotkeys = document.querySelectorAll('span.help-block__hotkey');
     const cssclass = 'help-block__hotkey--active';
@@ -357,6 +623,11 @@ export class Game
     }
   }
 
+  /**
+   * Create game keyboard-mouse controls and register event listeners.
+   * 
+   * @returns {void}
+   */
   createKeyboardMouseControls () {
     window.addEventListener('keydown', async (e) => {
       if (e.key === 'p') await this.pause();
@@ -423,6 +694,11 @@ export class Game
     });
   }
 
+  /**
+   * Create volume slider controls for game audio.
+   * 
+   * @returns {void}
+   */
   createVolumeControls () {
     const sliders = document.querySelectorAll('.volume-slider');
     for (const slider of sliders) {
@@ -445,8 +721,15 @@ export class Game
     }
   }
 
+  /**
+   * Toggle the FPS stats counter.
+   * 
+   * @param {number} panel - 0 = fps, 1 = ms,  2 = mb, 3+ = custom
+   * 
+   * @returns {void}
+   */
   toggleStats (panel = 0) {
-    this.stats.showPanel(panel); // 0 = fps, 1 = ms,  2 = mb, 3+ = custom
+    this.stats.showPanel(panel);
 
     if (! this.statsShown) {
       this.stats.domElement.style.cssText = 'position:absolute;top:0px;right:0px;';

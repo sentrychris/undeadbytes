@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browser/lib/Game.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browser/lib/Game.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Player } from './Entity/Player';
+import { Enemy } from './Entity/Enemy';
+import { Wall } from './Entity/Wall';
+import { Ammo } from './Entity/Pickup/Ammo';
+import { Health } from './Entity/Pickup/Health';
+import { Stamina } from './Entity/Pickup/Stamina';
+import { Ballistics } from './Ballistics/Ballistics';
+import { AudioFX } from './Audio/AudioFX';
+import { Camera } from './Scene/Camera';
+import { Map } from './Scene/Map';
+import { config } from '../config';
+import Stats from 'stats.js';
+
+/**
+ * Represents the main game class responsible for managing game entities,
+ * controls, and rendering.
+ * @class
+ * @category Game Admin
+ */
+export class Game
+{
+  /**
+   * Create a new game instance.
+   * 
+   * @constructor
+   * @param {Object} bridge - The execution context bridge e.g. "web" or IPC handler.
+   * @param {Object} dispatcher - The dispatcher object for custom game events.
+   * @param {Object} context - The canvas rendering context.
+   */
+  constructor (bridge, dispatcher, context) {
+    /**
+     * bridge - the execution context bridge
+     * @type {string|Object}
+     */
+    this.bridge = bridge;
+
+    /**
+     * dispatcher - the game custom event dispatcher
+     * @type {Object}
+     */
+    this.dispatcher = dispatcher;
+
+    /**
+     * frame - the current game frame ID
+     * @type {number}
+     */
+    this.frame = null;
+
+    /**
+     * stopped - Whether or not the game loop is stopped
+     * @type {boolean}
+     */
+    this.stopped = false;
+
+    /**
+     * handlers - the game handlers e.g. storage
+     * @type {Object}
+     */
+    this.handlers = { storage: null };
+    
+    /**
+     * context - the canvas rendering context
+     * @type {CanvasRenderingContext2D}
+     */
+    this.context = context;
+
+    /**
+     * camera - the game camera
+     * @type {Camera}
+     */
+    this.camera = new Camera(this.context);
+
+    /**
+     * keyboard - the game default keyboard configuration
+     * @type {Objet}
+     */
+    this.keyboard = config.device.keyboard;
+
+    /**
+     * mouse - the game default mouse configuration
+     * @type {Objet}
+     */
+    this.mouse = config.device.mouse;
+
+    /**
+     * map - the game map generator
+     * @type {Map}
+     */
+    this.map = new Map();
+
+    /**
+     * currentLevel - the current game level
+     * @type {number}
+     */
+    this.currentLevel = 1;
+  
+    /**
+     * gameover - whether or not the current game is over
+     * @type {boolean}
+     */
+    this.gameover = false;
+
+    /**
+     * levelPassed - whether or not the current level was passed
+     * @type {Objet}
+     */
+    this.levelPassed = false;
+
+    /**
+     * overlay - the game-end overlay
+     * @type {HTMLElement}
+     */
+    this.overlay = document.querySelector('.game-overlay');
+
+    /**
+     * Statistics counter for FPS
+     * @type {Stats}
+     */
+    this.stats = new Stats();
+
+    // Setup new game entities
+    this.newGameEntities();
+
+    const onResize = () => this.onResize(window.innerWidth, window.innerHeight);
+    window.addEventListener('resize', onResize);
+    onResize();
+
+    this.onDispatch();
+
+    this.createKeyboardMouseControls();
+    this.createVolumeControls();
+  }
+
+  /**
+   * Create new game entities and params.
+   * 
+   * @returns {void}
+   */
+  newGameEntities () {
+    /**
+     * player - the entity representing the player
+     * @type {Player}
+     */
+    this.player = null;
+
+    /**
+     * entities - array containing all game entities
+     * @type {array}
+     */
+    this.entities = [];
+
+    /**
+     * walls - array containing all wall entities
+     * @type {array}
+     */
+    this.walls = [];
+
+    /**
+     * enemies - array containing all enemy entities
+     * @type {array}
+     */
+    this.enemies = [];
+
+    /**
+     * ammoPickups - array containing all ammo pickup item entities
+     * @type {array}
+     */
+    this.ammoPickups = [];
+    
+    /**
+     * healthPickups - array containing all health pickup item entities
+     * @type {array}
+     */
+    this.healthPickups = [];
+
+    /**
+     * staminaPickups - array containing all stamina pickup item entities
+     * @type {array}
+     */
+    this.staminaPickups = [];
+
+    /**
+     * selectedWeaponIndex - the current selected mapped weapon index
+     * @type {number}
+     */
+    this.selectedWeaponIndex = 0;
+
+    /**
+     * ballistics - game ballistics handler
+     * @type {Ballistics}
+     */
+    this.ballistics = new Ballistics();
+  }
+
+  /**
+   * Attach a handler to the game, e.g. a storage handler
+   * 
+   * @param {string} handler - the handler key
+   * @param {Object} instance - the handler object
+   * 
+   * @returns {void}
+   */
+  attach (handler, instance) {
+    this.handlers[handler] = instance;
+
+    if (handler === 'storage') {
+      // Signal to storage that an attached game instance exists
+      this.handlers.storage.setGameInstanceAttached(true);
+    }
+  }
+
+  /**
+   * Start the game loop
+   * 
+   * @returns {void}
+   */
+  loop () {
+    this.stats.begin();
+
+    AudioFX.soundtrack();
+
+    if (! this.stopped) {
+      this.frame = null;
+      this.onUpdate();
+      this.onRender();
+    }
+  
+    if (this.gameover) {
+      this.displayGameEnd();
+      this.restart();
+    }
+
+    this.stats.end();
+  
+    this.run();
+  }
+
+
+  /**
+   * Run the game frames
+   * 
+   * @returns {void}
+   */
+  run () {
+    if (! this.frame &amp;&amp; ! this.stopped) {
+      this.frame = requestAnimationFrame(this.loop.bind(this));
+    }
+  }
+
+  /**
+   * Restart the game
+   * 
+   * @returns {void}
+   */
+  restart () {
+    if (this.levelPassed) {
+      this.stop().then(async (stopped) => await this.start(stopped, true));
+    } else {
+      this.stop().then(async (stopped) => await this.start(stopped, false));
+    }
+  }
+
+  /**
+   * Start the game
+   * 
+   * @param {boolean} stopped - whether or not the game is stopped
+   * @param {boolean} nextLevel - whether or not to start the next level
+   * @param {number|null} savedLevel - whether or not to start from a saved level
+   * 
+   * @returns {void}
+   */
+  async start (stopped, nextLevel = false, savedLevel = null) {
+    if (stopped &amp;&amp; ! this.frame) {
+      this.overlay.querySelector('h1').innerHTML = '';
+
+      if (nextLevel) {
+        ++this.currentLevel;
+      }
+
+      if (savedLevel) {
+        this.currentLevel = savedLevel;
+      }
+
+      setTimeout(() => {
+        this.overlay.style.display = 'none';
+        this.setup({
+          level: this.currentLevel
+        }, true);
+      }, 2000);
+    }
+  }
+
+  /**
+   * Pause the game
+   * 
+   * @returns {void}
+   */
+  async pause () {
+    const hotkey =document.querySelector('span[data-hotkey="P"]');
+    const state = document.querySelector('#game-pause-state');
+    const cssclass = 'help-block__hotkey--active';
+    if (! this.stopped) {
+      this.stopped = true;
+      cancelAnimationFrame(this.frame);
+      hotkey.classList.add(cssclass);
+      state.innerHTML = 'Game Paused';
+    } else {
+      hotkey.classList.remove(cssclass);
+      state.innerHTML = 'Pause Game';
+      this.stopped = false;
+      this.frame = requestAnimationFrame(this.loop.bind(this));
+    }
+
+    return this.stopped;
+  }
+
+
+  /**
+   * Stop the game
+   * 
+   * @returns {void}
+   */
+  async stop () {
+    this.stopped = true;
+    this.frame = null;
+    cancelAnimationFrame(this.loop.bind(this));
+
+    return this.stopped;
+  }
+
+  /**
+   * Setup a new game
+   * 
+   * @param {Object} params
+   * @param {number} params.level - the level to setup
+   * @param {boolean} loop - whether or not to start the game loop immediately
+   * 
+   * @returns {void}
+   */
+  setup ({ level = 1 }, loop = false) {
+    this.frame = null;
+    this.stopped = false;
+    this.gameover = false;
+    this.currentLevel = level;
+    this.levelPassed = false;
+    
+    this.newGameEntities();
+
+    this.generateMap(level)
+      .createPlayer()
+      .createEnemies()
+      .createWalls()
+      .createAmmoPickups()
+      .createHealthPickups()
+      .createStaminaPickups();
+
+    document.querySelector('#current-level').innerHTML = this.currentLevel;
+
+    this.setWeaponHotKey();
+
+    this.onResize(window.innerWidth, window.innerHeight);
+
+    if (loop) {
+      this.loop();
+    }
+  }
+
+  /**
+   * Handle all entity update events during the game loop.
+   * 
+   * @returns {void}
+   */
+  onUpdate () {
+    this.camera.update(this.player, this.entities);
+    this.ballistics.update(this);
+
+    for (let i = 0; i &lt; this.entities.length; i++) {
+      if (this.canUpdateEntity(this.entities[i])) {
+        this.entities[i].update(this);
+      }
+
+      if (this.entities[i].type === 'player') {
+        if (this.isPlayerDead(this.entities[i])) {
+          this.gameover = true;
+        }
+      }
+
+      if (this.entities[i].type === 'enemy') {
+        if (this.areAllEnemiesDead(this.entities[i])) {
+          this.gameover = true;
+          this.levelPassed = true;
+        }
+      }
+
+      if (this.entities[i].type === 'pickup' &amp;&amp; this.entities[i].markToDelete) {
+        this.entities.splice(i, 1);
+      }
+    }
+
+    document.querySelector('#enemies-remaining').innerHTML = this.enemies.length;
+  }
+
+
+  /**
+   * Handles all entity render events during the game loop.
+   * 
+   * @returns {void}
+   */
+  onRender () {
+    this.camera.newScene();
+    this.camera.preRender(this.player);
+
+    this.ballistics.render();
+    
+    for (let i = 0; i &lt; this.entities.length; i++) {
+      this.entities[i].render(this.context);
+    }
+
+    this.camera.postRender();
+  }
+
+  /**
+   * Handles all custom dispatcher events during the game loop.
+   * 
+   * @returns {void}
+   */
+  onDispatch () {
+    this.dispatcher.addEventListener('game:load', ({ save }) => {
+      this.overlay.style.display = 'flex';
+      this.overlay.querySelector('h1').innerHTML = 'Loading game...';
+      this.stop().then(async (stopped) => {
+        await this.start(stopped, false, save.level);
+      });
+    });
+  }
+
+
+  /**
+   * Handles all resize events during the game loop.
+   * 
+   * @returns {void}
+   */
+  onResize (width, height) {
+    this.context.canvas.width = width;
+    this.context.canvas.height = height;
+    
+    this.camera.resize();
+  }
+
+  /**
+   * Generate a new map based on the passed level index.
+   * 
+   * @param {number} levelIndex - the level to generate the map for
+   * 
+   * @returns {this}
+   */
+  generateMap (levelIndex = 0) {
+    this.map.newMapConfiguration();
+    this.map.generate(levelIndex);
+
+    return this;
+  }
+
+  /**
+   * Determines whether or not the given entity has an update() method implementation.
+   * 
+   * @param {Object} entity 
+   * 
+   * @returns {boolean}
+   */
+  canUpdateEntity (entity) {
+    return typeof entity !== 'undefined' &amp;&amp; typeof entity.update === 'function';
+  }
+
+  /**
+   * Create a new player entity.
+   * 
+   * @returns {this}
+   */
+  createPlayer () {
+    this.player = new Player(this.map.getPlayerPosition());
+    this.entities.push(this.player);
+
+    return this;
+  }
+
+  /**
+   * Create new enemy entities.
+   * 
+   * @returns {this}
+   */
+  createEnemies () {
+    for (let i = 0; i &lt; this.map.getEnemyPositions().length; i++) {
+      const enemy = new Enemy(this.map.getEnemyPositions()[i]);
+      this.entities.push(enemy);
+      this.enemies.push(enemy);
+    }
+
+    return this;
+  }
+
+  /**
+   * Create a new walls for the map.
+   * 
+   * @returns {this}
+   */
+  createWalls () {
+    for (let i = 0; i &lt; this.map.getWallPositions().length; i++) {
+      const wall = new Wall(this.map.getWallPositions()[i], true);
+      this.entities.push(wall);
+      this.walls.push(wall);
+    }
+
+    return this;
+  }
+
+  /**
+   * Create a new ammo pickup items for the map.
+   * 
+   * @returns {this}
+   */
+  createAmmoPickups () {
+    for (let i = 0; i &lt; this.map.getAmmoPickupPositions().length; i++) {
+      const ammoPickup = new Ammo(this.map.getAmmoPickupPositions()[i]);
+      this.entities.push(ammoPickup);
+      this.ammoPickups.push(ammoPickup);
+    }
+
+    return this;
+  }
+
+  /**
+   * Create a new health pickup items for the map.
+   * 
+   * @returns {this}
+   */
+  createHealthPickups () {
+    for (let i = 0; i &lt; this.map.getHealthPickupPositions().length; i++) {
+      const healthPickup = new Health(this.map.getHealthPickupPositions()[i]);
+      this.entities.push(healthPickup);
+      this.healthPickups.push(healthPickup);
+    }
+
+    return this;
+  }
+
+  /**
+   * Create a new stamina pickup items for the map.
+   * 
+   * @returns {this}
+   */
+  createStaminaPickups () {
+    for (let i = 0; i &lt; this.map.getStaminaPickupPositions().length; i++) {
+      const staminaPickup = new Stamina(this.map.getStaminaPickupPositions()[i]);
+      this.entities.push(staminaPickup);
+      this.staminaPickups.push(staminaPickup);
+    }
+
+    return this;
+  }
+
+  /**
+   * Determine whether or not the player is dead.
+   * 
+   * @param {Player} entity - the entity representing the player
+   * 
+   * @returns {boolean}
+   */
+  isPlayerDead (entity) {
+    return entity.type === 'player' &amp;&amp; entity.dead;
+  }
+
+  /**
+   * Determine whether or not all enemies are dead based on the enemy entity's
+   * allEnemiesDead property.
+   * 
+   * @param {Enemy} entity - the entity representing the enemy
+   * 
+   * @returns {boolean}
+   */
+  areAllEnemiesDead (entity) {
+    return entity.type === 'enemy' &amp;&amp; entity.allEnemiesDead;
+  }
+
+  /**
+   * Display the game-end overlay.
+   * 
+   * @returns {void}
+   */
+  displayGameEnd () {
+    const overlay = this.overlay;
+    setTimeout(() => {
+      if (this.levelPassed) {
+        overlay.querySelector('h1').innerHTML = 'You Win!';
+        overlay.classList.add('pass');
+        overlay.classList.remove('fail');
+      } else {
+        overlay.querySelector('h1').innerHTML = 'You Died!';
+        overlay.classList.remove('pass');
+        overlay.classList.add('fail');
+      }
+      overlay.style.display = 'flex';
+    }, 500);
+  }
+
+  /**
+   * Set the active weapon hotkey for the UI.
+   * 
+   * @returns {void}
+   */
+  setWeaponHotKey () {
+    const hotkeys = document.querySelectorAll('span.help-block__hotkey');
+    const cssclass = 'help-block__hotkey--active';
+    for (const key of hotkeys) {
+      const { hotkey } = key.dataset;
+      if (hotkey) {
+        if (parseInt(hotkey) !== (this.selectedWeaponIndex+1)) {
+          key.classList.remove(cssclass);
+        } else {
+          key.classList.add(cssclass);
+        }
+      }
+    }
+  }
+
+  /**
+   * Create game keyboard-mouse controls and register event listeners.
+   * 
+   * @returns {void}
+   */
+  createKeyboardMouseControls () {
+    window.addEventListener('keydown', async (e) => {
+      if (e.key === 'p') await this.pause();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      switch (event.key) {
+      case 'w': this.keyboard.up = true; break;
+      case 's': this.keyboard.down = true; break;
+      case 'a': this.keyboard.left = true; break;
+      case 'd': this.keyboard.right = true; break;
+      case 'h':
+        this.player.refillHealth(config.pickups.health, false);
+        break;
+      case '1':
+        this.selectedWeaponIndex = 0;
+        this.setWeaponHotKey();
+        break;
+      case '2':
+        this.selectedWeaponIndex = 1;
+        this.setWeaponHotKey();
+        break;
+      case '3':
+        this.selectedWeaponIndex = 2;
+        this.setWeaponHotKey();
+        break;
+      case '4':
+        this.selectedWeaponIndex = 3;
+        this.setWeaponHotKey();
+        break;
+      case '5':
+        this.selectedWeaponIndex = 4;
+        this.setWeaponHotKey();
+        break;
+      case '.':
+        this.handlers.storage.saveGame(this);
+        break;
+      case '*':
+        this.toggleStats();
+        break;
+      }
+    });
+    
+    document.addEventListener('keyup', (event) => {
+      switch (event.key) {
+      case 'w': this.keyboard.up = false; break;
+      case 's': this.keyboard.down = false; break;
+      case 'a': this.keyboard.left = false; break;
+      case 'd': this.keyboard.right = false; break;
+      }
+    });
+    
+    document.addEventListener('mousemove', (event) => {
+      this.mouse.x = event.clientX;
+      this.mouse.y = event.clientY;
+    });
+    
+    document.addEventListener('mousedown', () => {
+      this.mouse.pressed = true;
+    });
+    
+    document.addEventListener('mouseup', () => {
+      this.mouse.pressed = false;
+    });
+  }
+
+  /**
+   * Create volume slider controls for game audio.
+   * 
+   * @returns {void}
+   */
+  createVolumeControls () {
+    const sliders = document.querySelectorAll('.volume-slider');
+    for (const slider of sliders) {
+      slider.addEventListener('input', (e) => {
+        const { target } = e;
+        const value = (target.value - target.min) / (target.max - target.min);
+        const percent = Math.round(value * 100);
+        
+        target.style.background = 'linear-gradient(to right, #50ffb0 0%, #50ffb0 ' +
+          percent + '%, #fff ' + percent + '%, #fff 100%)';
+      
+        AudioFX.volume(target.dataset.control, value);
+
+        if (this.handlers.storage) {
+          setTimeout(() => {
+            this.handlers.storage.setSetting('volumes', AudioFX.volumes, true);
+          }, 1000);
+        }
+      });
+    }
+  }
+
+  /**
+   * Toggle the FPS stats counter.
+   * 
+   * @param {number} panel - 0 = fps, 1 = ms,  2 = mb, 3+ = custom
+   * 
+   * @returns {void}
+   */
+  toggleStats (panel = 0) {
+    this.stats.showPanel(panel);
+
+    if (! this.statsShown) {
+      this.stats.domElement.style.cssText = 'position:absolute;top:0px;right:0px;';
+      this.statsShown = true;
+    } else {
+      this.stats.domElement.style.cssText = 'display:none;';
+      this.statsShown = false;
+    }
+
+    const stats = document.querySelector('.stats');
+    if (stats) {
+      stats.appendChild(this.stats.dom);
+    }
+  }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

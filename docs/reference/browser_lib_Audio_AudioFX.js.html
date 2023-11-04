@@ -1,0 +1,352 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browser/lib/Audio/AudioFX.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browser/lib/Audio/AudioFX.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { config } from '../../config';
+import { weapons } from '../Ballistics/mappings';
+import { snippets, soundtrack } from './mappings';
+
+/**
+ * Audio Game FX Handler.
+ * @class
+ * @category Game
+ */
+export class AudioFx
+{
+  /**
+   * Create a new Audio FX handler.
+   * @param {boolean} eagerLoad  - Whether or not to eager-load audio objects
+   */
+  constructor (eagerLoad = true)
+  {  
+    // FX
+    this.audio = {
+      weapons: {},
+      snippets: {},
+    };
+
+    // Soundtrack
+    this.soundtracks = [];
+    this.loaded = false;
+
+    if (eagerLoad) {
+      // Preload all audio objects
+      this.load(['weapons', 'snippets', 'soundtrack']);
+    }
+
+    // Soundtrack loop
+    this.trackIndex = 0;
+    this.currentTrack = this.soundtracks[this.trackIndex];
+    this.nextTrackReady = false;
+    this.trackListener = false;
+
+    // FX playback loops
+    this.fx = {
+      weapon: null,
+      snippet: null
+    };
+
+    this.volumes = config.volumes;
+  }
+
+  /**
+   * Load audio FX objects.
+   * @param {array} keys - the audio to load e.g. "soundtrack", "weapons", "snippets"
+   */
+  load (keys = []) {
+    if (keys.includes('weapons')) {
+      for (const weapon of weapons) {
+        this.audio.weapons[weapon.name] = {
+          fire: new Audio(weapon.audio.fire),
+          reload: new Audio(weapon.audio.reload)
+        };
+      }
+    }
+
+    if (keys.includes('snippets')) {
+      for (const snippet of snippets) {
+        if (snippet.enabled) {
+          this.audio.snippets[snippet.name] = {
+            types: snippet.types,
+            playback: new Audio(snippet.playback)
+          };
+        }
+      }
+    }
+
+    if (keys.includes('soundtrack')) {
+      for (const track of soundtrack) {
+        this.soundtracks.push({
+          name: track.split('/').pop(),
+          playback: new Audio(track)
+        });
+      }
+    }
+
+    this.loaded = true;
+  }
+
+
+  /**
+   * Stop the selected audio FX.
+   * @param {string} key - the audio key e.g. "weapon", "snippet"
+   */
+  stop (key) {
+    const fx = this.fx[key];
+    if (fx &amp;&amp; ! fx.paused) {
+      fx.pause();
+      fx.currentTime = 0;
+    }
+  }
+
+  /**
+   * Set the volume for the selected audio object.
+   * @param {string} key - the audio key e.g. "soundtrack", "weapon", "snippet"
+   * @param {number} level - the volume level
+   */
+  async volume (key, level) {
+    if (key === 'soundtrack') {
+      this.volumes.soundtrack = level;
+      if (this.currentTrack &amp;&amp; ! this.currentTrack.playback.paused) {
+        this.currentTrack.playback.volume = this.volumes.soundtrack;
+      }
+    }
+
+    if (key === 'weapon') {
+      this.volumes.fx.weapon = level;
+      if (this.fx.weapon &amp;&amp; ! this.fx.weapon.paused) {
+        this.fx.weapon.volume = this.volumes.fx.weapon;
+      }
+    }
+
+    if (key === 'snippet') {
+      this.volumes.fx.snippet = level;
+      if (this.fx.snippet &amp;&amp; ! this.fx.snippet.paused) {
+        this.fx.snippet.volume = this.volumes.fx.snippet;
+      }
+    }
+  }
+
+  /**
+   * Handle weapon audio FX.
+   * @param {Object} params 
+   * @param {number|null} params.weaponIndex - The selected weapon index
+   * @param {string|null} params.equippedWeapon - The selected weapon object if no index is passed
+   * @param {string} action - the weapon audio action to play e.g. "fire" or "reload"
+   * @param {number} playbackRate - the weapon audio playback rate
+   * @returns {void}
+   */
+  weapon ({ weaponIndex = null, equippedWeapon = null }, action = 'fire', playbackRate = 1) {
+    if (! this.loaded) {
+      return;
+    }
+  
+    const weapon = weaponIndex
+      ? weapons[weaponIndex]
+      : equippedWeapon;
+
+    if (! weapon)  {
+      return;
+    }
+
+    this.fx.weapon = action === 'fire'
+      ? this.audio.weapons[weapon.name].fire
+      : this.audio.weapons[weapon.name].reload;
+
+    if (! this.fx.weapon) {
+      return;
+    }
+
+    if (weapon.audio.type !== 'repeat') {
+      this.stop('weapon');
+    }
+
+    this.fx.weapon.volume = this.volumes.fx.weapon;
+    this.fx.weapon.playbackRate = playbackRate;
+    this.fx.weapon.play();
+  }
+
+  /**
+   * Handle audio FX snippet.
+   * @param {string|null} params.name - The name of the audio FX snippet to play
+   * @param {boolean} params.random - If name is null and this is set to true, plays a random snippet
+   * @returns {void}
+   */
+  snippet ({name = null, random = false}, playbackRate = 1) {
+    if (! this.loaded) {
+      return;
+    }
+  
+    this.stop('snippet');
+
+    const snippet = random
+      ? snippets[Math.floor(Math.random() * snippets.length)]
+      : this.audio.snippets[name];
+
+    if (snippet) {
+      this.fx.snippet = random
+        ? this.audio.snippets[snippet.name].playback
+        : snippet.playback;
+      
+      this.fx.snippet.volume = this.volumes.fx.snippet;
+      this.fx.snippet.playbackRate = playbackRate;
+      this.fx.snippet.play();
+    }
+  }
+
+
+  /**
+   * Handle the game soundtrack.
+   * @returns {void}
+   */
+  soundtrack () {
+    if (! this.loaded) {
+      return;
+    }
+
+    if (this.currentTrack &amp;&amp; this.currentTrack.playback
+      &amp;&amp; (this.currentTrack.playback.paused || this.currentTrack.playback.currentTime === 0)
+    ) {
+      console.log(`now playing ${this.currentTrack.name}`);
+      this.currentTrack.playback.volume = this.volumes.soundtrack;
+      this.currentTrack.playback.play();
+    } else {
+      if (this.nextTrackReady) {
+        this.currentTrack.playback.pause();
+        this.currentTrack.playback.currentTime = 0;
+
+        ++this.trackIndex;
+        if (this.trackIndex >= this.soundtracks.length) {
+          this.trackIndex = 0; 
+        }
+
+        console.log(`changed track index to ${this.trackIndex}`);
+
+        this.trackListener = false;
+        this.currentTrack = this.soundtracks[this.trackIndex];
+      }
+    }
+
+    if (this.currentTrack &amp;&amp; ! this.trackListener) {
+      this.nextTrackReady = false;
+      this.currentTrack.playback.addEventListener('ended', () => {
+        this.nextTrackReady = true;
+        this.trackListener = true;
+      });
+    }
+  }
+}
+
+export const AudioFX = new AudioFx();</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

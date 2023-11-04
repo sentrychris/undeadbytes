@@ -2,7 +2,7 @@
 
 ## Pages
 
-* [API Reference](../reference/)
+* [API Reference](https://sentrychris.github.io/undeadbytes/reference/)
 * [Game](./game/README.md)
   * [Game loop](./game/loop.md)
   * [OnUpdate & onRender](./game/update-render.md)

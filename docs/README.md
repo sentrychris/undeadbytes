@@ -6,6 +6,7 @@ Play the game [here](https://sentrychris.github.io/undeadbytes/play/).
 
 ## Table of Contents
 
+* [API Reference](https://sentrychris.github.io/undeadbytes/reference/)
 * [Application Structure](#application-structure)
 * [Development Setup](#development-setup)
 * [How it Works](./full/README.md)
@@ -22,7 +23,6 @@ Play the game [here](https://sentrychris.github.io/undeadbytes/play/).
     * [Arc-box collision](./full/collision/arc-box-collision.md)
     * [Entity-to-player](./full/collision/entity-to-player.md)
     * [Entity-to-walls](./full/collision/entity-to-walls.md)
-* [API Reference](./reference/index.html)
 
 ## Application Structure
 

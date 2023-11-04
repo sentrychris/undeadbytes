@@ -21,6 +21,7 @@
     "docs:serve": "npm run docs:build && http-server docs/reference",
     "docs:game": "npm run game:build && cp -r dist/* docs/play/",
     "build:all": "npm run docs:game && npm run docs:build",
+    "clean:dist": "rm -rf ./dist",
     "clean:all": "rm -rf ./docs/play/* && rm -rf ./docs/reference/* && rm -rf ./dist"
   },
   "devDependencies": {

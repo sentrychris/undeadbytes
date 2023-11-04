@@ -65,6 +65,10 @@ Dive into the world of Undead Bytes and see if you have what it takes to survive
 
 ## Credits
 
+Credit to the kind and talented developers who have contributed to Undead Bytes:
+
+- <a href="https://github.com/sentrychris/https://github.com/sfazli96">sfazli96</a> - for design and development of [level 7](https://github.com/sentrychris/undeadbytes/pull/21)
+
 Credit to the kind and talented users on [Flaticon](https://www.flaticon.com/s) responsible for the following icons:
 
 - <a href="https://www.flaticon.com/free-icons/ammo" title="ammo icons">Ammo icons created by Smashicons - Flaticon</a>

@@ -16,11 +16,11 @@ static intersection (r1, r2) {
 
 This method is a basic collision check that determines if two entities, defined by their rectangular properties (x, y, width, height), intersect. The logic is straightforward: if any side of one entity is positioned to the left, right, above, or below the other, they do not intersect. Otherwise, they overlap, triggering a collision.
 
-## `distance(e1, e2, vectors = true)`
+## `distance(e1, e2, useVectors = true)`
 
 ```js
-static distance (e1, e2, vectors = true) {
-  if (vectors) {
+static distance (e1, e2, useVectors = true) {
+  if (useVectors) {
     return Math.sqrt(e1*e1 + e2*e2);
   }
 
@@ -31,7 +31,7 @@ static distance (e1, e2, vectors = true) {
 }
 ```
 
-The `distance` method calculates the Euclidean distance between two points in space. It's versatile, accepting either entity objects or numerical values as parameters. When `vectors` is set to `true`, the method considers the parameters as vector components, determining the distance between the points they represent. This is foundational for measuring the spatial separation between entities, a key factor in collision detection.
+The `distance` method calculates the Euclidean distance between two points in space. It's versatile, accepting either entity objects or numerical values as parameters. When `useVectors` is set to `true`, the method considers the parameters as vector components, determining the distance between the points they represent. This is foundational for measuring the spatial separation between entities, a key factor in collision detection.
 
 ## `arcBoxCollision(params)`
 

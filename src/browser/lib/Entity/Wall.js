@@ -3,7 +3,7 @@ import { config } from '../../config';
 /**
  * Wall entity
  * @class
- * @category Entity
+ * @category Game Entities
  */
 export class Wall
 {

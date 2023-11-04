@@ -6,7 +6,7 @@ import { config } from '../../config';
 /**
  * Enemy entity
  * @class
- * @category Entity
+ * @category Game Entities
  */
 export class Enemy
 {

@@ -6,7 +6,7 @@ import { config } from '../../../config';
 /**
  * Health pickup item entity
  * @class
- * @category Entity
+ * @category Game Entities
  * @subcategory Pickup
  */
 export class Health

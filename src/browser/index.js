@@ -1,10 +1,3 @@
-/**
- * Game entry point.
- * 
- * @category Game
- * @memberof Game
- * @module entry
- */
 import { Game } from './lib/Game';
 import { Storage } from './lib/Storage';
 import { GameDispatcher } from './lib/Events/GameDispatcher';
@@ -18,6 +11,14 @@ import {
 
 // Styles
 import './css/main.css';
+
+/**
+ * Game entry point.
+ * 
+ * @category Game
+ * @memberof Game
+ * @module browser
+ */
 
 const viewport = document.querySelector('#undead-bytes');
 const splash = document.querySelector('.splash');

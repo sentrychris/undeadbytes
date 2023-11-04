@@ -3,7 +3,7 @@ import { Dispatcher } from './Dispatcher';
 /**
  * Game event dispatcher.
  * @class
- * @category Events
+ * @category Game Events
  */
 export class GameDispatcher extends Dispatcher
 {

@@ -5,7 +5,7 @@ import { timestamp } from '../util';
 /**
  * Storage
  * @class
- * @category Game
+ * @category Game Admin
  */
 export class Storage
 {

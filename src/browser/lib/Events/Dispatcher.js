@@ -1,7 +1,7 @@
 /**
  * Dispatcher base class
  * @class
- * @category Events
+ * @category Game Events
  */
 export class Dispatcher {
   _listeners = {};

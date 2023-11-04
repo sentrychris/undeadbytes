@@ -5,7 +5,7 @@
  * 08 Ammo
  * 05 Health
  * 05 Stamina
- * @category Scene
+ * @category Game Scene
  * @subcategory Level
  * @memberof Level
  * @module level5

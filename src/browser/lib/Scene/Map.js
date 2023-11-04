@@ -5,7 +5,7 @@ import { levels } from '../Levels/mappings';
  * Maps are represented as arrays of strings, where each character denotes
  * a different game entity such as walls, enemies, pickups, and the player.
  * @class
- * @category Scene
+ * @category Game Scene
  */
 export class Map
 {

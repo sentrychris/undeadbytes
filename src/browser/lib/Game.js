@@ -15,7 +15,7 @@ import Stats from 'stats.js';
  * Represents the main game class responsible for managing game entities,
  * controls, and rendering.
  * @class
- * @category Game
+ * @category Game Admin
  */
 export class Game
 {
@@ -23,9 +23,9 @@ export class Game
    * Create a new game instance.
    * 
    * @constructor
-   * @param {Object} bridge - The bridge object.
-   * @param {Object} dispatcher - The dispatcher object.
-   * @param {Object} context - The rendering context.
+   * @param {Object} bridge - The execution context bridge e.g. "web" or IPC handler.
+   * @param {Object} dispatcher - The dispatcher object for custom game events.
+   * @param {Object} context - The canvas rendering context.
    */
   constructor (bridge, dispatcher, context) {
     /**

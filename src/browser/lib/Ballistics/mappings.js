@@ -2,7 +2,7 @@
  * Weapon mappings.
  * 
  * Weapons are mapped by array index to hotkey.
- * @category Ballistics
+ * @category Game Ballistics
  * @memberof Ballistics
  * @module weapons
  */

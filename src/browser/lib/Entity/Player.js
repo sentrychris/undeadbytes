@@ -7,7 +7,7 @@ import { config } from '../../config';
 /**
  * Player entity
  * @class
- * @category Entity
+ * @category Game Entities
  */
 export class Player
 {

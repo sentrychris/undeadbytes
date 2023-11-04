@@ -6,7 +6,7 @@ import { config } from '../../config';
  * world. It focuses on controlling the visible area based on the position of the
  * player and efficiently rendering only the visible portion of the game world.
  * @class
- * @category Scene
+ * @category Game Scene
  */
 export class Camera
 {

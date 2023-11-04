@@ -4,7 +4,7 @@ import { config } from '../../config';
 /**
  * Grenade projectile handler.
  * @class
- * @category Ballistics
+ * @category Game Ballistics
  */
 export class Grenade
 {

@@ -6,7 +6,7 @@ import { weapons } from './mappings';
 /**
  * Ballistics handler.
  * @class
- * @category Ballistics
+ * @category Game Ballistics
  */
 export class Ballistics
 {

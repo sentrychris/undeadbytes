@@ -1,7 +1,7 @@
 /**
  * Level 0.
  * Used only for testing.
- * @category Scene
+ * @category Game Scene
  * @subcategory Level
  * @memberof Level
  * @module level0

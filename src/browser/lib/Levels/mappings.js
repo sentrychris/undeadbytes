@@ -8,7 +8,7 @@ import { level6 } from './level6';
 
 /**
  * Game map levels
- * @category Scene
+ * @category Game Scene
  * @subcategory Level
  * @module levels
  */

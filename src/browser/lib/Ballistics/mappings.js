@@ -3,6 +3,7 @@
  * 
  * Weapons are mapped by array index to hotkey.
  * @category Ballistics
+ * @memberof Ballistics
  */
 export const weapons = [
   {

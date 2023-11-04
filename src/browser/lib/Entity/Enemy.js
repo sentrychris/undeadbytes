@@ -111,7 +111,7 @@ export class Enemy
    * Checks the render state, checks enemy-enemy collision and sets speed/direction
    * accordingly, checks to see if the enemy is dead and updates the tracked entities,
    * updates the enemy entity's bounds, checks for ballistic projectile collisions and
-   * sets damage and projectile "pushback" velocity.
+   * sets damage and projectile "pushback" velocity. This is called every frame/repaint.
    * 
    * @param {Game} game - the managed game instance
    * 

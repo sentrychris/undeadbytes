@@ -10,19 +10,47 @@ export class Bullet
 {
   /**
    * Create new bullet projectile.
+   * 
+   * @constructor
    * @param {CanvasRenderingContext2D} context - the canvas rendering context
    * @param {Player} player - the player entity
    * @param {number} i - bullet projectile spread index
    */
   constructor (context, player, i) {
+    /**
+     * vectorX - the projectile vector x-coordinate
+     * @type {number}
+     */
     this.vectorX = Math.cos(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
+
+    /**
+     * vectorY - the projectile vector y-coordinate
+     * @type {number}
+     */
     this.vectorY = Math.sin(player.angle + 90 * Math.PI / 180 + i * 5 * Math.PI / 180);
 
-    // Projectile position
+    /**
+     * x - the projectile current x-coordinate
+     * @type {number}
+     */
     this.x = player.x + this.vectorX * config.cell.radius * 1.5;
+
+    /**
+     * y - the projectile current y-coordinate
+     * @type {number}
+     */
     this.y = player.y + this.vectorY * config.cell.radius * 1.5;
 
+    /**
+     * radius - the rendered projectile radius size
+     * @type {number}
+     */
     this.radius = 5;
+
+    /**
+     * bounds - the entity's bounds for intersection.
+     * @type {object}
+     */
     this.bounds = {
       x: this.x - this.radius,
       y: this.y - this.radius,
@@ -30,15 +58,58 @@ export class Bullet
       height: this.radius * 2
     };
   
+    /**
+     * context - the canvas rendering context
+     * @type {CanvasRenderingContext2D}
+     */
     this.context = context;
+
+    /**
+     * frames - counter to control the rendering/update frequency
+     * @type {number}
+     */
     this.frames = 0;
+
+    /**
+     * markToDelete - determines whether or not the bullet should be rendered/updated
+     * @type {boolean}
+     */
     this.markToDelete = false;
   }
 
   /**
+   * Render the bullet projectile on the canvas.
+   * 
+   * This is called every frame/repaint to render the bullet. Note that this
+   * is an animated entity, therefore the x,y coordinates will change on update.
+   * 
+   * @param {array|string} color - the color of the projectile.
+   * 
+   * @returns {void}
+   */
+  render (color) {
+    if (Array.isArray(color)) {
+      color = color[Math.floor(Math.random() * color.length)];
+    }
+
+    this.context.beginPath();
+    this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+    this.context.fillStyle = color;
+    this.context.fill();
+  }
+
+  /**
    * Update the projectile data for bounds tracking, collision and cleanup.
+   * 
+   * Updates the bullet's x,y coordinates depending on the vector coordinates and projectile
+   * dropoff value, checks frames to ensure the bullet should remain active, and checks for
+   * collision against walls to determine if the bullet should remain active. This is called
+   * every frame/repaint.
+   * 
    * @param {Wall[]} walls - the rendered walls
    * @param {number} dropoff - the projectile dropoff rate
+   * 
+   * @returns {void}
    */
   update (walls, dropoff = 25) {
     this.x += this.vectorX * dropoff;
@@ -59,21 +130,5 @@ export class Bullet
         this.markToDelete = true;
       }
     }
-
-  }
-
-  /**
-   * Render the bullet projectile on the canvas.
-   * @param {array|string} color - the color of the projectile.
-   */
-  render (color) {
-    if (Array.isArray(color)) {
-      color = color[Math.floor(Math.random() * color.length)];
-    }
-
-    this.context.beginPath();
-    this.context.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-    this.context.fillStyle = color;
-    this.context.fill();
   }
 }

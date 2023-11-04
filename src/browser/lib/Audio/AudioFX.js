@@ -3,12 +3,11 @@ import { weapons } from '../Ballistics/mappings';
 import { snippets, soundtrack } from './mappings';
 
 /**
- * Audio FX Handler.
+ * Audio Game FX Handler.
  * @class
  * @category Game
- * @subcategory Audio
  */
-export class _AudioFX
+export class AudioFx
 {
   /**
    * Create a new Audio FX handler.
@@ -234,11 +233,4 @@ export class _AudioFX
   }
 }
 
-/**
- * @constant
- * @type {_AudioFX}
- * @category Game
- * @subcategory Audio
- * @default
- */
-export const AudioFX = new _AudioFX();
+export const AudioFX = new AudioFx();

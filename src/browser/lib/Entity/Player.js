@@ -130,7 +130,7 @@ export class Player
    * 
    * Checks the render state, sets the player entity's speed, angle and direction, detects
    * collision between the player and walls, checks damage and updates the player entity's
-   * position.
+   * position. This is called every frame/repaint.
    * 
    * @param {Game} game - the managed game instance
    * 

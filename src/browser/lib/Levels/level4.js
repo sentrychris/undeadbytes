@@ -7,6 +7,7 @@
  * 02 Stamina
  * @category Scene
  * @subcategory Level
+ * @memberof Level
  */
 export const level4 = [
   'W W W W W W W W W W W W W W W W W W W W',

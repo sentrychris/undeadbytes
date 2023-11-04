@@ -1,46 +1,46 @@
 module.exports = {
-    'env': {
-        'browser': true,
-        'es2021': true
-    },
-    'extends': 'eslint:recommended',
-    'overrides': [
-        {
-            'env': {
-                'node': true
-            },
-            'files': [
-                '.eslintrc.{js,cjs}'
-            ],
-            'parserOptions': {
-                'sourceType': 'script'
-            }
-        }
+  'env': {
+    'browser': true,
+    'es2021': true
+  },
+  'extends': 'eslint:recommended',
+  'overrides': [
+    {
+      'env': {
+        'node': true
+      },
+      'files': [
+        '.eslintrc.{js,cjs}'
+      ],
+      'parserOptions': {
+        'sourceType': 'script'
+      }
+    }
+  ],
+  'parserOptions': {
+    'ecmaVersion': 'latest',
+    'sourceType': 'module'
+  },
+  'rules': {
+    'indent': [
+      'error',
+      2
     ],
-    'parserOptions': {
-        'ecmaVersion': 'latest',
-        'sourceType': 'module'
-    },
-    'rules': {
-        'indent': [
-            'error',
-            2
-        ],
-        'quotes': [
-            'error',
-            'single'
-        ],
-        'semi': [
-            'error',
-            'always'
-        ],
-        'func-call-spacing': [
-            'error',
-            'never'
-        ],
-        'space-before-function-paren': [
-            'error',
-            'always'
-        ]
-    },
+    'quotes': [
+      'error',
+      'single'
+    ],
+    'semi': [
+      'error',
+      'always'
+    ],
+    'func-call-spacing': [
+      'error',
+      'never'
+    ],
+    'space-before-function-paren': [
+      'error',
+      'always'
+    ]
+  },
 };

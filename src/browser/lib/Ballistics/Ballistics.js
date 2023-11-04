@@ -3,16 +3,74 @@ import { Bullet } from './Bullet';
 import { Grenade } from './Grenade';
 import { weapons } from './mappings';
 
+/**
+ * Ballistics handler.
+ * @class
+ * @category Game Ballistics
+ */
 export class Ballistics
 {
+  /**
+   * Create new Ballistics handler
+   */
   constructor () {
+
+    /**
+     * weapon - the equipped weapon
+     * @type {Object}
+     */
     this.weapon = null;
+
+    /**
+     * trigger - determines whether or not the weapon is triggered
+     * @type {Object}
+     */
     this.trigger = true;
+
+    /**
+     * frames - counter to control the update frequency for weapon actions
+     * @type {number}
+     */
     this.frames = 0;
+
+    /**
+     * projectiles - array of tracked projectiles currently on canvas
+     * @type {array}
+     */
     this.projectiles = [];
+
+    /**
+     * indexesToDelete - indexes of various projectile entities to remove
+     * @type {array}
+     */
     this.indexesToDelete = [];
   }
 
+  /**
+   * Render ballistics projectiles.
+   * 
+   * This is called every frame/repaint to render projectiles. Note that
+   * projectiles are an animated entities, therefore their x,y coordinates
+   * will change on update.
+   * 
+   * @returns {void}
+   */
+  render () {
+    for (let i = 0; i < this.projectiles.length; i++) {
+      this.projectiles[i].render(this.weapon.projectile.color);
+    }
+  }
+
+  /**
+   * Update game ballistics data, handle weapon triggering and projectile cleanup.
+   * 
+   * Checks the weapon state, sets the weapon stats, handles tiggered weapon actions
+   * and audio. This is called every frame/repaint.
+   * 
+   * @param {Game} game - the managed game instance
+   * 
+   * @returns {void}
+   */
   update (game) {
     this.weapon = weapons[game.selectedWeaponIndex];
     this.setEquippedWeaponDisplayInformation();
@@ -36,12 +94,14 @@ export class Ballistics
     this.cleanupProjectiles(game.walls);
   }
 
-  render () {
-    for (let i = 0; i < this.projectiles.length; i++) {
-      this.projectiles[i].render(this.weapon.projectile.color);
-    }
-  }
-
+  /**
+   * Handle weapon fire.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * @param {Player} player - the player entity
+   * 
+   * @returns {void}
+   */
   handleFire (context, player) {
     if (this.shouldReloadWeaponAmmoClip()) {
       return;
@@ -57,6 +117,11 @@ export class Ballistics
     this.trigger = this.weapon.trigger;
   }
 
+  /**
+   * Set equippred weapon display information e.g. ammo, magazines.
+   * 
+   * @returns {void}
+   */
   setEquippedWeaponDisplayInformation () {
     const { name, clip, magazines } = this.weapon;
     document.querySelector('#equipped-weapon').innerHTML = name;
@@ -66,6 +131,11 @@ export class Ballistics
     document.querySelector('#magazines-total').innerHTML = magazines.capacity;
   }
 
+  /**
+   * Determine if weapon needs to be reloaded and handle accordingly.
+   * 
+   * @returns {boolean}
+   */
   shouldReloadWeaponAmmoClip () {
     if (this.weapon.clip.current <= 0) {
       if (this.weapon.magazines.current > 0) {
@@ -82,6 +152,11 @@ export class Ballistics
     return false;
   }
 
+  /**
+   * Refill the curren ammo clip or replenish magazines.
+   * 
+   * @returns {void}
+   */
   refillWeaponAmmoClip () {
     if (this.weapon.clip.current === this.weapon.clip.capacity) {
       if (this.weapon.magazines.current < this.weapon.magazines.capacity) {
@@ -92,6 +167,14 @@ export class Ballistics
     }
   }
 
+  /**
+   * Register bullet projectiles for rendering and collision.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * @param {Player} player - the player entity
+   * 
+   * @returns {void}
+   */
   registerProjectiles (context, player) {
     const { spread, delay } = this.weapon.projectile;
     for (let i = spread.min; i <= spread.max; i++) {
@@ -104,6 +187,13 @@ export class Ballistics
     }
   }
 
+  /**
+   * Clean up handled projectiles to stop rendering and updates.
+   * 
+   * @param {Wall[]} walls - the rendered walls
+   * 
+   * @returns {void}
+   */
   cleanupProjectiles (walls) {
     this.indexesToDelete = [];
     for (let i = 0; i < this.projectiles.length; i++) {

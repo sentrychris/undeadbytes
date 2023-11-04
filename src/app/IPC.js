@@ -1,8 +1,21 @@
 const { ipcMain } = require('electron');
 
 
-module.exports = class IPC
+/**
+ * IPC Handler.
+ * @class
+ * @category Desktop App
+ */
+class IPC
 {
+  /**
+   * Create a new IPC handler instance.
+   * 
+   * @param {BrowserWindow} context - the electron browser window
+   * @param {Object} handlers - game handlers to attach e.g. storage 
+   * @param {Object} params
+   * @param {boolean} params.register - immediately register event listeners or defer
+   */
   constructor(context, handlers = { storage: null }, { register = false}) {
     this.context = context;
     this.contextWindowTitle = 'Undead Bytes';
@@ -14,6 +27,11 @@ module.exports = class IPC
     }
   }
 
+  /**
+   * Register IPC event listeners.
+   * 
+   * @returns {void}
+   */
   register() {
     ipcMain.on('to:title:set', (event, title = null) => {
       if (title) {
@@ -39,3 +57,5 @@ module.exports = class IPC
     });
   }
 }
+
+module.exports = IPC;

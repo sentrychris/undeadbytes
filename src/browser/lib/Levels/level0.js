@@ -1,6 +1,10 @@
 /**
  * Level 0.
  * Used only for testing.
+ * @category Game Scene
+ * @subcategory Level
+ * @memberof Level
+ * @module level0
  */
 export const level0 = [
   'W W W W W W W W W W W W W W W W W W W W',

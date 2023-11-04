@@ -2,6 +2,9 @@
  * Weapon mappings.
  * 
  * Weapons are mapped by array index to hotkey.
+ * @category Game Ballistics
+ * @memberof Ballistics
+ * @module weapons
  */
 export const weapons = [
   {

@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browser/lib/Ballistics/mappings.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browser/lib/Ballistics/mappings.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Weapon mappings.
+ * 
+ * Weapons are mapped by array index to hotkey.
+ * @category Game Ballistics
+ * @memberof Ballistics
+ * @module weapons
+ */
+export const weapons = [
+  {
+    name: 'Pistol',
+    type: 'gun',
+    projectile: {
+      color: '#F8CA00',
+      delay: null,
+      spread: {
+        min: 0,
+        max: 0,
+      },
+      dps: 30,
+      dropoff: 40,
+    },
+    clip: {
+      current: 10,
+      capacity: 10
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
+    trigger: false,
+    audio: {
+      type: 'single',
+      fire: './fx/audio/pistol/pistol-fire.mp3',
+      reload: './fx/audio/pistol/pistol-reload.mp3'
+    }
+  },
+  {
+    name: 'Shotgun',
+    type: 'gun',
+    projectile: {
+      color: '#F8CA00',
+      delay: null,
+      spread: {
+        min: -3,
+        max: 3,
+      },
+      dps: 50,
+      dropoff: 25,
+    },
+    clip: {
+      current: 6,
+      capacity: 6
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
+    trigger: false,
+    audio: {
+      type: 'single',
+      fire: './fx/audio/shotgun/shotgun-fire.mp3',
+      reload: './fx/audio/shotgun/shotgun-reload.mp3'
+    }
+  },
+  {
+    name: 'Machine Gun',
+    type: 'gun',
+    projectile: {
+      color: ['#CC5500', '#F8CA00'],
+      delay: null,
+      spread: {
+        min: 0,
+        max: 0,
+      },
+      dps: 15,
+      dropoff: 40,
+    },
+    clip: {
+      current: 225,
+      capacity: 225
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
+    trigger: true,
+    audio: {
+      type: 'repeat',
+      fire: './fx/audio/machine-gun/machine-gun-fire.mp3',
+      reload: './fx/audio/machine-gun/machine-gun-reload.mp3'
+    }
+  },
+  {
+    name: 'Flamethrower',
+    type: 'gun',
+    projectile: {
+      color: ['#CC5500', '#F8CA00'],
+      delay: null,
+      spread: {
+        min: -5,
+        max: 5,
+      },
+      dps: 10,
+      dropoff: 20,
+    },
+    clip: {
+      current: 600,
+      capacity: 600
+    },
+    magazines: {
+      current: 2,
+      capacity: 2
+    },
+    trigger: true,
+    audio: {
+      type: 'repeat',
+      fire: './fx/audio/flamethrower/flamethrower-fire.mp3',
+      reload: './fx/audio/flamethrower/flamethrower-reload.mp3'
+    }
+  },
+  {
+    name: 'Grenade',
+    type: 'throwable',
+    projectile: {
+      color: ['#CC5500', '#F8CA00'],
+      delay: 2,
+      spread: {
+        min: -8,
+        max: 8,
+      },
+      dps: 75,
+      dropoff: [20,40],
+    },
+    clip: {
+      current: 2,
+      capacity: 2
+    },
+    magazines: {
+      current: 1,
+      capacity: 1
+    },
+    trigger: false,
+    audio: {
+      type: 'single',
+      fire: './fx/audio/flamethrower/flamethrower-fire.mp3',
+      reload: './fx/audio/flamethrower/flamethrower-reload.mp3'
+    }
+  }
+];</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

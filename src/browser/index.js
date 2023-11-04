@@ -12,6 +12,14 @@ import {
 // Styles
 import './css/main.css';
 
+/**
+ * Game entry point.
+ * 
+ * @category Game
+ * @memberof Game
+ * @module browser
+ */
+
 const viewport = document.querySelector('#undead-bytes');
 const splash = document.querySelector('.splash');
 const canvas = document.querySelector('canvas#game');
@@ -30,7 +38,13 @@ const storage = new Storage(bridge, dispatcher, {
 // Set the build version
 document.querySelector('.build-version span').innerHTML = config.version;
 
-// Game setup
+/**
+ * Instantiate and begin a new game.
+ * 
+ * @param {number} level - the level to play
+ * 
+ * @returns {void}
+ */
 function main (level = 1) {
   if (isActiveElement(viewport) && canvas) {
     // Create a new managed game instance
@@ -50,6 +64,13 @@ function main (level = 1) {
   }
 }
 
+/**
+ * Handle game instantiation from the splash screen.
+ * 
+ * @param {number} level - the level to play
+ * 
+ * @returns {void}
+ */
 function play (level = 1) {
   if (splash) {
     document.body.classList.remove('body-splash');
@@ -65,41 +86,16 @@ document.querySelector('#play-now').addEventListener('click', () => {
   play();
 });
 
-// Load game play trigger
+// Load saved games trigger
 document.querySelector('#load-game').addEventListener('click', () => {
   if (bridge !== 'web') {
+    // Send event through IPC channel to load games from game directory
     bridge.send('to:game:load');
   } else {
+    // Otherwise load games from local storage and configure display
     const loader = document.querySelector('#load-game-web');
     if (loader) {
-      loader.style.display = 'block';
-      const storage = JSON.parse(localStorage.getItem(config.game.savesLocalStorageKey));
-
-      if (storage && storage.saves) {
-        const createSavedGameItem = (save) => {
-          const node = document.createElement('p');
-          node.classList.add('load-game__item');
-          node.innerHTML = `[${save.date}] - Level ${save.level} | Medkits - ${save.player.pickups.health} | Load Game...`;
-          node.dataset.save = save.name;
-          
-          return node;
-        };
-
-        const lastFourSaves = storage.saves.slice(Math.max(storage.saves.length - 4, 1));
-        for (const save of lastFourSaves) {
-          const node = createSavedGameItem(save);
-          
-          node.onclick = (e) => {
-            const save = storage.saves.find((s) => s.name === e.target.dataset.save);
-            dispatcher.loadGame({
-              save,
-              instantiate: true
-            });
-          };
-
-          loader.appendChild(node);
-        }
-      }
+      storage.loadGameSavesFromLocalStorage(loader);
     }
   }
 });

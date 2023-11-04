@@ -1,19 +1,54 @@
+/**
+ * Game utilities.
+ * 
+ * @category Game
+ * @memberof Game
+ * @module utility
+ */
+
+/**
+ * Generate a random number.
+ * 
+ * @param {number} min - the minimum number
+ * @param {number} max - the maximum number
+ * 
+ * @returns {number}
+ */
 export function randomNumber (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function timestamp (replace = false) {
+/**
+ * Create a timestamp.
+ * 
+ * @param {boolean} condense - remove separators e.g. "-" or "/"
+ * 
+ * @returns {string}
+ */
+export function timestamp (condense = false) {
   const date = (new Date()).toISOString()
     .slice(0, 19)
-    .replace('T', replace ? '' : ' ');
+    .replace('T', condense ? '' : ' ');
 
-  return replace ? date.replace(/[:-]/g, '') : date;
+  return condense ? date.replace(/[:-]/g, '') : date;
 }
 
+/**
+ * Determine whether game element is active.
+ * 
+ * @param {HTMLElement} elem - the HTML element
+ * 
+ * @returns {boolean}
+ */
 export function isActiveElement (elem) {
   return ! elem.classList.contains('inactive');
 }
 
+/**
+ * Get the execution context bridge.
+ * 
+ * @returns {string|Object}
+ */
 export function getExecutionBridge () {
   if (Object.prototype.hasOwnProperty.call(window, 'executionBridge')
   && window.executionBridge !== null) {
@@ -23,6 +58,11 @@ export function getExecutionBridge () {
   return 'web';
 }
 
+/**
+ * Setup WASD keyboard tracking for the UI
+ * 
+ * @returns {void}
+ */
 export function trackWASDKeyboard () {
   function wasd (e) {
     const key = document.querySelector(`[data-key="${e.key}"]`);
@@ -43,13 +83,19 @@ export function trackWASDKeyboard () {
   });
 }
 
+/**
+ * Log the running game state to the console
+ * 
+ * @param {Game} game 
+ * @param {number} interval 
+ */
 export function logGameStateToConsole (game, interval = 2000) {
-  console.log(
+  console.debug(
     '%c Logging game data to console',
     'background: #222; color: yellow'
   );
 
-  console.log(
+  console.debug(
     `%c Refreshes every ${((interval % 60000) / 1000).toFixed(2)} seconds`,
     'background: #222; color: yellow'
   );
@@ -64,18 +110,24 @@ export function logGameStateToConsole (game, interval = 2000) {
   }
   
   setInterval(() => {
-    const entities = `W: ${game.walls.length} | E: ${game.enemies.length} | A: ${game.ammoPickups.length} | H: ${game.healthPickups.length}`;
+    const walls   = `W: ${game.walls.length} | `;
+    const enemies = `E: ${game.enemies.length} | `;
+    const ammo    = `A: ${game.ammoPickups.length} | `;
+    const health  = `H: ${game.healthPickups.length} | `;
+    const stamina = `S: ${game.staminaPickups.length}`;
 
-    console.log(`%c Player Health: ${game.player.health}`, 'background: #222; color: #bfff00');
-    console.log(`%c Enemies Alive: ${game.enemies.length}`, 'background: #222; color: #FF033E');
-    console.log(`%c Gameover State: ${game.gameover}`, 'background: #222; color: #00ffff');
+    const entities = walls + enemies + ammo + health + stamina;
+
+    console.debug(`%c Player Health: ${game.player.health}`, 'background: #222; color: #bfff00');
+    console.debug(`%c Enemies Alive: ${game.enemies.length}`, 'background: #222; color: #FF033E');
+    console.debug(`%c Gameover State: ${game.gameover}`, 'background: #222; color: #00ffff');
     
-    console.log('%c Entity Data:', 'background: #222; color: #ffffff');
-    console.log(
+    console.debug('%c Entity Data:', 'background: #222; color: #ffffff');
+    console.debug(
       `%c Total: ${game.entities.length} | Curr: ${calculate(game)}`,
       'background: #222; color: #ffffff'
     );
-    console.log(
+    console.debug(
       `%c ${entities}\n\n`,
       'background: #222; color: #ffffff'
     );

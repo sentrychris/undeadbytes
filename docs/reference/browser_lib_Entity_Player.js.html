@@ -1,0 +1,395 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browser/lib/Entity/Player.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browser/lib/Entity/Player.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+import { Collision } from '../Collision';
+import { Renderer } from '../Renderer';
+import { AudioFX } from '../Audio/AudioFX';
+import { config } from '../../config';
+
+/**
+ * Player entity
+ * @class
+ * @category Game Entities
+ */
+export class Player
+{
+  /**
+   * Create a new player entity.
+   * 
+   * @constructor
+   * @param {Object} spawn - the player spawn coordinates
+   * @param {number} spawn.x - the player spawn x-coordinate
+   * @param {number} spawn.y - the player spawn y-coordinate
+   */
+  constructor (spawn) {
+    /**
+     * type - the type of entity.
+     * @type {string}
+     */
+    this.type = 'player';
+
+    /**
+     * bounding - the entity's bounding behavior.
+     * @type {string}
+     */
+    this.bounding = 'arc';
+
+    /**
+     * x - the entity's x coordinate.
+     * @type {number}
+     */
+    this.x = spawn.x * config.cell.size;
+
+    /**
+     * y - the entity's y coordinate.
+     * @type {number}
+     */
+    this.y = spawn.y * config.cell.size;
+
+    /**
+     * angle - the entity's angle.
+     * @type {number}
+     */
+    this.angle = 0;
+
+    /**
+     * position - the entity's position.
+     * @type {number}
+     */
+    this.position = 0;
+    
+    /**
+     * incrementer - the entity's speed incrementer.
+     * @type {number}
+     */
+    this.incrementer = 0;
+
+    /**
+     * speed - the entity's speed.
+     * @type {number}
+     */
+    this.speed = 5;
+
+    /**
+     * stamina - entity stamina boost enabled.
+     * @type {boolean}
+     */
+    this.stamina = false;
+
+    /**
+     * staminaAmount - the amount of speed to boost by.
+     * @type {number}
+     */
+    this.staminaAmount = 0;
+
+    /**
+     * sleep - the entity's render state.
+     * @type {boolean}
+     */
+    this.sleep = true;
+    
+    /**
+     * invincible - the entity's damage state.
+     * @type {boolean}
+     */
+    this.invincible = false;
+
+    /**
+     * health - the entity's health.
+     * @type {number}
+     */
+    this.health = 100;
+
+    this.pickups = {
+      health: 0,
+      stamina: 0
+    };
+    
+    this.damage = {
+      x: 0,
+      y: 0
+    };
+    this.dead = false;
+  }
+
+  /**
+   * Render the player entity on the canvas.
+   * 
+   * This is called every frame/repaint to render the entity. Note that this is
+   * an animated entity, therefore the x,y coordinates will change on
+   * update.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
+   * @returns {void}
+   */
+  render (context) {
+    Renderer.render(this, context);
+  }
+
+  /**
+   * Update the player entity for rendering, collision and behaviour.
+   * 
+   * Checks the render state, sets the player entity's speed, angle and direction, detects
+   * collision between the player and walls, checks damage and updates the player entity's
+   * position. This is called every frame/repaint.
+   * 
+   * @param {Game} game - the managed game instance
+   * 
+   * @returns {void}
+   */
+  update (game) {
+    if (this.sleep || this.dead) {
+      return;
+    }
+
+    let count = 0;
+    count += game.keyboard.up ? 1 : 0;
+    count += game.keyboard.down ? 1 : 0;
+    count += game.keyboard.left ? 1 : 0;
+    count += game.keyboard.right ? 1 : 0;
+
+    let currentSpeed = this.speed;
+
+    if (count > 1) {
+      currentSpeed /= Math.sqrt(2);
+    }
+
+    if (Math.abs(this.damage.x) != 0 &lt; Math.abs(this.damage.y) != 0) {
+      this.damage.x *= 0.9;
+      this.damage.y *= 0.9;
+
+      this.x += this.damage.x;
+      this.y += this.damage.y;
+
+      if (Math.abs(this.damage.x) &lt; 0.5 &amp;&amp; Math.abs(this.damage.y) &lt; 0.5) {
+        this.damage = {
+          x: 0,
+          y: 0
+        };
+
+        this.invincible = false;
+      }
+    } else {
+      if (game.keyboard.up) this.y -= currentSpeed;
+      if (game.keyboard.down) this.y += currentSpeed;
+      if (game.keyboard.left) this.x -= currentSpeed;
+      if (game.keyboard.right) this.x += currentSpeed;
+    }
+
+    const collisionVector = Collision.entityToWalls(this, game.walls);
+    this.x += collisionVector.x * currentSpeed;
+    this.y += collisionVector.y * currentSpeed;
+
+    let vectorX = game.camera.offsetX + game.context.canvas.width / 2 - game.mouse.x;
+    let vectorY = game.camera.offsetY + game.context.canvas.height / 2 - game.mouse.y;
+
+    const distance = Collision.distance(vectorX, vectorY);
+
+    if (distance > 0) {
+      vectorX /= distance;
+      vectorY /= distance;
+
+      this.angle = Math.atan2(vectorY, vectorX) + 90 * Math.PI / 180;
+    }
+
+    if (game.keyboard.up || game.keyboard.down || game.keyboard.left || game.keyboard.right) {
+      this.incrementer += this.speed;
+    }
+
+    this.position = Math.sin(this.incrementer * Math.PI / 180);
+  }
+
+  /**
+   * Handle damage from colliding enemies.
+   * 
+   * @param {Enemy} enemy the enemy entity
+   * 
+   * @returns {void}
+   */
+  takeDamage (enemy) {
+    if (! this.invincible) {
+      const vectorX = this.x - enemy.x;
+      const vectorY = this.y - enemy.y;
+
+      const distance = Collision.distance(vectorX, vectorY);
+
+      if (distance > 0) {
+        this.damage.x = vectorX / distance * 20;
+        this.damage.y = vectorY / distance * 20;
+        this.invincible = true;
+        
+        this.health -= 25;
+        this.health = this.health &lt; 0 ? 0 : this.health;
+
+        if (this.health == 0) {
+          AudioFX.snippet({ name: 'eoww' });
+          this.dead = true;
+        }
+      }
+    }
+  }
+
+  /**
+   * Boost player speed when stamina entity is picked up.
+   * 
+   * @param {number} amount - the amount of speed to boost by
+   * 
+   * @returns {void}
+   */
+  boostSpeed (amount) {
+    this.speed = amount;
+    setTimeout(() => {
+      this.speed = 5;
+    }, 3000);
+  }
+
+  /**
+   * Refill player health when health entity is picked up or used.
+   * 
+   * @param {number} amount - the amount of health to restore
+   * @param {boolean} pickup - if false, then player is using a stored item
+   * 
+   * @returns {void}
+   */
+  refillHealth (amount, pickup = false) {
+    const refill = (health) => {
+      const increase = this.health + health;
+      if (increase &lt;= 100) {
+        this.health = increase;
+      }
+    };
+
+    if (this.health &lt; 100) {
+      if (! pickup) {
+        if (this.pickups.health &lt;= 0) {
+          this.pickups.health = 0;
+        } else {
+          refill(amount);
+          --this.pickups.health;
+        }
+      } else {
+        refill(amount);
+      }
+    } else if (pickup) {
+      ++this.pickups.health;
+    }
+
+    document.querySelector('#medkits-available').innerHTML = this.pickups.health;
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

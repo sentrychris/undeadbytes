@@ -2,8 +2,22 @@ const path = require('path');
 const { app, Menu } = require('electron');
 const openAboutWindow = require('about-window').default;
 
-
-module.exports = class AppMenu {
+/**
+ * App Menu.
+ * @class
+ * @category Desktop App
+ */
+class AppMenu
+{
+  /**
+   * Create new desktop app menu.
+   * 
+   * @constructor
+   * @param {BrowserWindow} context - the electron browser window
+   * @param {Object} params
+   * @param {boolean} params.register - immediately register the menu or defer
+   * @param {Object} params.handlers - game handlers to attach e.g. storage
+   */
   constructor(context, { register = false, handlers = { storage: null } }) {
     this.context = context;
     this.handlers = handlers;
@@ -13,10 +27,23 @@ module.exports = class AppMenu {
     }
   }
 
+  /**
+   * Attach handlers for the menu for callback behaviour
+   * 
+   * @param {string} handler - the handler key
+   * @param {Object} instance - the handler instance
+   * 
+   * @returns {void}
+   */
   attach (handler, instance) {
     this.handlers[handler] = instance;
   }
 
+  /**
+   * Register the application menu
+   * 
+   * @returns {void}
+   */
   register () {
     app.applicationMenu = Menu.buildFromTemplate([
       {
@@ -44,6 +71,27 @@ module.exports = class AppMenu {
       {
         label: 'View',
         submenu: [
+          {
+            label: 'Zoom In',
+            accelerator: (function() {
+              return process.platform === 'darwin' ? 'Command+Plus' : 'Ctrl+Plus'
+            }()),
+            click: () => {
+              const factor = (this.context.webContents.getZoomFactor() + 0.1)
+              this.context.webContents.zoomFactor = factor > 1 ? 1 : factor;
+            }
+          },
+          {
+            label: 'Zoom Out',
+            accelerator: (function() {
+              return process.platform === 'darwin' ? 'Command+-' : 'Ctrl+-'
+            }()),
+            click: () => {
+              const factor = (this.context.webContents.getZoomFactor() - 0.1)
+              this.context.webContents.zoomFactor = factor < 0.1 ? 0.1 : factor;
+            }
+          },
+          { type: 'separator' },
           {
             label: 'Toggle Developer Tools',
             accelerator: (function () {
@@ -76,3 +124,5 @@ module.exports = class AppMenu {
     ]);
   }
 };
+
+module.exports = AppMenu;

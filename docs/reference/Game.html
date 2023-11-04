@@ -1,0 +1,6172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> Game</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Class</p>
+                    <h1>Game</h1>
+                </header>
+                
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>Game<span class="signature">(bridge, dispatcher, context)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">Represents the main game class responsible for managing game entities,controls, and rendering.</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class='vertical-section'>
+                <div class="members">
+                    <div class="member">
+                        <div class=name>
+                            <span class="tag">Constructor</span>
+                        </div>
+                        
+
+
+    
+    <h4 class="name" id="Game">
+        <a class="href-link" href="#Game">#</a>
+        
+        <span class="code-name">
+            
+                new Game<span class="signature">(bridge, dispatcher, context)</span><span class="type-signature"></span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new game instance.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>bridge</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The execution context bridge e.g. "web" or IPC handler.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>dispatcher</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The dispatcher object for custom game events.</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>context</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">The canvas rendering context.</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line20">line 20</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        
+    
+    </div>
+    
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="Game.html">Game</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Members</h1>
+            <div class="members">
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">array</code>
+
+
+    </span>
+
+<h4 class="name" id="ammoPickups">
+    <a class="href-link" href="#ammoPickups">#</a>
+    
+    <span class="code-name">
+        ammoPickups
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    ammoPickups - array containing all ammo pickup item entities
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line168">line 168</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="Ballistics.html">Ballistics</a></code>
+
+
+    </span>
+
+<h4 class="name" id="ballistics">
+    <a class="href-link" href="#ballistics">#</a>
+    
+    <span class="code-name">
+        ballistics
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    ballistics - game ballistics handler
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line192">line 192</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">string</code>
+|
+
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="bridge">
+    <a class="href-link" href="#bridge">#</a>
+    
+    <span class="code-name">
+        bridge
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    bridge - the execution context bridge
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line35">line 35</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="Camera.html">Camera</a></code>
+
+
+    </span>
+
+<h4 class="name" id="camera">
+    <a class="href-link" href="#camera">#</a>
+    
+    <span class="code-name">
+        camera
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    camera - the game camera
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line71">line 71</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">CanvasRenderingContext2D</code>
+
+
+    </span>
+
+<h4 class="name" id="context">
+    <a class="href-link" href="#context">#</a>
+    
+    <span class="code-name">
+        context
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    context - the canvas rendering context
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line65">line 65</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">number</code>
+
+
+    </span>
+
+<h4 class="name" id="currentLevel">
+    <a class="href-link" href="#currentLevel">#</a>
+    
+    <span class="code-name">
+        currentLevel
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    currentLevel - the current game level
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line95">line 95</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="dispatcher">
+    <a class="href-link" href="#dispatcher">#</a>
+    
+    <span class="code-name">
+        dispatcher
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    dispatcher - the game custom event dispatcher
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line41">line 41</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">array</code>
+
+
+    </span>
+
+<h4 class="name" id="enemies">
+    <a class="href-link" href="#enemies">#</a>
+    
+    <span class="code-name">
+        enemies
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    enemies - array containing all enemy entities
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line162">line 162</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">array</code>
+
+
+    </span>
+
+<h4 class="name" id="entities">
+    <a class="href-link" href="#entities">#</a>
+    
+    <span class="code-name">
+        entities
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    entities - array containing all game entities
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line150">line 150</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">number</code>
+
+
+    </span>
+
+<h4 class="name" id="frame">
+    <a class="href-link" href="#frame">#</a>
+    
+    <span class="code-name">
+        frame
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    frame - the current game frame ID
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line47">line 47</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">boolean</code>
+
+
+    </span>
+
+<h4 class="name" id="gameover">
+    <a class="href-link" href="#gameover">#</a>
+    
+    <span class="code-name">
+        gameover
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    gameover - whether or not the current game is over
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line101">line 101</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Object</code>
+
+
+    </span>
+
+<h4 class="name" id="handlers">
+    <a class="href-link" href="#handlers">#</a>
+    
+    <span class="code-name">
+        handlers
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    handlers - the game handlers e.g. storage
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line59">line 59</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">array</code>
+
+
+    </span>
+
+<h4 class="name" id="healthPickups">
+    <a class="href-link" href="#healthPickups">#</a>
+    
+    <span class="code-name">
+        healthPickups
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    healthPickups - array containing all health pickup item entities
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line174">line 174</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Objet</code>
+
+
+    </span>
+
+<h4 class="name" id="keyboard">
+    <a class="href-link" href="#keyboard">#</a>
+    
+    <span class="code-name">
+        keyboard
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    keyboard - the game default keyboard configuration
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line77">line 77</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Objet</code>
+
+
+    </span>
+
+<h4 class="name" id="levelPassed">
+    <a class="href-link" href="#levelPassed">#</a>
+    
+    <span class="code-name">
+        levelPassed
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    levelPassed - whether or not the current level was passed
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line107">line 107</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="Map.html">Map</a></code>
+
+
+    </span>
+
+<h4 class="name" id="map">
+    <a class="href-link" href="#map">#</a>
+    
+    <span class="code-name">
+        map
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    map - the game map generator
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line89">line 89</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Objet</code>
+
+
+    </span>
+
+<h4 class="name" id="mouse">
+    <a class="href-link" href="#mouse">#</a>
+    
+    <span class="code-name">
+        mouse
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    mouse - the game default mouse configuration
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line83">line 83</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">HTMLElement</code>
+
+
+    </span>
+
+<h4 class="name" id="overlay">
+    <a class="href-link" href="#overlay">#</a>
+    
+    <span class="code-name">
+        overlay
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    overlay - the game-end overlay
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line113">line 113</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type"><a href="Player.html">Player</a></code>
+
+
+    </span>
+
+<h4 class="name" id="player">
+    <a class="href-link" href="#player">#</a>
+    
+    <span class="code-name">
+        player
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    player - the entity representing the player
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line144">line 144</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">number</code>
+
+
+    </span>
+
+<h4 class="name" id="selectedWeaponIndex">
+    <a class="href-link" href="#selectedWeaponIndex">#</a>
+    
+    <span class="code-name">
+        selectedWeaponIndex
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    selectedWeaponIndex - the current selected mapped weapon index
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line186">line 186</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">array</code>
+
+
+    </span>
+
+<h4 class="name" id="staminaPickups">
+    <a class="href-link" href="#staminaPickups">#</a>
+    
+    <span class="code-name">
+        staminaPickups
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    staminaPickups - array containing all stamina pickup item entities
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line180">line 180</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">Stats</code>
+
+
+    </span>
+
+<h4 class="name" id="stats">
+    <a class="href-link" href="#stats">#</a>
+    
+    <span class="code-name">
+        stats
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    Statistics counter for FPS
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line119">line 119</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">boolean</code>
+
+
+    </span>
+
+<h4 class="name" id="stopped">
+    <a class="href-link" href="#stopped">#</a>
+    
+    <span class="code-name">
+        stopped
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    stopped - Whether or not the game loop is stopped
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line53">line 53</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+                <div class="member">
+
+    <span class="method-parameter is-pulled-right">
+        <label>Type:</label>
+        
+<code class="param-type">array</code>
+
+
+    </span>
+
+<h4 class="name" id="walls">
+    <a class="href-link" href="#walls">#</a>
+    
+    <span class="code-name">
+        walls
+    </span>
+    
+</h4>
+
+
+
+
+<div class="description">
+    walls - array containing all wall entities
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line156">line 156</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+        <div class='vertical-section'>
+            <h1>Methods</h1>
+            <div class="members">
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="areAllEnemiesDead">
+        <a class="href-link" href="#areAllEnemiesDead">#</a>
+        
+        <span class="code-name">
+            
+                areAllEnemiesDead<span class="signature">(entity)</span><span class="type-signature"> &rarr; {boolean}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Determine whether or not all enemies are dead based on the enemy entity'sallEnemiesDead property.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>entity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Enemy.html">Enemy</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the entity representing the enemy</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line581">line 581</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">boolean</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="attach">
+        <a class="href-link" href="#attach">#</a>
+        
+        <span class="code-name">
+            
+                attach<span class="signature">(handler, instance)</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Attach a handler to the game, e.g. a storage handler
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>handler</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the handler key</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>instance</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the handler object</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line203">line 203</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="canUpdateEntity">
+        <a class="href-link" href="#canUpdateEntity">#</a>
+        
+        <span class="code-name">
+            
+                canUpdateEntity<span class="signature">(entity)</span><span class="type-signature"> &rarr; {boolean}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Determines whether or not the given entity has an update() method implementation.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>entity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line471">line 471</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">boolean</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createAmmoPickups">
+        <a class="href-link" href="#createAmmoPickups">#</a>
+        
+        <span class="code-name">
+            
+                createAmmoPickups<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new ammo pickup items for the map.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line522">line 522</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createEnemies">
+        <a class="href-link" href="#createEnemies">#</a>
+        
+        <span class="code-name">
+            
+                createEnemies<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create new enemy entities.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line492">line 492</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createHealthPickups">
+        <a class="href-link" href="#createHealthPickups">#</a>
+        
+        <span class="code-name">
+            
+                createHealthPickups<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new health pickup items for the map.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line537">line 537</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createKeyboardMouseControls">
+        <a class="href-link" href="#createKeyboardMouseControls">#</a>
+        
+        <span class="code-name">
+            
+                createKeyboardMouseControls<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create game keyboard-mouse controls and register event listeners.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line631">line 631</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createPlayer">
+        <a class="href-link" href="#createPlayer">#</a>
+        
+        <span class="code-name">
+            
+                createPlayer<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new player entity.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line480">line 480</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createStaminaPickups">
+        <a class="href-link" href="#createStaminaPickups">#</a>
+        
+        <span class="code-name">
+            
+                createStaminaPickups<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new stamina pickup items for the map.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line552">line 552</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createVolumeControls">
+        <a class="href-link" href="#createVolumeControls">#</a>
+        
+        <span class="code-name">
+            
+                createVolumeControls<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create volume slider controls for game audio.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line702">line 702</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="createWalls">
+        <a class="href-link" href="#createWalls">#</a>
+        
+        <span class="code-name">
+            
+                createWalls<span class="signature">()</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create a new walls for the map.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line507">line 507</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="displayGameEnd">
+        <a class="href-link" href="#displayGameEnd">#</a>
+        
+        <span class="code-name">
+            
+                displayGameEnd<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Display the game-end overlay.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line590">line 590</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="generateMap">
+        <a class="href-link" href="#generateMap">#</a>
+        
+        <span class="code-name">
+            
+                generateMap<span class="signature">(levelIndex)</span><span class="type-signature"> &rarr; {this}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Generate a new map based on the passed level index.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>levelIndex</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last">the level to generate the map for</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line457">line 457</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">this</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="isPlayerDead">
+        <a class="href-link" href="#isPlayerDead">#</a>
+        
+        <span class="code-name">
+            
+                isPlayerDead<span class="signature">(entity)</span><span class="type-signature"> &rarr; {boolean}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Determine whether or not the player is dead.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>entity</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type"><a href="Player.html">Player</a></code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the entity representing the player</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line569">line 569</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">boolean</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="loop">
+        <a class="href-link" href="#loop">#</a>
+        
+        <span class="code-name">
+            
+                loop<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Start the game loop
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line217">line 217</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="newGameEntities">
+        <a class="href-link" href="#newGameEntities">#</a>
+        
+        <span class="code-name">
+            
+                newGameEntities<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Create new game entities and params.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line139">line 139</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="onDispatch">
+        <a class="href-link" href="#onDispatch">#</a>
+        
+        <span class="code-name">
+            
+                onDispatch<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handles all custom dispatcher events during the game loop.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line427">line 427</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="onRender">
+        <a class="href-link" href="#onRender">#</a>
+        
+        <span class="code-name">
+            
+                onRender<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handles all entity render events during the game loop.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line409">line 409</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="onResize">
+        <a class="href-link" href="#onResize">#</a>
+        
+        <span class="code-name">
+            
+                onResize<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handles all resize events during the game loop.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line443">line 443</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="onUpdate">
+        <a class="href-link" href="#onUpdate">#</a>
+        
+        <span class="code-name">
+            
+                onUpdate<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Handle all entity update events during the game loop.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line373">line 373</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="pause">
+        <a class="href-link" href="#pause">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                pause<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Pause the game
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line298">line 298</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="restart">
+        <a class="href-link" href="#restart">#</a>
+        
+        <span class="code-name">
+            
+                restart<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Restart the game
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line255">line 255</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="run">
+        <a class="href-link" href="#run">#</a>
+        
+        <span class="code-name">
+            
+                run<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Run the game frames
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line244">line 244</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setWeaponHotKey">
+        <a class="href-link" href="#setWeaponHotKey">#</a>
+        
+        <span class="code-name">
+            
+                setWeaponHotKey<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Set the active weapon hotkey for the UI.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line611">line 611</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="setup">
+        <a class="href-link" href="#setup">#</a>
+        
+        <span class="code-name">
+            
+                setup<span class="signature">(params, loop)</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Setup a new game
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>params</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>level</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the level to setup</td>
+</tr>
+
+  
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>loop</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">whether or not to start the game loop immediately</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line340">line 340</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="start">
+        <a class="href-link" href="#start">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                start<span class="signature">(stopped, nextLevel, savedLevel)</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Start the game
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>stopped</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+
+  
+      <td class="default">
+      
+      </td>
+  
+
+  <td class="description last">whether or not the game is stopped</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>nextLevel</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">boolean</code>
+
+
+  
+  </td>
+
+  
+
+  
+      <td class="default">
+      
+          false
+      
+      </td>
+  
+
+  <td class="description last">whether or not to start the next level</td>
+</tr>
+
+
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>savedLevel</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+      <td class="default">
+      
+          null
+      
+      </td>
+  
+
+  <td class="description last">whether or not to start from a saved level</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line272">line 272</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="stop">
+        <a class="href-link" href="#stop">#</a>
+        
+            
+                <span class='tag'>async</span>
+            
+        
+        <span class="code-name">
+            
+                stop<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Stop the game
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line323">line 323</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+                <div class="member">
+
+
+    
+    <h4 class="name" id="toggleStats">
+        <a class="href-link" href="#toggleStats">#</a>
+        
+        <span class="code-name">
+            
+                toggleStats<span class="signature">(panel)</span><span class="type-signature"> &rarr; {void}</span>
+            
+        </span>
+    </h4>
+    
+
+    
+    
+    <div class="description">
+        Toggle the FPS stats counter.
+    </div>
+    
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+<div class="table-container">
+    <table class="params table">
+        <thead>
+        <tr>
+            
+            <th>Name</th>
+            
+
+            <th>Type</th>
+
+            
+
+            
+            <th>Default</th>
+            
+
+            <th class="last">Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        
+
+            
+<tr class="deep-level-0">
+  
+      <td class="name"><code>panel</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+
+
+  
+  </td>
+
+  
+
+  
+      <td class="default">
+      
+          0
+      
+      </td>
+  
+
+  <td class="description last">0 = fps, 1 = ms,  2 = mb, 3+ = custom</td>
+</tr>
+
+
+        
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+
+    
+
+    
+        <p class="tag-source">
+            <a href="browser_lib_Game.js.html" class="button">View Source</a>
+            <span>
+                <a href="browser_lib_Game.js.html">browser/lib/Game.js</a>, <a href="browser_lib_Game.js.html#line731">line 731</a>
+            </span>
+        </p>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class='columns method-parameter'>
+        <div class="column is-2"><label>Returns:</label></div>
+        <div class="column is-10">
+            
+                    
+
+<div class="columns">
+    
+    
+    <div class='column is-5 has-text-left'>
+        <label>Type: </label>
+        
+<code class="param-type">void</code>
+
+
+    </div>
+    
+</div>
+
+                
+        </div>
+    </div>
+
+
+
+
+</div>
+            
+            </div>
+        </div>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

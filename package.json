@@ -7,18 +7,19 @@
   "license": "MIT",
   "main": "src/main.js",
   "scripts": {
-    "build:docs": "jsdoc src -r -c jsdoc.json --verbose -d docs/Ref",
-    "serve:docs": "npm run build:docs && http-server docs/Ref",
     "prebuild": "node -p \"'export const APP_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/shared/version.js",
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint src --ext .js --fix",
-    "build:game": "npm run prebuild && webpack --config webpack.config.js",
-    "watch:game": "npm run prebuild && webpack --config webpack.config.js --watch",
-    "web": "http-server dist/",
-    "linux": "node ./node_modules/electron/cli.js",
-    "windows": "node_modules\\electron\\dist\\electron.exe .",
-    "build:exe": "npm run build:game && electron-builder --dir",
-    "build:installer": "npm run build:game && electron-builder"
+    "game:build": "npm run prebuild && webpack --config webpack.config.js",
+    "game:build:watch": "npm run prebuild && webpack --config webpack.config.js --watch",
+    "game:serve:web": "http-server dist/",
+    "game:serve:linux": "node ./node_modules/electron/cli.js",
+    "game:serve:windows": "node_modules\\electron\\dist\\electron.exe .",
+    "game:build:portable": "npm run build:game && electron-builder --dir",
+    "game:build:installer": "npm run build:game && electron-builder",
+    "docs:build": "jsdoc src -r -c jsdoc.json --verbose -d docs/reference",
+    "docs:serve": "npm run build:docs && http-server docs/reference",
+    "docs:game": "npm run build:game && cp -r dist/* docs/play/"
   },
   "devDependencies": {
     "@electron/asar": "^3.2.7",

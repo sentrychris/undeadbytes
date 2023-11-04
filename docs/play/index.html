@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Chris Rowles">
+  <meta name="description" content="Shoot zombies and work your way through low-poly dungeons!">
+  <meta property="og:title" content="Undead Bytes - A simple zombie shooter game in pure JS" />
+  <meta property="og:description" content="Shoot zombies and work your way through low-poly dungeons!" />
+  <meta property="og:image" content="https://sentrychris.github.io/undeadbytes/img/undeadbytes.png" />
+  <title>Undead Bytes - A simple zombie shooter game in pure JS</title>
+</head>
+<body class="body-splash">
+  <div id="undead-bytes" class="inactive">
+    <canvas id="game"></canvas>
+
+    <div class="help-section">
+      <p class="help-section__title">
+        Current Level: <strong id="current-level"></strong>
+      </p>
+      
+      <hr class="help-section__separator" />
+      
+      <p class="help-block gap-10">
+        <span data-hotkey="P" class="help-block__hotkey">P</span>
+        <span id="game-pause-state">Pause Game</span>
+      </p>
+
+      <hr class="help-section__separator" />
+      
+      <p class="help-section__title">
+        Enemies:
+      </p>
+      <div class="help-block gap-10">
+        <img src="./img/zombie.png" class="help-block__img">
+        <strong id="enemies-remaining"></strong>
+      </div>
+      
+      <hr class="help-section__separator" />
+      
+      <p class="help-section__title">
+        Weapon: <strong id="equipped-weapon"></strong>
+      </p>
+      <div class="help-block gap-40">
+        <div class="flex-align-gap">
+          <img src="./img/ammunition.png" class="help-block__img">
+          <span id="ammo-remaining"></span> / <span id="ammo-capacity"></span>
+        </div>
+        <div class="flex-align-gap">
+          <img src="./img/magazine.png" class="help-block__img">
+          <span id="magazines-remaining"></span> / <span id="magazines-total"></span>
+        </div>
+      </div>
+      <p>
+        <strong id="out-of-ammo">
+          <span>OUT OF AMMO</span>
+        </strong>
+      </p>
+
+      <div class="help-block gap-10">
+        <img src="./img/first-aid-box.png" class="help-block__img">
+        <strong id="medkits-available">0</strong>
+      </div>
+      
+      <hr class="help-section__separator" />
+      
+      <div class="help-block--wrap">
+        <p><span data-hotkey="1" class="help-block__hotkey">1</span> Pistol</p>
+        <p><span data-hotkey="2" class="help-block__hotkey">2</span> Shotgun</p>
+        <p><span data-hotkey="3" class="help-block__hotkey">3</span> Machine</p>
+        <p><span data-hotkey="4" class="help-block__hotkey">4</span> Flame</p>
+        <p><span data-hotkey="5" class="help-block__hotkey">5</span> Grenade</p>
+      </div>
+      
+      <hr class="help-section__separator" />
+      
+      <div class="keyboard">
+        <div class="keyboard__top-row">
+          <div data-key="w" class="keyboard__key">
+            <p>W</p>
+          </div>
+        </div>
+        <div class="keyboard__bottom-row">
+          <div data-key="a" class="keyboard__key">
+            <p>A</p>
+          </div>
+          <div data-key="s" class="keyboard__key">
+            <p>S</p>
+          </div>
+          <div data-key="d" class="keyboard__key">
+            <p>D</p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      
+      <div class="help-block--wrap">
+        <p>Soundtrack</p>
+        <input type="range" class="grow volume-slider" data-control="soundtrack"
+          step="0.01" min="0" max="1" value="0.5">
+      </div>
+      <div class="help-block--wrap">
+        <p>Weapon FX</p>
+        <input type="range" class="grow volume-slider" data-control="weapon"
+          step="0.01" min="0" max="1" value="0.5">
+      </div>
+      <div class="help-block--wrap">
+        <p>Other FX</p>
+        <input type="range" class="grow volume-slider" data-control="snippet"
+          step="0.01" min="0" max="1" value="0.5">
+      </div>
+    </div>
+
+    <div class="game-overlay">
+      <div class="game-overlay__text">
+        <h1 class="game-overlay__text--big">Game Over</h1>
+      </div>
+    </div>
+
+    <div class="stats"></div>
+  </div>
+
+
+  <div class="splash">
+    <div class="splash__text">
+      <h1 class="splash__heading">Undead Bytes</h1>
+
+      <div style="display: block">
+        <button class="splash__button" id="play-now">
+          <span class="splash__button__text">New Game >></span>
+        </button>
+        <button class="splash__button" id="load-game">
+          <span class="splash__button__text">Load Game >></span>
+        </button>
+      </div>
+
+      <div class="load-game" id="load-game-web"></div>
+    </div>
+  </div>
+
+  <div class="build-version">Build v<span></span></div>
+
+  <iframe src="./soundtrack/silence.mp3" type="audio/mp3" allow="autoplay"
+    id="audio" style="display:none"></iframe> 
+  <script src="./main.js"></script>
+</body>
+</html>

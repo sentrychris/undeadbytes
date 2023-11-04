@@ -103,7 +103,7 @@ export class Collision
   /**
    * Detect and handle collision between entities and walls.
    * 
-   * @see https://github.com/sentrychris/docs/Collision/entity-to-walls.md
+   * @see https://github.com/sentrychris/docs/full/collision/entity-to-walls.md
    * 
    * @param {Object} entity - a game entity
    * @param {array} walls - the walls
@@ -151,7 +151,7 @@ export class Collision
   /**
    * Player-to-entity collision.
    * 
-   * @see https://github.com/sentrychris/docs/Collision/entity-to-player.md
+   * @see https://github.com/sentrychris/docs/full/collision/entity-to-player.md
    * 
    * @param {Object} entity - the entity
    * @param {Game} game - the managed game instance

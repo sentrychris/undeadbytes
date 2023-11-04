@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browser/lib/Entity/Enemy.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browser/lib/Entity/Enemy.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Collision } from '../Collision';
+import { Renderer } from '../Renderer';
+import { AudioFX } from '../Audio/AudioFX';
+import { config } from '../../config';
+
+/**
+ * Enemy entity
+ * @class
+ * @category Game Entities
+ */
+export class Enemy
+{
+  /**
+   * Create a new enemy entity.
+   * 
+   * @constructor
+   * @param {Object} spawn - the enemy spawn coordinates
+   * @param {number} spawn.x - the enemy spawn x-coordinate
+   * @param {number} spawn.y - the enemy spawn y-coordinate
+   */
+  constructor (spawn) {
+    /**
+     * type - the type of entity.
+     * @type {string}
+     */
+    this.type = 'enemy';
+
+    /**
+     * bounding - the entity's bounding behavior.
+     * @type {string}
+     */
+    this.bounding = 'arc';
+
+    /**
+     * x - the entity's x coordinate.
+     * @type {number}
+     */
+    this.x = spawn.x * config.cell.size;
+
+    /**
+     * y - the entity's y coordinate.
+     * @type {number}
+     */
+    this.y = spawn.y * config.cell.size;
+
+    /**
+     * angle - the entity's angle.
+     * @type {number}
+     */
+    this.angle = 0;
+
+    /**
+     * position - the entity's position.
+     * @type {number}
+     */
+    this.position = 0;
+
+    /**
+     * incrementer - the entity's speed incrementer.
+     * @type {number}
+     */
+    this.incrementer = 0;
+
+    /**
+     * speed - the entity's speed.
+     * @type {number}
+     */
+    this.speed = 3;
+    
+    /**
+     * sleep - the entity's render state.
+     * @type {boolean}
+     */
+    this.sleep = true;
+    
+    this.pushAlongVelocity = {
+      x: 0,
+      y: 0
+    };
+    this.projectileHitVelocity = {
+      x: 0,
+      y: 0
+    };
+    this.canBeHitByProjectile = true;
+    this.lastVectorX = 0;
+    this.lastVectorY = 0;
+
+    this.health = 100;
+    this.dead = false;
+    this.allEnemiesDead = false;
+  }
+
+  /**
+   * Render the enemy entity on the canvas.
+   * 
+   * This is called every frame/repaint to render the entity. Note that this is
+   * an animated entity, therefore the x,y coordinates will change on
+   * update.
+   * 
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
+   * @returns {void}
+   */
+  render (context) {
+    Renderer.render(this, context);
+  }
+
+  /**
+   * Update the enemy entity for rendering, collision and behaviour.
+   * 
+   * Checks the render state, checks enemy-enemy collision and sets speed/direction
+   * accordingly, checks to see if the enemy is dead and updates the tracked entities,
+   * updates the enemy entity's bounds, checks for ballistic projectile collisions and
+   * sets damage and projectile "pushback" velocity. This is called every frame/repaint.
+   * 
+   * @param {Game} game - the managed game instance
+   * 
+   * @returns {void}
+   */
+  update (game) {
+    if (this.sleep || this.dead) {
+      return;
+    }
+    
+    Collision.entityToPlayer(this, game);
+
+    if (Math.random() &lt;= 0.1) {
+      for (let i = 0; i &lt; game.enemies.length; i++) {       
+        const enemy = game.enemies[i];
+  
+        if (enemy != this) {
+          let vectorX = enemy.x - this.x;
+          let vectorY = enemy.y - this.y;
+
+          const distance = Collision.distance(vectorX, vectorY);
+          
+          if (distance != 0 &amp;&amp; distance &lt; 100) {
+            vectorX /= distance;
+            vectorY /= distance;
+            enemy.pushAlong(vectorX, vectorY);
+          } 
+        }
+        
+        if (enemy.dead) {
+          // AudioFX.snippet({ random: true });
+          game.enemies.splice(i, 1);
+        }
+      }
+    }
+
+    this.pushAlongVelocity.x *= 0.9;
+    this.pushAlongVelocity.y *= 0.9;
+    
+    this.x += this.pushAlongVelocity.x;
+    this.y += this.pushAlongVelocity.y;
+
+    const bounds = {
+      x: this.x - config.cell.radius,
+      y: this.y - config.cell.radius,
+      width: config.cell.radius * 2,
+      height: config.cell.radius * 2
+    };
+
+    for (let i = 0; i &lt; game.ballistics.projectiles.length; i++) {
+      const projectile = game.ballistics.projectiles[i];
+
+      if (Collision.intersection(bounds, projectile.bounds)) {
+        projectile.markToDelete = true;
+        this.hitByProjectile(projectile, game.ballistics.weapon.projectile.dps, game.enemies);
+      }
+    }
+
+    this.projectileHitVelocity.x *= 0.9;
+    this.projectileHitVelocity.y *= 0.9;
+    
+    this.x += this.projectileHitVelocity.x;
+    this.y += this.projectileHitVelocity.y;
+
+    if (Math.abs(this.projectileHitVelocity.x) &lt; 0.5 &amp;&amp; Math.abs(this.projectileHitVelocity.y) &lt; 0.5) {
+      this.canBeHitByProjectile = true;
+      this.projectileHitVelocity.x = 0;
+      this.projectileHitVelocity.y = 0;
+    }
+  }
+
+  /**
+   * Set the push velocity to push enemies when bumped by entities.
+   * 
+   * @param {number} vectorX - the enemy's vector x-coordinate
+   * @param {number} vectorY - the enemy's vector y-coordinate
+   * 
+   * @returns {void}
+   */
+  pushAlong (vectorX, vectorY) {
+    this.pushAlongVelocity.x = vectorX * 10;
+    this.pushAlongVelocity.y = vectorY * 10;
+  }
+
+  /**
+   * Set the enemy velocity and handle DPS when enemies are hit by projectiles.
+   * 
+   * @param {Object} projectile - the weapon projectile data object
+   * @param {number} dps  - the damage per shot
+   * @param {array} enemies - the tracked enemy entities
+   * 
+   * @returns {void} 
+   */
+  hitByProjectile (projectile, dps, enemies) {
+    if (this.canBeHitByProjectile) {
+      this.projectileHitVelocity.x = projectile.vectorX * 15;
+      this.projectileHitVelocity.y = projectile.vectorY * 15;
+      this.canBeHitByProjectile = false;
+  
+      this.health -= dps;
+      this.health = this.health &lt; 0 ? 0 : this.health;
+  
+      if (this.health == 0) {
+        this.dead = true;
+
+        document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
+        setTimeout(() => {
+          document.querySelector('body').style.background = 'black';
+        }, 50);
+
+        // Last remaining enemy has been killed
+        // update is not called on the next tick
+        if (enemies.length === 1) {
+          enemies.length = 0;
+          this.allEnemiesDead = true;
+        }
+      }
+    }
+  }
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

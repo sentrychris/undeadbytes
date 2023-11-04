@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> browser/lib/Scene/Map.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"></div><div class="category"><h2>Desktop App</h2><h3>Modules</h3><ul><li><a href="Desktop.module_app.html">app</a></li><li><a href="Desktop.module_preload.html">preload</a></li></ul><h3>Classes</h3><ul><li><a href="AppMenu.html">AppMenu</a></li><li><a href="AppStorage.html">AppStorage</a></li><li><a href="IPC.html">IPC</a></li></ul></div><div class="category"><h2>Game</h2><h3>Modules</h3><ul><li><a href="Game.module_browser.html">browser</a></li><li><a href="Game.module_configuration.html">configuration</a></li><li><a href="Game.module_utility.html">utility</a></li></ul><h3>Classes</h3><ul><li><a href="AudioFx.html">AudioFx</a></li><li><a href="Collision.html">Collision</a></li><li><a href="Renderer.html">Renderer</a></li></ul></div><div class="category"><h2>Game Admin</h2><h3>Classes</h3><ul><li><a href="Game.html">Game</a></li><li><a href="Storage.html">Storage</a></li></ul></div><div class="category"><h2>Game Ballistics</h2><h3>Modules</h3><ul><li><a href="Ballistics.module_weapons.html">weapons</a></li></ul><h3>Classes</h3><ul><li><a href="Ballistics.html">Ballistics</a></li><li><a href="Bullet.html">Bullet</a></li><li><a href="Grenade.html">Grenade</a></li></ul></div><div class="category"><h2>Game Entities</h2><h3>Classes / Pickup</h3><ul><li><a href="Ammo.html">Ammo</a></li><li><a href="Health.html">Health</a></li><li><a href="Stamina.html">Stamina</a></li></ul><h3>Classes</h3><ul><li><a href="Enemy.html">Enemy</a></li><li><a href="Player.html">Player</a></li><li><a href="Wall.html">Wall</a></li></ul></div><div class="category"><h2>Game Events</h2><h3>Classes</h3><ul><li><a href="Dispatcher.html">Dispatcher</a></li><li><a href="GameDispatcher.html">GameDispatcher</a></li></ul></div><div class="category"><h2>Game Scene</h2><h3>Modules / Level</h3><ul><li><a href="Level.module_level0.html">level0</a></li><li><a href="Level.module_level1.html">level1</a></li><li><a href="Level.module_level2.html">level2</a></li><li><a href="Level.module_level3.html">level3</a></li><li><a href="Level.module_level4.html">level4</a></li><li><a href="Level.module_level5.html">level5</a></li><li><a href="Level.module_level6.html">level6</a></li><li><a href="Level.module_level7.html">level7</a></li><li><a href="module-levels.html">levels</a></li></ul><h3>Classes</h3><ul><li><a href="Camera.html">Camera</a></li><li><a href="Map.html">Map</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>browser/lib/Scene/Map.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { levels } from '../Levels/mappings';
+
+/**
+ * The Map class manages the configuration and generation of game maps.
+ * Maps are represented as arrays of strings, where each character denotes
+ * a different game entity such as walls, enemies, pickups, and the player.
+ * @class
+ * @category Game Scene
+ */
+export class Map
+{
+  /**
+   * Create a new map.
+   * 
+   * @constructor
+   */
+  constructor () {
+    this.levels = levels;
+    this.newMapConfiguration();
+  }
+
+  /**
+   * Reset all map entity positions.
+   * 
+   * Resets all entity positions to their default values, placing the player 
+   * at the top-left corner and clearing arrays for enemies, walls, ammo pickups, 
+   * health pickups, and stamina pickups.
+   * 
+   * @returns {void}
+   */
+  newMapConfiguration () {
+    /**
+     * playerPosition - the player's spawn position
+     * @type {Object}
+     */
+    this.playerPosition = {
+      x: 0,
+      y: 0
+    };
+
+    /**
+     * enemyPositions - the enemy spawn positions
+     * @type {array}
+     */
+    this.enemyPositions = [];
+
+    /**
+     * enemyPositions - the wall placement positions
+     * @type {array}
+     */
+    this.wallPositions = [];
+
+    /**
+     * ammoPickupPositions - the ammo pickup item positions
+     * @type {array}
+     */
+    this.ammoPickupPositions = [];
+
+    /**
+     * healthPickupPositions - the healt pickup item positions
+     * @type {array}
+     */
+    this.healthPickupPositions = [];
+
+    /**
+     * staminaPickupPositions - the stamina pickup item positions
+     * @type {array}
+     */
+    this.staminaPickupPositions = [];
+  }
+
+  /**
+   * Generate a new map.
+   * 
+   * Generates a new map based on the specified levelIndex. Processes the
+   * corresponding level configuration and updates position arrays for entities.
+   * 
+   * @param {number} levelIndex - the index of the level configuration
+   * 
+   * @returns {void}
+   */
+  generate (levelIndex = 1) {
+    const level = levels[levelIndex];
+    for (let y = 0; y &lt; level.length; y++) {
+      const row = level[y];
+
+      for (let x = 0; x &lt; row.length; x += 2) {
+        const char = row[x];
+        const realX = x / 2;
+
+        switch (char) {
+        case 'W': this.wallPositions.push({ x: realX, y }); break;
+        case 'E': this.enemyPositions.push({ x: realX, y }); break;
+        case 'A': this.ammoPickupPositions.push({ x: realX, y }); break;
+        case 'H': this.healthPickupPositions.push({ x: realX, y }); break;
+        case 'S': this.staminaPickupPositions.push({x: realX, y }); break;
+        case 'P': this.playerPosition = { x: realX, y: y }; break;
+        }
+      }
+    }
+  }
+
+  /**
+   * Get the player entity's map position.
+   * 
+   * @returns {Object}
+   */
+  getPlayerPosition () {
+    return this.playerPosition;
+  }
+
+  /**
+   * Get the enemy entities' map positions.
+   * 
+   * @returns {array}
+   */
+  getEnemyPositions () {
+    return this.enemyPositions;
+  }
+
+  /**
+   * Get the wall pickup entities' map positions.
+   * 
+   * @returns {array}
+   */
+  getWallPositions () {
+    return this.wallPositions;
+  }
+
+  /**
+   * Get the ammo pickup entities' map positions.
+   * 
+   * @returns {array}
+   */
+  getAmmoPickupPositions () {
+    return this.ammoPickupPositions;
+  }
+
+  /**
+   * Get the health pickup entities' map positions.
+   * 
+   * @returns {array}
+   */
+  getHealthPickupPositions () {
+    return this.healthPickupPositions;
+  }
+
+  /**
+   * Get the stamina pickup entities' map positions.
+   * 
+   * @returns {array}
+   */
+  getStaminaPickupPositions () {
+    return this.staminaPickupPositions;
+  }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

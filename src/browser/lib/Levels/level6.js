@@ -8,6 +8,7 @@
  * @category Scene
  * @subcategory Level
  * @memberof Level
+ * @module level6
  */
 export const level6 = [
   'W W W W W W W W W W W W W W W W W W W W W W W W W',

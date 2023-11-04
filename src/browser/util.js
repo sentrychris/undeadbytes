@@ -1,19 +1,54 @@
+/**
+ * Game utilities.
+ * 
+ * @category Game
+ * @memberof Game
+ * @module utility
+ */
+
+/**
+ * Generate a random number.
+ * 
+ * @param {number} min - the minimum number
+ * @param {number} max - the maximum number
+ * 
+ * @returns {number}
+ */
 export function randomNumber (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-export function timestamp (replace = false) {
+/**
+ * Create a timestamp.
+ * 
+ * @param {boolean} condense - remove separators e.g. "-" or "/"
+ * 
+ * @returns {string}
+ */
+export function timestamp (condense = false) {
   const date = (new Date()).toISOString()
     .slice(0, 19)
-    .replace('T', replace ? '' : ' ');
+    .replace('T', condense ? '' : ' ');
 
-  return replace ? date.replace(/[:-]/g, '') : date;
+  return condense ? date.replace(/[:-]/g, '') : date;
 }
 
+/**
+ * Determine whether game element is active.
+ * 
+ * @param {HTMLElement} elem - the HTML element
+ * 
+ * @returns {boolean}
+ */
 export function isActiveElement (elem) {
   return ! elem.classList.contains('inactive');
 }
 
+/**
+ * Get the execution context bridge.
+ * 
+ * @returns {string|Object}
+ */
 export function getExecutionBridge () {
   if (Object.prototype.hasOwnProperty.call(window, 'executionBridge')
   && window.executionBridge !== null) {
@@ -23,6 +58,11 @@ export function getExecutionBridge () {
   return 'web';
 }
 
+/**
+ * Setup WASD keyboard tracking for the UI
+ * 
+ * @returns {void}
+ */
 export function trackWASDKeyboard () {
   function wasd (e) {
     const key = document.querySelector(`[data-key="${e.key}"]`);
@@ -43,6 +83,12 @@ export function trackWASDKeyboard () {
   });
 }
 
+/**
+ * Log the running game state to the console
+ * 
+ * @param {Game} game 
+ * @param {number} interval 
+ */
 export function logGameStateToConsole (game, interval = 2000) {
   console.debug(
     '%c Logging game data to console',

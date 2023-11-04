@@ -49,7 +49,7 @@ export class Grenade
 
     /**
      * bounds - the entity's bounds for intersection.
-     * @type {object}
+     * @type {Object}
      */
     this.bounds = {
       x: this.x - this.radius,

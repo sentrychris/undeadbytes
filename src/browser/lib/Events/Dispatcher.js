@@ -63,7 +63,7 @@ export class Dispatcher {
   /**
    * Dispatch custom event.
    * 
-   * @param {*} event 
+   * @param {Object} event 
    * @returns {void}
    */
   dispatchEvent (event) {

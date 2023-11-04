@@ -59,7 +59,7 @@ export class Ammo
 
     /**
      * bounds - the entity's bounds for intersection.
-     * @type {object}
+     * @type {Object}
      */
     this.bounds = {
       x: this.x,

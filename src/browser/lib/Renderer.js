@@ -14,7 +14,7 @@ export class Renderer
    * is active, and checks the entity type to apply specified behaviour and styles.
    * 
    * @param {CanvasRenderingContext2D} context - the canvas context for rendering.
-   * @param {*} entity - the entity to render
+   * @param {Object} entity - the entity to render
    * 
    * @returns {void}
    */

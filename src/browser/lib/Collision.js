@@ -105,8 +105,9 @@ export class Collision
    * 
    * @see https://github.com/sentrychris/docs/Collision/entity-to-walls.md
    * 
-   * @param {*} entity
-   * @param {*} walls
+   * @param {Object} entity - a game entity
+   * @param {array} walls - the walls
+   * 
    * @returns {Object}
    */
   static entityToWalls (entity, walls) {
@@ -152,9 +153,10 @@ export class Collision
    * 
    * @see https://github.com/sentrychris/docs/Collision/entity-to-player.md
    * 
-   * @param {*} entity 
-   * @param {*} game 
-   * @param {function} callback 
+   * @param {Object} entity - the entity
+   * @param {Game} game - the managed game instance
+   * @param {function} callback - the callback to execute when the player and entity intersect
+   * 
    * @returns {void}
    */
   static entityToPlayer (entity, game, callback) {

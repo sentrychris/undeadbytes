@@ -1,5 +1,12 @@
 import { APP_VERSION } from '../shared/version.js';
 
+/**
+ * Game configuration and defaults.
+ * 
+ * @category Game
+ * @memberof Game
+ * @module configuration
+ */
 export const config = {
   version: APP_VERSION,
   cell: {

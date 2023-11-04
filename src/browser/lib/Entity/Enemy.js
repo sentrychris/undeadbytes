@@ -199,7 +199,7 @@ export class Enemy
   /**
    * Set the enemy velocity and handle DPS when enemies are hit by projectiles.
    * 
-   * @param {*} projectile - the weapon projectile data object
+   * @param {Object} projectile - the weapon projectile data object
    * @param {number} dps  - the damage per shot
    * @param {array} enemies - the tracked enemy entities
    * 

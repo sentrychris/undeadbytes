@@ -25,7 +25,7 @@ export class GameDispatcher extends Dispatcher
    * Dispatch load game event.
    * 
    * @param {Object} params
-   * @param {*} params.save - the save file json object
+   * @param {Object} params.save - the save file json object
    * @param {boolean} params.instantiate - whether or not the game has already been instantiated past the splash screen
    * @returns {void}
    */

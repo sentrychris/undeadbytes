@@ -1,3 +1,10 @@
+/**
+ * Game entry point.
+ * 
+ * @category Game
+ * @memberof Game
+ * @module entry
+ */
 import { Game } from './lib/Game';
 import { Storage } from './lib/Storage';
 import { GameDispatcher } from './lib/Events/GameDispatcher';
@@ -30,7 +37,13 @@ const storage = new Storage(bridge, dispatcher, {
 // Set the build version
 document.querySelector('.build-version span').innerHTML = config.version;
 
-// Game setup
+/**
+ * Instantiate and begin a new game.
+ * 
+ * @param {number} level - the level to play
+ * 
+ * @returns {void}
+ */
 function main (level = 1) {
   if (isActiveElement(viewport) && canvas) {
     // Create a new managed game instance
@@ -50,7 +63,13 @@ function main (level = 1) {
   }
 }
 
-// Game play
+/**
+ * Handle game instantiation from the splash screen.
+ * 
+ * @param {number} level - the level to play
+ * 
+ * @returns {void}
+ */
 function play (level = 1) {
   if (splash) {
     document.body.classList.remove('body-splash');

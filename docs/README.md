@@ -2,6 +2,8 @@
 
 Undead Bytes is built with HTML5 Canvas, CSS and pure JS, it has one single dependency - [stats.js]().
 
+Play the game [here](https://sentrychris.github.io/undeadbytes/play/).
+
 ## Table of Contents
 
 * [Application Structure](#application-structure)
@@ -14,6 +16,7 @@ Undead Bytes is built with HTML5 Canvas, CSS and pure JS, it has one single depe
     * [Arc-box collision](./full/collision/arc-box-collision.md)
     * [Entity-to-player](./full/collision/entity-to-player.md)
     * [Entity-to-walls](./full/collision/entity-to-walls.md)
+* [API Reference](./reference/index.html)
 
 ## Application Structure
 

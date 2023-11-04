@@ -4,7 +4,11 @@
 
 Welcome to Undead Bytes, a fun little low-poly shooter game written in vanilla JavaScript and powered by HTML5 canvas. Gear up, survive waves of zombies, and strategically use your weapons to navigate through each level. Are you ready to face the undead?
 
-Want to contribute a map? Find out [how to here](./docs/contribute/maps.md)!
+Play the game [here](https://sentrychris.github.io/undeadbytes/play/).
+
+View developer documentation [here](https://sentrychris.github.io/undeadbytes/).
+
+Want to contribute a map? Find out how [here](./docs/contribute/maps.md).
 
 ## Table of Contents
 - [Introduction](#introduction)

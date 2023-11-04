@@ -76,11 +76,23 @@ To get started, follow these simple steps.
 
 3. Build the game:
     ```sh
-    npm run build:game
+    npm run game:build
     ```
 
 You should now have a working version of Undead Bytes output to your `dist/` folder.
 
-If you have [http-server]() installed, you can run the game on a local web sever by running `npm run web` in your console.
+### Serving through the browser
 
-If you want to test the electron-based desktop app, you can run `npm run windows` for Windows or `npm run linux` for Linux / MacOS.
+If you have [http-server]() installed, you can run the game on a local web sever by running `npm run game:serve:web` in your console.
+
+### Testing the desktop app
+
+If you want to test the electron-based desktop app, you can run `npm run game:serve:windows` for Windows or `npm run game:serve:linux` for Linux / MacOS.
+
+### Building a standalone desktop app
+
+If you want to build a standalone electron-based desktop app executable, you can run `npm run game:build:standalone`, this will output a standalone executable to `releases/${platform}/${arch}`.
+
+
+### Building an installer
+If you want to build an exe/pkg/deb installer for the electron-based desktop app, you can run `npm run game:build:installer`, this will output an installer to `releases/${platform}/${arch}`.

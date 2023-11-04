@@ -3,6 +3,8 @@ import { config } from '../../config';
 
 /**
  * Grenade projectile handler.
+ * @class
+ * @category Ballistics
  */
 export class Grenade
 {

@@ -4,6 +4,9 @@ import { snippets, soundtrack } from './mappings';
 
 /**
  * Audio FX Handler.
+ * @class
+ * @category Game
+ * @subcategory Audio
  */
 export class _AudioFX
 {
@@ -234,6 +237,8 @@ export class _AudioFX
 /**
  * @constant
  * @type {_AudioFX}
+ * @category Game
+ * @subcategory Audio
  * @default
  */
 export const AudioFX = new _AudioFX();

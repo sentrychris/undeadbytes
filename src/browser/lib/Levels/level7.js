@@ -5,6 +5,8 @@
  * 14 Ammo
  * 08 Health
  * 08 Stamina
+ * @category Scene
+ * @subcategory Level
  */
 export const Level7 = [
   'W W W W W W W W W W W W W W W W W W W W W W W W W W',
@@ -32,4 +34,4 @@ export const Level7 = [
   'W       E     E   E     E     H   E   W   A       W',
   'W     H         W             W                   W',
   'W W W W W W W W W W W W W W W W W W W W W W W W W W'
-  ];
+];

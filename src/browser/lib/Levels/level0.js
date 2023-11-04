@@ -1,6 +1,8 @@
 /**
  * Level 0.
  * Used only for testing.
+ * @category Scene
+ * @subcategory Level
  */
 export const level0 = [
   'W W W W W W W W W W W W W W W W W W W W',

@@ -2,6 +2,8 @@ import { config } from '../config';
 
 /**
  * Entity Collision
+ * @class
+ * @category Game
  */
 export class Collision
 {

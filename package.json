@@ -7,7 +7,8 @@
   "license": "MIT",
   "main": "src/main.js",
   "scripts": {
-    "docs": "jsdoc src -r -c jsdoc.json --verbose -d docs/Ref",
+    "build:docs": "jsdoc src -r -c jsdoc.json --verbose -d docs/Ref",
+    "serve:docs": "npm run build:docs && http-server docs/Ref",
     "prebuild": "node -p \"'export const APP_VERSION = ' + JSON.stringify(require('./package.json').version) + ';'\" > src/shared/version.js",
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint src --ext .js --fix",
@@ -21,7 +22,7 @@
   },
   "devDependencies": {
     "@electron/asar": "^3.2.7",
-    "clean-jsdoc-theme": "^4.2.14",
+    "better-docs": "^2.7.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "electron": "^27.0.2",
@@ -29,6 +30,8 @@
     "eslint": "^8.52.0",
     "jsdoc": "^4.0.2",
     "style-loader": "^3.3.3",
+    "taffydb": "^2.7.3",
+    "tui-jsdoc-template": "^1.2.2",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4"
   },

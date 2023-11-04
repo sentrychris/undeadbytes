@@ -11,8 +11,20 @@ import { Map } from './Scene/Map';
 import { config } from '../config';
 import Stats from 'stats.js';
 
+/**
+ * Represents the main game class responsible for managing game entities,
+ * controls, and rendering.
+ * @class
+ * @category Game
+ */
 export class Game
 {
+  /**
+   * @constructor
+   * @param {Object} bridge - The bridge object.
+   * @param {Object} dispatcher - The dispatcher object.
+   * @param {Object} context - The rendering context.
+   */
   constructor (bridge, dispatcher, context) {
     this.bridge = bridge;
     this.dispatcher = dispatcher;

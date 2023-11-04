@@ -1,5 +1,16 @@
 {
   "opts": {
-      "template": "node_modules/clean-jsdoc-theme"
-  }
+    "template": "node_modules/better-docs"
+  },
+  "templates": {
+    "name": "Undead Bytes",
+    "footerText": "Made with ❤️ by CR",
+    "logo": {
+      "url": "https://sentrychris.github.io/undeadbytes/img/zombie.png",
+      "width": "50px",
+      "height": "50px",
+      "link": "https://github.com/sentrychris/undeadbytes"
+    }
+  },
+  "plugins": ["./docs/plugins/category.js"]
 }

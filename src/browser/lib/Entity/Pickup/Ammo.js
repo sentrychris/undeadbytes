@@ -5,11 +5,16 @@ import { config } from '../../../config';
 
 /**
  * Ammo pickup item entity
+ * @class
+ * @category Entity
+ * @subcategory Pickup
  */
 export class Ammo
 {
   /**
    * Create a new ammo pickup entity.
+   * 
+   * @constructor
    * @param {Object} spawn - the ammo pickup item spawn coordinates
    * @param {number} spawn.x - the ammo pickup item spawn x-coordinate
    * @param {number} spawn.y - the ammo pickup item spawn y-coordinate
@@ -110,7 +115,8 @@ export class Ammo
    * a statically-placed entity, therefore the x,y coordinates will not change on
    * update.
    * 
-   * @param {CanvasRenderingContext2D} context
+   * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
    * @returns {void}
    */
   render (context) {
@@ -125,6 +131,7 @@ export class Ammo
    * method is executed as a callback.
    * 
    * @param {Game} game - the managed game instance
+   * 
    * @returns {void}
    */
   update (game) {
@@ -143,6 +150,7 @@ export class Ammo
    * frame/repaint.
    * 
    * @param {Game} game - the managed game instance
+   * 
    * @returns {void}
    */
   pickup (game) {

@@ -3,6 +3,8 @@ import { config } from '../../config';
 
 /**
  * Bullet projectile handler.
+ * @class
+ * @category Ballistics
  */
 export class Bullet
 {

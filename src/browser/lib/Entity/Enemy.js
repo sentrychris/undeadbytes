@@ -5,25 +5,72 @@ import { config } from '../../config';
 
 /**
  * Enemy entity
+ * @class
+ * @category Entity
  */
 export class Enemy
 {
   /**
    * Create a new enemy entity.
+   * 
+   * @constructor
    * @param {Object} spawn - the enemy spawn coordinates
    * @param {number} spawn.x - the enemy spawn x-coordinate
    * @param {number} spawn.y - the enemy spawn y-coordinate
    */
   constructor (spawn) {
+    /**
+     * type - the type of entity.
+     * @type {string}
+     */
     this.type = 'enemy';
+
+    /**
+     * bounding - the entity's bounding behavior.
+     * @type {string}
+     */
     this.bounding = 'arc';
+
+    /**
+     * x - the entity's x coordinate.
+     * @type {number}
+     */
     this.x = spawn.x * config.cell.size;
+
+    /**
+     * y - the entity's y coordinate.
+     * @type {number}
+     */
     this.y = spawn.y * config.cell.size;
+
+    /**
+     * angle - the entity's angle.
+     * @type {number}
+     */
     this.angle = 0;
+
+    /**
+     * position - the entity's position.
+     * @type {number}
+     */
     this.position = 0;
+
+    /**
+     * incrementer - the entity's speed incrementer.
+     * @type {number}
+     */
     this.incrementer = 0;
+
+    /**
+     * speed - the entity's speed.
+     * @type {number}
+     */
     this.speed = 3;
     
+    /**
+     * sleep - the entity's render state.
+     * @type {boolean}
+     */
     this.sleep = true;
     
     this.pushAlongVelocity = {
@@ -45,7 +92,13 @@ export class Enemy
 
   /**
    * Render the enemy entity on the canvas.
+   * 
+   * This is called every frame/repaint to render the entity. Note that this is
+   * an animated entity, therefore the x,y coordinates will change on
+   * update.
+   * 
    * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
    * @returns {void}
    */
   render (context) {
@@ -54,7 +107,14 @@ export class Enemy
 
   /**
    * Update the enemy entity for rendering, collision and behaviour.
+   * 
+   * Checks the render state, checks enemy-enemy collision and sets speed/direction
+   * accordingly, checks to see if the enemy is dead and updates the tracked entities,
+   * updates the enemy entity's bounds, checks for ballistic projectile collisions and
+   * sets damage and projectile "pushback" velocity.
+   * 
    * @param {Game} game - the managed game instance
+   * 
    * @returns {void}
    */
   update (game) {
@@ -125,8 +185,10 @@ export class Enemy
 
   /**
    * Set the push velocity to push enemies when bumped by entities.
-   * @param {number} vectorX 
-   * @param {number} vectorY
+   * 
+   * @param {number} vectorX - the enemy's vector x-coordinate
+   * @param {number} vectorY - the enemy's vector y-coordinate
+   * 
    * @returns {void}
    */
   pushAlong (vectorX, vectorY) {
@@ -136,9 +198,11 @@ export class Enemy
 
   /**
    * Set the enemy velocity and handle DPS when enemies are hit by projectiles.
-   * @param {*} projectile 
-   * @param {number} dps 
-   * @param {array} enemies
+   * 
+   * @param {*} projectile - the weapon projectile data object
+   * @param {number} dps  - the damage per shot
+   * @param {array} enemies - the tracked enemy entities
+   * 
    * @returns {void} 
    */
   hitByProjectile (projectile, dps, enemies) {

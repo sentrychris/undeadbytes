@@ -5,11 +5,16 @@ import { config } from '../../../config';
 
 /**
  * Stamina pickup item entity
+ * @class
+ * @category Entity
+ * @subcategory Pickup
  */
 export class Stamina
 {
   /**
    * Create a new stamina pickup entity.
+   * 
+   * @constructor
    * @param {Object} spawn - the stamina pickup item spawn coordinates
    * @param {number} spawn.x - the stamina pickup item spawn x-coordinate
    * @param {number} spawn.y - the stamina pickup item spawn y-coordinate
@@ -108,6 +113,8 @@ export class Stamina
    * update.
    * 
    * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
+   * @returns {void}
    */
   render (context) {
     Renderer.render(this, context);
@@ -121,6 +128,8 @@ export class Stamina
    * method is executed as a callback.
    * 
    * @param {Game} game - the managed game instance
+   * 
+   * @returns {void}
    */
   update (game) {
     Collision.entityToPlayer(this, game, () => {
@@ -137,6 +146,8 @@ export class Stamina
    * deletion, upon which it wil be removed from the canvas on the next frame/repaint.
    * 
    * @param {Game} game - the managed game instance
+   * 
+   * @returns {void}
    */
   pickup (game) {
     AudioFX.snippet({ name: 'inject' });

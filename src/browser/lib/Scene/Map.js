@@ -1,12 +1,18 @@
 import { levels } from '../Levels/mappings';
 
 /**
- * Map handler
+ * The Map class manages the configuration and generation of game maps.
+ * Maps are represented as arrays of strings, where each character denotes
+ * a different game entity such as walls, enemies, pickups, and the player.
+ * @class
+ * @category Scene
  */
 export class Map
 {
   /**
    * Create a new map.
+   * 
+   * @constructor
    */
   constructor () {
     this.levels = levels;
@@ -14,8 +20,64 @@ export class Map
   }
 
   /**
+   * Reset all map entity positions.
+   * 
+   * Resets all entity positions to their default values, placing the player 
+   * at the top-left corner and clearing arrays for enemies, walls, ammo pickups, 
+   * health pickups, and stamina pickups.
+   * 
+   * @returns {void}
+   */
+  newMapConfiguration () {
+    /**
+     * playerPosition - the player's spawn position
+     * @type {Object}
+     */
+    this.playerPosition = {
+      x: 0,
+      y: 0
+    };
+
+    /**
+     * enemyPositions - the enemy spawn positions
+     * @type {array}
+     */
+    this.enemyPositions = [];
+
+    /**
+     * enemyPositions - the wall placement positions
+     * @type {array}
+     */
+    this.wallPositions = [];
+
+    /**
+     * ammoPickupPositions - the ammo pickup item positions
+     * @type {array}
+     */
+    this.ammoPickupPositions = [];
+
+    /**
+     * healthPickupPositions - the healt pickup item positions
+     * @type {array}
+     */
+    this.healthPickupPositions = [];
+
+    /**
+     * staminaPickupPositions - the stamina pickup item positions
+     * @type {array}
+     */
+    this.staminaPickupPositions = [];
+  }
+
+  /**
    * Generate a new map.
+   * 
+   * Generates a new map based on the specified levelIndex. Processes the
+   * corresponding level configuration and updates position arrays for entities.
+   * 
    * @param {number} levelIndex - the index of the level configuration
+   * 
+   * @returns {void}
    */
   generate (levelIndex = 1) {
     const level = levels[levelIndex];
@@ -39,23 +101,9 @@ export class Map
   }
 
   /**
-   * Reset all map entity positions.
-   */
-  newMapConfiguration () {
-    this.playerPosition = {
-      x: 0,
-      y: 0
-    };
-    this.enemyPositions = [];
-    this.wallPositions = [];
-    this.ammoPickupPositions = [];
-    this.healthPickupPositions = [];
-    this.staminaPickupPositions = [];
-  }
-
-  /**
    * Get the player entity's map position.
-   * @returns {*}
+   * 
+   * @returns {Object}
    */
   getPlayerPosition () {
     return this.playerPosition;
@@ -63,6 +111,7 @@ export class Map
 
   /**
    * Get the enemy entities' map positions.
+   * 
    * @returns {array}
    */
   getEnemyPositions () {
@@ -71,6 +120,7 @@ export class Map
 
   /**
    * Get the wall pickup entities' map positions.
+   * 
    * @returns {array}
    */
   getWallPositions () {
@@ -79,6 +129,7 @@ export class Map
 
   /**
    * Get the ammo pickup entities' map positions.
+   * 
    * @returns {array}
    */
   getAmmoPickupPositions () {
@@ -87,6 +138,7 @@ export class Map
 
   /**
    * Get the health pickup entities' map positions.
+   * 
    * @returns {array}
    */
   getHealthPickupPositions () {
@@ -95,6 +147,7 @@ export class Map
 
   /**
    * Get the stamina pickup entities' map positions.
+   * 
    * @returns {array}
    */
   getStaminaPickupPositions () {

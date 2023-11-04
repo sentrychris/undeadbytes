@@ -5,11 +5,16 @@ import { config } from '../../../config';
 
 /**
  * Health pickup item entity
+ * @class
+ * @category Entity
+ * @subcategory Pickup
  */
 export class Health
 {
   /**
    * Create a new health pickup entity.
+   * 
+   * @constructor
    * @param {Object} spawn - the health pickup item spawn coordinates
    * @param {number} spawn.x - the health pickup item spawn x-coordinate
    * @param {number} spawn.y - the health pickup item spawn y-coordinate
@@ -108,6 +113,7 @@ export class Health
    * update.
    *
    * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
    * @returns {void}
    */
   render (context) {
@@ -122,6 +128,7 @@ export class Health
    * method is executed as a callback.
    * 
    * @param {Game} game - the managed game instance
+   * 
    * @returns {void}
    */
   update (game) {
@@ -140,6 +147,7 @@ export class Health
    * canvas on the next frame/repaint.
    * 
    * @param {Game} game - the managed game instance
+   * 
    * @returns {void}
    */
   pickup (game) {

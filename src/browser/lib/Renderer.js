@@ -2,6 +2,8 @@ import { config } from '../config';
 
 /**
  * Entity Renderer
+ * @class
+ * @category Game
  */
 export class Renderer
 {
@@ -13,6 +15,8 @@ export class Renderer
    * 
    * @param {CanvasRenderingContext2D} context - the canvas context for rendering.
    * @param {*} entity - the entity to render
+   * 
+   * @returns {void}
    */
   static render (entity, context) {
     if (entity.sleep) {
@@ -55,6 +59,8 @@ export class Renderer
    * @param {number} x - the entity x-coordinate
    * @param {number} y - the entity y-coordinate
    * @param {number} angle the angle to rotate on the canvas
+   * 
+   * @returns {void}
    */
   static beginRotationOffset (context, x, y, angle) {
     context.translate(-(-x + context.canvas.width / 2), -(-y + context.canvas.height / 2));
@@ -70,6 +76,8 @@ export class Renderer
    * @param {number} x - the entity x-coordinate
    * @param {number} y - the entity y-coordinate
    * @param {number} angle the angle to rotate on the canvas
+   * 
+   * @returns {void}
    */
   static endRotationOffset (context, x, y, angle) {
     context.rotate(-angle);
@@ -83,6 +91,8 @@ export class Renderer
    * 
    * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
    * @param {number} position - the entity's position for feet animation
+   * 
+   * @returns {void}
    */
   static player (context, position) {
     context.shadowBlur = 5;
@@ -147,6 +157,7 @@ export class Renderer
    * Draw dead player.
    * 
    * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
+   * @returns {void}
    */
   static deadPlayer (context) {
     // left foot
@@ -183,12 +194,6 @@ export class Renderer
     context.fillStyle = '#53777A';
     context.fill();
 
-    // gun
-    // context.beginPath();
-    // context.rect(-12.5, 40, 25, 70);
-    // context.fillStyle = 'gray';
-    // context.fill();
-
     // head
     context.beginPath();
     context.arc(20, 10, 35, 0, 2 * Math.PI);
@@ -209,6 +214,8 @@ export class Renderer
    * 
    * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
    * @param {number} position - the entity's position for feet animation
+   * 
+   * @returns {void}
    */
   static enemy (context, position) {
     context.shadowBlur = 10;
@@ -263,6 +270,8 @@ export class Renderer
    * Draw dead enemy.
    * 
    * @param {CanvasRenderingContext2D} context  - the canvas context for rendering
+   * 
+   * @returns {void}
    */
   static deadEnemy (context) {
     // left foot
@@ -317,6 +326,8 @@ export class Renderer
    * @param {number} x - the entity x-coordinate
    * @param {number} y - the entity y-coordinate
    * @param {number} health - the entity's health value
+   * 
+   * @returns {void}
    */
   static health (context, x, y, health) {
     context.beginPath();

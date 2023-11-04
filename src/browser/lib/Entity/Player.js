@@ -6,31 +6,96 @@ import { config } from '../../config';
 
 /**
  * Player entity
+ * @class
+ * @category Entity
  */
 export class Player
 {
   /**
    * Create a new player entity.
+   * 
+   * @constructor
    * @param {Object} spawn - the player spawn coordinates
    * @param {number} spawn.x - the player spawn x-coordinate
    * @param {number} spawn.y - the player spawn y-coordinate
    */
   constructor (spawn) {
+    /**
+     * type - the type of entity.
+     * @type {string}
+     */
     this.type = 'player';
+
+    /**
+     * bounding - the entity's bounding behavior.
+     * @type {string}
+     */
     this.bounding = 'arc';
+
+    /**
+     * x - the entity's x coordinate.
+     * @type {number}
+     */
     this.x = spawn.x * config.cell.size;
+
+    /**
+     * y - the entity's y coordinate.
+     * @type {number}
+     */
     this.y = spawn.y * config.cell.size;
+
+    /**
+     * angle - the entity's angle.
+     * @type {number}
+     */
     this.angle = 0;
+
+    /**
+     * position - the entity's position.
+     * @type {number}
+     */
     this.position = 0;
     
+    /**
+     * incrementer - the entity's speed incrementer.
+     * @type {number}
+     */
     this.incrementer = 0;
+
+    /**
+     * speed - the entity's speed.
+     * @type {number}
+     */
     this.speed = 5;
+
+    /**
+     * stamina - entity stamina boost enabled.
+     * @type {boolean}
+     */
     this.stamina = false;
+
+    /**
+     * staminaAmount - the amount of speed to boost by.
+     * @type {number}
+     */
     this.staminaAmount = 0;
 
+    /**
+     * sleep - the entity's render state.
+     * @type {boolean}
+     */
     this.sleep = true;
     
+    /**
+     * invincible - the entity's damage state.
+     * @type {boolean}
+     */
     this.invincible = false;
+
+    /**
+     * health - the entity's health.
+     * @type {number}
+     */
     this.health = 100;
 
     this.pickups = {
@@ -47,7 +112,13 @@ export class Player
 
   /**
    * Render the player entity on the canvas.
+   * 
+   * This is called every frame/repaint to render the entity. Note that this is
+   * an animated entity, therefore the x,y coordinates will change on
+   * update.
+   * 
    * @param {CanvasRenderingContext2D} context - the canvas rendering context
+   * 
    * @returns {void}
    */
   render (context) {
@@ -56,7 +127,13 @@ export class Player
 
   /**
    * Update the player entity for rendering, collision and behaviour.
+   * 
+   * Checks the render state, sets the player entity's speed, angle and direction, detects
+   * collision between the player and walls, checks damage and updates the player entity's
+   * position.
+   * 
    * @param {Game} game - the managed game instance
+   * 
    * @returns {void}
    */
   update (game) {
@@ -76,7 +153,6 @@ export class Player
       currentSpeed /= Math.sqrt(2);
     }
 
-    // keyboard
     if (Math.abs(this.damage.x) != 0 < Math.abs(this.damage.y) != 0) {
       this.damage.x *= 0.9;
       this.damage.y *= 0.9;
@@ -99,13 +175,10 @@ export class Player
       if (game.keyboard.right) this.x += currentSpeed;
     }
 
-    // Detect collision between the player and the walls and "bounce" back
-    // using the vector difference multipled by the current player's speed.
     const collisionVector = Collision.entityToWalls(this, game.walls);
     this.x += collisionVector.x * currentSpeed;
     this.y += collisionVector.y * currentSpeed;
 
-    // mouse
     let vectorX = game.camera.offsetX + game.context.canvas.width / 2 - game.mouse.x;
     let vectorY = game.camera.offsetY + game.context.canvas.height / 2 - game.mouse.y;
 
@@ -118,7 +191,6 @@ export class Player
       this.angle = Math.atan2(vectorY, vectorX) + 90 * Math.PI / 180;
     }
 
-    // foot
     if (game.keyboard.up || game.keyboard.down || game.keyboard.left || game.keyboard.right) {
       this.incrementer += this.speed;
     }
@@ -128,7 +200,9 @@ export class Player
 
   /**
    * Handle damage from colliding enemies.
+   * 
    * @param {Enemy} enemy the enemy entity
+   * 
    * @returns {void}
    */
   takeDamage (enemy) {
@@ -155,8 +229,10 @@ export class Player
   }
 
   /**
-   * Boost player speed when stamina entity is picked up
+   * Boost player speed when stamina entity is picked up.
+   * 
    * @param {number} amount - the amount of speed to boost by
+   * 
    * @returns {void}
    */
   boostSpeed (amount) {
@@ -167,9 +243,11 @@ export class Player
   }
 
   /**
-   * Refill player health when health entity is picked up or used
+   * Refill player health when health entity is picked up or used.
+   * 
    * @param {number} amount - the amount of health to restore
    * @param {boolean} pickup - if false, then player is using a stored item
+   * 
    * @returns {void}
    */
   refillHealth (amount, pickup = false) {

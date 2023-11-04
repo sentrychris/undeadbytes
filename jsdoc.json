@@ -1,15 +1,26 @@
 {
   "opts": {
+    "readme": "./docs/readme.md",
     "template": "node_modules/better-docs"
   },
   "templates": {
-    "name": "Undead Bytes",
-    "footerText": "Made with ❤️ by CR",
-    "logo": {
-      "url": "https://sentrychris.github.io/undeadbytes/img/zombie.png",
-      "width": "50px",
-      "height": "50px",
-      "link": "https://github.com/sentrychris/undeadbytes"
+    "search": true,
+    "better-docs": {
+      "name": "Undead Bytes v0.5.1 - Developer Documentation",
+      "css": "./docs.css",
+      "logo": "https://sentrychris.github.io/undeadbytes/play/img/zombie.png",
+      "title": "Undead Bytes - API Reference",
+      "hideGenerator": false,
+      "navLinks": [
+        {
+          "label": "View on Github",
+          "href": "https://github.com/sentrychris/undeadbytes "
+        },
+        {
+          "label": "Play Now",
+          "href": "https://sentrychris.github.io/undeadbytes/play/"
+        }
+      ]
     }
   },
   "plugins": ["./build/plugins/category.js"]

@@ -5,7 +5,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title>Undead Bytes - API Reference Home</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -19,7 +19,7 @@
   <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
   <link type="text/css" rel="stylesheet" href="styles/app.min.css">
   <link type="text/css" rel="stylesheet" href="styles/iframe.css">
-  <link type="text/css" rel="stylesheet" href="">
+  <link type="text/css" rel="stylesheet" href="./docs.css">
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   
@@ -39,7 +39,15 @@
             <span aria-hidden="true"></span>
         </a>
         <div class="logo">
+             
+                <a class="image" href="index.html">
+                    <img src="https://sentrychris.github.io/undeadbytes/play/img/zombie.png" alt="logo">
+                </a>
             
+             
+                <a href="index.html">
+                    <h1 class="navbar-item">Undead Bytes v0.5.1 - Developer Documentation</h1>
+                </a>
             
         </div>
         <div class="menu">
@@ -52,6 +60,22 @@
                     Documentation
                 </a>
                 
+                 
+                    
+                        <a
+                            class="link user-link "
+                            href="https://github.com/sentrychris/undeadbytes "
+                        >
+                            View on Github
+                        </a>
+                    
+                        <a
+                            class="link user-link "
+                            href="https://sentrychris.github.io/undeadbytes/play/"
+                        >
+                            Play Now
+                        </a>
+                    
                 
                 
             </div>
@@ -63,6 +87,10 @@
             class="sidebar "
             id="sidebarNav"
         >
+            
+                <div class="search-wrapper">
+                    <input id="search" type="text" placeholder="Search docs..." class="input">
+                </div>
             
             <nav>
                 
@@ -99,6 +127,113 @@
 
 
 
+    <section>
+        <article><h1>Undead Bytes Developer Documentation</h1>
+<p>Undead Bytes is built with HTML5 Canvas, CSS and pure JS, it has one single dependency - <a href="">stats.js</a>.</p>
+<p>Play the game <a href="https://sentrychris.github.io/undeadbytes/play/">here</a>.</p>
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="https://sentrychris.github.io/undeadbytes/reference/">API Reference</a></li>
+<li><a href="#application-structure">Application Structure</a></li>
+<li><a href="#development-setup">Development Setup</a></li>
+<li><a href="./full/README.md">How it Works</a>
+<ul>
+<li><a href="./full/game/README.md">Game</a>
+<ul>
+<li><a href="./full/game/loop.md">Game loop</a></li>
+<li><a href="./full/game/update-render.md">onRender &amp; onUpdate</a></li>
+</ul>
+</li>
+<li><a href="./full/entity/README.md">Entities</a>
+<ul>
+<li><a href="./full/entity/player.md">Player</a></li>
+<li><a href="./full/entity/enemy.md">Enemy</a></li>
+</ul>
+</li>
+<li><a href="./full/scene/README.md">Scene</a>
+<ul>
+<li><a href="./full/scene/map.md">Map</a></li>
+<li><a href="./full/scene/camera.md">Camera</a></li>
+</ul>
+</li>
+<li><a href="./full/collision/README.md">Collision</a>
+<ul>
+<li><a href="./full/collision/arc-box-collision.md">Arc-box collision</a></li>
+<li><a href="./full/collision/entity-to-player.md">Entity-to-player</a></li>
+<li><a href="./full/collision/entity-to-walls.md">Entity-to-walls</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>Application Structure</h2>
+<p>The application structure is as follows:</p>
+<pre class="prettyprint source lang-sh"><code>.
+├── build                     # Electron app build resources
+├── dist                      # Output folder for compiled game
+├── docs                      # Reserved for Github
+├── node_modules              # Reserved for NPM
+├── releases                  # Output folder for compiled executables
+├── src                       # Application source code
+│   ├── app                   # Electron app and IPC code
+│   ├── browser               # Game code
+│   |   ├── css               # Styles
+│   |   └── lib               # Game logic
+│   |   |   ├── Audio         # Audio FX handling
+│   |   |   ├── Ballistics    # Weapon and bullet handling
+│   |   |   ├── Entity        # Game entities (player, enemies, walls, items etc.)
+│   |   |   ├── Events        # Custom event dispatchers
+│   |   |   ├── Levels        # Game levels
+│   |   |   ├── Scene         # Canvas scene manager 
+│   |   |   ├── Collision.js  # Entity collision logic
+│   |   |   ├── Game.js       # Game instance and management logic
+│   |   |   ├── Renderer.js   # Entity canvas rendering logic
+│   |   |   └── Storage.js    # Storage handling for saved games and settings
+│   |   ├── views             # Game view template
+│   |   ├── config.js         # Game base configuration values
+│   |   ├── index.js          # Game entry point
+|   |   └── util.js           # Various utilities
+│   ├── shared                # Shared resources
+│   |   ├── assets            # Shared assets (images, audio etc.)
+│   |   └── version.js        # Dynamically generated version file
+│   ├── main.js               # Entry point for the electron app
+│   └── preload.js            # Electron app preloader
+├── LICENSE                   # The license file
+├── package-lock.json         # Reserved for NPM
+├── package.json              # NPM dependencies and project configuration
+└── README.md                 # This file
+└── webpack.config.js         # Build configuration
+</code></pre>
+<h2>Development Setup</h2>
+<p>To get started, follow these simple steps.</p>
+<ol>
+<li>
+<p>Clone the repository:</p>
+<pre class="prettyprint source lang-sh"><code>git clone git@github.com:sentrychris/undeadbytes.git
+</code></pre>
+</li>
+<li>
+<p>Install the build dependencies:</p>
+<pre class="prettyprint source lang-sh"><code>npm install
+</code></pre>
+</li>
+<li>
+<p>Build the game:</p>
+<pre class="prettyprint source lang-sh"><code>npm run game:build
+</code></pre>
+</li>
+</ol>
+<p>You should now have a working version of Undead Bytes output to your <code>dist/</code> folder.</p>
+<h3>Serving through the browser</h3>
+<p>If you have <a href="">http-server</a> installed, you can run the game on a local web sever by running <code>npm run game:serve:web</code> in your console.</p>
+<h3>Testing the desktop app</h3>
+<p>If you want to test the electron-based desktop app, you can run <code>npm run game:serve:windows</code> for Windows or <code>npm run game:serve:linux</code> for Linux / MacOS.</p>
+<h3>Building a standalone desktop app</h3>
+<p>If you want to build a standalone electron-based desktop app executable, you can run <code>npm run game:build:standalone</code>, this will output a standalone executable to <code>releases/${platform}/${arch}</code>.</p>
+<h3>Building an installer</h3>
+<p>If you want to build an exe/pkg/deb installer for the electron-based desktop app, you can run <code>npm run game:build:installer</code>, this will output an installer to <code>releases/${platform}/${arch}</code>.</p></article>
+    </section>
+
 
 
 
@@ -123,6 +258,8 @@
 <script src="scripts/app.min.js"></script>
 <script>PR.prettyPrint();</script>
 <script src="scripts/linenumber.js"> </script>
+
+<script src="scripts/search.js"> </script>
 
 
 </body>

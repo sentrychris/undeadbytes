@@ -1,0 +1,25 @@
+.top-nav {
+  background: #222222;
+  color: #FFFFFF;
+}
+
+.navbar-item, .navbar-link {
+  color: #FFFFFF;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+.image {
+  display: flex;
+}
+.logo a img {
+  width: 50px;
+}
+.top-nav .menu .navigation .link {
+  color: #FFFFFF;
+}
+.top-nav .menu .navigation .link:hover:not(.no-hover) {
+  border-bottom: 2px solid #FFFFFF;
+}

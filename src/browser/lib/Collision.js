@@ -157,7 +157,7 @@ export class Collision
    * @param {Game} game - the managed game instance
    * @param {Object} callbackOptions
    * @param {string|null} callbackOptions.on - maps to the entity type to know which entity to execute on
-   * @param {string|null} callbackOptions.onDistance - the distance between the player and the entity before the callback executes
+   * @param {number|null} callbackOptions.onDistance - the distance between the player and the entity before the callback executes
    * @param {function|null} callbackOptions.callback - the callback to execute when the player and entity intersect
    * 
    * @returns {void}

@@ -66,7 +66,7 @@ export class AudioFx
       for (const snippet of snippets) {
         if (snippet.enabled) {
           this.audio.snippets[snippet.name] = {
-            types: snippet.types,
+            type: snippet.type,
             playback: new Audio(snippet.playback)
           };
         }

@@ -1,4 +1,4 @@
-## `entityToPlayer(entity, game, { on, onDistance, callback })`
+## `entityToPlayer(entity, game, { on, onDistance, onCallback })`
 
 The `entityToPlayer` method manages collisions between a given entity and the player in the game environment.
 
@@ -8,7 +8,7 @@ The `entityToPlayer` method manages collisions between a given entity and the pl
 - **`game`** (Object): The game context containing information about the player and other game elements.
 - **`on`** (string): An option to define the type of entity to execute a callback on
 - **`onDistance`** (number): An option to define the distance between the entity and the player to trigger the callback.
-- **`callback`** (Function): An option to define the callback function that is executed when the conditions are met.
+- **`onCallback`** (Function): An option to define the callback function that is executed when the conditions are met.
 
 ### Logic:
 
@@ -39,8 +39,8 @@ The `entityToPlayer` method manages collisions between a given entity and the pl
 
 4. **Entity Type Check:**
    ```javascript
-   if (callback && on === entity.type && distance <= onDistance) {
-      callback();
+   if (onCallback && on === entity.type && distance <= onDistance) {
+      onCallback();
    }
    ```
    If the entity type matches the passed callback object information and the distance to the player is within the trigger range, the optional callback function is executed.

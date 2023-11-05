@@ -158,11 +158,11 @@ export class Collision
    * @param {Object} callbackOptions
    * @param {string|null} callbackOptions.on - maps to the entity type to know which entity to execute on
    * @param {number|null} callbackOptions.onDistance - the distance between the player and the entity before the callback executes
-   * @param {function|null} callbackOptions.callback - the callback to execute when the player and entity intersect
+   * @param {function|null} callbackOptions.onCallback - the callback to execute when the player and entity intersect
    * 
    * @returns {void}
    */
-  static entityToPlayer (entity, game, { on = null, onDistance = null, callback = null }) {
+  static entityToPlayer (entity, game, { on = null, onDistance = null, onCallback = null }) {
     let vectorX = game.player.x - entity.x;
     let vectorY = game.player.y - entity.y;
 
@@ -176,8 +176,8 @@ export class Collision
 
     const distance = Collision.distance(vectorX, vectorY);
 
-    if (callback && on === entity.type && distance <= onDistance) {
-      callback();
+    if (onCallback && on === entity.type && distance <= onDistance) {
+      onCallback();
     }
 
     if (distance > 0 && entity.type === 'enemy') {

@@ -135,7 +135,7 @@ export class Health
     Collision.entityToPlayer(this, game, {
       on: this.type,
       onDistance: this.distance,
-      callback: () => {
+      onCallback: () => {
         this.pickup(game);
       }
     });

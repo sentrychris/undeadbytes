@@ -125,7 +125,7 @@ export class Enemy
     Collision.entityToPlayer(this, game, {
       on: this.type,
       onDistance: 350,
-      callback: () => {
+      onCallback: () => {
         if (! this.dead && ! this.allEnemiesDead) {
           AudioFX.snippet({ name: 'zombiegrowl' });
         }

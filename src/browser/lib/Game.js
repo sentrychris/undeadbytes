@@ -9,6 +9,7 @@ import { AudioFX } from './Audio/AudioFX';
 import { Camera } from './Scene/Camera';
 import { Map } from './Scene/Map';
 import { config } from '../config';
+import { ubcolors, randomFromArray } from '../util';
 import Stats from 'stats.js';
 
 /**
@@ -491,7 +492,12 @@ export class Game
    */
   createEnemies () {
     for (let i = 0; i < this.map.getEnemyPositions().length; i++) {
-      const enemy = new Enemy(this.map.getEnemyPositions()[i]);
+      const enemy = new Enemy(this.map.getEnemyPositions()[i], {
+        hands: randomFromArray(ubcolors),
+        feet:  randomFromArray(ubcolors),
+        torso: randomFromArray(ubcolors)
+      });
+
       this.entities.push(enemy);
       this.enemies.push(enemy);
     }

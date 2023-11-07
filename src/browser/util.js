@@ -6,6 +6,20 @@
  * @module utility
  */
 
+export const ubcolors = [
+  '#8d1017',
+  '#5f0c10',
+  '#738b75',
+  '#50799e',
+  '#A9430F',
+  '#eac177',
+  '#CCCCCC',
+  '#79BD9A',
+  '#3B8686',
+  '#0B486B',
+  '#CFF09E'
+];
+
 /**
  * Generate a random number.
  * 
@@ -16,6 +30,17 @@
  */
 export function randomNumber (min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+/**
+ * Pick a random element from an array.
+ * 
+ * @param {array} arr - the array
+ * 
+ * @returns {*}
+ */
+export function randomFromArray (arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 /**

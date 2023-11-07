@@ -1,5 +1,6 @@
 import { Collision } from '../Collision';
 import { config } from '../../config';
+import { randomFromArray } from '../../util';
 
 /**
  * Grenade projectile handler.
@@ -89,7 +90,7 @@ export class Grenade
    */
   render (color) {
     if (Array.isArray(color)) {
-      color = color[Math.floor(Math.random() * color.length)];
+      color = randomFromArray(color);
     }
 
     this.context.beginPath();

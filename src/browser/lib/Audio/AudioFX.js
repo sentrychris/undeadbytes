@@ -1,4 +1,5 @@
 import { config } from '../../config';
+import { randomFromArray } from '../../util';
 import { weapons } from '../Ballistics/mappings';
 import { snippets, soundtrack } from './mappings';
 
@@ -188,7 +189,7 @@ export class AudioFx
     }
 
     const snippet = random
-      ? snippets[Math.floor(Math.random() * snippets.length)]
+      ? randomFromArray(snippets)
       : this.audio.snippets[name];
 
     if (snippet) {

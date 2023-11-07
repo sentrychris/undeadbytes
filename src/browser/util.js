@@ -6,20 +6,6 @@
  * @module utility
  */
 
-export const ubcolors = [
-  '#8d1017',
-  '#5f0c10',
-  '#738b75',
-  '#50799e',
-  '#A9430F',
-  '#eac177',
-  '#CCCCCC',
-  '#79BD9A',
-  '#3B8686',
-  '#0B486B',
-  '#CFF09E'
-];
-
 /**
  * Generate a random number.
  * 
@@ -41,6 +27,15 @@ export function randomNumber (min, max) {
  */
 export function randomFromArray (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Generate a random hex color code.
+ * 
+ * @returns {string}
+ */
+export function randomColor () {
+  return '#'+(Math.random() * 0xFFFFFF << 0).toString(16);
 }
 
 /**

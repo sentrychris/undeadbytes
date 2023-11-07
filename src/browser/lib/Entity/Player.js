@@ -1,6 +1,6 @@
 
 import { Collision } from '../Collision';
-import { Renderer } from '../Renderer';
+import { Renderer } from '../Render/Renderer';
 import { AudioFX } from '../Audio/AudioFX';
 import { config } from '../../config';
 

@@ -627,6 +627,10 @@ export class Game
         }
       }
     }
+
+    this.ballistics.setEquippedWeaponDisplayInformation(
+      this.selectedWeaponIndex
+    );
   }
 
   /**

@@ -19,6 +19,25 @@ export const config = {
   player: {
     health: 100,
     speed: 5,
+    model: {
+      glow: 8,
+      feet: '#454B1B',
+      hands: {
+        left: '#7C815F',
+        right: '#53777A'
+      },
+      torso: {
+        left: '#53777A',
+        right: '#7C815F'
+      },
+      head: '#F1D4AF',
+      hair: 'rgba(58,35,0,0.5)',
+      helmet: '#454B1B',
+      sunglasses: '#222222',
+      backpack: '#777777',
+      weapon: '#999999',
+      shadow: '#6E8C8F',
+    }
   },
   pickups: {
     size: 75,    // Default render size (config.cell.size / 2)

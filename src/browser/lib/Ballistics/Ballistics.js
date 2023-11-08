@@ -44,6 +44,13 @@ export class Ballistics
      * @type {array}
      */
     this.indexesToDelete = [];
+
+
+    /**
+     * Determine whether the weapons HUD has been initialized
+     * @type {boolean}
+     */
+    this.displayInitialized = false;
   }
 
   /**
@@ -56,6 +63,7 @@ export class Ballistics
    * @returns {void}
    */
   render () {
+    this.initializeWeaponsHUD();
     for (let i = 0; i < this.projectiles.length; i++) {
       this.projectiles[i].render(this.weapon.projectile.color);
     }
@@ -73,7 +81,6 @@ export class Ballistics
    */
   update (game) {
     this.weapon = weapons[game.selectedWeaponIndex];
-    this.setEquippedWeaponDisplayInformation();
 
     if (this.weapon && this.trigger && ! game.player.dead) {
       document.querySelector('#out-of-ammo').style.display = 'none';
@@ -115,6 +122,21 @@ export class Ballistics
 
     this.registerProjectiles(context, player);
     this.trigger = this.weapon.trigger;
+
+    this.setEquippedWeaponDisplayInformation();
+  }
+
+  /**
+   * Initialize the weapons HUD.
+   * 
+   * @returns {void}
+   */
+  initializeWeaponsHUD () {
+    if (! this.displayInitialized) {
+      this.setEquippedWeaponDisplayInformation();
+    }
+
+    this.displayInitialized = true;
   }
 
   /**
@@ -122,8 +144,17 @@ export class Ballistics
    * 
    * @returns {void}
    */
-  setEquippedWeaponDisplayInformation () {
-    const { name, clip, magazines } = this.weapon;
+  setEquippedWeaponDisplayInformation (weaponsIndex = null) {
+    const weapon = weaponsIndex !== null
+      ? weapons[weaponsIndex]
+      : this.weapon;
+
+    if (! weapon) {
+      return;
+    }
+
+    const { name, clip, magazines } = weapon;
+
     document.querySelector('#equipped-weapon').innerHTML = name;
     document.querySelector('#ammo-remaining').innerHTML = clip.current;
     document.querySelector('#ammo-capacity').innerHTML = clip.capacity;
@@ -165,6 +196,8 @@ export class Ballistics
     } else {
       this.weapon.clip.current = this.weapon.clip.capacity;
     }
+
+    this.setEquippedWeaponDisplayInformation();
   }
 
   /**

@@ -1,5 +1,5 @@
 import { Collision } from '../../Collision';
-import { Renderer } from '../../Renderer';
+import { Renderer } from '../../Render/Renderer';
 import { AudioFX } from '../../Audio/AudioFX';
 import { config } from '../../../config';
 
@@ -99,7 +99,7 @@ export class Ammo
      * distance - the distance between the player and the entity to trigger behavior.
      * @type {number}
      */
-    this.distance = 95;
+    this.distance = 100;
 
     /**
      * markToDelete - determines whether the entity should be removed from the game.
@@ -135,8 +135,12 @@ export class Ammo
    * @returns {void}
    */
   update (game) {
-    Collision.entityToPlayer(this, game, () => {
-      this.pickup(game);
+    Collision.entityToPlayer(this, game, {
+      on: this.type,
+      onDistance: this.distance,
+      onCallback: () => {
+        this.pickup(game);
+      }
     });
   }
 

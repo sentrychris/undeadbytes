@@ -1,5 +1,5 @@
 import { Collision } from '../../Collision';
-import { Renderer } from '../../Renderer';
+import { Renderer } from '../../Render/Renderer';
 import { AudioFX } from '../../Audio/AudioFX';
 import { config } from '../../../config';
 
@@ -132,8 +132,12 @@ export class Health
    * @returns {void}
    */
   update (game) {
-    Collision.entityToPlayer(this, game, () => {
-      this.pickup(game);
+    Collision.entityToPlayer(this, game, {
+      on: this.type,
+      onDistance: this.distance,
+      onCallback: () => {
+        this.pickup(game);
+      }
     });
   }
 

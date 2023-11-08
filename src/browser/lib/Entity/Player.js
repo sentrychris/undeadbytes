@@ -1,6 +1,6 @@
 
 import { Collision } from '../Collision';
-import { Renderer } from '../Renderer';
+import { Renderer } from '../Render/Renderer';
 import { AudioFX } from '../Audio/AudioFX';
 import { config } from '../../config';
 
@@ -92,6 +92,13 @@ export class Player
      */
     this.invincible = false;
 
+
+    /**
+     * firing - determines if weapon is being fired.
+     * @type {boolean}
+     */
+    this.firing = false;
+
     /**
      * health - the entity's health.
      * @type {number}
@@ -140,6 +147,8 @@ export class Player
     if (this.sleep || this.dead) {
       return;
     }
+
+    this.firing = game.mouse.pressed;
 
     let count = 0;
     count += game.keyboard.up ? 1 : 0;
@@ -221,7 +230,7 @@ export class Player
         this.health = this.health < 0 ? 0 : this.health;
 
         if (this.health == 0) {
-          AudioFX.snippet({ name: 'eoww' });
+          AudioFX.snippet({ name: 'defib' });
           this.dead = true;
         }
       }

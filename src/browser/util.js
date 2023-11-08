@@ -19,6 +19,31 @@ export function randomNumber (min, max) {
 }
 
 /**
+ * Pick a random element from an array.
+ * 
+ * @param {array} arr - the array
+ * 
+ * @returns {*}
+ */
+export function randomFromArray (arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Generate a random hex color code.
+ * 
+ * @returns {string}
+ */
+export function randomColor () {
+  // return '#'+(Math.random() * 0x008000 << 0).toString(16);
+  const hue = randomNumber(0, 250);
+  const saturation = randomNumber(0, 35);
+  const light = randomNumber(35, 55);
+
+  return 'hsl(' + hue + ', ' + saturation + '%, ' + light + '%)';
+}
+
+/**
  * Create a timestamp.
  * 
  * @param {boolean} condense - remove separators e.g. "-" or "/"

@@ -9,8 +9,8 @@ export class PlayerRender
    * @returns {void}
    */
   static alive (context, position) {
-    context.shadowBlur = 5;
-    context.shadowColor = 'white';
+    context.shadowBlur = 8;
+    context.shadowColor = '#6E8C8F';
 
     // left foot
     context.beginPath();
@@ -107,7 +107,7 @@ export class PlayerRender
     // helmet
     context.rotate(-180 * Math.PI / 180);
     context.beginPath();
-    context.arc(0, -6, 44, 6, 180 * Math.PI / 180);
+    context.arc(0, -4, 44, 6, 180 * Math.PI / 180);
     context.fillStyle = '#454B1B';
     context.fill();
     context.rotate(180 * Math.PI / 180);

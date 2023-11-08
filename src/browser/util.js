@@ -35,7 +35,12 @@ export function randomFromArray (arr) {
  * @returns {string}
  */
 export function randomColor () {
-  return '#'+(Math.random() * 0xFFFFFF << 0).toString(16);
+  // return '#'+(Math.random() * 0x008000 << 0).toString(16);
+  const hue = randomNumber(0, 250);
+  const saturation = randomNumber(0, 35);
+  const light = randomNumber(35, 55);
+
+  return 'hsl(' + hue + ', ' + saturation + '%, ' + light + '%)';
 }
 
 /**

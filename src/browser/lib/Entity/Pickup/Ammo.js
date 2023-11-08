@@ -99,7 +99,7 @@ export class Ammo
      * distance - the distance between the player and the entity to trigger behavior.
      * @type {number}
      */
-    this.distance = 95;
+    this.distance = 100;
 
     /**
      * markToDelete - determines whether the entity should be removed from the game.

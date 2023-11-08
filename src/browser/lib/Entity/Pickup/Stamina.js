@@ -96,7 +96,7 @@ export class Stamina
      * distance - the distance between the player and the entity to trigger behavior.
      * @type {number}
      */
-    this.distance = 100;
+    this.distance = 110;
 
     /**
      * markToDelete - determines whether the entity should be removed from the game.

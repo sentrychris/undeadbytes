@@ -10,7 +10,7 @@ export class EnemyRender
    * @returns {void}
    */
   static alive (context, position, color) {
-    context.shadowBlur = 20;
+    context.shadowBlur = 15;
     context.shadowColor = '#8fce00';
     
     // left foot
@@ -67,6 +67,8 @@ export class EnemyRender
    * @returns {void}
    */
   static dead (context, color) {
+    context.shadowBlur = 0;
+
     // left foot
     context.beginPath();
     context.rect(52, -30, 25, 40);

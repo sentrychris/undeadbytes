@@ -42,7 +42,7 @@ export class Renderer
       if (! entity.dead) {
         entity.type === 'enemy'
           ? EnemyRender.alive(context, entity.position, entity.color)
-          : PlayerRender.alive(context, entity.position);
+          : PlayerRender.alive(context, entity.position, entity.firing);
       } else {
         entity.type === 'enemy'
           ? EnemyRender.dead(context, entity.color)

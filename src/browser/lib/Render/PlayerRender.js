@@ -1,3 +1,7 @@
+import { config } from '../../config';
+import { randomNumber } from '../../util';
+import { WeaponRender } from './WeaponRender';
+
 export class PlayerRender
 {
   /**
@@ -8,27 +12,28 @@ export class PlayerRender
    * 
    * @returns {void}
    */
-  static alive (context, position) {
-    context.shadowBlur = 8;
-    context.shadowColor = '#6E8C8F';
+  static alive (context, position, isFiringWeapon) {
+    const { model } = config.player;
+    context.shadowBlur = model.glow;
+    context.shadowColor = model.shadow;
 
     // left foot
     context.beginPath();
     context.rect(20, -20 + (position * 35), 25, 40);
-    context.fillStyle = '#454B1B';
+    context.fillStyle = model.feet;
     context.fill();
 
     // right foot
     context.beginPath();
     context.rect(-40, -20 + (position * -35), 25, 40);
-    context.fillStyle = '#454B1B';
+    context.fillStyle = model.feet;
     context.fill();
 
     // left hand
     context.rotate(30 * Math.PI / 180);
     context.beginPath();
     context.rect(40, -10, 20, 80);
-    context.fillStyle = '#7C815F';
+    context.fillStyle = model.hands.left;
     context.fill();
     context.rotate(-30 * Math.PI / 180);
 
@@ -36,79 +41,68 @@ export class PlayerRender
     context.rotate(-50 * Math.PI / 180);
     context.beginPath();
     context.rect(-55, -20, 20, 45);
-    context.fillStyle = '#53777A';
+    context.fillStyle = model.hands.right;
     context.fill();
     context.rotate(50 * Math.PI / 180);
 
     // left torso
     context.beginPath();
     context.rect(-60, - 30, 120, 60);
-    context.fillStyle = '#53777A';
+    context.fillStyle = model.torso.left;
     context.fill();
 
     // backpack
     context.beginPath();
     context.rect(-27, -47, 50, 50);
-    context.fillStyle = '#134F5C';
+    context.fillStyle = model.backpack;
     context.fill();
     
     // right torso
     context.beginPath();
     context.rect(-60, - 30, 80, 60);
-    context.fillStyle = '#7C815F';
+    context.fillStyle = model.torso.right;
     context.fill();
 
-    // gun
-    context.beginPath();
-    context.rect(-12.5, 30, 25, 70);
-    context.fillStyle = 'gray';
-    context.fill();
+    // Weapon
+    WeaponRender.gun(
+      context,
+      model,
+      isFiringWeapon ? randomNumber(30, 60) : 20
+    );
 
     // head
     context.beginPath();
     context.arc(0, 0, 40, 0, 2 * Math.PI);
-    context.fillStyle = '#F1D4AF';
+    context.fillStyle = model.head;
     context.fill();
     
     // hair
     context.beginPath();
     context.arc(0, 0, 22, 0, 2 * Math.PI);
-    context.fillStyle = 'rgba(58,35,0,0.5)';
+    context.fillStyle = model.hair;
     context.fill();
     
-    // let sunglasses
+    // left sunglasses
     context.beginPath();
     context.rect(6, 31, 18, 7);
-    context.fillStyle = '#222222';
+    context.fillStyle = model.sunglasses;
     context.fill();
-    // bridge
+    // sunglasses frame
     context.beginPath();
     context.rect(-8, 32, 15, 3);
-    context.fillStyle = '#222222';
+    context.fillStyle = model.sunglasses;
     context.fill();
     // right sunglasses
     context.beginPath();
     context.rect(-24, 31, 18, 7);
-    context.fillStyle = '#222222';
+    context.fillStyle = model.sunglasses;
     context.fill();
-    
-    // // left soulder
-    // context.beginPath();
-    // context.arc(49, 15, 6, 0, 2 * Math.PI);
-    // context.fillStyle = '#7C815F';
-    // context.fill();
-    
-    // // right shoulder
-    // context.beginPath();
-    // context.arc(-49, 15, 6, 0, 2 * Math.PI);
-    // context.fillStyle = '#53777A';
-    // context.fill();
 
     // helmet
     context.rotate(-180 * Math.PI / 180);
     context.beginPath();
     context.arc(0, -4, 44, 6, 180 * Math.PI / 180);
-    context.fillStyle = '#454B1B';
+    context.fillStyle = model.helmet;
     context.fill();
     context.rotate(180 * Math.PI / 180);
   }
@@ -120,23 +114,25 @@ export class PlayerRender
    * @returns {void}
    */
   static dead (context) {
+    const { model } = config.player;
+
     // left foot
     context.beginPath();
     context.rect(30, 20, 25, 40);
-    context.fillStyle = '#454B1B';
+    context.fillStyle = model.feet;
     context.fill();
 
     // right foot
     context.beginPath();
     context.rect(-25, -30 -35, 25, 40);
-    context.fillStyle = '#454B1B';
+    context.fillStyle = model.feet;
     context.fill();
 
     // left hand
     context.rotate(25 * Math.PI / 180);
     context.beginPath();
     context.rect(40, -5, 20, 80);
-    context.fillStyle = '#C02942';
+    context.fillStyle = model.hands.left;
     context.fill();
     context.rotate(-25 * Math.PI / 180);
 
@@ -144,7 +140,7 @@ export class PlayerRender
     context.rotate(-60 * Math.PI / 180);
     context.beginPath();
     context.rect(-40, 20, 20, 45);
-    context.fillStyle = '#C02942';
+    context.fillStyle = model.hands.right;
     context.fill();
     context.rotate(60 * Math.PI / 180);
 

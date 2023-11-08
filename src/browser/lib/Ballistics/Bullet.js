@@ -46,7 +46,7 @@ export class Bullet
      * radius - the rendered projectile radius size
      * @type {number}
      */
-    this.radius = 5;
+    this.radius = 4;
 
     /**
      * bounds - the entity's bounds for intersection.

@@ -92,6 +92,13 @@ export class Player
      */
     this.invincible = false;
 
+
+    /**
+     * firing - determines if weapon is being fired.
+     * @type {boolean}
+     */
+    this.firing = false;
+
     /**
      * health - the entity's health.
      * @type {number}
@@ -140,6 +147,8 @@ export class Player
     if (this.sleep || this.dead) {
       return;
     }
+
+    this.firing = game.mouse.pressed;
 
     let count = 0;
     count += game.keyboard.up ? 1 : 0;

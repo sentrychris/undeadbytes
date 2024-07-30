@@ -132,8 +132,14 @@ export class Enemy
    * @param {Object} spawn - the enemy spawn coordinates
    * @param {number} spawn.x - the enemy spawn x-coordinate
    * @param {number} spawn.y - the enemy spawn y-coordinate
+   * @param {Object} color - the enemy's color
+   * @param {string} color.hands - the enemy hands color
+   * @param {string} color.feet - the enemy feet color
+   * @param {string} color.torso - the enemy torso color
    */
-  constructor (spawn) {
+  constructor (spawn, color = {
+    hands: null, feet: null, torso: null
+  }) {
     /**
      * type - the type of entity.
      * @type {string}
@@ -145,6 +151,12 @@ export class Enemy
      * @type {string}
      */
     this.bounding = 'arc';
+
+    /**
+     * Color - entity feet, hands and torso color.
+     * @type {Object}
+     */
+    this.color = color;
 
     /**
      * x - the entity's x coordinate.
@@ -237,7 +249,15 @@ export class Enemy
       return;
     }
     
-    Collision.entityToPlayer(this, game);
+    Collision.entityToPlayer(this, game, {
+      on: this.type,
+      onDistance: 350,
+      onCallback: () => {
+        if (! this.dead &amp;&amp; ! this.allEnemiesDead) {
+          AudioFX.snippet({ name: 'zombiegrowl' });
+        }
+      }
+    });
 
     if (Math.random() &lt;= 0.1) {
       for (let i = 0; i &lt; game.enemies.length; i++) {       
@@ -257,7 +277,6 @@ export class Enemy
         }
         
         if (enemy.dead) {
-          // AudioFX.snippet({ random: true });
           game.enemies.splice(i, 1);
         }
       }
@@ -331,7 +350,6 @@ export class Enemy
   
       if (this.health == 0) {
         this.dead = true;
-
         document.querySelector('body').style.background = 'radial-gradient(white 5%, green 30%, black 100%)';
         setTimeout(() => {
           document.querySelector('body').style.background = 'black';

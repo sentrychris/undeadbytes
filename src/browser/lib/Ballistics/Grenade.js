@@ -1,5 +1,6 @@
 import { Collision } from '../Collision';
 import { config } from '../../config';
+import { randomFromArray } from '../../util';
 
 /**
  * Grenade projectile handler.
@@ -83,13 +84,13 @@ export class Grenade
    * This is called every frame/repaint to render the bullet. Note that this
    * is an animated entity, therefore the x,y coordinates will change on update.
    * 
-   * @param {array|string} color - the color of the projectile.
+   * @param {array|string} color - the color(s) of the projectile.
    * 
    * @returns {void}
    */
   render (color) {
     if (Array.isArray(color)) {
-      color = color[Math.floor(Math.random() * color.length)];
+      color = randomFromArray(color);
     }
 
     this.context.beginPath();

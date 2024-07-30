@@ -134,6 +134,26 @@ export function randomNumber (min, max) {
 }
 
 /**
+ * Pick a random element from an array.
+ * 
+ * @param {array} arr - the array
+ * 
+ * @returns {*}
+ */
+export function randomFromArray (arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Generate a random hex color code.
+ * 
+ * @returns {string}
+ */
+export function randomColor () {
+  return '#'+(Math.random() * 0xFFFFFF &lt;&lt; 0).toString(16);
+}
+
+/**
  * Create a timestamp.
  * 
  * @param {boolean} condense - remove separators e.g. "-" or "/"

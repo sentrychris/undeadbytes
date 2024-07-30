@@ -824,7 +824,7 @@
         
         <span class="code-name">
             
-                entityToPlayer<span class="signature">(entity, game, callback)</span><span class="type-signature"> &rarr; {void}</span>
+                entityToPlayer<span class="signature">(entity, game, callbackOptions)</span><span class="type-signature"> &rarr; {void}</span>
             
         </span>
     </h4>
@@ -921,13 +921,92 @@
             
 <tr class="deep-level-0">
   
-      <td class="name"><code>callback</code></td>
+      <td class="name"><code>callbackOptions</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">Object</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last"></td>
+</tr>
+
+  
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>on</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">string</code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">maps to the entity type to know which entity to execute on</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>onDistance</code></td>
+  
+
+  <td class="type">
+  
+      
+<code class="param-type">number</code>
+|
+
+<code class="param-type">null</code>
+
+
+  
+  </td>
+
+  
+
+  
+
+  <td class="description last">the distance between the player and the entity before the callback executes</td>
+</tr>
+
+  
+    
+<tr class="deep-level-1">
+  
+      <td class="name"><code>onCallback</code></td>
   
 
   <td class="type">
   
       
 <code class="param-type">function</code>
+|
+
+<code class="param-type">null</code>
 
 
   
@@ -939,6 +1018,8 @@
 
   <td class="description last">the callback to execute when the player and entity intersect</td>
 </tr>
+
+  
 
 
         
@@ -992,7 +1073,7 @@
         <p class="tag-source">
             <a href="browser_lib_Collision.js.html" class="button">View Source</a>
             <span>
-                <a href="browser_lib_Collision.js.html">browser/lib/Collision.js</a>, <a href="browser_lib_Collision.js.html#line162">line 162</a>
+                <a href="browser_lib_Collision.js.html">browser/lib/Collision.js</a>, <a href="browser_lib_Collision.js.html#line165">line 165</a>
             </span>
         </p>
     

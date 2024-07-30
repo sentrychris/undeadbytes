@@ -9,6 +9,7 @@ import { AudioFX } from './Audio/AudioFX';
 import { Camera } from './Scene/Camera';
 import { Map } from './Scene/Map';
 import { config } from '../config';
+import { randomColor } from '../util';
 import Stats from 'stats.js';
 
 /**
@@ -286,7 +287,7 @@ export class Game
         this.setup({
           level: this.currentLevel
         }, true);
-      }, 2000);
+      }, 2500);
     }
   }
 
@@ -296,7 +297,7 @@ export class Game
    * @returns {void}
    */
   async pause () {
-    const hotkey =document.querySelector('span[data-hotkey="P"]');
+    const hotkey = document.querySelector('span[data-hotkey="P"]');
     const state = document.querySelector('#game-pause-state');
     const cssclass = 'help-block__hotkey--active';
     if (! this.stopped) {
@@ -491,7 +492,12 @@ export class Game
    */
   createEnemies () {
     for (let i = 0; i < this.map.getEnemyPositions().length; i++) {
-      const enemy = new Enemy(this.map.getEnemyPositions()[i]);
+      const enemy = new Enemy(this.map.getEnemyPositions()[i], {
+        hands: randomColor(),
+        feet:  randomColor(),
+        torso: randomColor(),
+      });
+
       this.entities.push(enemy);
       this.enemies.push(enemy);
     }
@@ -621,6 +627,10 @@ export class Game
         }
       }
     }
+
+    this.ballistics.setEquippedWeaponDisplayInformation(
+      this.selectedWeaponIndex
+    );
   }
 
   /**

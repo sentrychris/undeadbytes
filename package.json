@@ -25,13 +25,13 @@
     "clean:all": "rm -rf ./docs/play/* && rm -rf ./docs/reference/* && rm -rf ./dist"
   },
   "devDependencies": {
-    "@electron/asar": "^3.2.7",
+    "@electron/asar": "^3.2.8",
     "better-docs": "^2.7.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
-    "electron": "^27.0.2",
+    "electron": "^27.0.3",
     "electron-builder": "^24.6.4",
-    "eslint": "^8.52.0",
+    "eslint": "^8.53.0",
     "jsdoc": "^4.0.2",
     "style-loader": "^3.3.3",
     "taffydb": "^2.7.3",
